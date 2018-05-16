@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://res/movement.shader" type="Shader" id=1]
+[ext_resource path="res://res/sprites/water.png" type="Texture" id=2]
+[ext_resource path="res://res/sprites/grass3.png" type="Texture" id=3]
+[ext_resource path="res://res/sprites/pave.png" type="Texture" id=4]
+
+
+
+
+
+
+[sub_resource type="ShaderMaterial" id=1]
+
+render_priority = 0
+shader = ExtResource( 1 )
+shader_param/coeff = 4.0
+_sections_unfolded = [ "shader_param" ]
+
+[node name="GroundTileset" type="Node2D" index="0"]
+
+position = Vector2( 74.6615, 41.6117 )
+
+[node name="water" type="Sprite" parent="." index="0"]
+
+material = SubResource( 1 )
+position = Vector2( -28.1931, 5.35343 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Material" ]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="water" index="0"]
+
+visible = false
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="water/StaticBody2D2" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( 0.443428, -7.28742, -6.95364, -0.266475, 0.19268, 8.13358, 7.71511, 0.360394 )
+_sections_unfolded = [ "Material", "Transform" ]
+
+[node name="ground" type="Sprite" parent="." index="1"]
+
+position = Vector2( -20.1425, -9.86638 )
+z_index = -10
+z_as_relative = false
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Z Index" ]
+
+[node name="pave" type="Sprite" parent="." index="2"]
+
+position = Vector2( -2.50904, -1.58766 )
+texture = ExtResource( 4 )
+
+
