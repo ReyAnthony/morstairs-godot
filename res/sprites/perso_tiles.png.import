@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light.png-75b4ee93e79dd6234ffa90af6245543d.stex"
+path="res://.import/perso_tiles.png-096f3b1da6fc0ad475c1c33cc845befd.stex"
 
 [deps]
 
-source_file="res://res/sprites/light.png"
-source_md5="6d4d404bb68071654f8b5b9f6742db18"
+source_file="res://res/sprites/perso_tiles.png"
+source_md5="8f0f3a1db62e539e9d275a623242bb8d"
 
-dest_files=[ "res://.import/light.png-75b4ee93e79dd6234ffa90af6245543d.stex" ]
-dest_md5="d1fe9866f9667477c05d789dfd06b7b8"
+dest_files=[ "res://.import/perso_tiles.png-096f3b1da6fc0ad475c1c33cc845befd.stex" ]
+dest_md5="89cacc5adda9698296334b5b7e3d97a8"
 
 [params]
 

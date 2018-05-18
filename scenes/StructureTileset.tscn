@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://res/sprites/wall3.png" type="Texture" id=1]
+
+[node name="StructureTileset" type="Node2D"]
+
+_sections_unfolded = [ "Material", "Transform", "Z Index" ]
+
+[node name="wall" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 1 )
+offset = Vector2( 0, -15 )
+_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall/StaticBody2D" index="0"]
+
+position = Vector2( 0.173862, -16.7615 )
+build_mode = 0
+polygon = PoolVector2Array( 0.252897, 4.88708, -8.52972, 3.87759, -8.51458, 7.61824, -0.477329, 15.9495, 8.14801, 7.61824, 8.16992, 4.044 )
+
+

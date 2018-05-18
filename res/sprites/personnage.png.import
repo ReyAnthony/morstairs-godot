@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light.png-75b4ee93e79dd6234ffa90af6245543d.stex"
+path="res://.import/personnage.png-effe9f11e7e937e71bc30239557d952e.stex"
 
 [deps]
 
-source_file="res://res/sprites/light.png"
-source_md5="6d4d404bb68071654f8b5b9f6742db18"
+source_file="res://res/sprites/personnage.png"
+source_md5="a5afe30f3c98ee6d214ab8a5a1cba037"
 
-dest_files=[ "res://.import/light.png-75b4ee93e79dd6234ffa90af6245543d.stex" ]
-dest_md5="d1fe9866f9667477c05d789dfd06b7b8"
+dest_files=[ "res://.import/personnage.png-effe9f11e7e937e71bc30239557d952e.stex" ]
+dest_md5="1bbc083f0768d8f51a5fdc9b7f54d861"
 
 [params]
 

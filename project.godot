@@ -14,6 +14,10 @@ config/name="Morstairs"
 run/main_scene="res://scenes/Node.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SettingSingleton="*res://scripts/SettingSingleton.gd"
+
 [display]
 
 window/size/width=1280
@@ -27,4 +31,5 @@ window/stretch/shrink="1"
 [rendering]
 
 quality/intended_usage/framebuffer_allocation=0
+environment/default_clear_color=Color( 0.777344, 0.777344, 0.777344, 1 )
 environment/default_environment="res://default_env.tres"
