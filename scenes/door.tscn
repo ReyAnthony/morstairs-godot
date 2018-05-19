@@ -47,7 +47,7 @@ tracks/2/keys = {
 "values": [  ]
 }
 
-[node name="door" type="Sprite"]
+[node name="door" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
 offset = Vector2( 1.46753, 0 )
@@ -90,6 +90,7 @@ polygon = PoolVector2Array( 0.208778, 5.85397, -8.37056, 3.07937, -8.51458, 7.61
 
 [node name="CanEnterArrow" type="Sprite" parent="." index="2"]
 
+visible = false
 position = Vector2( -0.146467, -12.9349 )
 rotation = 1.57613
 scale = Vector2( 0.552308, 0.552308 )
