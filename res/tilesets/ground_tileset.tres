@@ -1,11 +1,12 @@
-[gd_resource type="TileSet" load_steps=10 format=2]
+[gd_resource type="TileSet" load_steps=11 format=2]
 
 [ext_resource path="res://res/movement.shader" type="Shader" id=1]
 [ext_resource path="res://res/sprites/water.png" type="Texture" id=2]
 [ext_resource path="res://res/sprites/grass3.png" type="Texture" id=3]
 [ext_resource path="res://res/sprites/pave.png" type="Texture" id=4]
 [ext_resource path="res://res/sprites/wall_ground.png" type="Texture" id=5]
-[ext_resource path="res://res/sprites/grass_flower.png" type="Texture" id=6]
+[ext_resource path="res://res/movement_up_down.shader" type="Shader" id=6]
+[ext_resource path="res://res/sprites/grass_flower.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -22,7 +23,7 @@ points = PoolVector2Array( 7.71511, 0.360394, 0.19268, 8.13358, -6.95364, -0.266
 [sub_resource type="ShaderMaterial" id=3]
 
 render_priority = 0
-shader = ExtResource( 1 )
+shader = ExtResource( 6 )
 shader_param/coeff = 2.0
 _sections_unfolded = [ "shader_param" ]
 
@@ -71,7 +72,7 @@ _sections_unfolded = [ "shader_param" ]
 3/navigation_offset = Vector2( 8.5, 8.5 )
 3/shapes = [  ]
 4/name = "grass_flower"
-4/texture = ExtResource( 6 )
+4/texture = ExtResource( 7 )
 4/tex_offset = Vector2( 0, 0 )
 4/material = SubResource( 3 )
 4/modulate = Color( 1, 1, 1, 1 )

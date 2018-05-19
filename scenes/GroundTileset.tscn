@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://res/movement.shader" type="Shader" id=1]
 [ext_resource path="res://res/sprites/water.png" type="Texture" id=2]
 [ext_resource path="res://res/sprites/grass3.png" type="Texture" id=3]
 [ext_resource path="res://res/sprites/pave.png" type="Texture" id=4]
 [ext_resource path="res://res/sprites/wall_ground.png" type="Texture" id=5]
-[ext_resource path="res://res/sprites/grass_flower.png" type="Texture" id=6]
+[ext_resource path="res://res/movement_up_down.shader" type="Shader" id=6]
+[ext_resource path="res://res/sprites/grass_flower.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -17,7 +18,7 @@ _sections_unfolded = [ "shader_param" ]
 [sub_resource type="ShaderMaterial" id=3]
 
 render_priority = 0
-shader = ExtResource( 1 )
+shader = ExtResource( 6 )
 shader_param/coeff = 2.0
 _sections_unfolded = [ "shader_param" ]
 
@@ -72,7 +73,7 @@ texture = ExtResource( 5 )
 
 material = SubResource( 3 )
 position = Vector2( 10.9739, 10.1115 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 _sections_unfolded = [ "Material", "Offset" ]
 
 

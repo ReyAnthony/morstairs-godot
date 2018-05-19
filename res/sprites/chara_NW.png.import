@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chara.png-4dafca06def5eec2859bb37708aaacbe.stex"
+path="res://.import/chara_NW.png-b173b5ea0c2ac8ba5911893d42777ef9.stex"
 
 [deps]
 
-source_file="res://res/sprites/chara.png"
-source_md5="a7c02baa1632b1a87df70edb5f62ad68"
+source_file="res://res/sprites/chara_NW.png"
+source_md5="5ad27e144d6817078e8260c875337bbe"
 
-dest_files=[ "res://.import/chara.png-4dafca06def5eec2859bb37708aaacbe.stex" ]
-dest_md5="33e88959fcb5e4fcd9d10fc4d0a379c9"
+dest_files=[ "res://.import/chara_NW.png-b173b5ea0c2ac8ba5911893d42777ef9.stex" ]
+dest_md5="3c1b7c7d1859ced0bee1fb16cb101da6"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0
