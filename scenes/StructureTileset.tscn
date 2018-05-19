@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://res/sprites/wall3.png" type="Texture" id=1]
-[ext_resource path="res://scenes/FurnitureTileset.tscn" type="PackedScene" id=2]
+[ext_resource path="res://res/sprites/fortified_wall.png" type="Texture" id=2]
+[ext_resource path="res://scenes/FurnitureTileset.tscn" type="PackedScene" id=3]
 
 [node name="StructureTileset" type="Node2D"]
 
@@ -30,9 +31,16 @@ position = Vector2( 0.173862, -16.7615 )
 build_mode = 0
 polygon = PoolVector2Array( 0.252897, 4.88708, -8.52972, 3.87759, -8.51458, 7.61824, -0.477329, 15.9495, 8.14801, 7.61824, 8.16992, 4.044 )
 
-[node name="FurnitureTileset" parent="." index="1" instance=ExtResource( 2 )]
+[node name="fortified_wall" type="Sprite" parent="." index="1"]
 
-position = Vector2( -116.298, 5.80221 )
+position = Vector2( -22.2271, -1.46992 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -15 )
+_sections_unfolded = [ "Offset" ]
+
+[node name="FurnitureTileset" parent="." index="2" instance=ExtResource( 3 )]
+
+position = Vector2( -119.89, 9.04255 )
 _sections_unfolded = [ "Transform" ]
 
 
