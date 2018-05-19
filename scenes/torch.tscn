@@ -2,7 +2,7 @@
 
 [ext_resource path="res://res/movement.shader" type="Shader" id=1]
 [ext_resource path="res://res/sprites/torch.png" type="Texture" id=2]
-[ext_resource path="res://scenes/torch.gd" type="Script" id=3]
+[ext_resource path="res://scripts/torch.gd" type="Script" id=3]
 [ext_resource path="res://res/sprites/light.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -148,7 +148,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Emission Shape", "Gravity", "Spread", "Trail" ]
 
-[node name="torch" type="Sprite" index="0" groups=[
+[node name="torch" type="Sprite" groups=[
 "torchs",
 ]]
 
@@ -199,7 +199,6 @@ blend_times = [  ]
 [node name="Particles2D" type="Particles2D" parent="." index="2"]
 
 position = Vector2( 0, -2.85714 )
-scale = Vector2( 1, 1 )
 emitting = true
 amount = 3
 lifetime = 3.0
