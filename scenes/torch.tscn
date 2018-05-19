@@ -148,7 +148,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angle", "Color", "Emission Shape", "Gravity", "Spread", "Trail" ]
 
-[node name="torch" type="Sprite" groups=[
+[node name="torch" type="Sprite" index="0" groups=[
 "torchs",
 ]]
 
@@ -166,9 +166,9 @@ enabled = true
 editor_only = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 0 )
-texture_scale = 1.60667
+texture_scale = 1.57348
 color = Color( 0.996933, 0.992518, 0.465123, 1 )
-energy = 1.50929
+energy = 0.485052
 mode = 0
 range_height = 0.0
 range_z_min = -1024

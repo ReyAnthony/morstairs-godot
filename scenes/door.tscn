@@ -11,7 +11,7 @@ length = 2.0
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath("CanEnterArrow:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -23,7 +23,7 @@ tracks/0/keys = {
 "values": [  ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:offset")
+tracks/1/path = NodePath("CanEnterArrow:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -34,10 +34,23 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 3, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
 
-[node name="door" type="Sprite"]
+[node name="door" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
+offset = Vector2( 1.46753, 0 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Material", "Offset", "Transform", "Visibility", "Z Index" ]
 
@@ -76,16 +89,15 @@ polygon = PoolVector2Array( 0.208778, 5.85397, -8.37056, 3.07937, -8.51458, 7.61
 
 [node name="CanEnterArrow" type="Sprite" parent="." index="2"]
 
-visible = false
 position = Vector2( -0.146467, -12.9349 )
 rotation = 1.57613
 scale = Vector2( 0.552308, 0.552308 )
 z_index = 100
 texture = ExtResource( 3 )
-offset = Vector2( 1.46753, 0 )
+offset = Vector2( 1.58452, 0 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Z Index" ]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanEnterArrow" index="0"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 
 root_node = NodePath("..")
 autoplay = "grow"
