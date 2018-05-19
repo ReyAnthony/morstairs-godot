@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 4.20695
+radius = 2.3281
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
 "player",
@@ -28,7 +28,7 @@ _sections_unfolded = [ "Offset", "Transform", "Z Index" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -0.145782, 3.35312 )
+position = Vector2( -0.677795, 4.24914 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 

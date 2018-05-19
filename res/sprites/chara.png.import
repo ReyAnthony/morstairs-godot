@@ -10,7 +10,7 @@ source_file="res://res/sprites/chara.png"
 source_md5="a7c02baa1632b1a87df70edb5f62ad68"
 
 dest_files=[ "res://.import/chara.png-4dafca06def5eec2859bb37708aaacbe.stex" ]
-dest_md5="2ffbc74a2bc5ae12e16aaceafd7d4519"
+dest_md5="33e88959fcb5e4fcd9d10fc4d0a379c9"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

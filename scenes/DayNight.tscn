@@ -25,7 +25,8 @@ tracks/0/keys = {
 
 modulate = Color( 0.351562, 0.351562, 0.351562, 1 )
 script = ExtResource( 1 )
-anim = NodePath("AnimationPlayer")
+CYCLE_LENGTH_DAY_IN_SEC = 60.0
+CYCLE_LENGTH_NIGHT_DIV = 4.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 

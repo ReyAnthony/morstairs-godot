@@ -25,10 +25,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 4.9, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.01 ]
+"values": [ 0.01, 1.6, 1.5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.5, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.60667, 1.55, 1.6 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -86,7 +98,9 @@ tracks/3/keys = {
 "values": [  ]
 }
 
-[node name="torch" type="Sprite"]
+[node name="torch" type="Sprite" groups=[
+"torchs",
+]]
 
 material = SubResource( 1 )
 position = Vector2( 260, 42 )
@@ -102,9 +116,9 @@ enabled = true
 editor_only = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 0 )
-texture_scale = 1.62496
-color = Color( 0.99025, 0.921669, 0.43363, 1 )
-energy = 0.01
+texture_scale = 1.60667
+color = Color( 0.996933, 0.992518, 0.465123, 1 )
+energy = 1.50929
 mode = 0
 range_height = 0.0
 range_z_min = -1024
@@ -124,12 +138,14 @@ _sections_unfolded = [ "Material", "Range", "Shadow", "Transform" ]
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
 root_node = NodePath("..")
-autoplay = "light_on"
+autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/light_on = SubResource( 3 )
 anims/torch_anim = SubResource( 2 )
 blend_times = [  ]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 

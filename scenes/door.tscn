@@ -53,10 +53,9 @@ audio_bus_name = "Master"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
 
-visible = false
 position = Vector2( 0.279747, 0.279745 )
 build_mode = 0
-polygon = PoolVector2Array( -0.894783, 26.3066, -18.7904, 8.58991, -9.4847, 7.15826, 0.178955, 16.464 )
+polygon = PoolVector2Array( -0.894783, 26.3066, -18.7904, 8.58991, -9.4847, 7.15826, 18.5877, 7.73577 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
 
@@ -71,7 +70,6 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
 
-visible = false
 position = Vector2( 0.139874, -1.39872 )
 build_mode = 0
 polygon = PoolVector2Array( 0.208778, 5.85397, -8.37056, 3.07937, -8.51458, 7.61824, -0.477329, 15.9495, 8.14801, 7.61824, 8.05304, 3.50756 )
@@ -84,7 +82,7 @@ rotation = 1.57613
 scale = Vector2( 0.552308, 0.552308 )
 z_index = 100
 texture = ExtResource( 3 )
-offset = Vector2( 0.221021, 0 )
+offset = Vector2( 1.46753, 0 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Z Index" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanEnterArrow" index="0"]

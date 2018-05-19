@@ -7,10 +7,10 @@ path="res://.import/door.png-d89a3b9646c5b5204b3711b2a5891d4d.stex"
 [deps]
 
 source_file="res://res/sprites/door.png"
-source_md5="7908c2d6d57b45b597fef226e5b8f7ae"
+source_md5="8001e1b508b95539935a795e700193a6"
 
 dest_files=[ "res://.import/door.png-d89a3b9646c5b5204b3711b2a5891d4d.stex" ]
-dest_md5="e0f60f9ca664d4e286ef06f1aa9859d4"
+dest_md5="00ef220fadce4cfc46eb86e69fb97d1a"
 
 [params]
 

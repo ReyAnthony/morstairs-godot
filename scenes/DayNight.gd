@@ -1,15 +1,17 @@
 extends Node2D
 
-export (NodePath) var anim
-var time
-var CYCLE_LENGTH_DAY_IN_SEC = 20
-var CYCLE_LENGTH_NIGHT = CYCLE_LENGTH_DAY_IN_SEC / 4
+export (float) var CYCLE_LENGTH_DAY_IN_SEC
+export (float) var CYCLE_LENGTH_NIGHT_DIV
+
+var CYCLE_LENGTH_NIGHT
 var day = true
 var anim_node
+var time
 
 func _ready():
 	time = 0
-	anim_node = get_node(anim)
+	anim_node = $AnimationPlayer
+	CYCLE_LENGTH_NIGHT = CYCLE_LENGTH_DAY_IN_SEC / CYCLE_LENGTH_NIGHT_DIV
 	self.set_process(true)
    
 func _process(delta):
@@ -30,11 +32,11 @@ func get_cycle_length():
 		return  CYCLE_LENGTH_NIGHT		
 		
 func day():
-	get_node(anim).play("Daylight_cycle")
+	anim_node.play("Daylight_cycle")
 	for t in get_tree().get_nodes_in_group("torchs"):
 		t.light_it()
 	
 func night():
-	get_node(anim).play_backwards("Daylight_cycle")	
+	anim_node.play_backwards("Daylight_cycle")	
 	for t in get_tree().get_nodes_in_group("torchs"):
 		t.unlight_it()
