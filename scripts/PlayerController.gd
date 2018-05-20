@@ -13,6 +13,13 @@ func _physics_process(delta):
 		velocity.x = -WALK_SPEED
 		velocity.y = -WALK_SPEED
 		$AnimatedSprite.play("NW")
+	elif Input.is_action_pressed("ui_right") &&  Input.is_action_pressed("ui_up"):
+		velocity.x =  WALK_SPEED
+		velocity.y = -WALK_SPEED
+		$AnimatedSprite.play("NE")
+	elif Input.is_action_pressed("ui_up"):
+		velocity.y = -WALK_SPEED
+		$AnimatedSprite.play("N")
 	elif Input.is_action_pressed("ui_right") &&  Input.is_action_pressed("ui_down"):
 		velocity.x =  WALK_SPEED
 		velocity.y = WALK_SPEED
@@ -21,10 +28,17 @@ func _physics_process(delta):
 		velocity.x = -WALK_SPEED
 		velocity.y = WALK_SPEED
 		$AnimatedSprite.play("SW")
-	elif Input.is_action_pressed("ui_right") &&  Input.is_action_pressed("ui_up"):
-		velocity.x =  WALK_SPEED
-		velocity.y = -WALK_SPEED
-		$AnimatedSprite.play("NE")
+	elif Input.is_action_pressed("ui_down"):
+		velocity.y = WALK_SPEED
+		$AnimatedSprite.play("S")
+	elif Input.is_action_pressed("ui_right"):
+		velocity.x = WALK_SPEED
+		$AnimatedSprite.play("E")
+	elif Input.is_action_pressed("ui_left"):
+		velocity.x = -WALK_SPEED
+		$AnimatedSprite.play("W")
+	
+
 
     # We don't need to multiply velocity by delta because MoveAndSlide already takes delta time into account.
 
