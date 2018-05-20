@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://res/harp.ogg" type="AudioStream" id=1]
 [ext_resource path="res://scenes/DayNight.tscn" type="PackedScene" id=2]
@@ -7,10 +7,11 @@
 [ext_resource path="res://scenes/torch.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Guard.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Room.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/TalkingNPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://res/sprites/merchant_portrait.png" type="Texture" id=9]
+[ext_resource path="res://scenes/Room.tscn" type="PackedScene" id=10]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="Music" type="AudioStreamPlayer2D" parent="." index="0"]
 
@@ -150,17 +151,27 @@ _sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility", "coll
 [node name="Guard" parent="DayNight/Walls" index="17" instance=ExtResource( 8 )]
 
 position = Vector2( -15, -113 )
+chara_name = "Guard"
 messages = [ "This is the King's quarters, get lost !", "Move away or you'll be dealt with !" ]
 
 [node name="Guard2" parent="DayNight/Walls" index="18" instance=ExtResource( 8 )]
 
 position = Vector2( 7, -136 )
+chara_name = "Guard"
 messages = [ "Stand back citizen, this is the King's quarters !" ]
 
 [node name="Guard4" parent="DayNight/Walls" index="19" instance=ExtResource( 8 )]
 
 position = Vector2( 403, 94 )
+chara_name = "Guard"
 messages = [ "Escuse me, citizen, but i'm on watch duty, if you want some help with some petty crimes, please go to the barracks." ]
+
+[node name="InnKeeper" parent="DayNight/Walls" index="20" instance=ExtResource( 8 )]
+
+position = Vector2( 219, 118 )
+chara_name = "InnKeeper"
+chara_portrait = ExtResource( 9 )
+messages = [ "Hello adventurer, buy something will ya ?" ]
 
 [node name="Rooms" type="Node2D" parent="DayNight" index="2"]
 
@@ -169,7 +180,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Room" parent="DayNight/Rooms" index="0" instance=ExtResource( 9 )]
+[node name="Room" parent="DayNight/Rooms" index="0" instance=ExtResource( 10 )]
 
 editor/display_folded = true
 cell_y_sort = true
@@ -193,7 +204,7 @@ visible = false
 build_mode = 0
 polygon = PoolVector2Array( 224, 91, 185, 129, 225, 170, 265, 129, 241, 105 )
 
-[node name="Room2" parent="DayNight/Rooms" index="1" instance=ExtResource( 9 )]
+[node name="Room2" parent="DayNight/Rooms" index="1" instance=ExtResource( 10 )]
 
 editor/display_folded = true
 position = Vector2( 2, -15 )
@@ -216,7 +227,7 @@ visible = false
 build_mode = 0
 polygon = PoolVector2Array( 204, -22, 193, -63, 221, -97, 241, -88, 270, -75, 318, -43, 362, -14, 372, 14, 334, 33, 304, 28, 264, 13, 235, 1, 210, -4 )
 
-[node name="Room3" parent="DayNight/Rooms" index="2" instance=ExtResource( 9 )]
+[node name="Room3" parent="DayNight/Rooms" index="2" instance=ExtResource( 10 )]
 
 editor/display_folded = true
 tile_data = PoolIntArray( -2097115, 0, 0, -2097114, 0, 0, -2097113, 0, 0, -2097112, 0, 0, -2097111, 0, 0, -2097110, 0, 0, -2097109, 0, 0, -2097108, 0, 0, -2097107, 0, 0, -2031579, 0, 0, -2031578, 0, 0, -2031577, 0, 0, -2031576, 0, 0, -2031575, 0, 0, -2031574, 0, 0, -2031573, 0, 0, -2031572, 0, 0, -2031571, 0, 0, -1966043, 0, 0, -1966042, 0, 0, -1966041, 0, 0, -1966040, 0, 0, -1966039, 0, 0, -1966038, 0, 0, -1966037, 0, 0, -1966036, 0, 0, -1966035, 0, 0, -1900507, 0, 0, -1900506, 0, 0, -1900505, 0, 0, -1900504, 0, 0, -1900503, 0, 0, -1900502, 0, 0, -1900501, 0, 0, -1900500, 0, 0, -1900499, 0, 0, -1834971, 0, 0, -1834970, 0, 0, -1834969, 0, 0, -1834968, 0, 0, -1834967, 0, 0, -1834966, 0, 0, -1834965, 0, 0, -1834964, 0, 0, -1834963, 0, 0, -1769435, 0, 0, -1769434, 0, 0, -1769433, 0, 0, -1769432, 0, 0, -1769431, 0, 0, -1769430, 0, 0, -1769429, 0, 0, -1769428, 0, 0, -1769427, 0, 0, -1703899, 0, 0, -1703898, 0, 0, -1703897, 0, 0, -1703896, 0, 0, -1703895, 0, 0, -1703894, 0, 0, -1703893, 0, 0, -1703892, 0, 0, -1703891, 0, 0 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/guard_portrait.png-c5bdc54d54ec8468d3181e5bef6d045c.stex"
+path="res://.import/merchant_portrait.png-72726f8a7f6a59bc61c5aa98fb3aad15.stex"
 
 [deps]
 
-source_file="res://res/sprites/guard_portrait.png"
-source_md5="86a065500c8244bb8b629575377dd859"
+source_file="res://res/sprites/merchant_portrait.png"
+source_md5="88b9ce11724948bf68005590e7bf6ea6"
 
-dest_files=[ "res://.import/guard_portrait.png-c5bdc54d54ec8468d3181e5bef6d045c.stex" ]
-dest_md5="035b0cb44f921980bb0e2f1913a47301"
+dest_files=[ "res://.import/merchant_portrait.png-72726f8a7f6a59bc61c5aa98fb3aad15.stex" ]
+dest_md5="43f068e5a017092fb018d10d9ff158ab"
 
 [params]
 

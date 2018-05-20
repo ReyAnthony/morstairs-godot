@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://res/sprites/chara_SE.png" type="Texture" id=1]
-[ext_resource path="res://scripts/Guard.gd" type="Script" id=2]
+[ext_resource path="res://scripts/TalkingNPC.gd" type="Script" id=2]
 [ext_resource path="res://res/sprites/guard_portrait.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Action.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/DialogPanel.tscn" type="PackedScene" id=5]
@@ -11,7 +11,7 @@
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
-chara_name = "Guard"
+chara_name = "NPC"
 chara_portrait = ExtResource( 3 )
 messages = null
 
