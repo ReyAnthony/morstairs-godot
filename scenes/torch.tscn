@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://res/movement.shader" type="Shader" id=1]
 [ext_resource path="res://res/sprites/torch.png" type="Texture" id=2]
@@ -11,6 +11,37 @@ render_priority = 0
 shader = ExtResource( 1 )
 shader_param/coeff = 4.0
 _sections_unfolded = [ "shader_param" ]
+
+[sub_resource type="Animation" id=7]
+
+resource_name = "light_off"
+length = 10.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 7.8, 10, 10.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.50929, 1.50929, 0.01, 0.01 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.9, 6.1, 9.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.61, 1.51, 1.6, 1.5 ]
+}
 
 [sub_resource type="Animation" id=2]
 
@@ -25,7 +56,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 4.9, 5 ),
+"times": PoolRealArray( 0, 2.5, 5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.01, 1.6, 1.5 ]
@@ -148,7 +179,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angle", "Color", "Emission Shape", "Gravity", "Spread", "Trail" ]
 
-[node name="torch" type="Sprite" groups=[
+[node name="torch" type="Sprite" index="0" groups=[
 "torchs",
 ]]
 
@@ -166,9 +197,9 @@ enabled = true
 editor_only = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 0 )
-texture_scale = 1.57348
+texture_scale = 1.5
 color = Color( 0.996933, 0.992518, 0.465123, 1 )
-energy = 0.485052
+energy = 0.01
 mode = 0
 range_height = 0.0
 range_z_min = -1024
@@ -192,6 +223,7 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
+anims/light_off = SubResource( 7 )
 anims/light_on = SubResource( 2 )
 anims/torch_anim = SubResource( 3 )
 blend_times = [  ]

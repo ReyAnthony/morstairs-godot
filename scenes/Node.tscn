@@ -10,7 +10,7 @@
 [ext_resource path="res://res/sprites/chara_SE.png" type="Texture" id=8]
 [ext_resource path="res://scenes/Room.tscn" type="PackedScene" id=9]
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 [node name="Music" type="AudioStreamPlayer2D" parent="." index="0"]
 
@@ -56,6 +56,7 @@ __meta__ = {
 
 [node name="Walls" type="TileMap" parent="DayNight" index="1"]
 
+editor/display_folded = true
 mode = 1
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
@@ -217,6 +218,7 @@ polygon = PoolVector2Array( 204, -22, 193, -63, 221, -97, 241, -88, 270, -75, 31
 
 [node name="Room3" parent="DayNight/Rooms" index="2" instance=ExtResource( 9 )]
 
+editor/display_folded = true
 tile_data = PoolIntArray( -2097115, 0, 0, -2097114, 0, 0, -2097113, 0, 0, -2097112, 0, 0, -2097111, 0, 0, -2097110, 0, 0, -2097109, 0, 0, -2097108, 0, 0, -2097107, 0, 0, -2031579, 0, 0, -2031578, 0, 0, -2031577, 0, 0, -2031576, 0, 0, -2031575, 0, 0, -2031574, 0, 0, -2031573, 0, 0, -2031572, 0, 0, -2031571, 0, 0, -1966043, 0, 0, -1966042, 0, 0, -1966041, 0, 0, -1966040, 0, 0, -1966039, 0, 0, -1966038, 0, 0, -1966037, 0, 0, -1966036, 0, 0, -1966035, 0, 0, -1900507, 0, 0, -1900506, 0, 0, -1900505, 0, 0, -1900504, 0, 0, -1900503, 0, 0, -1900502, 0, 0, -1900501, 0, 0, -1900500, 0, 0, -1900499, 0, 0, -1834971, 0, 0, -1834970, 0, 0, -1834969, 0, 0, -1834968, 0, 0, -1834967, 0, 0, -1834966, 0, 0, -1834965, 0, 0, -1834964, 0, 0, -1834963, 0, 0, -1769435, 0, 0, -1769434, 0, 0, -1769433, 0, 0, -1769432, 0, 0, -1769431, 0, 0, -1769430, 0, 0, -1769429, 0, 0, -1769428, 0, 0, -1769427, 0, 0, -1703899, 0, 0, -1703898, 0, 0, -1703897, 0, 0, -1703896, 0, 0, -1703895, 0, 0, -1703894, 0, 0, -1703893, 0, 0, -1703892, 0, 0, -1703891, 0, 0 )
 
 [node name="Collider" type="Area2D" parent="DayNight/Rooms/Room3" index="0"]

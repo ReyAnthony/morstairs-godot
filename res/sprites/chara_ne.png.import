@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chara_SE.png-bb8a4d1dcbb83ae6f16ffd22b3180c5f.stex"
+path="res://.import/chara_ne.png-e9324c3c875d936c7eeeea9f29e34f01.stex"
 
 [deps]
 
-source_file="res://res/sprites/chara_SE.png"
-source_md5="d53e63e13101fef49e4bdd4c3ceaea0b"
+source_file="res://res/sprites/chara_ne.png"
+source_md5="4bf9f8adab2b8294d9729e4c4b24d219"
 
-dest_files=[ "res://.import/chara_SE.png-bb8a4d1dcbb83ae6f16ffd22b3180c5f.stex" ]
-dest_md5="90277aeca40fea9e3d0879ef8ed0b15d"
+dest_files=[ "res://.import/chara_ne.png-e9324c3c875d936c7eeeea9f29e34f01.stex" ]
+dest_md5="9200afcc91e44b676f24fe8e45c69c95"
 
 [params]
 

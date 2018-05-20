@@ -20,11 +20,11 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("ui_left") && Input.is_action_pressed("ui_down"):
 		velocity.x = -WALK_SPEED
 		velocity.y = WALK_SPEED
-		$AnimatedSprite.play("SE")
+		$AnimatedSprite.play("SW")
 	elif Input.is_action_pressed("ui_right") &&  Input.is_action_pressed("ui_up"):
 		velocity.x =  WALK_SPEED
 		velocity.y = -WALK_SPEED
-		$AnimatedSprite.play("SE")
+		$AnimatedSprite.play("NE")
 
     # We don't need to multiply velocity by delta because MoveAndSlide already takes delta time into account.
 
