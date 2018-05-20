@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/Action.gd" type="Script" id=1]
+[ext_resource path="res://res/sprites/arrow.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "grow"
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Action/CanEnterArrow:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ActionInfo:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 3, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[node name="Action" type="Node2D"]
+
+position = Vector2( 0, -0.107855 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+
+root_node = NodePath("..")
+autoplay = "grow"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/grow = SubResource( 1 )
+blend_times = [  ]
+
+[node name="Area2D" type="Area2D" parent="." index="1"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
+
+position = Vector2( 1, 0.107855 )
+build_mode = 0
+polygon = PoolVector2Array( -3, 14, -6, 7, -5, 7, 5, 7 )
+
+[node name="ActionInfo" type="Sprite" parent="." index="2"]
+
+visible = false
+position = Vector2( -0.146467, -16.8111 )
+rotation = 1.57613
+scale = Vector2( 0.552308, 0.552308 )
+z_index = 100
+texture = ExtResource( 2 )
+offset = Vector2( 1.58452, 0 )
+_sections_unfolded = [ "Offset", "Region", "Transform", "Z Index" ]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+
+

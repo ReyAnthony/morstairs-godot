@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-e0182a40d0fdf09b926232d2f2d3ab82.stex"
+path="res://.import/guard_portrait.png-c5bdc54d54ec8468d3181e5bef6d045c.stex"
 
 [deps]
 
-source_file="res://res/sprites/arrow.png"
-source_md5="66689107c2c0400bf5509514b6efb628"
+source_file="res://res/sprites/guard_portrait.png"
+source_md5="5dcb695079db5b6687df8ce5f2c35959"
 
-dest_files=[ "res://.import/arrow.png-e0182a40d0fdf09b926232d2f2d3ab82.stex" ]
-dest_md5="6b08b63334048e68768dfb9cf3fed533"
+dest_files=[ "res://.import/guard_portrait.png-c5bdc54d54ec8468d3181e5bef6d045c.stex" ]
+dest_md5="8d9526356c5975fa43bf17391331d014"
 
 [params]
 

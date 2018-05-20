@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://res/sprites/chara_SE.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Guard.gd" type="Script" id=2]
+[ext_resource path="res://res/sprites/guard_portrait.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Action.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/DialogPanel.tscn" type="PackedScene" id=5]
+
+[node name="Guard" type="Sprite"]
+
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform" ]
+chara_name = "Guard"
+chara_portrait = ExtResource( 3 )
+messages = null
+
+[node name="Action" parent="." index="0" instance=ExtResource( 4 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
+
+editor/display_folded = true
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="DialogPanel" parent="CanvasLayer" index="0" instance=ExtResource( 5 )]
+
+visible = false
+_sections_unfolded = [ "Grow Direction", "Hint", "Material", "Pause", "Popup", "Rect", "Visibility" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="2"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -3, 8, 4, 6, 2, 3, -4, 3, -4, 6 )
+
+[connection signal="accept_pressed" from="Action" to="." method="_on_Action_accept_pressed"]
+
+
