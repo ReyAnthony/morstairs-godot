@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/guard_portrait.png-c5bdc54d54ec8468d3181e5bef6d045c.stex"
+path="res://.import/gold_stash.png-5466da797ab7528109489ad7990cbd63.stex"
 
 [deps]
 
-source_file="res://res/sprites/guard_portrait.png"
-source_md5="a3c6cb797902c8f5bf272bbeab74cb0d"
+source_file="res://res/sprites/gold_stash.png"
+source_md5="3c6e1f8df563ff5439ed996998fa2fca"
 
-dest_files=[ "res://.import/guard_portrait.png-c5bdc54d54ec8468d3181e5bef6d045c.stex" ]
-dest_md5="d1ecdb4ddc9bb6de07128058bc499488"
+dest_files=[ "res://.import/gold_stash.png-5466da797ab7528109489ad7990cbd63.stex" ]
+dest_md5="bbf8fd2a941db85595d6ec3e04c760e8"
 
 [params]
 

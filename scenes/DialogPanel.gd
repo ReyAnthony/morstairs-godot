@@ -1,5 +1,7 @@
 extends Popup
 
+signal on_dialog_end
+
 var messages = []
 var current_index = 0
 
@@ -31,5 +33,6 @@ func popup(chara_name, chara_portrait, messages):
 
 func hide():
 	set_process(false)
+	emit_signal("on_dialog_end")
 	.hide()
 	
