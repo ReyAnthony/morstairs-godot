@@ -12,7 +12,7 @@ config_version=3
 
 config/name="Morstairs"
 run/main_scene="res://scenes/Node.tscn"
-config/icon="res://icon.png"
+config/icon="res://res/sprites/icon.png"
 
 [autoload]
 

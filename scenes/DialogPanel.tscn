@@ -4,7 +4,7 @@
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://res/sprites/perso_S.png" type="Texture" id=3]
 
-[node name="DialogPanel" type="Popup"]
+[node name="DialogPanel" type="Popup" index="0"]
 
 pause_mode = 2
 anchor_left = 0.0

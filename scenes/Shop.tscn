@@ -4,7 +4,7 @@
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://res/sprites/gold_stash.png" type="Texture" id=3]
 
-[node name="Shop" type="Control" index="0"]
+[node name="Shop" type="Control"]
 
 pause_mode = 2
 anchor_left = 0.5
@@ -208,7 +208,6 @@ _sections_unfolded = [ "Columns", "custom_fonts" ]
 
 [node name="Controls" type="Control" parent="ShopPopup/Panel/Shop" index="2"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -302,7 +301,7 @@ group = null
 text = "QUIT"
 flat = false
 align = 1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Theme", "custom_fonts", "custom_styles" ]
 
 [node name="GoldInfos" type="Control" parent="ShopPopup/Panel/Shop" index="3"]
 

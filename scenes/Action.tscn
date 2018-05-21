@@ -10,7 +10,7 @@ length = 2.0
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Action/CanEnterArrow:scale")
+tracks/0/path = NodePath("ActionInfo:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -46,7 +46,7 @@ tracks/2/keys = {
 "values": [  ]
 }
 
-[node name="Action" type="Node2D"]
+[node name="Action" type="Node2D" index="0"]
 
 position = Vector2( 0, -0.107855 )
 script = ExtResource( 1 )

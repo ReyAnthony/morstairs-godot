@@ -19,9 +19,9 @@ func _process(delta):
 		time += delta
 	elif time >= get_cycle_length(): 
 		if day:
-			day()
+			day_end()
 		else:
-			night()
+			night_end()
 		day = !day
 		time = 0
 
@@ -31,12 +31,12 @@ func get_cycle_length():
 	else:
 		return  CYCLE_LENGTH_NIGHT		
 		
-func day():
+func day_end():
 	anim_node.play("Daylight_cycle")
 	for t in get_tree().get_nodes_in_group("torchs"):
 		t.light_it()
 	
-func night():
+func night_end():
 	anim_node.play_backwards("Daylight_cycle")	
 	for t in get_tree().get_nodes_in_group("torchs"):
 		t.unlight_it()
