@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wall.png-bbbb552070c6d8053979d442725c27e8.stex"
+path="res://.import/roof_arch_left.png-205148017db6c1d6cd5f881aecbc31fa.stex"
 
 [deps]
 
-source_file="res://res/sprites/wall.png"
-source_md5="48cb1807e81f17904b108e9666d0d9e9"
+source_file="res://res/sprites/roof_arch_left.png"
+source_md5="db0ffac3aa7e577b7889f765452fdc58"
 
-dest_files=[ "res://.import/wall.png-bbbb552070c6d8053979d442725c27e8.stex" ]
-dest_md5="51b59362ef456b8d920cb9d53f1ad1e3"
+dest_files=[ "res://.import/roof_arch_left.png-205148017db6c1d6cd5f881aecbc31fa.stex" ]
+dest_md5="3a0a0a0a2a0ea4097ce6a5b9b8ff8cde"
 
 [params]
 

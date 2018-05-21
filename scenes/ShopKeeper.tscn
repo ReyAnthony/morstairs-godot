@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/ShopKeeper.gd" type="Script" id=1]
 [ext_resource path="res://scenes/TalkingNPC.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Shop.tscn" type="PackedScene" id=3]
+[ext_resource path="res://res/sprites/merchant_SE.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Shop.tscn" type="PackedScene" id=4]
 
-[node name="ShopKeeper" type="Node2D"]
+[node name="ShopKeeper" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 chara_name = null
@@ -12,6 +13,8 @@ chara_portrait = null
 messages = null
 
 [node name="TalkingNPC" parent="." index="0" instance=ExtResource( 2 )]
+
+texture = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
 
@@ -21,7 +24,7 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Shop" parent="CanvasLayer" index="0" instance=ExtResource( 3 )]
+[node name="Shop" parent="CanvasLayer" index="0" instance=ExtResource( 4 )]
 
 [connection signal="on_dialog_end" from="TalkingNPC" to="." method="_on_TalkingNPC_on_dialog_end"]
 
