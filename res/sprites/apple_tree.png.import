@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tree.png-615c0016a400f5bb59109d3b85fd02df.stex"
+path="res://.import/apple_tree.png-abe2914dec9cff8b4a9cd13085e40407.stex"
 
 [deps]
 
-source_file="res://res/sprites/tree.png"
-source_md5="d93d450e66abc402c3b0438a72a90b12"
+source_file="res://res/sprites/apple_tree.png"
+source_md5="c7381ce41f0dfd029b01ceb7bcdc6253"
 
-dest_files=[ "res://.import/tree.png-615c0016a400f5bb59109d3b85fd02df.stex" ]
-dest_md5="79e8d7b111c237953416fbd389b6c0eb"
+dest_files=[ "res://.import/apple_tree.png-abe2914dec9cff8b4a9cd13085e40407.stex" ]
+dest_md5="a4542e0e555a88e4482c3b70eace4d74"
 
 [params]
 
