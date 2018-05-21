@@ -7,10 +7,10 @@ path="res://.import/chara_E.png-b293bc7f66557c68ae777f4e96c0d1ff.stex"
 [deps]
 
 source_file="res://res/sprites/chara_E.png"
-source_md5="084a08a7fc707b9b1f5637ecdc114b5a"
+source_md5="2dc6cd0cf90877f6e8771d049c14aaee"
 
 dest_files=[ "res://.import/chara_E.png-b293bc7f66557c68ae777f4e96c0d1ff.stex" ]
-dest_md5="ea965199369385eedab48a6f9ef426e7"
+dest_md5="363f1c57fc20fff199ee6d798bc84939"
 
 [params]
 

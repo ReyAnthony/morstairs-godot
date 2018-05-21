@@ -7,10 +7,10 @@ path="res://.import/perso_N.png-b06da92dcf9b494f38f88825b286be6b.stex"
 [deps]
 
 source_file="res://res/sprites/perso_N.png"
-source_md5="eb6023ebc29e57009221c398f9604b29"
+source_md5="030ebe9a697e7e5d27a8654b1dcf5b96"
 
 dest_files=[ "res://.import/perso_N.png-b06da92dcf9b494f38f88825b286be6b.stex" ]
-dest_md5="ec431b58ea1c38e5a3c8ce902b83a175"
+dest_md5="e3fbcbaa2d579a6b3f9c20907891a99e"
 
 [params]
 

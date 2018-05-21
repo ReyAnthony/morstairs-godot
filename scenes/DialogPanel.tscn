@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/DialogPanel.gd" type="Script" id=1]
+[ext_resource path="res://scripts/DialogPanel.gd" type="Script" id=1]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://res/sprites/perso_S.png" type="Texture" id=3]
 

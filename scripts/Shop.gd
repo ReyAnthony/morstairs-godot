@@ -25,7 +25,6 @@ func select_first_stuff(inventory):
 	if inventory.get_item_count() > 0:
 		inventory.select(0)
 		#HACK => select won't fire signal ...
-		#DOES NOT WORK
 		if inventory == MERCHANT_INVENTORY: 
 			_on_MerchantInventory_item_selected(0)
 		else:
