@@ -1,35 +1,25 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://scenes/Shop.tscn" type="PackedScene" id=1]
-[ext_resource path="res://res/harp.ogg" type="AudioStream" id=2]
-[ext_resource path="res://scenes/DayNight.tscn" type="PackedScene" id=3]
-[ext_resource path="res://res/tilesets/ground_tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://res/tilesets/structure_tileset.tres" type="TileSet" id=5]
-[ext_resource path="res://scenes/torch.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/door.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/TalkingNPC.tscn" type="PackedScene" id=9]
+[ext_resource path="res://res/harp.ogg" type="AudioStream" id=1]
+[ext_resource path="res://scenes/DayNight.tscn" type="PackedScene" id=2]
+[ext_resource path="res://res/tilesets/ground_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://res/tilesets/structure_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://scenes/torch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/TalkingNPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/ShopKeeper.tscn" type="PackedScene" id=9]
 [ext_resource path="res://res/sprites/merchant_portrait.png" type="Texture" id=10]
 [ext_resource path="res://res/sprites/woman_portrait.png" type="Texture" id=11]
 [ext_resource path="res://scenes/Room.tscn" type="PackedScene" id=12]
 
 [node name="Node" type="Node"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
-
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-
-[node name="Shop" parent="CanvasLayer" index="0" instance=ExtResource( 1 )]
-
-[node name="Music" type="AudioStreamPlayer2D" parent="." index="1"]
+[node name="Music" type="AudioStreamPlayer2D" parent="." index="0"]
 
 pause_mode = 2
 position = Vector2( 11, -130 )
-stream = ExtResource( 2 )
+stream = ExtResource( 1 )
 volume_db = 0.0
 autoplay = true
 max_distance = 2000.0
@@ -38,7 +28,7 @@ bus = "Master"
 area_mask = 1
 _sections_unfolded = [ "Pause" ]
 
-[node name="DayNight" parent="." index="2" instance=ExtResource( 3 )]
+[node name="DayNight" parent="." index="1" instance=ExtResource( 2 )]
 
 modulate = Color( 1, 1, 1, 1 )
 position = Vector2( -193, -193 )
@@ -48,7 +38,7 @@ CYCLE_LENGTH_DAY_IN_SEC = 10.0
 [node name="Grounds" type="TileMap" parent="DayNight" index="0"]
 
 mode = 1
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -72,7 +62,7 @@ __meta__ = {
 [node name="Walls" type="TileMap" parent="DayNight" index="1"]
 
 mode = 1
-tile_set = ExtResource( 5 )
+tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -93,101 +83,101 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="torch3" parent="DayNight/Walls" index="0" instance=ExtResource( 6 )]
+[node name="torch3" parent="DayNight/Walls" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 101, 5 )
 
-[node name="torch4" parent="DayNight/Walls" index="1" instance=ExtResource( 6 )]
+[node name="torch4" parent="DayNight/Walls" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 124, -18 )
 
-[node name="torch5" parent="DayNight/Walls" index="2" instance=ExtResource( 6 )]
+[node name="torch5" parent="DayNight/Walls" index="2" instance=ExtResource( 5 )]
 
 position = Vector2( 212, 118 )
 
-[node name="torch6" parent="DayNight/Walls" index="3" instance=ExtResource( 6 )]
+[node name="torch6" parent="DayNight/Walls" index="3" instance=ExtResource( 5 )]
 
 position = Vector2( 236, -59 )
 
-[node name="torch7" parent="DayNight/Walls" index="4" instance=ExtResource( 6 )]
+[node name="torch7" parent="DayNight/Walls" index="4" instance=ExtResource( 5 )]
 
 position = Vector2( 268, -27 )
 
-[node name="torch8" parent="DayNight/Walls" index="5" instance=ExtResource( 6 )]
+[node name="torch8" parent="DayNight/Walls" index="5" instance=ExtResource( 5 )]
 
 position = Vector2( 300, 5 )
 
-[node name="torch9" parent="DayNight/Walls" index="6" instance=ExtResource( 6 )]
+[node name="torch9" parent="DayNight/Walls" index="6" instance=ExtResource( 5 )]
 
 position = Vector2( 194, -21 )
 
-[node name="torch10" parent="DayNight/Walls" index="7" instance=ExtResource( 6 )]
+[node name="torch10" parent="DayNight/Walls" index="7" instance=ExtResource( 5 )]
 
 position = Vector2( 254, 39 )
 
-[node name="torch11" parent="DayNight/Walls" index="8" instance=ExtResource( 6 )]
+[node name="torch11" parent="DayNight/Walls" index="8" instance=ExtResource( 5 )]
 
 position = Vector2( 10, -143 )
 
-[node name="torch12" parent="DayNight/Walls" index="9" instance=ExtResource( 6 )]
+[node name="torch12" parent="DayNight/Walls" index="9" instance=ExtResource( 5 )]
 
 position = Vector2( -22, -112 )
 
-[node name="torch13" parent="DayNight/Walls" index="10" instance=ExtResource( 6 )]
+[node name="torch13" parent="DayNight/Walls" index="10" instance=ExtResource( 5 )]
 
 position = Vector2( 203, 64 )
 
-[node name="torch14" parent="DayNight/Walls" index="11" instance=ExtResource( 6 )]
+[node name="torch14" parent="DayNight/Walls" index="11" instance=ExtResource( 5 )]
 
 position = Vector2( 222, 45 )
 
-[node name="torch15" parent="DayNight/Walls" index="12" instance=ExtResource( 6 )]
+[node name="torch15" parent="DayNight/Walls" index="12" instance=ExtResource( 5 )]
 
 position = Vector2( 375, 115 )
 
-[node name="torch16" parent="DayNight/Walls" index="13" instance=ExtResource( 6 )]
+[node name="torch16" parent="DayNight/Walls" index="13" instance=ExtResource( 5 )]
 
 position = Vector2( 395, 95 )
 
-[node name="door2" parent="DayNight/Walls" index="14" instance=ExtResource( 7 )]
+[node name="door2" parent="DayNight/Walls" index="14" instance=ExtResource( 6 )]
 
 position = Vector2( -7, -135 )
 
-[node name="door3" parent="DayNight/Walls" index="15" instance=ExtResource( 7 )]
+[node name="door3" parent="DayNight/Walls" index="15" instance=ExtResource( 6 )]
 
 position = Vector2( -15, -127 )
 
-[node name="Player" parent="DayNight/Walls" index="16" instance=ExtResource( 8 )]
+[node name="Player" parent="DayNight/Walls" index="16" instance=ExtResource( 7 )]
 
 position = Vector2( 228, 70 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility", "collision" ]
 
-[node name="Guard" parent="DayNight/Walls" index="17" instance=ExtResource( 9 )]
+[node name="Guard" parent="DayNight/Walls" index="17" instance=ExtResource( 8 )]
 
 position = Vector2( -15, -113 )
 chara_name = "Guard"
 messages = [ "This is the King's quarters, get lost !", "Move away or you'll be dealt with !" ]
 
-[node name="Guard2" parent="DayNight/Walls" index="18" instance=ExtResource( 9 )]
+[node name="Guard2" parent="DayNight/Walls" index="18" instance=ExtResource( 8 )]
 
 position = Vector2( 7, -136 )
 chara_name = "Guard"
 messages = [ "Stand back citizen, this is the King's quarters !" ]
 
-[node name="Guard4" parent="DayNight/Walls" index="19" instance=ExtResource( 9 )]
+[node name="Guard4" parent="DayNight/Walls" index="19" instance=ExtResource( 8 )]
 
 position = Vector2( 403, 94 )
 chara_name = "Guard"
 messages = [ "Escuse me, citizen, but i'm on watch duty, if you want some help with some petty crimes, please go to the barracks." ]
 
-[node name="InnKeeper" parent="DayNight/Walls" index="20" instance=ExtResource( 9 )]
+[node name="ShopKeeper" parent="DayNight/Walls" index="20" instance=ExtResource( 9 )]
 
-position = Vector2( 219, 118 )
-chara_name = "InnKeeper"
+position = Vector2( 221, 117 )
+chara_name = "Shop Keeper"
 chara_portrait = ExtResource( 10 )
-messages = [ "Hello adventurer, buy something will ya ?" ]
+messages = [ "Welcome to my modest shop ! Please buy something !" ]
 
-[node name="InnKeeper2" parent="DayNight/Walls" index="21" instance=ExtResource( 9 )]
+[node name="Woman" parent="DayNight/Walls" index="21" instance=ExtResource( 8 )]
 
 position = Vector2( 212, 61 )
 chara_name = "Woman"
@@ -271,7 +261,7 @@ polygon = PoolVector2Array( 516, 102, 556, 64, 618, 116, 572, 158, 547, 143, 517
 [node name="Higher" type="TileMap" parent="DayNight" index="3"]
 
 mode = 1
-tile_set = ExtResource( 5 )
+tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )

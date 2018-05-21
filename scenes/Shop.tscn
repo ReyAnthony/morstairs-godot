@@ -76,31 +76,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="StoreLabel" type="Label" parent="ShopPopup/Panel/Shop" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 314.0
-margin_top = 21.0
-margin_right = 682.0
-margin_bottom = 57.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
-text = "STORE"
-align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="Merchant" type="Control" parent="ShopPopup/Panel/Shop" index="1"]
+[node name="Merchant" type="Control" parent="ShopPopup/Panel/Shop" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -165,7 +141,7 @@ icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
 _sections_unfolded = [ "Columns", "Icon", "custom_colors", "custom_fonts" ]
 
-[node name="Player" type="Control" parent="ShopPopup/Panel/Shop" index="2"]
+[node name="Player" type="Control" parent="ShopPopup/Panel/Shop" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -230,7 +206,7 @@ icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
 _sections_unfolded = [ "Columns", "custom_fonts" ]
 
-[node name="Controls" type="Control" parent="ShopPopup/Panel/Shop" index="3"]
+[node name="Controls" type="Control" parent="ShopPopup/Panel/Shop" index="2"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -328,7 +304,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="GoldInfos" type="Control" parent="ShopPopup/Panel/Shop" index="4"]
+[node name="GoldInfos" type="Control" parent="ShopPopup/Panel/Shop" index="3"]
 
 editor/display_folded = true
 anchor_left = 0.0

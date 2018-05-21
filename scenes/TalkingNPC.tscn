@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/Action.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/DialogPanel.tscn" type="PackedScene" id=5]
 
-[node name="Guard" type="Sprite"]
+[node name="TalkingNPC" type="Sprite"]
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -19,7 +19,6 @@ messages = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -48,5 +47,7 @@ build_mode = 0
 polygon = PoolVector2Array( -3, 8, 4, 6, 2, 3, -4, 3, -4, 6 )
 
 [connection signal="accept_pressed" from="Action" to="." method="_on_Action_accept_pressed"]
+
+[connection signal="on_dialog_end" from="CanvasLayer/DialogPanel" to="." method="_on_DialogPanel_on_dialog_end"]
 
 

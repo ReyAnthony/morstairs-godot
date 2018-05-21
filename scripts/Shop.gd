@@ -6,9 +6,6 @@ var MERCHANT_GOLD = 1000
 var MERCHANT_INVENTORY
 var PLAYER_INVENTORY 
 
-func _ready():
-	show_shop()
-
 func _on_Quit_pressed():
 	$ShopPopup.hide()
 	get_tree().paused = false
