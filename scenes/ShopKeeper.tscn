@@ -5,7 +5,7 @@
 [ext_resource path="res://res/sprites/merchant_SE.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Shop.tscn" type="PackedScene" id=4]
 
-[node name="ShopKeeper" type="Node2D" index="0"]
+[node name="ShopKeeper" type="Node2D"]
 
 script = ExtResource( 1 )
 chara_name = null

@@ -15,7 +15,7 @@
 [ext_resource path="res://res/sprites/woman_portrait.png" type="Texture" id=13]
 [ext_resource path="res://scenes/Room.tscn" type="PackedScene" id=14]
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 [node name="Music" type="AudioStreamPlayer2D" parent="." index="0"]
 
@@ -170,7 +170,7 @@ messages = [ "Stand back citizen, this is the King's quarters !" ]
 
 [node name="Guard4" parent="DayNight/Walls" index="19" instance=ExtResource( 8 )]
 
-position = Vector2( 403, 94 )
+position = Vector2( 401, 94 )
 texture = ExtResource( 9 )
 chara_name = "Guard"
 messages = [ "Escuse me, citizen, but i'm on watch duty, if you want some help with some petty crimes, please go to the barracks." ]

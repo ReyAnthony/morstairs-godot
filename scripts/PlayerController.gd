@@ -4,6 +4,14 @@ const WALK_SPEED = 30
 
 var velocity = Vector2()
 
+func _ready():
+	set_process(true)
+	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_pause"):
+		get_tree().paused = true
+		$CanvasLayer/PlayerInventory.show_inventory()	
+
 func _physics_process(delta):
 	
 	velocity.y = 0
@@ -37,11 +45,5 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("ui_left"):
 		velocity.x = -WALK_SPEED
 		$AnimatedSprite.play("W")
-	
-
-
-    # We don't need to multiply velocity by delta because MoveAndSlide already takes delta time into account.
-
-    # The second parameter of move_and_slide is the normal pointing up.
-    # In the case of a 2d platformer, in Godot upward is negative y, which translates to -1 as a normal.
+		
 	move_and_slide(velocity.normalized() * WALK_SPEED, Vector2(0, -1))

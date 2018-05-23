@@ -1,56 +1,57 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/PlayerController.gd" type="Script" id=1]
-[ext_resource path="res://res/sprites/chara_W.png" type="Texture" id=2]
-[ext_resource path="res://res/sprites/perso_N.png" type="Texture" id=3]
-[ext_resource path="res://res/sprites/chara_SW.png" type="Texture" id=4]
-[ext_resource path="res://res/sprites/chara_NW.png" type="Texture" id=5]
-[ext_resource path="res://res/sprites/chara_ne.png" type="Texture" id=6]
-[ext_resource path="res://res/sprites/chara_SE.png" type="Texture" id=7]
-[ext_resource path="res://res/sprites/perso_S.png" type="Texture" id=8]
-[ext_resource path="res://res/sprites/chara_E.png" type="Texture" id=9]
+[ext_resource path="res://res/sprites/perso_N.png" type="Texture" id=2]
+[ext_resource path="res://res/sprites/chara_SW.png" type="Texture" id=3]
+[ext_resource path="res://res/sprites/chara_NW.png" type="Texture" id=4]
+[ext_resource path="res://res/sprites/chara_ne.png" type="Texture" id=5]
+[ext_resource path="res://res/sprites/chara_SE.png" type="Texture" id=6]
+[ext_resource path="res://res/sprites/perso_S.png" type="Texture" id=7]
+[ext_resource path="res://res/sprites/chara_E.png" type="Texture" id=8]
+[ext_resource path="res://res/sprites/chara_W.png" type="Texture" id=9]
+[ext_resource path="res://scenes/PlayerInventory.tscn" type="PackedScene" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "W",
+"name": "N",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "N",
+"name": "SW",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "SW",
+"name": "NW",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "NW",
+"name": "NE",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "NE",
+"name": "SE",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
-"name": "SE",
+"name": "S",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "S",
+"name": "E",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
-"name": "E",
+"name": "W",
 "speed": 5.0
 } ]
 
@@ -81,7 +82,20 @@ position = Vector2( 0.396357, 6.3323 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="2"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="PlayerInventory" parent="CanvasLayer" index="0" instance=ExtResource( 10 )]
+
+margin_top = -2.0
+margin_bottom = -2.0
+
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
 
 position = Vector2( 0, -0.985252 )
 anchor_mode = 1
