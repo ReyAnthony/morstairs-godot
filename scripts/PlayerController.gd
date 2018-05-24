@@ -10,7 +10,7 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("ui_pause"):
 		get_tree().paused = true
-		$CanvasLayer/PlayerInventory.show_inventory()	
+		$CanvasLayer/PlayerInventory.show_inventory()
 
 func _physics_process(delta):
 	
