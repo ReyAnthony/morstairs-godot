@@ -10,6 +10,7 @@
 script = ExtResource( 1 )
 chara_name = null
 chara_portrait = null
+merchant_id = null
 messages = null
 
 [node name="TalkingNPC" parent="." index="0" instance=ExtResource( 2 )]

@@ -2,6 +2,7 @@ extends Node2D
 
 export (String)  var chara_name
 export (Texture) var chara_portrait
+export (String)  var merchant_id
 export (Array, String) var messages = []
 
 func _ready():
@@ -10,4 +11,4 @@ func _ready():
 	$TalkingNPC.messages = messages
 
 func _on_TalkingNPC_on_dialog_end():
-	$CanvasLayer/Shop.show_shop()
+	$CanvasLayer/Shop.show_shop(merchant_id)

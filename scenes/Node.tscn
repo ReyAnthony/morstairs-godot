@@ -15,7 +15,7 @@
 [ext_resource path="res://res/sprites/woman_portrait.png" type="Texture" id=13]
 [ext_resource path="res://scenes/Room.tscn" type="PackedScene" id=14]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="Music" type="AudioStreamPlayer2D" parent="." index="0"]
 
@@ -178,11 +178,20 @@ messages = [ "Escuse me, citizen, but i'm on watch duty, if you want some help w
 [node name="ShopKeeper" parent="DayNight/Walls" index="20" instance=ExtResource( 10 )]
 
 position = Vector2( 221, 117 )
-chara_name = "Shop Keeper"
+chara_name = "Shopkeeper"
 chara_portrait = ExtResource( 11 )
+merchant_id = "MORSTAIRS_TOWN_SELLER"
 messages = [ "Welcome to my modest shop ! Please buy something !" ]
 
-[node name="Woman" parent="DayNight/Walls" index="21" instance=ExtResource( 8 )]
+[node name="ShopKeeper2" parent="DayNight/Walls" index="21" instance=ExtResource( 10 )]
+
+position = Vector2( 364, -53 )
+chara_name = "Black Market Seller"
+chara_portrait = ExtResource( 11 )
+merchant_id = "MORSTAIRS_BLACKMARKET_SELLER"
+messages = [ "Pss, buy something... And don't bring guards or i'll kill you !" ]
+
+[node name="Woman" parent="DayNight/Walls" index="22" instance=ExtResource( 8 )]
 
 position = Vector2( 212, 61 )
 texture = ExtResource( 12 )

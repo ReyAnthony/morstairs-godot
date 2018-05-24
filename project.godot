@@ -16,8 +16,10 @@ config/icon="res://res/sprites/icon.png"
 
 [autoload]
 
-SettingSingleton="*res://scripts/SettingSingleton.gd"
-PlayerDataSingleton="*res://scripts/PlayerDataSingleton.gd"
+SettingSingleton="*res://scripts/singletons/SettingSingleton.gd"
+ObjectHelper="*res://scripts/singletons/ObjectHelper.gd"
+PlayerDataSingleton="*res://scripts/singletons/PlayerDataSingleton.gd"
+ShopDataSingleton="*res://scripts/singletons/ShopDataSingleton.gd"
 
 [display]
 

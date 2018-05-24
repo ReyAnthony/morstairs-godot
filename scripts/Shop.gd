@@ -1,17 +1,16 @@
 extends Control
 
-var PLAYER_GOLD = 1500
-var MERCHANT_GOLD = 1000
-
 var MERCHANT_INVENTORY
 var PLAYER_INVENTORY 
+var MERCHANT_ID
 
 func _on_Quit_pressed():
 	$ShopPopup.hide()
 	get_tree().paused = false
 	
-func show_shop():
+func show_shop(merchant_id):
 	get_tree().paused = true
+	MERCHANT_ID = merchant_id
 	MERCHANT_INVENTORY = $ShopPopup/Panel/Shop/Merchant/MerchantInventory
 	PLAYER_INVENTORY = $ShopPopup/Panel/Shop/Player/PlayerInventory
 	refresh_store()
@@ -31,35 +30,15 @@ func refresh_store():
 	MERCHANT_INVENTORY.clear()
 	PLAYER_INVENTORY.clear()
 	
-	MERCHANT_INVENTORY.add_item("Rusty Sword")
-	MERCHANT_INVENTORY.set_item_metadata(0, 
-	{"name": "Rusty Sword",
-	 "cost": 50,
-	 "throwable": true,
-	 "infos": {} 
-	 })
-	
-	MERCHANT_INVENTORY.add_item("Shiny Sword")
-	MERCHANT_INVENTORY.set_item_metadata(1, 
-	{"name": "Shiny Sword",
-	 "cost": 2500,
-	 "throwable": true,
-	 "infos": {} 
-	 })
-	
-	var idx = 0
-	for o in PlayerDataSingleton.objects:
-		PLAYER_INVENTORY.add_item(o.name)
-		PLAYER_INVENTORY.set_item_metadata(idx, o)
-		idx += 1
+	ObjectHelper.add_object_in_list_view(ShopDataSingleton.get_shop_objects(MERCHANT_ID), MERCHANT_INVENTORY)
+	ObjectHelper.add_object_in_list_view(PlayerDataSingleton.objects, PLAYER_INVENTORY)
 	
 	select_first_stuff(MERCHANT_INVENTORY)
 	select_first_stuff(PLAYER_INVENTORY)
 
-func update_info_view(inventory, obj_data):
+func update_info_view(inventory, price):
 	var node = inventory.get_node("../Infos/Cost/Value")
-	node.text = String(obj_data.cost)
-	pass
+	node.text = String(price)
 
 func get_player_gold():
 	return PlayerDataSingleton.gold
@@ -68,10 +47,10 @@ func set_player_gold(amount):
 	PlayerDataSingleton.gold = amount
 	
 func get_merchant_gold():
-	return MERCHANT_GOLD
+	return ShopDataSingleton.get_merchant_gold(MERCHANT_ID)
 
 func set_merchant_gold(amount):
-	MERCHANT_GOLD = amount
+	ShopDataSingleton.set_merchant_gold(MERCHANT_ID, amount)
 
 func update_gold_amounts():
 	$ShopPopup/Panel/Shop/GoldInfos/PlayerGold/Amount.text = String(get_player_gold())
@@ -85,8 +64,10 @@ func _on_Buy_pressed():
 	disable_buy_sell(true, true)
 	var idx = MERCHANT_INVENTORY.get_selected_items()[0]
 	var object = MERCHANT_INVENTORY.get_item_metadata(idx)
-	var cost = object.cost
+	var cost = ShopDataSingleton.apply_pricetag_modifier_for_merchant(MERCHANT_ID, object.cost)
+	
 	MERCHANT_INVENTORY.remove_item(idx)
+	ShopDataSingleton.remove_object_from_inventory(MERCHANT_ID, idx)
 	
 	PlayerDataSingleton.add_object_in_inventory(object)
 	set_player_gold(get_player_gold() - cost)
@@ -98,8 +79,10 @@ func _on_Sell_pressed():
 	disable_buy_sell(true, true)
 	var idx = PLAYER_INVENTORY.get_selected_items()[0]
 	var object = PLAYER_INVENTORY.get_item_metadata(idx)
-	var cost = object.cost
+	var cost = ShopDataSingleton.apply_pricetag_modifier_for_player(MERCHANT_ID, object.cost)
+	
 	PLAYER_INVENTORY.remove_item(idx)
+	ShopDataSingleton.add_object_in_inventory(MERCHANT_ID, object)
 	
 	#same hack than in the inventory, mapping is 1:1 so ids are matching
 	PlayerDataSingleton.remove_object_from_inventory(idx)
@@ -109,22 +92,19 @@ func _on_Sell_pressed():
 	refresh_store()
 
 func _on_MerchantInventory_item_selected(index):
-	print("selected merchant " + String(index)) 
 	var obj = MERCHANT_INVENTORY.get_item_metadata(index)
-	var cost = obj.cost
-	print("Merchant cost " + String(cost))
+	var cost = ShopDataSingleton.apply_pricetag_modifier_for_merchant(MERCHANT_ID, obj.cost)
 	if cost <= get_player_gold():
 		$ShopPopup/Panel/Shop/Controls/Buy.disabled = false
 	else:
 		$ShopPopup/Panel/Shop/Controls/Buy.disabled = true
-	update_info_view(MERCHANT_INVENTORY, obj)	
+	update_info_view(MERCHANT_INVENTORY, cost)	
 
 func _on_PlayerInventory_item_selected(index):
-	print("selected player " + String(index)) 
 	var obj = PLAYER_INVENTORY.get_item_metadata(index)
-	var cost = obj.cost
+	var cost = ShopDataSingleton.apply_pricetag_modifier_for_player(MERCHANT_ID, obj.cost)
 	if cost <= get_merchant_gold() && obj.throwable:
 		$ShopPopup/Panel/Shop/Controls/Sell.disabled = false
 	else:
 		$ShopPopup/Panel/Shop/Controls/Sell.disabled = true	
-	update_info_view(PLAYER_INVENTORY, obj)	
+	update_info_view(PLAYER_INVENTORY, cost)	
