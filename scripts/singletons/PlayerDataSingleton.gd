@@ -11,6 +11,15 @@ var objects = [
 var player_name = "UNKNOWN"
 var gold = 500
 
+func get_player_gold(): 
+	return self.gold
+	
+func set_player_gold(gold):
+	if gold > 0:
+		self.gold = gold
+	else:
+		self.gold = 0	
+
 func add_object_in_inventory(obj): 
 	objects.push_back(obj)
 	

@@ -41,10 +41,10 @@ func update_info_view(inventory, price):
 	node.text = String(price)
 
 func get_player_gold():
-	return PlayerDataSingleton.gold
+	return PlayerDataSingleton.get_player_gold()
 
 func set_player_gold(amount):
-	PlayerDataSingleton.gold = amount
+	PlayerDataSingleton.set_player_gold(amount)
 	
 func get_merchant_gold():
 	return ShopDataSingleton.get_merchant_gold(MERCHANT_ID)
@@ -68,8 +68,8 @@ func _on_Buy_pressed():
 	
 	MERCHANT_INVENTORY.remove_item(idx)
 	ShopDataSingleton.remove_object_from_inventory(MERCHANT_ID, idx)
-	
 	PlayerDataSingleton.add_object_in_inventory(object)
+	
 	set_player_gold(get_player_gold() - cost)
 	set_merchant_gold(get_merchant_gold() + cost)
 	update_gold_amounts()
@@ -83,9 +83,9 @@ func _on_Sell_pressed():
 	
 	PLAYER_INVENTORY.remove_item(idx)
 	ShopDataSingleton.add_object_in_inventory(MERCHANT_ID, object)
-	
 	#same hack than in the inventory, mapping is 1:1 so ids are matching
 	PlayerDataSingleton.remove_object_from_inventory(idx)
+	
 	set_merchant_gold(get_merchant_gold() - cost)
 	set_player_gold(get_player_gold() + cost)
 	update_gold_amounts()
