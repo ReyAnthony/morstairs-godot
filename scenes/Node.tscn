@@ -15,7 +15,7 @@
 [ext_resource path="res://res/sprites/woman_portrait.png" type="Texture" id=13]
 [ext_resource path="res://scenes/Room.tscn" type="PackedScene" id=14]
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 [node name="Music" type="AudioStreamPlayer2D" parent="." index="0"]
 
