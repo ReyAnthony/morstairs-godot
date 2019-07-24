@@ -7,10 +7,7 @@ path="res://.import/harp.ogg-f95e95a3cb192f8dc33367df209aa7a9.oggstr"
 [deps]
 
 source_file="res://res/harp.ogg"
-source_md5="3d26bfcaffee16c204eea65aa77b8766"
-
 dest_files=[ "res://.import/harp.ogg-f95e95a3cb192f8dc33367df209aa7a9.oggstr" ]
-dest_md5="efbd019d6597f1ad706b6a6765e92b43"
 
 [params]
 

@@ -3,20 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/roof_tilemap.png-52ade16a459c2960e751155b15c6bc7e.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://res/sprites/roof_tilemap.png"
-source_md5="822c08aec58aa56380a2e83164261b6a"
-
 dest_files=[ "res://.import/roof_tilemap.png-52ade16a459c2960e751155b15c6bc7e.stex" ]
-dest_md5="1755c03d877ac77e209f66229267da4f"
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=false
@@ -26,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true

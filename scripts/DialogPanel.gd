@@ -9,7 +9,7 @@ func _ready():
 	set_process(false)
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("mouse_left_click"):
 		if current_index < messages.size() - 1:
 			current_index += 1
 			$Panel/CharaMessage.text = messages[current_index]
@@ -17,7 +17,7 @@ func _process(delta):
 			get_tree().paused = false
 			self.hide()
 
-func popup(chara_name, chara_portrait, messages):
+func my_popup(chara_name, chara_portrait, messages):
 	
 	assert(messages.size() > 0)
 

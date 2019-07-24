@@ -1,0 +1,164 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://res/shaders/movement.shader" type="Shader" id=1]
+[ext_resource path="res://res/sprites/env/torch.png" type="Texture" id=2]
+[ext_resource path="res://scripts/torch.gd" type="Script" id=3]
+[ext_resource path="res://res/sprites/env/light.png" type="Texture" id=4]
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/coeff = 4.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "light_off"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 7.8, 10, 10.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.50929, 1.50929, 0.01, 0.01 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.9, 6.1, 9.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.61, 1.51, 1.6, 1.5 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.01, 1.6, 1.5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.5, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.60667, 1.55, 1.6 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 1, 1.9, 2.7, 3.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.6, 1.63, 1.56, 1.7, 1.62 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 1.9, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.991943, 0.484375, 1 ), Color( 0.976562, 0.823021, 0.362396, 1 ), Color( 0.957062, 1, 0.214844, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 1.9, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.5, 1.47, 1.63 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Light2D:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[sub_resource type="Gradient" id=5]
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+trail_color_modifier = SubResource( 6 )
+flag_disable_z = true
+spread = 93.51
+gravity = Vector3( 0, -5, 0 )
+initial_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.398438, 0.398438, 0.398438, 1 )
+
+[node name="torch" type="Sprite" groups=[
+"torchs",
+]]
+pause_mode = 2
+material = SubResource( 1 )
+position = Vector2( 260, 42 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 4 )
+texture_scale = 1.61
+color = Color( 0.996933, 0.992518, 0.465123, 1 )
+energy = 1.50929
+shadow_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/light_off = SubResource( 2 )
+anims/light_on = SubResource( 3 )
+anims/torch_anim = SubResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, -2.85714 )
+amount = 3
+lifetime = 3.0
+randomness = 1.0
+process_material = SubResource( 7 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

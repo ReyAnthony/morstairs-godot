@@ -1,5 +1,12 @@
 extends Sprite
 
+export (bool) var inside = false
+
+func _ready():
+	#by default torches inside buildings are hidden
+	if inside:
+		hide()
+
 func light_it():
 	$AnimationPlayer.stop(true)
 	$Light2D.energy = 0

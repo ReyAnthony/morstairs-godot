@@ -10,7 +10,18 @@ var objects = [
 
 var player_name = "UNKNOWN"
 var gold = 500
+var target
+var fight_mode = false
 
+func set_target(global_position, node):
+	target = {"position": global_position, "node": node}
+	
+func clear_target():
+	target = null
+	
+func get_target():
+	return self.target	
+	
 func get_player_gold(): 
 	return self.gold
 	

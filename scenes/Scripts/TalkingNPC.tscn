@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/TalkingNPC.gd" type="Script" id=1]
+[ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
+[ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=3]
+[ext_resource path="res://res/sprites/characters/lady_SE.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Scripts/DialogPanel.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.9764
+height = 12.2736
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 13.7716
+height = 23.9114
+
+[node name="TalkingNPC" type="KinematicBody2D" groups=[
+"npc",
+]]
+scale = Vector2( 1.00418, 1.0142 )
+script = ExtResource( 1 )
+material_on_mouse_enter = ExtResource( 2 )
+chara_name = "NPC"
+chara_portrait = ExtResource( 3 )
+sprite = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 1, 1 )
+polygon = PoolVector2Array( -4.13, 10.0657, 3.41519, 10.5375, 5.8773, 7.70656, 4.68596, 2.6737, -5.1625, 2.75234, -5.55961, 6.3697 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
+layer = 0
+
+[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 5 )]
+
+[node name="Interactable" type="Node2D" parent="."]
+
+[node name="MouseArea" type="Area2D" parent="Interactable"]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
+shape = SubResource( 1 )
+
+[node name="ActionArea" type="Area2D" parent="Interactable"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
+position = Vector2( 0, 6.73 )
+scale = Vector2( 0.492, -0.231 )
+shape = SubResource( 2 )
+[connection signal="on_dialog_end" from="CanvasLayer/DialogPanel" to="." method="_on_DialogPanel_on_dialog_end"]
+[connection signal="input_event" from="Interactable/MouseArea" to="." method="_on_MouseArea_input_event"]
+[connection signal="mouse_entered" from="Interactable/MouseArea" to="." method="_on_MouseArea_mouse_entered"]
+[connection signal="mouse_exited" from="Interactable/MouseArea" to="." method="_on_MouseArea_mouse_exited"]
+[connection signal="body_entered" from="Interactable/ActionArea" to="." method="_on_ActionArea_body_entered"]

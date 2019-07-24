@@ -1,0 +1,161 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/PlayerInventory.gd" type="Script" id=1]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
+
+[node name="PlayerInventory" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="InventoryPopup" type="Popup" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="InventoryPopup"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Inventory" type="Control" parent="InventoryPopup/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -587.0
+margin_top = -308.0
+margin_right = 604.0
+margin_bottom = 308.0
+
+[node name="Label" type="Label" parent="InventoryPopup/Panel/Inventory"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.5
+margin_top = -18.0
+margin_right = 109.5
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+text = "INVENTORY"
+
+[node name="Inventory" type="ItemList" parent="InventoryPopup/Panel/Inventory"]
+margin_left = 6.0
+margin_top = 197.0
+margin_right = 350.0
+margin_bottom = 593.0
+custom_fonts/font = ExtResource( 2 )
+
+[node name="Exit" type="Button" parent="InventoryPopup/Panel/Inventory"]
+margin_left = 982.0
+margin_top = 512.0
+margin_right = 1155.0
+margin_bottom = 589.0
+custom_fonts/font = ExtResource( 2 )
+text = "EXIT"
+
+[node name="ObjectInfoView" type="Control" parent="InventoryPopup/Panel/Inventory"]
+margin_left = 373.0
+margin_top = 207.0
+margin_right = 954.0
+margin_bottom = 590.0
+
+[node name="Cost" type="Control" parent="InventoryPopup/Panel/Inventory/ObjectInfoView"]
+editor/display_folded = true
+margin_right = 289.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="InventoryPopup/Panel/Inventory/ObjectInfoView/Cost"]
+margin_right = 121.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 2 )
+text = "Cost :"
+
+[node name="Value" type="Label" parent="InventoryPopup/Panel/Inventory/ObjectInfoView/Cost"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -145.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 2 )
+text = "0"
+
+[node name="PlayerInfoView" type="Control" parent="InventoryPopup/Panel/Inventory"]
+editor/display_folded = true
+margin_left = 13.0
+margin_top = 61.0
+margin_right = 1163.0
+margin_bottom = 178.0
+
+[node name="Name" type="Control" parent="InventoryPopup/Panel/Inventory/PlayerInfoView"]
+editor/display_folded = true
+margin_right = 571.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="InventoryPopup/Panel/Inventory/PlayerInfoView/Name"]
+margin_right = 129.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 2 )
+text = "NAME :"
+
+[node name="Value" type="Label" parent="InventoryPopup/Panel/Inventory/PlayerInfoView/Name"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -405.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 2 )
+text = "VALUE"
+
+[node name="Gold" type="Control" parent="InventoryPopup/Panel/Inventory/PlayerInfoView"]
+editor/display_folded = true
+margin_top = 55.0
+margin_right = 571.0
+margin_bottom = 95.0
+
+[node name="Label" type="Label" parent="InventoryPopup/Panel/Inventory/PlayerInfoView/Gold"]
+margin_right = 129.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 2 )
+text = "GOLD :"
+
+[node name="Value" type="Label" parent="InventoryPopup/Panel/Inventory/PlayerInfoView/Gold"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -405.0
+margin_top = -1.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 2 )
+text = "0"
+
+[node name="ObjectActionsView" type="Control" parent="InventoryPopup/Panel/Inventory"]
+margin_left = 973.0
+margin_top = 201.0
+margin_right = 1186.0
+margin_bottom = 494.0
+
+[node name="Throw" type="Button" parent="InventoryPopup/Panel/Inventory/ObjectActionsView"]
+margin_left = 5.0
+margin_top = -14.0
+margin_right = 177.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 2 )
+text = "Throw"
+
+[node name="Equip" type="Button" parent="InventoryPopup/Panel/Inventory/ObjectActionsView"]
+margin_left = 7.0
+margin_top = 93.0
+margin_right = 179.0
+margin_bottom = 175.0
+custom_fonts/font = ExtResource( 2 )
+text = "Equip"
+
+[node name="Unequip" type="Button" parent="InventoryPopup/Panel/Inventory/ObjectActionsView"]
+margin_left = 11.0
+margin_top = 204.0
+margin_right = 185.0
+margin_bottom = 286.0
+custom_fonts/font = ExtResource( 2 )
+text = "UNEQUIP"
+[connection signal="item_selected" from="InventoryPopup/Panel/Inventory/Inventory" to="." method="_on_Inventory_item_selected"]
+[connection signal="pressed" from="InventoryPopup/Panel/Inventory/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="InventoryPopup/Panel/Inventory/ObjectActionsView/Throw" to="." method="_on_Throw_pressed"]
+[connection signal="pressed" from="InventoryPopup/Panel/Inventory/ObjectActionsView/Equip" to="." method="_on_Equip_pressed"]
+[connection signal="pressed" from="InventoryPopup/Panel/Inventory/ObjectActionsView/Unequip" to="." method="_on_Unequip_pressed"]
