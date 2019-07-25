@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	queue_free()
+"
 
 [sub_resource type="Animation" id=1]
 resource_name = "damage"
@@ -32,6 +39,7 @@ tracks/1/keys = {
 [node name="Damage" type="Node2D"]
 position = Vector2( 1, 0 )
 z_index = 255
+script = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "damage"
@@ -49,3 +57,4 @@ custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "1"
 align = 1
 valign = 1
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

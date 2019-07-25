@@ -44,6 +44,8 @@ func _process(delta):
 		
 		if (target.position - self.global_position).length() < 2:
 			PlayerDataSingleton.clear_target()
+			velocity.x = 0
+			velocity.y = 0
 		pass
 	
 	if PlayerDataSingleton.fight_mode: 
