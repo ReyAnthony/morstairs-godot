@@ -1,19 +1,21 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/TalkingNPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=3]
 [ext_resource path="res://res/sprites/characters/lady_SE.png" type="Texture" id=4]
-[ext_resource path="res://scenes/Scripts/DialogPanel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=6]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scripts/Stats.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Scripts/Damage.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Scripts/DialogPanel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=8]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.75
 height = 14.38
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 5.86
+radius = 7.02
 height = 1.82
 
 [node name="TalkingNPC" type="KinematicBody2D" groups=[
@@ -26,18 +28,25 @@ chara_name = "NPC"
 chara_portrait = ExtResource( 3 )
 sprite = ExtResource( 4 )
 
+[node name="Stats" type="Node2D" parent="."]
+z_index = 255
+script = ExtResource( 5 )
+life = 3
+damage = ExtResource( 6 )
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -4.13, 10.0657, 3.41519, 10.5375, 5.8773, 7.70656, 4.68596, 2.6737, -5.1625, 2.75234, -5.55961, 6.3697 )
+polygon = PoolVector2Array( -4.13, 10.0657, 3.41519, 10.5375, 5.8773, 7.70656, 4.686, 4.214, -5.392, 4.032, -5.56, 4.42 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 0
 
-[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 5 )]
+[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 7 )]
 
-[node name="Interactable" parent="." instance=ExtResource( 6 )]
+[node name="Interactable" parent="." instance=ExtResource( 8 )]
 z_index = 128
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
@@ -47,7 +56,6 @@ editor/display_folded = true
 shape = SubResource( 1 )
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
-editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
 position = Vector2( 0, 9.17 )
@@ -60,7 +68,7 @@ margin_top = -18.0
 margin_right = 153.805
 margin_bottom = 18.0
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 9 )
 align = 1
 valign = 1
 [connection signal="on_dialog_end" from="CanvasLayer/DialogPanel" to="." method="_on_DialogPanel_on_dialog_end"]

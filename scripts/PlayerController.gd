@@ -3,7 +3,7 @@ extends KinematicBody2D
 const WALK_SPEED = 30
 var velocity = Vector2()
 var f = ""
-var isAttacking = false
+var is_attacking = false
 var last_dir = "NW"
 
 func _ready():
@@ -48,7 +48,7 @@ func _process(delta):
 	
 	if PlayerDataSingleton.fight_mode: 
 		anim = "_FIGHT"	
-		if isAttacking:
+		if is_attacking:
 			anim += "_MELEE_ATTACK"	
 
 	if anim_direction != "":
@@ -60,13 +60,17 @@ func _process(delta):
 		
 	move_and_slide(velocity.normalized() * WALK_SPEED)
 
+func _on_AnimatedSprite_animation_finished():
+	if is_attacking:
+		PlayerDataSingleton.target.node.get_stats().attack(1)
+
 func _unhandled_input(event):
 	if Input.is_action_pressed("mouse_left_click"):
 		PlayerDataSingleton.clear_target()
 		PlayerDataSingleton.set_target(get_global_mouse_position(), self)
 		#HACK not to click directly on the player
 		var dist = (get_global_mouse_position() - self.global_position)
-		if dist.x > -7 and dist.x < 7 :
+		if dist.x > -5 and dist.x < 5 :
 			PlayerDataSingleton.clear_target()
 	else:
 		velocity.x = 0
@@ -74,8 +78,8 @@ func _unhandled_input(event):
 
 func _on_RangedAttackZone_body_entered(body):
 	if body.is_in_group("npc") && PlayerDataSingleton.fight_mode && PlayerDataSingleton.target.node == body:
-		isAttacking = true
+		is_attacking = true
 
 func _on_RangedAttackZone_body_exited(body):
 	if body.is_in_group("npc"):
-		isAttacking = false
+		is_attacking = false

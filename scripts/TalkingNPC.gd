@@ -8,6 +8,9 @@ export (Texture) var chara_portrait
 export (Array, String) var messages = []
 export (Texture) var sprite
 
+func get_stats():
+	return $Stats
+
 func _ready():
 	$Sprite.texture = sprite
 	$Interactable/Name.text = chara_name
