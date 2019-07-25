@@ -1,18 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/TalkingNPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=3]
 [ext_resource path="res://res/sprites/characters/lady_SE.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Scripts/DialogPanel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.9764
-height = 12.2736
+radius = 3.75
+height = 14.38
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 13.7716
-height = 23.9114
+radius = 5.86
+height = 1.82
 
 [node name="TalkingNPC" type="KinematicBody2D" groups=[
 "npc",
@@ -25,20 +26,17 @@ chara_portrait = ExtResource( 3 )
 sprite = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 4 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( -4.13, 10.0657, 3.41519, 10.5375, 5.8773, 7.70656, 4.68596, 2.6737, -5.1625, 2.75234, -5.55961, 6.3697 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 0
 
 [node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 5 )]
 
-[node name="Interactable" type="Node2D" parent="."]
+[node name="Interactable" parent="." instance=ExtResource( 6 )]
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
@@ -47,13 +45,13 @@ editor/display_folded = true
 shape = SubResource( 1 )
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
-position = Vector2( 0, 6.73 )
-scale = Vector2( 0.492, -0.231 )
+position = Vector2( 0, 9.17 )
 shape = SubResource( 2 )
 [connection signal="on_dialog_end" from="CanvasLayer/DialogPanel" to="." method="_on_DialogPanel_on_dialog_end"]
-[connection signal="input_event" from="Interactable/MouseArea" to="." method="_on_MouseArea_input_event"]
-[connection signal="mouse_entered" from="Interactable/MouseArea" to="." method="_on_MouseArea_mouse_entered"]
-[connection signal="mouse_exited" from="Interactable/MouseArea" to="." method="_on_MouseArea_mouse_exited"]
-[connection signal="body_entered" from="Interactable/ActionArea" to="." method="_on_ActionArea_body_entered"]
+[connection signal="mouse_clicked" from="Interactable" to="." method="_on_Interactable_mouse_clicked"]
+[connection signal="mouse_entered" from="Interactable" to="." method="_on_Interactable_mouse_entered"]
+[connection signal="mouse_exited" from="Interactable" to="." method="_on_Interactable_mouse_exited"]
+[connection signal="player_entered_while_interactable_is_targeted" from="Interactable" to="." method="_on_Interactable_player_entered_while_interactable_is_targeted"]

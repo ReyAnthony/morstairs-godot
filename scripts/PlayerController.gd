@@ -21,7 +21,6 @@ func _process(delta):
 		$CanvasLayer/PlayerInventory.show_inventory()
 	elif Input.is_action_just_pressed("switch_combat_mode"):
 		PlayerDataSingleton.clear_target()
-		print(last_dir)
 		if PlayerDataSingleton.fight_mode: 
 			$AnimationPlayer.play("FightOff")
 			$AnimatedSprite.play(last_dir)
@@ -42,7 +41,6 @@ func _process(delta):
 			anim_direction += "W"
 		elif velocity.x > 0:
 			anim_direction += "E"
-			
 		
 		if (target.position - self.global_position).length() < 2:
 			PlayerDataSingleton.clear_target()
@@ -63,10 +61,13 @@ func _process(delta):
 	move_and_slide(velocity.normalized() * WALK_SPEED)
 
 func _unhandled_input(event):
-	
 	if Input.is_action_pressed("mouse_left_click"):
 		PlayerDataSingleton.clear_target()
 		PlayerDataSingleton.set_target(get_global_mouse_position(), self)
+		#HACK not to click directly on the player
+		var dist = (get_global_mouse_position() - self.global_position)
+		if dist.x > -7 and dist.x < 7 :
+			PlayerDataSingleton.clear_target()
 	else:
 		velocity.x = 0
 		velocity.y = 0

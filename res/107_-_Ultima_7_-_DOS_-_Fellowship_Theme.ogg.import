@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/107_-_Ultima_7_-_DOS_-_Fellowship_Theme.ogg-955743a5c2d3be340891c311c974ec45.oggstr"
+
+[deps]
+
+source_file="res://res/107_-_Ultima_7_-_DOS_-_Fellowship_Theme.ogg"
+dest_files=[ "res://.import/107_-_Ultima_7_-_DOS_-_Fellowship_Theme.ogg-955743a5c2d3be340891c311c974ec45.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
