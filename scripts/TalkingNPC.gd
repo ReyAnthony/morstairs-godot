@@ -10,6 +10,7 @@ export (Texture) var sprite
 
 func _ready():
 	$Sprite.texture = sprite
+	$Interactable/Name.text = chara_name
 
 func _on_DialogPanel_on_dialog_end():
 	emit_signal("on_dialog_end")

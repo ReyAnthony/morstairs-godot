@@ -20,7 +20,6 @@ run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 
 [autoload]
 
-SettingSingleton="*res://scripts/singletons/SettingSingleton.gd"
 ObjectHelper="*res://scripts/singletons/ObjectHelper.gd"
 PlayerDataSingleton="*res://scripts/singletons/PlayerDataSingleton.gd"
 ShopDataSingleton="*res://scripts/singletons/ShopDataSingleton.gd"
@@ -30,6 +29,7 @@ ShopDataSingleton="*res://scripts/singletons/ShopDataSingleton.gd"
 window/size/width=1280
 window/size/height=720
 window/size/fullscreen=true
+mouse_cursor/custom_image="res://res/sprites/cursor.png"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -144,5 +144,5 @@ mouse_left_click={
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 quality/filters/anisotropic_filter_level=1
-environment/default_clear_color=Color( 0.695312, 0.695312, 0.695312, 1 )
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

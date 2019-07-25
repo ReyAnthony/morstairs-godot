@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://res/shaders/movement.shader" type="Shader" id=1]
 [ext_resource path="res://res/sprites/env/water.png" type="Texture" id=2]
@@ -7,6 +7,14 @@
 [ext_resource path="res://res/sprites/env/wall_ground.png" type="Texture" id=5]
 [ext_resource path="res://res/shaders/movement_up_down.shader" type="Shader" id=6]
 [ext_resource path="res://res/sprites/env/grass_flower.png" type="Texture" id=7]
+[ext_resource path="res://res/sprites/env/grass-pave-1.png" type="Texture" id=8]
+[ext_resource path="res://res/sprites/env/grass-pave-2.png" type="Texture" id=9]
+[ext_resource path="res://res/sprites/env/grass-pave-3.png" type="Texture" id=10]
+[ext_resource path="res://res/sprites/env/grass-pave-4.png" type="Texture" id=11]
+[ext_resource path="res://res/sprites/env/water_grass1.png" type="Texture" id=12]
+[ext_resource path="res://res/sprites/env/water_grass2.png" type="Texture" id=13]
+[ext_resource path="res://res/sprites/env/water_grass4.png" type="Texture" id=14]
+[ext_resource path="res://res/sprites/env/water_grass3.png" type="Texture" id=15]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -25,10 +33,9 @@ position = Vector2( -28.1931, 5.35343 )
 texture = ExtResource( 2 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="water"]
-visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="water/StaticBody2D2"]
-polygon = PoolVector2Array( 0.443428, -7.28742, -6.95364, -0.266475, 0.19268, 8.13358, 7.71511, 0.360394 )
+polygon = PoolVector2Array( -0.0456657, -7.51679, -8.2447, 0.120659, 0.19268, 8.13358, 7.71511, 0.360394 )
 
 [node name="ground" type="Sprite" parent="."]
 position = Vector2( -20.1425, -9.86638 )
@@ -48,3 +55,64 @@ texture = ExtResource( 5 )
 material = SubResource( 2 )
 position = Vector2( 10.9739, 10.1115 )
 texture = ExtResource( 7 )
+
+[node name="grass_pave1" type="Sprite" parent="."]
+position = Vector2( 29.9435, -6.69969 )
+texture = ExtResource( 8 )
+
+[node name="grass_pave2" type="Sprite" parent="."]
+position = Vector2( 41.8389, -24.0642 )
+texture = ExtResource( 9 )
+
+[node name="grass_pave3" type="Sprite" parent="."]
+position = Vector2( 9.571, -23.1071 )
+texture = ExtResource( 10 )
+
+[node name="grass_pave4" type="Sprite" parent="."]
+position = Vector2( 30.9006, 17.638 )
+texture = ExtResource( 11 )
+
+[node name="water_grass" type="Sprite" parent="."]
+position = Vector2( 57.743, -10.5543 )
+texture = ExtResource( 12 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="water_grass"]
+editor/display_folded = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="water_grass/StaticBody2D"]
+polygon = PoolVector2Array( -7.86516, 0.435173, 8.15822, 0.539902, 0.198883, 7.97559 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="water_grass2" type="Sprite" parent="."]
+position = Vector2( 64.2303, 12.9892 )
+texture = ExtResource( 13 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="water_grass2"]
+editor/display_folded = true
+position = Vector2( -3.0313, -2.17896 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="water_grass2/StaticBody2D2"]
+polygon = PoolVector2Array( -5.03749, 2.32028, 2.60764, -5.74377, 2.50291, 10.5938 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="water_grass3" type="Sprite" parent="."]
+position = Vector2( 89.2836, 9.02407 )
+texture = ExtResource( 14 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="water_grass3"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="water_grass3/StaticBody2D"]
+polygon = PoolVector2Array( 0.390869, -7.72782, -0.0280457, 8.50501, 8.35019, -0.0826797 )
+
+[node name="water_grass4" type="Sprite" parent="."]
+position = Vector2( 87.736, -14.339 )
+texture = ExtResource( 15 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="water_grass4"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="water_grass4/StaticBody2D"]
+polygon = PoolVector2Array( -7.90593, -0.49283, 8.85054, -0.388102, -0.260788, -8.76634 )

@@ -10,6 +10,7 @@ var objects = [
 
 var player_name = "UNKNOWN"
 var gold = 500
+
 var target
 var fight_mode = false
 

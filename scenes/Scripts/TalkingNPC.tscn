@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/TalkingNPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://res/sprites/characters/lady_SE.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Scripts/DialogPanel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=6]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.75
@@ -37,6 +38,7 @@ layer = 0
 [node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 5 )]
 
 [node name="Interactable" parent="." instance=ExtResource( 6 )]
+z_index = 128
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
@@ -50,6 +52,17 @@ editor/display_folded = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
 position = Vector2( 0, 9.17 )
 shape = SubResource( 2 )
+
+[node name="Name" type="Label" parent="Interactable"]
+visible = false
+margin_left = -13.1954
+margin_top = -18.0
+margin_right = 153.805
+margin_bottom = 18.0
+rect_scale = Vector2( 0.15, 0.15 )
+custom_fonts/font = ExtResource( 7 )
+align = 1
+valign = 1
 [connection signal="on_dialog_end" from="CanvasLayer/DialogPanel" to="." method="_on_DialogPanel_on_dialog_end"]
 [connection signal="mouse_clicked" from="Interactable" to="." method="_on_Interactable_mouse_clicked"]
 [connection signal="mouse_entered" from="Interactable" to="." method="_on_Interactable_mouse_entered"]
