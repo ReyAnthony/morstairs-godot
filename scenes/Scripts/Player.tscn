@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/PlayerController.gd" type="Script" id=1]
-[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://scenes/Scripts/PlayerInventory.tscn" type="PackedScene" id=3]
-[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=4]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=5]
-[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=6]
-[ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=7]
+[ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
+[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/Scripts/PlayerInventory.tscn" type="PackedScene" id=4]
+[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=5]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=7]
+[ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 2.3281
@@ -95,15 +96,16 @@ radius = 4.2382
 
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 5.58728
-height = 10.7389
+height = 0.19799
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
 script = ExtResource( 1 )
+material_on_mouse_enter = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 2 )
+frames = ExtResource( 3 )
 animation = "W_FIGHT_MELEE_ATTACK"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -117,7 +119,7 @@ anims/FightOn = SubResource( 3 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 3 )]
+[node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 
@@ -131,7 +133,7 @@ margin_left = 525.264
 margin_top = 487.904
 margin_right = 625.264
 margin_bottom = 592.904
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 stretch_mode = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/FightOn"]
@@ -139,7 +141,7 @@ margin_left = 441.27
 margin_top = 614.383
 margin_right = 733.27
 margin_bottom = 650.383
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 text = "Fight mode on"
 align = 1
 valign = 1
@@ -153,7 +155,7 @@ margin_left = 543.629
 margin_top = 515.057
 margin_right = 618.629
 margin_bottom = 592.057
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 stretch_mode = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/FightOff"]
@@ -161,7 +163,7 @@ margin_left = 441.27
 margin_top = 614.383
 margin_right = 733.27
 margin_bottom = 650.383
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 text = "Fight mode off"
 align = 1
 valign = 1
@@ -181,7 +183,7 @@ drag_margin_bottom = 0.3
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="Interactable" parent="." instance=ExtResource( 7 )]
+[node name="Interactable" parent="." instance=ExtResource( 8 )]
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
@@ -194,6 +196,7 @@ shape = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 position = Vector2( -0.095829, 1.62906 )
+scale = Vector2( 0.79, 0.78 )
 shape = SubResource( 6 )
 
 [node name="Name" type="Label" parent="Interactable"]
@@ -203,7 +206,10 @@ margin_top = -17.0
 margin_right = 135.99
 margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 text = "Player"
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="mouse_clicked" from="Interactable" to="." method="_on_Interactable_mouse_clicked"]
+[connection signal="mouse_entered" from="Interactable" to="." method="_on_Interactable_mouse_entered"]
+[connection signal="mouse_exited" from="Interactable" to="." method="_on_Interactable_mouse_exited"]
 [connection signal="something_entered_inside_interactable" from="Interactable" to="." method="_on_Interactable_something_entered_inside_interactable"]

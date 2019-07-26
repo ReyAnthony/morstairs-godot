@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export (Material) var material_on_mouse_enter
+
 const WALK_SPEED = 30
 var velocity = Vector2()
 var f = ""
@@ -67,14 +69,11 @@ func _on_AnimatedSprite_animation_finished():
 		PlayerDataSingleton.target.node.get_stats().attack(1)
 
 func _unhandled_input(event):
-	if Input.is_action_pressed("mouse_left_click"):
+	#if not clicking on an Interactable
+	if Input.is_action_just_pressed("mouse_left_click"):
 		is_attacking = false
 		PlayerDataSingleton.clear_target()
 		PlayerDataSingleton.set_target(get_global_mouse_position(), null)
-		#HACK not to click directly on the player
-		var dist = (get_global_mouse_position() - self.global_position)
-		if dist.x > -5 and dist.x < 5 :
-			PlayerDataSingleton.clear_target()
 	else:
 		velocity.x = 0
 		velocity.y = 0
@@ -84,3 +83,16 @@ func _on_Interactable_something_entered_inside_interactable(body):
 		return
 	if PlayerDataSingleton.fight_mode && PlayerDataSingleton.target.node == body:
 		is_attacking = true
+
+func _on_Interactable_mouse_clicked():
+	$AnimatedSprite.material = null
+	$Interactable/Name.hide()
+	PlayerDataSingleton.clear_target()
+	get_tree().paused = true
+	$CanvasLayer/PlayerInventory.show_inventory()
+
+func _on_Interactable_mouse_entered():
+	$AnimatedSprite.material = material_on_mouse_enter
+
+func _on_Interactable_mouse_exited():
+	$AnimatedSprite.material = null

@@ -40,7 +40,7 @@ func _on_MouseArea_mouse_exited():
 	emit_signal("mouse_exited")
 
 func _on_MouseArea_input_event(viewport, event, shape_idx):
-	if Input.is_action_pressed("mouse_left_click") and !clicked:
+	if Input.is_action_just_pressed("mouse_left_click") and !clicked:
 		emit_signal("mouse_clicked")
 		clicked = true
 		if !hack:
