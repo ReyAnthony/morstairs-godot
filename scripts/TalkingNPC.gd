@@ -28,7 +28,7 @@ func _on_Interactable_mouse_entered():
 func _on_Interactable_mouse_exited():
 	$Sprite.material = null
 
-func _on_Interactable_player_entered_while_interactable_is_targeted(body):
+func _on_Interactable_something_entered_inside_interactable(body):
 	if PlayerDataSingleton.get_target() == null:
 		return
 	if !PlayerDataSingleton.fight_mode && PlayerDataSingleton.get_target().node == self:

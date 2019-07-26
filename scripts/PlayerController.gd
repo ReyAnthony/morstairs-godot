@@ -48,9 +48,9 @@ func _process(delta):
 			velocity.y = 0
 		pass
 	
-	if PlayerDataSingleton.fight_mode: 
+	if PlayerDataSingleton.fight_mode:
 		anim = "_FIGHT"	
-		if is_attacking:
+		if is_attacking and PlayerDataSingleton.get_target() != null:
 			anim += "_MELEE_ATTACK"	
 
 	if anim_direction != "":
@@ -63,13 +63,14 @@ func _process(delta):
 	move_and_slide(velocity.normalized() * WALK_SPEED)
 
 func _on_AnimatedSprite_animation_finished():
-	if is_attacking:
+	if is_attacking and PlayerDataSingleton.target != null and PlayerDataSingleton.target.node != null :
 		PlayerDataSingleton.target.node.get_stats().attack(1)
 
 func _unhandled_input(event):
 	if Input.is_action_pressed("mouse_left_click"):
+		is_attacking = false
 		PlayerDataSingleton.clear_target()
-		PlayerDataSingleton.set_target(get_global_mouse_position(), self)
+		PlayerDataSingleton.set_target(get_global_mouse_position(), null)
 		#HACK not to click directly on the player
 		var dist = (get_global_mouse_position() - self.global_position)
 		if dist.x > -5 and dist.x < 5 :
@@ -78,10 +79,8 @@ func _unhandled_input(event):
 		velocity.x = 0
 		velocity.y = 0
 
-func _on_RangedAttackZone_body_entered(body):
-	if body.is_in_group("npc") && PlayerDataSingleton.fight_mode && PlayerDataSingleton.target.node == body:
+func _on_Interactable_something_entered_inside_interactable(body):
+	if PlayerDataSingleton.target == null:
+		return
+	if PlayerDataSingleton.fight_mode && PlayerDataSingleton.target.node == body:
 		is_attacking = true
-
-func _on_RangedAttackZone_body_exited(body):
-	if body.is_in_group("npc"):
-		is_attacking = false

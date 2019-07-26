@@ -16,8 +16,8 @@ radius = 3.75
 height = 14.38
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 7.02
-height = 1.82
+radius = 8.17
+height = 0.13
 
 [node name="TalkingNPC" type="KinematicBody2D" groups=[
 "npc",
@@ -50,6 +50,7 @@ layer = 0
 
 [node name="Interactable" parent="." instance=ExtResource( 9 )]
 z_index = 128
+group_to_test_on_enter = "player"
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
@@ -58,6 +59,7 @@ editor/display_folded = true
 shape = SubResource( 1 )
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
 position = Vector2( 0, 9.17 )
@@ -77,4 +79,4 @@ valign = 1
 [connection signal="mouse_clicked" from="Interactable" to="." method="_on_Interactable_mouse_clicked"]
 [connection signal="mouse_entered" from="Interactable" to="." method="_on_Interactable_mouse_entered"]
 [connection signal="mouse_exited" from="Interactable" to="." method="_on_Interactable_mouse_exited"]
-[connection signal="player_entered_while_interactable_is_targeted" from="Interactable" to="." method="_on_Interactable_player_entered_while_interactable_is_targeted"]
+[connection signal="something_entered_inside_interactable" from="Interactable" to="." method="_on_Interactable_something_entered_inside_interactable"]

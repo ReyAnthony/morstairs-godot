@@ -22,5 +22,4 @@ func attack(damages):
 		dmg.global_position = global_position
 		$"../".queue_free()
 	else:
-		
 		add_child(dmg)	
