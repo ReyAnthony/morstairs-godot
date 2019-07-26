@@ -4,13 +4,13 @@ export (Material) var material_on_mouse_entered
 
 const WALK_SPEED = 30
 var velocity = Vector2()
-var f = ""
 var is_attacking = false
 var last_dir = "NW"
 
 func _ready():
 	set_process(true)
 	$AnimatedSprite.play("NW")
+	add_to_group("player")
 	
 func _process(delta):
 	var anim_direction = ""
@@ -87,8 +87,7 @@ func _unhandled_input(event):
 func _on_Interactable_something_entered_inside_interactable(body):
 	if PlayerDataSingleton.target == null or !PlayerDataSingleton.fight_mode:
 		return
-	
-	#WE HAVE A BUG WHEN WE ATTACK NEAR
+
 	if PlayerDataSingleton.target.node == body and !PlayerDataSingleton.target.node.can_be_hit:
 		is_attacking = false
 		PlayerDataSingleton.clear_target()

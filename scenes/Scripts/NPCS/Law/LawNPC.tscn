@@ -28,6 +28,7 @@ polygon = PoolVector2Array( -8.22234, 12.9512, -5.33417, 16.6151, -0.189621, 21.
 
 [node name="Interactable" parent="TalkingNPC" instance=ExtResource( 3 )]
 group_to_test_on_enter = "player"
+body_to_move = NodePath("..")
 
 [node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
 editor/display_folded = true

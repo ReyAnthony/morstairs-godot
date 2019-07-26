@@ -92,15 +92,13 @@ tracks/2/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 3.86293
+radius = 5.10834
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 5.58728
 height = 0.19799
 
-[node name="Player" type="KinematicBody2D" groups=[
-"player",
-]]
+[node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 material_on_mouse_entered = ExtResource( 2 )
 
@@ -186,17 +184,19 @@ editor_draw_drag_margin = true
 
 [node name="Interactable" parent="." instance=ExtResource( 8 )]
 group_to_test_on_enter = "npc"
+body_to_move = NodePath("..")
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
 position = Vector2( 0, 6.36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
+position = Vector2( -0.191654, -3.83307 )
 shape = SubResource( 4 )
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
-position = Vector2( -0.095829, 1.62906 )
+position = Vector2( -0.287483, 1.91654 )
 scale = Vector2( 0.79, 0.78 )
 shape = SubResource( 5 )
 
