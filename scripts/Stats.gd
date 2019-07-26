@@ -3,16 +3,16 @@ extends Node2D
 export (int) var life
 export (PackedScene) var damage
 export (PackedScene) var corpse
+export (String) var root
 
 func attack(damages):
-	#TODO DELETE THE LAST DMG
 	#BROKEN ON SHOPKEEPER (one level of node more)
 	var dmg = damage.instance()
 	dmg.get_node("Label").text = str(damages)
 	life -= damages
 	
 	if life < 1:
-		var r = $"../../"
+		var r = get_node(root)
 		var rp = r.get_parent()
 		var c = corpse.instance()
 		r.add_child(dmg)

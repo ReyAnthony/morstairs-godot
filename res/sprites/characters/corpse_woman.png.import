@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/corpse.png-13b87257a510c8c97fbdd0b76063e632.stex"
+path="res://.import/corpse_woman.png-c2d236c4c86f9c03e786300590883745.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/characters/corpse.png"
-dest_files=[ "res://.import/corpse.png-13b87257a510c8c97fbdd0b76063e632.stex" ]
+source_file="res://res/sprites/characters/corpse_woman.png"
+dest_files=[ "res://.import/corpse_woman.png-c2d236c4c86f9c03e786300590883745.stex" ]
 
 [params]
 

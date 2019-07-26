@@ -17,6 +17,8 @@ func _ready():
 	assert($MouseArea != null)
 	assert($ActionArea != null)
 	assert($Name != null)
+	assert(group_to_test_on_enter != "")
+	assert(group_to_test_on_enter != null)
 	mouseArea = $MouseArea
 	actionArea = $ActionArea
 	mouseArea.connect("input_event", self, "_on_MouseArea_input_event")

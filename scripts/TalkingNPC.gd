@@ -6,15 +6,26 @@ export (Material) var material_on_mouse_enter
 export (String)  var chara_name
 export (Texture) var chara_portrait
 export (Array, String) var messages = []
-export (Texture) var sprite
 
-func get_stats():
-	return $Stats
+var can_be_hit = false
+
+func attack(amount):
+	$Stats.attack(amount)
 
 func _ready():
-	$Sprite.texture = sprite
-	$Interactable/Name.text = chara_name
+	assert($Sprite != null)
+	assert($Interactable != null)
+	self.add_to_group("npc")
+	if $Stats != null:
+		can_be_hit = true
 
+	$Interactable.connect("mouse_clicked", self, "_on_Interactable_mouse_clicked")
+	$Interactable.connect("mouse_entered", self,  "_on_Interactable_mouse_entered")
+	$Interactable.connect("mouse_exited", self, "_on_Interactable_mouse_exited")
+	$Interactable.connect("something_entered_inside_interactable", self, "_on_Interactable_something_entered_inside_interactable")
+	
+	$Interactable/Name.text = chara_name
+	
 func _on_DialogPanel_on_dialog_end():
 	emit_signal("on_dialog_end")
 	PlayerDataSingleton.clear_target()

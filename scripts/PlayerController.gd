@@ -65,8 +65,9 @@ func _process(delta):
 	move_and_slide(velocity.normalized() * WALK_SPEED)
 
 func _on_AnimatedSprite_animation_finished():
-	if is_attacking and PlayerDataSingleton.target != null and PlayerDataSingleton.target.node != null :
-		PlayerDataSingleton.target.node.get_stats().attack(1)
+	if is_attacking and PlayerDataSingleton.target != null and PlayerDataSingleton.target.node != null:
+		if PlayerDataSingleton.target.node.can_be_hit:
+			PlayerDataSingleton.target.node.attack(1)
 
 func _unhandled_input(event):
 	#if not clicking on an Interactable
@@ -84,9 +85,14 @@ func _unhandled_input(event):
 		velocity.y = 0
 
 func _on_Interactable_something_entered_inside_interactable(body):
-	if PlayerDataSingleton.target == null:
+	if PlayerDataSingleton.target == null or !PlayerDataSingleton.fight_mode:
 		return
-	if PlayerDataSingleton.fight_mode && PlayerDataSingleton.target.node == body:
+	
+	#WE HAVE A BUG WHEN WE ATTACK NEAR
+	if PlayerDataSingleton.target.node == body and !PlayerDataSingleton.target.node.can_be_hit:
+		is_attacking = false
+		PlayerDataSingleton.clear_target()
+	elif PlayerDataSingleton.target.node == body:
 		is_attacking = true
 
 func _on_Interactable_mouse_clicked():

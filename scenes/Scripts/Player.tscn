@@ -92,7 +92,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 4.2382
+radius = 3.86293
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 5.58728
@@ -117,6 +117,7 @@ anims/FightOff = SubResource( 2 )
 anims/FightOn = SubResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 0
 
 [node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 4 )]

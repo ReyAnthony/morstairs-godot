@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/Scripts/TalkingNPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://res/sprites/characters/woman_portrait.png" type="Texture" id=2]
+[ext_resource path="res://res/sprites/characters/lady_SE.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://scenes/Scripts/Stats.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Scripts/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=7]
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.5876
+height = 13.2929
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 7.12598
+
+[node name="WomanNPC" type="Node2D"]
+
+[node name="TalkingNPC" parent="." instance=ExtResource( 1 )]
+chara_name = "Woman"
+chara_portrait = ExtResource( 2 )
+messages = [ "Message" ]
+
+[node name="Sprite" type="Sprite" parent="TalkingNPC"]
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TalkingNPC"]
+position = Vector2( -0.0520752, 0.154682 )
+polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
+
+[node name="Interactable" parent="TalkingNPC" instance=ExtResource( 4 )]
+editor/display_folded = true
+group_to_test_on_enter = "player"
+
+[node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingNPC/Interactable/MouseArea"]
+shape = SubResource( 1 )
+
+[node name="ActionArea" type="Area2D" parent="TalkingNPC/Interactable"]
+position = Vector2( 0.995837, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingNPC/Interactable/ActionArea"]
+position = Vector2( -1.21263, 8.40183 )
+shape = SubResource( 2 )
+
+[node name="Name" type="Label" parent="TalkingNPC/Interactable"]
+visible = false
+margin_left = -13.6325
+margin_top = -17.2094
+margin_right = 168.367
+margin_bottom = 18.7906
+rect_scale = Vector2( 0.15, 0.15 )
+custom_fonts/font = ExtResource( 5 )
+text = "TEST"
+align = 1
+valign = 1
+
+[node name="Stats" parent="TalkingNPC" instance=ExtResource( 6 )]
+corpse = ExtResource( 7 )

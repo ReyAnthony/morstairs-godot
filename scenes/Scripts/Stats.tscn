@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Stats.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Scripts/Damage.tscn" type="PackedScene" id=2]
+
+[node name="Stats" type="Node2D"]
+script = ExtResource( 1 )
+life = 3
+damage = ExtResource( 2 )
+root = "/root/Level/DayNight/Walls/"
