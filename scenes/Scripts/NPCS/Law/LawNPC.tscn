@@ -17,7 +17,7 @@ radius = 11.9791
 [node name="TalkingNPC" parent="." instance=ExtResource( 1 )]
 chara_name = "Laws"
 chara_portrait = null
-messages = [ "Message" ]
+messages = [ "IT IS I, THE LAW" ]
 
 [node name="Sprite" type="Sprite" parent="TalkingNPC"]
 texture = ExtResource( 2 )
@@ -30,11 +30,13 @@ polygon = PoolVector2Array( -8.22234, 12.9512, -5.33417, 16.6151, -0.189621, 21.
 group_to_test_on_enter = "player"
 
 [node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingNPC/Interactable/MouseArea"]
 shape = SubResource( 1 )
 
 [node name="ActionArea" type="Area2D" parent="TalkingNPC/Interactable"]
+editor/display_folded = true
 position = Vector2( 0.995837, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingNPC/Interactable/ActionArea"]

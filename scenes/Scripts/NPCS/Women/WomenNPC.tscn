@@ -8,7 +8,6 @@
 [ext_resource path="res://scenes/Scripts/Stats.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Scripts/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=7]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
 height = 13.2929
