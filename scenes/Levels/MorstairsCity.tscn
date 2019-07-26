@@ -25,7 +25,7 @@ autoplay = true
 [node name="DayNight" parent="." instance=ExtResource( 2 )]
 modulate = Color( 1, 1, 1, 1 )
 position = Vector2( -193, -193 )
-CYCLE_LENGTH_DAY_IN_SEC = 60.0
+CYCLE_LENGTH_DAY_IN_SEC = 5.0
 
 [node name="Grounds" type="TileMap" parent="DayNight"]
 mode = 1
@@ -38,6 +38,7 @@ __meta__ = {
 }
 
 [node name="Walls" type="TileMap" parent="DayNight"]
+editor/display_folded = true
 mode = 1
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )

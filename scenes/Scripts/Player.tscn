@@ -198,10 +198,10 @@ shape = SubResource( 6 )
 
 [node name="Name" type="Label" parent="Interactable"]
 visible = false
-margin_left = -10.0103
-margin_top = -14.4309
+margin_left = -10.01
+margin_top = -17.0
 margin_right = 135.99
-margin_bottom = 21.5691
+margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
 custom_fonts/font = ExtResource( 5 )
 text = "Player"
