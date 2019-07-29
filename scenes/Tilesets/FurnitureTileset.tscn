@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://res/sprites/env/chair.png" type="Texture" id=1]
+[ext_resource path="res://res/sprites/env/table.png" type="Texture" id=2]
 
 [node name="FurnitureTileset" type="Node2D"]
 
@@ -15,3 +16,12 @@ region_rect = Rect2( 0, 0, 7, 18 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="chair/StaticBody2D"]
 polygon = PoolVector2Array( 1, 1, 5, 4, 8, 1, 8, -4, 5, -6, 1, -2 )
+
+[node name="Table" type="Sprite" parent="."]
+position = Vector2( 172.711, -23.975 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Table"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Table/StaticBody2D2"]
+polygon = PoolVector2Array( -7.71651, -1.60324, 0.297516, 6.31758, 8.76299, -2.88134, 4.43266, -3.43414, -0.91391, -8.21947 )

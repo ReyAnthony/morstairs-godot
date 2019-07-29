@@ -6,6 +6,7 @@ const WALK_SPEED = 30
 var velocity = Vector2()
 var is_attacking = false
 var last_dir = "NW"
+var PDS = PlayerDataSingleton
 
 func _ready():
 	set_process(true)
@@ -16,17 +17,17 @@ func _ready():
 func _process(delta):
 	var anim_direction = ""
 	var anim = ""
-	var target = PlayerDataSingleton.get_target()
+	var target = PDS.get_target()
 		
 	if Input.is_action_just_pressed("switch_combat_mode"):
-		PlayerDataSingleton.clear_target()
-		if PlayerDataSingleton.fight_mode: 
+		PDS.clear_target()
+		if PDS.fight_mode: 
 			$AnimationPlayer.play("FightOff")
 			$AnimatedSprite.play(last_dir)
 		else:
 			$AnimationPlayer.play("FightOn")
 			$AnimatedSprite.play(last_dir + "_FIGHT")
-		PlayerDataSingleton.fight_mode = !PlayerDataSingleton.fight_mode
+		PDS.fight_mode = !PDS.fight_mode
 	
 	if  target != null:
 		#make movement only diagonal, so we don't have to make 8 sprites
@@ -42,7 +43,7 @@ func _process(delta):
 			anim_direction += "E"
 		
 		if (target.position - self.global_position).length() < 2:
-			PlayerDataSingleton.clear_target()
+			PDS.clear_target()
 			velocity.x = 0
 			velocity.y = 0
 		pass
@@ -53,9 +54,9 @@ func _process(delta):
 	else:
 		is_attacking = false	
 
-	if PlayerDataSingleton.fight_mode:
+	if PDS.fight_mode:
 		anim = "_FIGHT"	
-		if is_attacking and PlayerDataSingleton.get_target() != null:
+		if is_attacking and PDS.get_target() != null:
 			anim += "_MELEE_ATTACK"	
 
 	if anim_direction != "":
@@ -68,37 +69,37 @@ func _process(delta):
 	move_and_slide(velocity.normalized() * WALK_SPEED)
 
 func _on_AnimatedSprite_animation_finished():
-	if PlayerDataSingleton.target == null:
+	if PDS.target == null or !is_instance_valid(PDS.target.node):
 		is_attacking = false
 	if is_attacking \
-		and PlayerDataSingleton.target != null \
-		and PlayerDataSingleton.target.node != null \
-		and PlayerDataSingleton.target.node.can_be_hit \
+		and PDS.target != null \
+		and PDS.target.node != null \
+		and PDS.target.node.can_be_hit \
 		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
-		and $Interactable/ActionArea.overlaps_body(PlayerDataSingleton.target.node):
-			PlayerDataSingleton.target.node.attack(1)
+		and $Interactable/ActionArea.overlaps_body(PDS.target.node):
+			PDS.target.node.attack(1)
 			
 # warning-ignore:unused_argument
 func _unhandled_input(event):
 	if Input.is_action_pressed("mouse_left_click"):
 		is_attacking = false	
-		PlayerDataSingleton.set_target(get_global_mouse_position(), null)
+		PDS.set_target(get_global_mouse_position(), null)
 	else:
 		velocity.x = 0
 		velocity.y = 0
 
 func _on_Interactable_something_entered_inside_interactable(body):
-	if PlayerDataSingleton.target == null or !PlayerDataSingleton.fight_mode:
+	if PDS.target == null or !PDS.fight_mode:
 		return
-	if PlayerDataSingleton.target.node == body and !PlayerDataSingleton.target.node.can_be_hit:
+	if PDS.target.node == body and !PDS.target.node.can_be_hit:
 		is_attacking = false
-		PlayerDataSingleton.clear_target()
-	elif PlayerDataSingleton.target.node == body:
+		PDS.clear_target()
+	elif PDS.target.node == body:
 		is_attacking = true
 
 func _on_Interactable_mouse_clicked():
-	if !PlayerDataSingleton.fight_mode:
-		PlayerDataSingleton.clear_target()
+	if !PDS.fight_mode:
+		PDS.clear_target()
 		get_tree().paused = true
 		$CanvasLayer/PlayerInventory.show_inventory()
 

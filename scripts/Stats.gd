@@ -6,7 +6,6 @@ export (PackedScene) var corpse
 export (String) var root
 
 func attack(damages):
-	#BROKEN ON SHOPKEEPER (one level of node more)
 	var dmg = damage.instance()
 	dmg.get_node("Label").text = str(damages)
 	life -= damages

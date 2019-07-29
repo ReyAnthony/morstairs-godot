@@ -13,7 +13,6 @@ chara_name = "NPC"
 chara_portrait = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 0
 
 [node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 4 )]

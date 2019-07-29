@@ -19,6 +19,7 @@ func _process(delta):
 
 func my_popup(chara_name, chara_portrait, messages):
 	
+	$"../".layer = 255
 	assert(messages.size() > 0)
 
 	$Panel/CharaName.text = chara_name
@@ -32,6 +33,7 @@ func my_popup(chara_name, chara_portrait, messages):
 	.popup()
 
 func hide():
+	$"../".layer = 0
 	set_process(false)
 	emit_signal("on_dialog_end")
 	.hide()
