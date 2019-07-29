@@ -12,6 +12,7 @@ func _ready():
 	$AnimatedSprite.play("NW")
 	add_to_group("player")
 	
+# warning-ignore:unused_argument
 func _process(delta):
 	var anim_direction = ""
 	var anim = ""
@@ -45,14 +46,13 @@ func _process(delta):
 			velocity.x = 0
 			velocity.y = 0
 		pass
+		
+		if target.node != null and is_instance_valid(target.node) and target.node.is_in_group("npc"):
+			if !$Interactable/ActionArea.overlaps_body(target.node):
+				is_attacking = false
 	else:
 		is_attacking = false	
-		
-	if PlayerDataSingleton.target == null or\
-		PlayerDataSingleton.target.node == null or\
-		!$Interactable/ActionArea.overlaps_body(PlayerDataSingleton.target.node):
-		is_attacking = false
-	
+
 	if PlayerDataSingleton.fight_mode:
 		anim = "_FIGHT"	
 		if is_attacking and PlayerDataSingleton.get_target() != null:
@@ -78,6 +78,7 @@ func _on_AnimatedSprite_animation_finished():
 		and $Interactable/ActionArea.overlaps_body(PlayerDataSingleton.target.node):
 			PlayerDataSingleton.target.node.attack(1)
 			
+# warning-ignore:unused_argument
 func _unhandled_input(event):
 	if Input.is_action_pressed("mouse_left_click"):
 		is_attacking = false	

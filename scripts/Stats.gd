@@ -17,7 +17,7 @@ func attack(damages):
 		var c = corpse.instance()
 		r.add_child(dmg)
 		rp.add_child(c)
-		rp.move_child(c, rp.get_position_in_parent() + 1)
+		rp.move_child(c, rp.get_position_in_parent() + 2)
 		c.global_position = global_position
 		dmg.global_position = global_position
 		$"../".queue_free()
