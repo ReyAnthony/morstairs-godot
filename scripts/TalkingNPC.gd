@@ -27,11 +27,11 @@ func _ready():
 	$Interactable/Name.text = chara_name
 	
 func _on_DialogPanel_on_dialog_end():
-	emit_signal("on_dialog_end")
 	PlayerDataSingleton.clear_target()
+	emit_signal("on_dialog_end")
 
 func _on_Interactable_mouse_clicked():
-	PlayerDataSingleton.set_target(self.global_position, self)
+	PlayerDataSingleton.set_target(global_position, self)
 
 func _on_Interactable_mouse_entered():
 	$Sprite.material = material_on_mouse_enter

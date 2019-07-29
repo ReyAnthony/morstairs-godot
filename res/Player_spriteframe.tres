@@ -133,10 +133,10 @@ animations = [ {
 "frames": [ ExtResource( 68 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ) ],
 "loop": true,
 "name": "SE_FIGHT_MELEE_ATTACK",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [ ExtResource( 72 ), ExtResource( 73 ), ExtResource( 74 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 77 ) ],
 "loop": true,
 "name": "NW_FIGHT_MELEE_ATTACK",
-"speed": 8.0
+"speed": 10.0
 } ]

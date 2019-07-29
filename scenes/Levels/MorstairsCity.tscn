@@ -5,11 +5,11 @@
 [ext_resource path="res://res/tilesets/ground_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://res/tilesets/structure_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/Scripts/torch.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scripts/NPCS/Women/WomenNPC.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Scripts/NPCS/Guard/GuardNPC.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Scripts/NPCS/Law/LawNPC.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Scripts/NPCS/Merchant/MerchantNPC.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Scripts/Player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Scripts/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Scripts/NPCS/Women/WomenNPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Scripts/NPCS/Guard/GuardNPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Scripts/NPCS/Law/LawNPC.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Scripts/NPCS/Merchant/MerchantNPC.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/Scripts/Room.tscn" type="PackedScene" id=11]
 
 [node name="Level" type="Node"]
@@ -76,29 +76,32 @@ position = Vector2( 375, 115 )
 [node name="torch16" parent="DayNight/Walls" instance=ExtResource( 5 )]
 position = Vector2( 395, 95 )
 
-[node name="WomanNPC" parent="DayNight/Walls" instance=ExtResource( 6 )]
+[node name="Player" parent="DayNight/Walls" instance=ExtResource( 6 )]
+position = Vector2( 228, 70 )
+
+[node name="WomanNPC" parent="DayNight/Walls" instance=ExtResource( 7 )]
 position = Vector2( 212.446, 60.0851 )
 
-[node name="WomanNPC2" parent="DayNight/Walls" instance=ExtResource( 6 )]
+[node name="WomanNPC2" parent="DayNight/Walls" instance=ExtResource( 7 )]
 position = Vector2( 249.78, 54.4938 )
 
-[node name="GuardNPC3" parent="DayNight/Walls" instance=ExtResource( 7 )]
+[node name="GuardNPC3" parent="DayNight/Walls" instance=ExtResource( 8 )]
 position = Vector2( 400.842, 95.1117 )
 
-[node name="GuardNPC" parent="DayNight/Walls" instance=ExtResource( 7 )]
+[node name="GuardNPC" parent="DayNight/Walls" instance=ExtResource( 8 )]
 position = Vector2( -8.26217, -108.395 )
 
-[node name="GuardNPC2" parent="DayNight/Walls" instance=ExtResource( 7 )]
+[node name="GuardNPC2" parent="DayNight/Walls" instance=ExtResource( 8 )]
 position = Vector2( 16.0565, -127.829 )
 
-[node name="LawNPC" parent="DayNight/Walls" instance=ExtResource( 8 )]
+[node name="LawNPC" parent="DayNight/Walls" instance=ExtResource( 9 )]
 position = Vector2( 149.629, 36.8919 )
 
-[node name="MerchantNPC" parent="DayNight/Walls" instance=ExtResource( 9 )]
+[node name="MerchantNPC" parent="DayNight/Walls" instance=ExtResource( 10 )]
 position = Vector2( 220.695, 116.59 )
 merchant_id = "MORSTAIRS_TOWN_SELLER"
 
-[node name="MerchantNPC2" parent="DayNight/Walls" instance=ExtResource( 9 )]
+[node name="MerchantNPC2" parent="DayNight/Walls" instance=ExtResource( 10 )]
 position = Vector2( 365.784, -44.0653 )
 merchant_id = "MORSTAIRS_BLACKMARKET_SELLER"
 
@@ -118,11 +121,7 @@ inside = true
 position = Vector2( 300, 5 )
 inside = true
 
-[node name="Player" parent="DayNight/Walls" instance=ExtResource( 10 )]
-position = Vector2( 228, 70 )
-
 [node name="Rooms" type="Node2D" parent="DayNight"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }

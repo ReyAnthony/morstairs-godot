@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
@@ -9,11 +9,7 @@
 [ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=7]
 [ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=8]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 2.3281
-
-[sub_resource type="Animation" id=2]
-resource_name = "FightOff"
+[sub_resource type="Animation" id=3]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/FightOff:modulate")
@@ -52,7 +48,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/FightOff:visible")
@@ -91,10 +87,10 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 radius = 5.10834
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 5.58728
 height = 0.19799
 
@@ -102,17 +98,17 @@ height = 0.19799
 script = ExtResource( 1 )
 material_on_mouse_entered = ExtResource( 2 )
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -8.45649, -0.30751 )
+polygon = PoolVector2Array( 6.71868, 6.1156, 9.07625, 5.50058, 10.9726, 6.62811, 11.0238, 8.0119, 8.61499, 8.62692, 6.92369, 7.9094 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
-animation = "W_FIGHT_MELEE_ATTACK"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.396357, 6.3323 )
-shape = SubResource( 1 )
+animation = "SE"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FightOff = SubResource( 2 )
-anims/FightOn = SubResource( 3 )
+anims/FightOff = SubResource( 3 )
+anims/FightOn = SubResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 editor/display_folded = true
@@ -187,18 +183,20 @@ group_to_test_on_enter = "npc"
 body_to_move = NodePath("..")
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
+editor/display_folded = true
 position = Vector2( 0, 6.36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
-position = Vector2( -0.191654, -3.83307 )
-shape = SubResource( 4 )
+position = Vector2( -0.345409, -0.347971 )
+shape = SubResource( 5 )
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 position = Vector2( -0.287483, 1.91654 )
 scale = Vector2( 0.79, 0.78 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Name" type="Label" parent="Interactable"]
 visible = false

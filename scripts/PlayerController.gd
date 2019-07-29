@@ -17,11 +17,7 @@ func _process(delta):
 	var anim = ""
 	var target = PlayerDataSingleton.get_target()
 		
-	if Input.is_action_just_pressed("ui_pause"):
-		PlayerDataSingleton.clear_target()
-		get_tree().paused = true
-		$CanvasLayer/PlayerInventory.show_inventory()
-	elif Input.is_action_just_pressed("switch_combat_mode"):
+	if Input.is_action_just_pressed("switch_combat_mode"):
 		PlayerDataSingleton.clear_target()
 		if PlayerDataSingleton.fight_mode: 
 			$AnimationPlayer.play("FightOff")
@@ -49,6 +45,13 @@ func _process(delta):
 			velocity.x = 0
 			velocity.y = 0
 		pass
+	else:
+		is_attacking = false	
+		
+	if PlayerDataSingleton.target == null or\
+		PlayerDataSingleton.target.node == null or\
+		!$Interactable/ActionArea.overlaps_body(PlayerDataSingleton.target.node):
+		is_attacking = false
 	
 	if PlayerDataSingleton.fight_mode:
 		anim = "_FIGHT"	
@@ -65,21 +68,20 @@ func _process(delta):
 	move_and_slide(velocity.normalized() * WALK_SPEED)
 
 func _on_AnimatedSprite_animation_finished():
-	if is_attacking and PlayerDataSingleton.target != null and PlayerDataSingleton.target.node != null:
-		if PlayerDataSingleton.target.node.can_be_hit:
-			PlayerDataSingleton.target.node.attack(1)
-
-func _unhandled_input(event):
-	#if not clicking on an Interactable
-	if Input.is_action_pressed("mouse_left_click"):
+	if PlayerDataSingleton.target == null:
 		is_attacking = false
-		PlayerDataSingleton.clear_target()
+	if is_attacking \
+		and PlayerDataSingleton.target != null \
+		and PlayerDataSingleton.target.node != null \
+		and PlayerDataSingleton.target.node.can_be_hit \
+		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
+		and $Interactable/ActionArea.overlaps_body(PlayerDataSingleton.target.node):
+			PlayerDataSingleton.target.node.attack(1)
+			
+func _unhandled_input(event):
+	if Input.is_action_pressed("mouse_left_click"):
+		is_attacking = false	
 		PlayerDataSingleton.set_target(get_global_mouse_position(), null)
-		
-		#HACK not to click directly on the player
-		var dist = (get_global_mouse_position() - self.global_position)
-		if dist.x > -5 and dist.x < 5 :
-			PlayerDataSingleton.clear_target()
 	else:
 		velocity.x = 0
 		velocity.y = 0
@@ -87,7 +89,6 @@ func _unhandled_input(event):
 func _on_Interactable_something_entered_inside_interactable(body):
 	if PlayerDataSingleton.target == null or !PlayerDataSingleton.fight_mode:
 		return
-
 	if PlayerDataSingleton.target.node == body and !PlayerDataSingleton.target.node.can_be_hit:
 		is_attacking = false
 		PlayerDataSingleton.clear_target()
@@ -95,11 +96,10 @@ func _on_Interactable_something_entered_inside_interactable(body):
 		is_attacking = true
 
 func _on_Interactable_mouse_clicked():
-	$AnimatedSprite.material = null
-	$Interactable/Name.hide()
-	PlayerDataSingleton.clear_target()
-	get_tree().paused = true
-	$CanvasLayer/PlayerInventory.show_inventory()
+	if !PlayerDataSingleton.fight_mode:
+		PlayerDataSingleton.clear_target()
+		get_tree().paused = true
+		$CanvasLayer/PlayerInventory.show_inventory()
 
 func _on_Interactable_mouse_entered():
 	$AnimatedSprite.material = material_on_mouse_entered
