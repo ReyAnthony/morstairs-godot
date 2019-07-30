@@ -15,9 +15,11 @@
 [node name="Level" type="Node"]
 
 [node name="DayNight" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
 modulate = Color( 1, 1, 1, 1 )
 position = Vector2( -193, -193 )
-CYCLE_LENGTH_DAY_IN_SEC = 5.0
+_CYCLE_LENGTH_DAY_IN_SEC = 5.0
+_CYCLE_LENGTH_NIGHT_DIV = 2.0
 
 [node name="Grounds" type="TileMap" parent="DayNight"]
 mode = 1
@@ -188,3 +190,4 @@ tile_data = PoolIntArray( -1834996, 2, 0, -1834995, 2, 0, -1834994, 2, 0, -18349
 __meta__ = {
 "_edit_lock_": true
 }
+

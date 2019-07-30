@@ -1,5 +1,6 @@
 extends Control
 
+#TODO migrate to GD script and remake
 var MERCHANT_INVENTORY
 var PLAYER_INVENTORY 
 var MERCHANT_ID

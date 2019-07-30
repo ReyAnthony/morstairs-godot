@@ -1,19 +1,25 @@
 extends Node2D
+class_name Stats
 
-export (int) var life
-export (PackedScene) var damage
-export (PackedScene) var corpse
-export (String) var root
+export (int) var life: int
+export (PackedScene) var damage: PackedScene
+export (PackedScene) var corpse: PackedScene
+export (String) var root: String
 
-func attack(damages):
+var _current_life: int
+
+func _ready():
+	_current_life = life
+
+func attack(damages: int):
 	var dmg = damage.instance()
 	dmg.get_node("Label").text = str(damages)
-	life -= damages
+	_current_life -= damages
 	
-	if life < 1:
-		var r = get_node(root)
-		var rp = r.get_parent()
-		var c = corpse.instance()
+	if _current_life < 1:
+		var r := get_node(root)
+		var rp := r.get_parent()
+		var c := corpse.instance()
 		r.add_child(dmg)
 		rp.add_child(c)
 		rp.move_child(c, rp.get_position_in_parent() + 2)

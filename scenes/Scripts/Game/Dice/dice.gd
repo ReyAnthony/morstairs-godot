@@ -1,14 +1,16 @@
 extends Control
+class_name Dice
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-var _a = "a"
+var rng: RandomNumberGenerator
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	rng = RandomNumberGenerator.new()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _dice_throw(d: int = 1, faces: int = 6) -> Array:
+	assert(d > 0)
+	assert(faces > 1)
+	var throws:Array = []
+	for i in range(0, d):
+		throws.append(rng.randi_range(1, faces))
+	return throws
+	

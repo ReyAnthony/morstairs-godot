@@ -1,15 +1,16 @@
 extends KinematicBody2D
+class_name NPC
 
 signal on_dialog_end
 
-export (Material) var material_on_mouse_enter
-export (String)  var chara_name
-export (Texture) var chara_portrait
-export (Array, String) var messages = []
+export (Material) var material_on_mouse_enter: Material
+export (String)  var chara_name: String
+export (Texture) var chara_portrait: Texture
+export (Array, String) var messages: Array = []
 
-var can_be_hit = false
+var can_be_hit := false
 
-func attack(amount):
+func attack(amount: int):
 	$Stats.attack(amount)
 
 func _ready():
@@ -39,9 +40,9 @@ func _on_Interactable_mouse_entered():
 func _on_Interactable_mouse_exited():
 	$Sprite.material = null
 
-func _on_Interactable_something_entered_inside_interactable(body):
+func _on_Interactable_something_entered_inside_interactable(body: PhysicsBody2D):
 	if PlayerDataSingleton.get_target() == null:
 		return
 	if !PlayerDataSingleton.fight_mode && PlayerDataSingleton.get_target().node == self:
-		$CanvasLayer/DialogPanel.my_popup(chara_name, chara_portrait, messages)
+		($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, messages)
 		PlayerDataSingleton.clear_target()

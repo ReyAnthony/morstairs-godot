@@ -1,12 +1,12 @@
 extends KinematicBody2D
 
-export (Material) var material_on_mouse_entered
+export (Material) var material_on_mouse_entered: Material
 
-const WALK_SPEED = 30
-var velocity = Vector2()
-var is_attacking = false
-var last_dir = "NW"
-var PDS = PlayerDataSingleton
+const _WALK_SPEED := 30
+const _PDS: PDS = PlayerDataSingleton
+var _velocity := Vector2()
+var _is_attacking := false
+var _last_dir := "NW"
 
 func _ready():
 	set_process(true)
@@ -14,92 +14,95 @@ func _ready():
 	add_to_group("player")
 	
 # warning-ignore:unused_argument
-func _process(delta):
-	var anim_direction = ""
-	var anim = ""
-	var target = PDS.get_target()
+func _process(delta: float):
+	var anim_direction := ""
+	var anim := ""
+	var target: PlayerTarget = _PDS.get_target()
 		
 	if Input.is_action_just_pressed("switch_combat_mode"):
-		PDS.clear_target()
-		if PDS.fight_mode: 
+		_PDS.clear_target()
+		if _PDS.fight_mode: 
 			$AnimationPlayer.play("FightOff")
-			$AnimatedSprite.play(last_dir)
+			$AnimatedSprite.play(_last_dir)
 		else:
 			$AnimationPlayer.play("FightOn")
-			$AnimatedSprite.play(last_dir + "_FIGHT")
-		PDS.fight_mode = !PDS.fight_mode
+			$AnimatedSprite.play(_last_dir + "_FIGHT")
+		_PDS.fight_mode = !_PDS.fight_mode
 	
 	if  target != null:
 		#make movement only diagonal, so we don't have to make 8 sprites
-		velocity = (target.position - self.global_position).normalized()
+		_velocity = (target.position - self.global_position).normalized()
 		
-		if velocity.y > 0:
+		if _velocity.y > 0:
 			anim_direction += "S"
-		elif velocity.y < 0:
+		elif _velocity.y < 0:
 			anim_direction += "N"
-		if velocity.x < 0:
+		if _velocity.x < 0:
 			anim_direction += "W"
-		elif velocity.x > 0:
+		elif _velocity.x > 0:
 			anim_direction += "E"
 		
 		if (target.position - self.global_position).length() < 2:
-			PDS.clear_target()
-			velocity.x = 0
-			velocity.y = 0
+			_PDS.clear_target()
+			_velocity.x = 0
+			_velocity.y = 0
 		pass
 		
 		if target.node != null and is_instance_valid(target.node) and target.node.is_in_group("npc"):
 			if !$Interactable/ActionArea.overlaps_body(target.node):
-				is_attacking = false
+				_is_attacking = false
 	else:
-		is_attacking = false	
+		_is_attacking = false	
 
-	if PDS.fight_mode:
+	if _PDS.fight_mode:
 		anim = "_FIGHT"	
-		if is_attacking and PDS.get_target() != null:
+		if _is_attacking and _PDS.get_target() != null:
 			anim += "_MELEE_ATTACK"	
 
 	if anim_direction != "":
 		$AnimatedSprite.play(anim_direction + anim)
-		last_dir = anim_direction
-	if velocity.length() < 0.1:
+		_last_dir = anim_direction
+	if _velocity.length() < 0.1:
 		$AnimatedSprite.stop()
 		$AnimatedSprite.frame = 0
 		
-	move_and_slide(velocity.normalized() * WALK_SPEED)
+	move_and_slide(_velocity.normalized() * _WALK_SPEED)
 
 func _on_AnimatedSprite_animation_finished():
-	if PDS.target == null or !is_instance_valid(PDS.target.node):
-		is_attacking = false
-	if is_attacking \
-		and PDS.target != null \
-		and PDS.target.node != null \
-		and PDS.target.node.can_be_hit \
+	var target: PlayerTarget = _PDS.get_target()
+	if target == null or !is_instance_valid(target.node):
+		_is_attacking = false
+		return
+	if _is_attacking \
+		and target != null \
+		and target.node != null \
+		and (target.node as NPC).can_be_hit \
 		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
-		and $Interactable/ActionArea.overlaps_body(PDS.target.node):
-			PDS.target.node.attack(1)
+		and $Interactable/ActionArea.overlaps_body(target.node):
+			target.node.attack(1)
 			
 # warning-ignore:unused_argument
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent):
 	if Input.is_action_pressed("mouse_left_click"):
-		is_attacking = false	
-		PDS.set_target(get_global_mouse_position(), null)
+		_is_attacking = false	
+		_PDS.set_target(get_global_mouse_position(), null)
 	else:
-		velocity.x = 0
-		velocity.y = 0
+		_velocity.x = 0
+		_velocity.y = 0
 
-func _on_Interactable_something_entered_inside_interactable(body):
-	if PDS.target == null or !PDS.fight_mode:
+func _on_Interactable_something_entered_inside_interactable(body: PhysicsBody2D):
+	var target: PlayerTarget = _PDS.get_target()	
+	if target == null or !_PDS.fight_mode:
 		return
-	if PDS.target.node == body and !PDS.target.node.can_be_hit:
-		is_attacking = false
-		PDS.clear_target()
-	elif PDS.target.node == body:
-		is_attacking = true
+	if target.node == body and !(target.node as NPC).can_be_hit:
+		_is_attacking = false
+		_PDS.clear_target()
+	elif target.node == body:
+		_is_attacking = true
 
 func _on_Interactable_mouse_clicked():
-	if !PDS.fight_mode:
-		PDS.clear_target()
+	if !_PDS.fight_mode:
+		_PDS.clear_target()
 		get_tree().paused = true
 		$CanvasLayer/PlayerInventory.show_inventory()
 

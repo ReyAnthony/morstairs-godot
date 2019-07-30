@@ -8,9 +8,74 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "DayNight",
+"language": "GDScript",
+"path": "res://scripts/DayNight.gd"
+}, {
+"base": "Popup",
+"class": "DialogPanel",
+"language": "GDScript",
+"path": "res://scripts/DialogPanel.gd"
+}, {
+"base": "Control",
+"class": "Dice",
+"language": "GDScript",
+"path": "res://scenes/Scripts/Game/Dice/dice.gd"
+}, {
+"base": "Node2D",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://scripts/Interactable.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "NPC",
+"language": "GDScript",
+"path": "res://scripts/NPC.gd"
+}, {
+"base": "Node",
+"class": "PDS",
+"language": "GDScript",
+"path": "res://scripts/singletons/PlayerData/PlayerDataSingleton.gd"
+}, {
+"base": "Node",
+"class": "PlayerTarget",
+"language": "GDScript",
+"path": "res://scripts/singletons/PlayerData/PlayerTarget.gd"
+}, {
+"base": "Node2D",
+"class": "Room",
+"language": "GDScript",
+"path": "res://scripts/Room.gd"
+}, {
+"base": "Node2D",
+"class": "ShopKeeper",
+"language": "GDScript",
+"path": "res://scripts/ShopKeeper.gd"
+}, {
+"base": "Node2D",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://scripts/Stats.gd"
+}, {
+"base": "Sprite",
+"class": "Torch",
+"language": "GDScript",
+"path": "res://scripts/torch.gd"
+} ]
 _global_script_class_icons={
-
+"DayNight": "",
+"DialogPanel": "",
+"Dice": "",
+"Interactable": "",
+"NPC": "",
+"PDS": "",
+"PlayerTarget": "",
+"Room": "",
+"ShopKeeper": "",
+"Stats": "",
+"Torch": ""
 }
 
 [application]
@@ -21,7 +86,7 @@ run/main_scene="res://scenes/Levels/MorstairsCity2.tscn"
 [autoload]
 
 ObjectHelper="*res://scripts/singletons/ObjectHelper.gd"
-PlayerDataSingleton="*res://scripts/singletons/PlayerDataSingleton.gd"
+PlayerDataSingleton="*res://scripts/singletons/PlayerData/PlayerDataSingleton.gd"
 ShopDataSingleton="*res://scripts/singletons/ShopDataSingleton.gd"
 
 [display]

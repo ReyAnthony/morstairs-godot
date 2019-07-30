@@ -1,12 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/Scripts/TalkingNPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Scripts/NPC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/sprites/characters/woman_portrait.png" type="Texture" id=2]
 [ext_resource path="res://res/sprites/characters/lady_SE.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=4]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/Scripts/Stats.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Scripts/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=7]
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
@@ -30,8 +31,7 @@ position = Vector2( -0.0520752, 0.154682 )
 polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
 
 [node name="Interactable" parent="TalkingNPC" instance=ExtResource( 4 )]
-group_to_test_on_enter = "player"
-body_to_move = NodePath("../..")
+_group_to_test_on_enter = "player"
 
 [node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
 editor/display_folded = true
@@ -61,3 +61,4 @@ valign = 1
 [node name="Stats" parent="TalkingNPC" instance=ExtResource( 6 )]
 life = 3000
 corpse = ExtResource( 7 )
+

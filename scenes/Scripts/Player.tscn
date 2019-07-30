@@ -87,7 +87,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=3]
 script/source = "extends CanvasLayer
 
 func _ready():
@@ -101,10 +101,10 @@ func _process(delta):
 		return
 "
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 5.10834
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 5.58728
 height = 0.19799
 
@@ -127,7 +127,7 @@ anims/FightOn = SubResource( 2 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 editor/display_folded = true
 layer = 0
-script = SubResource( 5 )
+script = SubResource( 3 )
 
 [node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 4 )]
 anchor_right = 0.0
@@ -194,8 +194,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="Interactable" parent="." instance=ExtResource( 8 )]
-group_to_test_on_enter = "npc"
-body_to_move = NodePath("..")
+_group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
@@ -203,7 +202,7 @@ position = Vector2( 0, 6.36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
 position = Vector2( -0.345409, -0.347971 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
@@ -211,7 +210,7 @@ editor/display_folded = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 position = Vector2( -0.287483, 1.91654 )
 scale = Vector2( 0.79, 0.78 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Name" type="Label" parent="Interactable"]
 visible = false
@@ -222,6 +221,7 @@ margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
 custom_fonts/font = ExtResource( 6 )
 text = "Player"
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="mouse_clicked" from="Interactable" to="." method="_on_Interactable_mouse_clicked"]
 [connection signal="mouse_entered" from="Interactable" to="." method="_on_Interactable_mouse_entered"]

@@ -8,3 +8,4 @@ script = ExtResource( 1 )
 life = 3
 damage = ExtResource( 2 )
 root = "/root/Level/DayNight/Walls/"
+
