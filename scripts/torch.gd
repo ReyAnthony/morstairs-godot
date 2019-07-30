@@ -1,6 +1,7 @@
 extends Sprite
+class_name Torch
 
-export (bool) var inside = false
+export (bool) var inside: bool = false
 
 func _ready():
 	#by default torches inside buildings are hidden
@@ -17,7 +18,7 @@ func unlight_it():
 	$AnimationPlayer.stop(true)
 	$AnimationPlayer.play("light_off")
 
-func _on_AnimationPlayer_animation_finished(anim_name):	
+func _on_AnimationPlayer_animation_finished(anim_name: String):	
 	if anim_name == "light_on":
 		$AnimationPlayer.play("torch_anim")
 	if anim_name == "light_off":
