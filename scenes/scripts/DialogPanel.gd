@@ -16,7 +16,10 @@ func _process(delta):
 			$Panel/CharaMessage.text = _messages[_current_index]
 		else: 
 			get_tree().paused = false
-			.hide()
+			$"../".layer = 0
+			set_process(false)
+			emit_signal("on_dialog_end")
+			hide()
 
 func my_popup(chara_name: String, chara_portrait: Texture, messages: Array):
 	
@@ -32,10 +35,3 @@ func my_popup(chara_name: String, chara_portrait: Texture, messages: Array):
 	get_tree().paused = true
 	set_process(true)
 	.popup()
-
-func hide():
-	$"../".layer = 0
-	set_process(false)
-	emit_signal("on_dialog_end")
-	.hide()
-	

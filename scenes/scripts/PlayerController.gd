@@ -12,11 +12,10 @@ func _ready():
 	set_process(true)
 	$AnimatedSprite.play("NW")
 	add_to_group("player")
-	$Interactable.connect("mouse_clicked", self, "_on_Interactable_mouse_clicked")
-	$Interactable.connect("mouse_entered", self,  "_on_Interactable_mouse_entered")
-	$Interactable.connect("mouse_exited", self, "_on_Interactable_mouse_exited")
-	$Interactable.connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
-	
+	$Interactable.connect("mouse_clicked", self, "_on_player_mouse_clicked")
+	$Interactable.connect("mouse_entered", self,  "_on_player_mouse_entered")
+	$Interactable.connect("mouse_exited", self, "_on_player_mouse_exited")
+	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
 	
 # warning-ignore:unused_argument
 func _process(delta: float):
@@ -29,10 +28,11 @@ func _process(delta: float):
 		if _PDS.fight_mode: 
 			$AnimationPlayer.play("FightOff")
 			$AnimatedSprite.play(_last_dir)
-			$AnimatedSprite.material = null
+			_unclear_selection()
 		else:
 			$AnimationPlayer.play("FightOn")
 			$AnimatedSprite.play(_last_dir + "_FIGHT")
+			_clear_selection(true)
 		_PDS.fight_mode = !_PDS.fight_mode
 	
 	if  target != null:
@@ -97,7 +97,7 @@ func _unhandled_input(event: InputEvent):
 		_velocity.x = 0
 		_velocity.y = 0
 		
-func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
+func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 	var target: PlayerTarget = _PDS.get_target()	
 	if target == null or !_PDS.fight_mode:
 		return
@@ -106,19 +106,26 @@ func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 		_PDS.clear_target()
 	elif target.node == body:
 		_is_attacking = true
-	#Let's ignore mouse clicks when we are fighting	
-	if Input.is_action_pressed("mouse_left_click"):
-		get_tree().set_input_as_handled() 
 
-func _on_Interactable_mouse_clicked():
+func _on_player_mouse_clicked():
 	if !_PDS.fight_mode:
 		_PDS.clear_target()
 		get_tree().paused = true
 		$CanvasLayer/PlayerInventory.show_inventory()
+		_clear_selection()
 
-func _on_Interactable_mouse_entered():
+func _on_player_mouse_entered():
 	if !_PDS.fight_mode:
 		$AnimatedSprite.material = material_on_mouse_entered
 
-func _on_Interactable_mouse_exited():
+func _on_player_mouse_exited():
 	$AnimatedSprite.material = null
+	
+func _clear_selection(forever: bool = false):
+	$AnimatedSprite.material = null
+	if forever:
+		$Interactable.show_name = false
+	$Interactable.hide_name()
+	
+func _unclear_selection():
+	$Interactable.show_name = true

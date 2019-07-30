@@ -194,7 +194,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="Interactable" parent="." instance=ExtResource( 8 )]
-_group_to_test_on_enter = "npc"
+group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true

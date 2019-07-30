@@ -7,8 +7,6 @@
 [ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=6]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
 height = 13.2929
@@ -31,7 +29,6 @@ polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.8113
 
 [node name="Interactable" parent="TalkingNPC" instance=ExtResource( 3 )]
 editor/display_folded = true
-_group_to_test_on_enter = "player"
 
 [node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
 editor/display_folded = true
@@ -59,5 +56,5 @@ align = 1
 valign = 1
 
 [node name="Stats" parent="TalkingNPC" instance=ExtResource( 5 )]
+life = 30
 corpse = ExtResource( 6 )
-

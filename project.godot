@@ -93,7 +93,6 @@ ShopDataSingleton="*res://scenes/scripts/singletons/ShopDataSingleton.gd"
 
 window/size/width=1280
 window/size/height=720
-window/size/fullscreen=true
 mouse_cursor/custom_image="res://res/sprites/cursor.png"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
