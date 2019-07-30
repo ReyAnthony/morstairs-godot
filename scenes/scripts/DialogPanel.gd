@@ -16,7 +16,7 @@ func _process(delta):
 			$Panel/CharaMessage.text = _messages[_current_index]
 		else: 
 			get_tree().paused = false
-			self.hide()
+			.hide()
 
 func my_popup(chara_name: String, chara_portrait: Texture, messages: Array):
 	

@@ -4,8 +4,7 @@ class_name Interactable
 signal mouse_entered
 signal mouse_exited
 signal mouse_clicked
-#Rename TO ONSTAY
-signal something_entered_inside_interactable(body)
+signal something_is_inside_interactable(body)
 
 export (String) var _group_to_test_on_enter: String
 var _mouseArea: Area2D
@@ -26,17 +25,14 @@ func _ready():
 func _process(delta: float):
 	for b in _actionArea.get_overlapping_bodies():
 		if (b.is_in_group(_group_to_test_on_enter)):
-			emit_signal("something_entered_inside_interactable", b)
+			emit_signal("something_is_inside_interactable", b)
 			return
 	
 func _input(event: InputEvent):
 	if get_tree().paused:
 		return
-		
 	if Input.is_action_just_pressed("mouse_left_click") and _is_mouse_inside:
 		emit_signal("mouse_clicked")
-		get_tree().set_input_as_handled() 
-	if Input.is_action_pressed("mouse_left_click") and _is_mouse_inside:
 		get_tree().set_input_as_handled() 
 	
 func _on__mouseArea_mouse_entered():

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scripts/NPC.gd" type="Script" id=1]
+[ext_resource path="res://scenes/scripts/NPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=3]
-[ext_resource path="res://scenes/Scripts/DialogPanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Scenes/DialogPanel.tscn" type="PackedScene" id=4]
 
 [node name="NPC" type="KinematicBody2D"]
 scale = Vector2( 1.00418, 1.0142 )
@@ -16,5 +16,4 @@ chara_portrait = ExtResource( 3 )
 layer = 0
 
 [node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 4 )]
-
 [connection signal="on_dialog_end" from="CanvasLayer/DialogPanel" to="." method="_on_DialogPanel_on_dialog_end"]

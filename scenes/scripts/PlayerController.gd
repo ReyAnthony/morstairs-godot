@@ -12,6 +12,11 @@ func _ready():
 	set_process(true)
 	$AnimatedSprite.play("NW")
 	add_to_group("player")
+	$Interactable.connect("mouse_clicked", self, "_on_Interactable_mouse_clicked")
+	$Interactable.connect("mouse_entered", self,  "_on_Interactable_mouse_entered")
+	$Interactable.connect("mouse_exited", self, "_on_Interactable_mouse_exited")
+	$Interactable.connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
+	
 	
 # warning-ignore:unused_argument
 func _process(delta: float):
@@ -24,6 +29,7 @@ func _process(delta: float):
 		if _PDS.fight_mode: 
 			$AnimationPlayer.play("FightOff")
 			$AnimatedSprite.play(_last_dir)
+			$AnimatedSprite.material = null
 		else:
 			$AnimationPlayer.play("FightOn")
 			$AnimatedSprite.play(_last_dir + "_FIGHT")
@@ -83,14 +89,15 @@ func _on_AnimatedSprite_animation_finished():
 			
 # warning-ignore:unused_argument
 func _unhandled_input(event: InputEvent):
+	##TODO small bug after dialogs, player will move where clicked, but not everytime
 	if Input.is_action_pressed("mouse_left_click"):
 		_is_attacking = false	
 		_PDS.set_target(get_global_mouse_position(), null)
 	else:
 		_velocity.x = 0
 		_velocity.y = 0
-
-func _on_Interactable_something_entered_inside_interactable(body: PhysicsBody2D):
+		
+func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	var target: PlayerTarget = _PDS.get_target()	
 	if target == null or !_PDS.fight_mode:
 		return
@@ -99,6 +106,9 @@ func _on_Interactable_something_entered_inside_interactable(body: PhysicsBody2D)
 		_PDS.clear_target()
 	elif target.node == body:
 		_is_attacking = true
+	#Let's ignore mouse clicks when we are fighting	
+	if Input.is_action_pressed("mouse_left_click"):
+		get_tree().set_input_as_handled() 
 
 func _on_Interactable_mouse_clicked():
 	if !_PDS.fight_mode:
@@ -107,7 +117,8 @@ func _on_Interactable_mouse_clicked():
 		$CanvasLayer/PlayerInventory.show_inventory()
 
 func _on_Interactable_mouse_entered():
-	$AnimatedSprite.material = material_on_mouse_entered
+	if !_PDS.fight_mode:
+		$AnimatedSprite.material = material_on_mouse_entered
 
 func _on_Interactable_mouse_exited():
 	$AnimatedSprite.material = null

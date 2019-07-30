@@ -1,12 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/Scripts/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Scenes/NPC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/sprites/characters/woman_portrait.png" type="Texture" id=2]
 [ext_resource path="res://res/sprites/characters/lady_SE.png" type="Texture" id=3]
-[ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=4]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=5]
-[ext_resource path="res://scenes/Scripts/Stats.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Scripts/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Scenes/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=7]
+
 
 
 [sub_resource type="CapsuleShape2D" id=1]

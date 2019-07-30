@@ -23,7 +23,7 @@ func _ready():
 	$Interactable.connect("mouse_clicked", self, "_on_Interactable_mouse_clicked")
 	$Interactable.connect("mouse_entered", self,  "_on_Interactable_mouse_entered")
 	$Interactable.connect("mouse_exited", self, "_on_Interactable_mouse_exited")
-	$Interactable.connect("something_entered_inside_interactable", self, "_on_Interactable_something_entered_inside_interactable")
+	$Interactable.connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 	
 	$Interactable/Name.text = chara_name
 	
@@ -40,7 +40,7 @@ func _on_Interactable_mouse_entered():
 func _on_Interactable_mouse_exited():
 	$Sprite.material = null
 
-func _on_Interactable_something_entered_inside_interactable(body: PhysicsBody2D):
+func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if PlayerDataSingleton.get_target() == null:
 		return
 	if !PlayerDataSingleton.fight_mode && PlayerDataSingleton.get_target().node == self:

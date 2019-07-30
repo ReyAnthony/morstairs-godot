@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://scripts/PlayerController.gd" type="Script" id=1]
+[ext_resource path="res://scenes/scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://scenes/Scripts/PlayerInventory.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Scenes/PlayerInventory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=5]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=7]
-[ext_resource path="res://scenes/Scripts/Interactable.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Animation" id=1]
 length = 2.0
@@ -221,9 +221,4 @@ margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
 custom_fonts/font = ExtResource( 6 )
 text = "Player"
-
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
-[connection signal="mouse_clicked" from="Interactable" to="." method="_on_Interactable_mouse_clicked"]
-[connection signal="mouse_entered" from="Interactable" to="." method="_on_Interactable_mouse_entered"]
-[connection signal="mouse_exited" from="Interactable" to="." method="_on_Interactable_mouse_exited"]
-[connection signal="something_entered_inside_interactable" from="Interactable" to="." method="_on_Interactable_something_entered_inside_interactable"]

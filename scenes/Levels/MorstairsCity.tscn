@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://scenes/Scripts/DayNight.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Scenes/DayNight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/tilesets/ground_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://res/tilesets/structure_tileset.tres" type="TileSet" id=3]
-[ext_resource path="res://scenes/Scripts/torch.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Scripts/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Scenes/torch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Scenes/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://res/107_-_Ultima_7_-_DOS_-_Fellowship_Theme.ogg" type="AudioStream" id=6]
-[ext_resource path="res://scenes/Scripts/NPCS/Women/WomenNPC.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Scripts/NPCS/Guard/GuardNPC.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Scripts/NPCS/Law/LawNPC.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Scripts/NPCS/Merchant/MerchantNPC.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/Scripts/Room.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Scenes/NPCS/Women/WomenNPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardNPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Scenes/NPCS/Law/LawNPC.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Scenes/NPCS/Merchant/MerchantNPC.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Scenes/Room.tscn" type="PackedScene" id=11]
 
 [node name="Level" type="Node"]
 
@@ -190,4 +190,3 @@ tile_data = PoolIntArray( -1834996, 2, 0, -1834995, 2, 0, -1834994, 2, 0, -18349
 __meta__ = {
 "_edit_lock_": true
 }
-
