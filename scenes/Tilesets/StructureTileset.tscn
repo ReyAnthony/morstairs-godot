@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/Tilesets/FurnitureTileset.tscn" type="PackedScene" id=7]
 [ext_resource path="res://res/sprites/env/root_arch_top.png" type="Texture" id=8]
 
-[sub_resource type="OccluderPolygon2D" id=13]
+[sub_resource type="OccluderPolygon2D" id=14]
 polygon = PoolVector2Array( -13.4471, -49.7455, -11.1416, -51.4363, -0.843472, -51.59, 3.15281, -50.0529, 4.07608, -43.4306, 3.46127, -36.3603, 0.233498, -32.9788, -1.76465, -32.5177, -1.76465, -35.7455, -4.3776, -34.8232, -9.1424, -35.1306, -11.1405, -35.1306, -10.5257, -32.2103, -9.91092, -31.7492, -11.6017, -30.6733, -13.1387, -31.4418, -15.1368, -32.8251, -17.4424, -37.4362, -18.3646, -41.8936, -17.2897, -44.6733, -16.5212, -46.0567, -14.5231, -48.3622 )
 
 [node name="StructureTileset" type="Node2D"]
@@ -39,7 +39,7 @@ position = Vector2( -0.501442, -13.7897 )
 polygon = PoolVector2Array( -11.0568, 3.61034, -7.92275, -3.40987, -5.03945, -3.91132, -2.53222, -2.40699, -0.902531, 0.476318, 0.100361, 2.98354, 0.100361, 3.86107, -5.41553, 4.23715 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="tree"]
-occluder = SubResource( 13 )
+occluder = SubResource( 14 )
 
 [node name="AppleTree" type="Sprite" parent="."]
 position = Vector2( 86.2847, -14.3955 )
@@ -55,7 +55,7 @@ position = Vector2( -0.501442, -13.7897 )
 polygon = PoolVector2Array( -11.3075, 3.86107, -8.04812, -1.27874, -6.04235, -3.28451, -3.03368, -2.90843, -1.6547, 0.225597, 0.351067, 2.23138, -0.150368, 3.48499, 0.852516, 3.98643 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AppleTree"]
-occluder = SubResource( 13 )
+occluder = SubResource( 14 )
 
 [node name="fortified_wall" type="Sprite" parent="."]
 position = Vector2( -22.2271, -1.46992 )

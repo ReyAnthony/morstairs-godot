@@ -5,8 +5,6 @@
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=4]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.33256
 height = 33.9592
@@ -19,7 +17,7 @@ radius = 11.9791
 [node name="TalkingNPC" parent="." instance=ExtResource( 1 )]
 chara_name = "Laws"
 chara_portrait = null
-messages = [ "IT IS I, THE LAW" ]
+messages = [ "IT IS I, THE LAW", "YOU NEED TO RESPECT ME." ]
 
 [node name="Sprite" type="Sprite" parent="TalkingNPC"]
 texture = ExtResource( 2 )
@@ -29,7 +27,6 @@ position = Vector2( -0.0520752, 0.154682 )
 polygon = PoolVector2Array( -8.22234, 12.9512, -5.33417, 16.6151, -0.189621, 21.1726, 9.10668, 11.5214, 7.21132, 5.17655, -0.00911237, 8.39364, -8.22234, 4.19355 )
 
 [node name="Interactable" parent="TalkingNPC" instance=ExtResource( 3 )]
-_group_to_test_on_enter = "player"
 
 [node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
 editor/display_folded = true
@@ -56,4 +53,3 @@ custom_fonts/font = ExtResource( 4 )
 text = "TEST"
 align = 1
 valign = 1
-

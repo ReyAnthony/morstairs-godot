@@ -1,17 +1,18 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://res/shaders/movement.shader" type="Shader" id=1]
 [ext_resource path="res://res/sprites/env/torch.png" type="Texture" id=2]
 [ext_resource path="res://scenes/scripts/torch.gd" type="Script" id=3]
 [ext_resource path="res://res/sprites/env/light.png" type="Texture" id=4]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/coeff = 4.0
 
-[sub_resource type="Animation" id=2]
-resource_name = "light_off"
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Animation" id=3]
 length = 10.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Light2D:energy")
@@ -38,7 +39,7 @@ tracks/1/keys = {
 "values": [ 1.61, 1.51, 1.6, 1.5 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Light2D:energy")
@@ -65,7 +66,7 @@ tracks/1/keys = {
 "values": [ 1.60667, 1.55, 1.6 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 4.0
 loop = true
 tracks/0/type = "value"
@@ -117,18 +118,17 @@ tracks/3/keys = {
 "values": [  ]
 }
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=6]
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=7]
-trail_color_modifier = SubResource( 6 )
+[sub_resource type="ParticlesMaterial" id=8]
+trail_color_modifier = SubResource( 7 )
 flag_disable_z = true
 spread = 93.51
 gravity = Vector3( 0, -5, 0 )
 initial_velocity = 1.0
-angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 color = Color( 0.398438, 0.398438, 0.398438, 1 )
@@ -143,18 +143,27 @@ scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 2 )
 script = ExtResource( 3 )
 
+[node name="USE THIS FOR PERF" type="Sprite" parent="."]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.882353 )
+material = SubResource( 2 )
+position = Vector2( 0.12442, -1.49302 )
+scale = Vector2( 1.50984, 1.50984 )
+z_index = 1
+texture = ExtResource( 4 )
+
 [node name="Light2D" type="Light2D" parent="."]
 visible = false
 texture = ExtResource( 4 )
-texture_scale = 1.61
+texture_scale = 1.55781
 color = Color( 0.996933, 0.992518, 0.465123, 1 )
 energy = 1.50929
 shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/light_off = SubResource( 2 )
-anims/light_on = SubResource( 3 )
-anims/torch_anim = SubResource( 4 )
+anims/light_off = SubResource( 3 )
+anims/light_on = SubResource( 4 )
+anims/torch_anim = SubResource( 5 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 visible = false
@@ -162,6 +171,5 @@ position = Vector2( 0, -2.85714 )
 amount = 3
 lifetime = 3.0
 randomness = 1.0
-process_material = SubResource( 7 )
-
+process_material = SubResource( 8 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
