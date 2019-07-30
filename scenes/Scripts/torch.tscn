@@ -5,7 +5,6 @@
 [ext_resource path="res://scripts/torch.gd" type="Script" id=3]
 [ext_resource path="res://res/sprites/env/light.png" type="Texture" id=4]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/coeff = 4.0
@@ -128,6 +127,7 @@ flag_disable_z = true
 spread = 93.51
 gravity = Vector3( 0, -5, 0 )
 initial_velocity = 1.0
+angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 color = Color( 0.398438, 0.398438, 0.398438, 1 )
@@ -156,6 +156,7 @@ anims/light_on = SubResource( 3 )
 anims/torch_anim = SubResource( 4 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
+visible = false
 position = Vector2( 0, -2.85714 )
 amount = 3
 lifetime = 3.0

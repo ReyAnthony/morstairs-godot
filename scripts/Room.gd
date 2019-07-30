@@ -1,7 +1,14 @@
 extends Node2D
 
 func _ready():
-	assert($Collider != null)
+	var has_collider
+	for c in get_children():
+		if c is Area2D:
+			c.connect("body_entered", self, "_on_Collider_body_entered")
+			c.connect("body_exited", self, "_on_Collider_body_exited")
+			has_collider = true
+	if !has_collider:
+		assert(false)		
 
 func _on_Collider_body_entered(body):
 	if body.is_in_group("player"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://res/sprites/env/wall3.png" type="Texture" id=1]
 [ext_resource path="res://res/sprites/env/tree.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://res/sprites/env/fortified_wall_arch_left.png" type="Texture" id=5]
 [ext_resource path="res://res/sprites/env/fortified_wall_arch_right.png" type="Texture" id=6]
 [ext_resource path="res://scenes/Tilesets/FurnitureTileset.tscn" type="PackedScene" id=7]
+[ext_resource path="res://res/sprites/env/root_arch_top.png" type="Texture" id=8]
 
 [sub_resource type="OccluderPolygon2D" id=13]
 polygon = PoolVector2Array( -13.4471, -49.7455, -11.1416, -51.4363, -0.843472, -51.59, 3.15281, -50.0529, 4.07608, -43.4306, 3.46127, -36.3603, 0.233498, -32.9788, -1.76465, -32.5177, -1.76465, -35.7455, -4.3776, -34.8232, -9.1424, -35.1306, -11.1405, -35.1306, -10.5257, -32.2103, -9.91092, -31.7492, -11.6017, -30.6733, -13.1387, -31.4418, -15.1368, -32.8251, -17.4424, -37.4362, -18.3646, -41.8936, -17.2897, -44.6733, -16.5212, -46.0567, -14.5231, -48.3622 )
@@ -62,14 +63,20 @@ texture = ExtResource( 4 )
 offset = Vector2( 0, -15 )
 
 [node name="fortified_wall_arch_left" type="Sprite" parent="."]
-position = Vector2( -22.2271, 29.2124 )
+position = Vector2( -20.9808, 42.5651 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -15 )
 
 [node name="fortified_wall_arch_right" type="Sprite" parent="."]
-position = Vector2( 7.08549, 32.4998 )
+position = Vector2( -3.77473, 21.9956 )
 texture = ExtResource( 6 )
 offset = Vector2( 0, -15 )
 
 [node name="FurnitureTileset" parent="." instance=ExtResource( 7 )]
 position = Vector2( -119.89, 9.04255 )
+
+[node name="fortified_wall_arch_top" type="Sprite" parent="."]
+position = Vector2( 37.148, 17 )
+texture = ExtResource( 8 )
+centered = false
+offset = Vector2( -8, -22 )
