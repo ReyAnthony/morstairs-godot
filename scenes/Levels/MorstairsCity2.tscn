@@ -12,7 +12,7 @@
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 31.4342, -2.6673, 0, 0, 0, 0, 81.5161, -7.75375, 0, 0, 0, 0, 128.077, -6.18869, 0, 0, 0, 0, 172.29, -3.84109, 0, 0, 0, 0, 224.719, -12.1359, 0, 0, 0, 0, 241.935, 16.8177, 0, 0, 0, 0, 300.311, 69.6385, 0, 0, 0, 0, 323.396, 86.8541, 0, 0, 0, 0, 314.006, 89.9843, 0, 0, 0, 0, 284.27, 70.421, 0, 0, 0, 0, 262.359, 40.6849, 0, 0, 0, 0, 245.926, 18.774, 0, 0, 0, 0, 222.763, -1.8848, 0, 0, 0, 0, 198.113, 13.7658, 0, 0, 0, 0, 189.505, 10.2444, 0, 0, 0, 0, 160.16, 2.41913, 0, 0, 0, 0, 59.214, 3.59291, 0, 0, 0, 0, 30.6517, 3.59291, 0, 0, 0, 0, 31.4342, -2.6673 )
+"points": PoolVector2Array( 0, 0, 0, 0, 55.5646, -13.447, 0, 0, 0, 0, 70.3154, -12.8686, 0, 0, 0, 0, 79.86, -11.7116, 0, 0, 0, 0, 96.057, -2.74545, 0, 0, 0, 0, 103.288, 5.64227, 0, 0, 0, 0, 135.392, 5.93149, 0, 0, 0, 0, 163.159, 5.64227, 0, 0, 0, 0, 171.257, 5.64227, 0, 0, 0, 0, 185.719, 12.0054, 0, 0, 0, 0, 196.71, 18.0792, 0, 0, 0, 0, 205.965, 19.2361, 0, 0, 0, 0, 218.402, 19.2361, 0, 0, 0, 0, 232.864, 19.2361, 0, 0, 0, 0, 241.54, 14.6084, 0, 0, 0, 0, 232.574, -7.37315, 0, 0, 0, 0, 221.584, -23.5701, 0, 0, 0, 0, 217.245, -25.884, 0, 0, 0, 0, 199.602, -22.4132, 0, 0, 0, 0, 194.396, -14.8932, 0, 0, 0, 0, 189.479, -7.66238, 0, 0, 0, 0, 178.777, -3.61314, 0, 0, 0, 0, 168.365, -1.58853, 0, 0, 0, 0, 161.134, 1.88226, 0, 0, 0, 0, 146.383, 1.88226, 0, 0, 0, 0, 129.029, 4.19611, 0, 0, 0, 0, 115.146, 3.90688, 0, 0, 0, 0, 103.288, -0.431595, 0, 0, 0, 0, 96.9247, -7.37315, 0, 0, 0, 0, 85.0662, -11.1332, 0, 0, 0, 0, 74.0754, -15.1824, 0, 0, 0, 0, 62.5061, -16.0501, 0, 0, 0, 0, 59.0353, -15.7609, 0, 0, 0, 0, 55.5646, -13.447 )
 }
 
 [sub_resource type="GDScript" id=2]
@@ -58,75 +58,83 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="torch" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 43.5625, 132.314 )
-inside = true
-
-[node name="torch13" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 43.5625, 132.314 )
-inside = true
-
-[node name="torch2" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 29.3608, 153.833 )
-inside = true
-
-[node name="torch3" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( -28.8089, 164.267 )
-inside = true
-
-[node name="torch4" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( -20.9833, 94.3589 )
-inside = true
-
-[node name="torch5" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( -46.8076, 105.706 )
-inside = true
-
-[node name="torch6" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 2.62364, 87.4464 )
-inside = true
-
-[node name="torch7" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 26.2306, 80.0121 )
-inside = true
-
-[node name="torch8" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 56.098, 80.9251 )
-inside = true
-
-[node name="torch9" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 93.7909, 119.009 )
-inside = true
-
-[node name="torch10" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 110.38, 133.639 )
-inside = true
-
-[node name="torch12" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 127.361, 149.836 )
-inside = true
-
-[node name="LawNPC" parent="DayNight/Walls" instance=ExtResource( 5 )]
-position = Vector2( 293.582, 12.3455 )
-
 [node name="Path2D" type="Path2D" parent="DayNight/Walls"]
+editor/display_folded = true
 position = Vector2( 88.0572, 28.1088 )
 curve = SubResource( 3 )
 script = SubResource( 2 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="DayNight/Walls/Path2D"]
-position = Vector2( 31.4342, -2.6673 )
-rotation = 0.283794
+position = Vector2( 55.5646, -13.447 )
 rotate = false
 
-[node name="GuardNPC" parent="DayNight/Walls/Path2D/PathFollow2D" instance=ExtResource( 6 )]
-rotation = -0.283794
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DayNight/Walls/Path2D/PathFollow2D"]
+remote_path = NodePath("../../../Characters/GuardNPC")
 
-[node name="Player" parent="DayNight/Walls" instance=ExtResource( 7 )]
+[node name="Torches" type="YSort" parent="DayNight/Walls"]
 editor/display_folded = true
-position = Vector2( 206.356, 27.9846 )
+position = Vector2( 88.0572, 28.1088 )
 
-[node name="Music" type="AudioStreamPlayer2D" parent="DayNight/Walls/Player"]
+[node name="torch" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -44.4947, 104.205 )
+inside = true
+
+[node name="torch13" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -44.4947, 104.205 )
+inside = true
+
+[node name="torch2" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -58.6964, 125.724 )
+inside = true
+
+[node name="torch3" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -116.866, 136.158 )
+inside = true
+
+[node name="torch4" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -109.041, 66.2501 )
+inside = true
+
+[node name="torch5" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -134.865, 77.5972 )
+inside = true
+
+[node name="torch6" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -85.4336, 59.3376 )
+inside = true
+
+[node name="torch7" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -61.8266, 51.9033 )
+inside = true
+
+[node name="torch8" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -31.9592, 52.8163 )
+inside = true
+
+[node name="torch9" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( 5.7337, 90.9002 )
+inside = true
+
+[node name="torch10" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( 22.3228, 105.53 )
+inside = true
+
+[node name="torch12" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( 39.3038, 121.727 )
+inside = true
+
+[node name="Characters" type="YSort" parent="DayNight/Walls"]
+position = Vector2( 293.582, 12.3455 )
+
+[node name="LawNPC" parent="DayNight/Walls/Characters" instance=ExtResource( 5 )]
+
+[node name="GuardNPC" parent="DayNight/Walls/Characters" instance=ExtResource( 6 )]
+position = Vector2( -149.96, 2.31627 )
+
+[node name="Player" parent="DayNight/Walls/Characters" instance=ExtResource( 7 )]
+position = Vector2( -87.226, 15.6391 )
+
+[node name="Music" type="AudioStreamPlayer2D" parent="DayNight/Walls/Characters/Player"]
 pause_mode = 2
 position = Vector2( -24, -7 )
 stream = ExtResource( 8 )
@@ -158,4 +166,3 @@ tile_data = PoolIntArray( -3604480, 2, 0, -3604479, 2, 0, -3604478, 2, 0, -36044
 __meta__ = {
 "_edit_lock_": true
 }
-

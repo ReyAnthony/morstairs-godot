@@ -28,16 +28,16 @@ func _process(delta: float):
 		if _PDS.fight_mode: 
 			$AnimationPlayer.play("FightOff")
 			$AnimatedSprite.play(_last_dir)
-			_unclear_selection()
+			_unclear_player_selection()
 		else:
 			$AnimationPlayer.play("FightOn")
 			$AnimatedSprite.play(_last_dir + "_FIGHT")
-			_clear_selection(true)
+			_clear_player_selection(true)
 		_PDS.fight_mode = !_PDS.fight_mode
 	
-	if  target != null:
+	if  target.is_valid():
 		#make movement only diagonal, so we don't have to make 8 sprites
-		_velocity = (target.position - self.global_position).normalized()
+		_velocity = (target.get_position() - self.global_position).normalized()
 		
 		if _velocity.y > 0:
 			anim_direction += "S"
@@ -48,21 +48,23 @@ func _process(delta: float):
 		elif _velocity.x > 0:
 			anim_direction += "E"
 		
-		if (target.position - self.global_position).length() < 2:
+		if (target.get_position() - self.global_position).length() < 2:
 			_PDS.clear_target()
 			_velocity.x = 0
 			_velocity.y = 0
 		pass
 		
-		if target.node != null and is_instance_valid(target.node) and target.node.is_in_group("npc"):
+		if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.is_in_group("npc"):
 			if !$Interactable/ActionArea.overlaps_body(target.node):
 				_is_attacking = false
 	else:
-		_is_attacking = false	
+		_is_attacking = false
+		_velocity.x = 0
+		_velocity.y = 0
 
 	if _PDS.fight_mode:
 		anim = "_FIGHT"	
-		if _is_attacking and _PDS.get_target() != null:
+		if _is_attacking and _PDS.get_target().is_valid():
 			anim += "_MELEE_ATTACK"	
 
 	if anim_direction != "":
@@ -76,12 +78,12 @@ func _process(delta: float):
 
 func _on_AnimatedSprite_animation_finished():
 	var target: PlayerTarget = _PDS.get_target()
-	if target == null or !is_instance_valid(target.node):
+	if !target.is_valid() or target.targetType != target.TargetType.ACTION_TARGET:
 		_is_attacking = false
 		return
 	if _is_attacking \
-		and target != null \
-		and target.node != null \
+		and target.is_valid() \
+		and target.targetType == target.TargetType.ACTION_TARGET \
 		and (target.node as NPC).can_be_hit \
 		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
 		and $Interactable/ActionArea.overlaps_body(target.node):
@@ -92,14 +94,14 @@ func _unhandled_input(event: InputEvent):
 	##TODO small bug after dialogs, player will move where clicked, but not everytime
 	if Input.is_action_pressed("mouse_left_click"):
 		_is_attacking = false	
-		_PDS.set_target(get_global_mouse_position(), null)
+		_PDS.set_target(get_global_mouse_position())
 	else:
 		_velocity.x = 0
 		_velocity.y = 0
 		
 func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 	var target: PlayerTarget = _PDS.get_target()	
-	if target == null or !_PDS.fight_mode:
+	if !target.is_valid() or !_PDS.fight_mode or target.targetType != target.TargetType.ACTION_TARGET:
 		return
 	if target.node == body and !(target.node as NPC).can_be_hit:
 		_is_attacking = false
@@ -112,7 +114,7 @@ func _on_player_mouse_clicked():
 		_PDS.clear_target()
 		get_tree().paused = true
 		$CanvasLayer/PlayerInventory.show_inventory()
-		_clear_selection()
+		_clear_player_selection()
 
 func _on_player_mouse_entered():
 	if !_PDS.fight_mode:
@@ -121,11 +123,11 @@ func _on_player_mouse_entered():
 func _on_player_mouse_exited():
 	$AnimatedSprite.material = null
 	
-func _clear_selection(forever: bool = false):
+func _clear_player_selection(forever: bool = false):
 	$AnimatedSprite.material = null
 	if forever:
 		$Interactable.show_name = false
 	$Interactable.hide_name()
 	
-func _unclear_selection():
+func _unclear_player_selection():
 	$Interactable.show_name = true

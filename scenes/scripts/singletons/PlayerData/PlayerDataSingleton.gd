@@ -7,13 +7,18 @@ var _target: PlayerTarget
 
 var fight_mode := false
 
-func set_target(global_position: Vector2, node: Node2D):
+func _ready():
+	_target = PlayerTarget.new(Vector2(0,0))
+	_target.invalidate()
+
+func set_target(global_position: Vector2, node: Node2D = null):
 	_target = PlayerTarget.new(global_position, node)
 	
 func clear_target():
-	_target = null
+	_target.invalidate()
 	
 func get_target() -> PlayerTarget:
+	assert(_target != null)
 	return _target	
 	
 func get_player_name() -> String:

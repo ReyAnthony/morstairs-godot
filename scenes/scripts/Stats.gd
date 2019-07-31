@@ -17,6 +17,8 @@ func attack(damages: int):
 	_current_life -= damages
 	
 	if _current_life < 1:
+		if PlayerDataSingleton.get_target().node == $"../":
+			PlayerDataSingleton.clear_target()
 		var r := get_node(root)
 		var rp := r.get_parent()
 		var c := corpse.instance()

@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/scripts/NPC.gd" type="Script" id=1]
+[ext_resource path="res://scenes/scripts/NPC/NPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Scenes/DialogPanel.tscn" type="PackedScene" id=4]
+
 
 [node name="NPC" type="KinematicBody2D"]
 scale = Vector2( 1.00418, 1.0142 )
