@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Scenes/DayNight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/tilesets/ground_tileset.tres" type="TileSet" id=2]
@@ -9,6 +9,25 @@
 [ext_resource path="res://scenes/Scenes/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://res/107_-_Ultima_7_-_DOS_-_Fellowship_Theme.ogg" type="AudioStream" id=8]
 [ext_resource path="res://scenes/Scenes/Room.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 31.4342, -2.6673, 0, 0, 0, 0, 81.5161, -7.75375, 0, 0, 0, 0, 128.077, -6.18869, 0, 0, 0, 0, 172.29, -3.84109, 0, 0, 0, 0, 224.719, -12.1359, 0, 0, 0, 0, 241.935, 16.8177, 0, 0, 0, 0, 300.311, 69.6385, 0, 0, 0, 0, 323.396, 86.8541, 0, 0, 0, 0, 314.006, 89.9843, 0, 0, 0, 0, 284.27, 70.421, 0, 0, 0, 0, 262.359, 40.6849, 0, 0, 0, 0, 245.926, 18.774, 0, 0, 0, 0, 222.763, -1.8848, 0, 0, 0, 0, 198.113, 13.7658, 0, 0, 0, 0, 189.505, 10.2444, 0, 0, 0, 0, 160.16, 2.41913, 0, 0, 0, 0, 59.214, 3.59291, 0, 0, 0, 0, 30.6517, 3.59291, 0, 0, 0, 0, 31.4342, -2.6673 )
+}
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Path2D
+class_name NPCPathMovement
+
+var pathFollow: PathFollow2D
+
+func _ready():
+	assert($PathFollow2D != null)
+	pathFollow = $PathFollow2D
+
+#should we use physics_process ?
+func _process(delta: float):
+	pathFollow.offset += 25 * delta"
 
 [node name="Level" type="Node"]
 
@@ -90,17 +109,22 @@ inside = true
 [node name="LawNPC" parent="DayNight/Walls" instance=ExtResource( 5 )]
 position = Vector2( 293.582, 12.3455 )
 
-[node name="GuardNPC" parent="DayNight/Walls" instance=ExtResource( 6 )]
-position = Vector2( 94.17, 18.4002 )
+[node name="Path2D" type="Path2D" parent="DayNight/Walls"]
+position = Vector2( 88.0572, 28.1088 )
+curve = SubResource( 3 )
+script = SubResource( 2 )
 
-[node name="Path2D" type="Path2D" parent="DayNight/Walls/GuardNPC"]
-position = Vector2( -6.11279, 9.70856 )
+[node name="PathFollow2D" type="PathFollow2D" parent="DayNight/Walls/Path2D"]
+position = Vector2( 31.4342, -2.6673 )
+rotation = 0.283794
+rotate = false
 
-[node name="PathFollow2D" type="PathFollow2D" parent="DayNight/Walls/GuardNPC/Path2D"]
+[node name="GuardNPC" parent="DayNight/Walls/Path2D/PathFollow2D" instance=ExtResource( 6 )]
+rotation = -0.283794
 
 [node name="Player" parent="DayNight/Walls" instance=ExtResource( 7 )]
 editor/display_folded = true
-position = Vector2( 226.816, 27.9846 )
+position = Vector2( 206.356, 27.9846 )
 
 [node name="Music" type="AudioStreamPlayer2D" parent="DayNight/Walls/Player"]
 pause_mode = 2
@@ -134,3 +158,4 @@ tile_data = PoolIntArray( -3604480, 2, 0, -3604479, 2, 0, -3604478, 2, 0, -36044
 __meta__ = {
 "_edit_lock_": true
 }
+
