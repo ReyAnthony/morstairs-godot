@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
@@ -7,7 +7,10 @@
 [ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=5]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=7]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 length = 2.0
@@ -193,7 +196,15 @@ drag_margin_bottom = 0.3
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="Interactable" parent="." instance=ExtResource( 8 )]
+[node name="Stats" type="Node2D" parent="."]
+script = ExtResource( 8 )
+player = true
+life = 2000
+damage = ExtResource( 9 )
+corpse = ExtResource( 10 )
+
+[node name="Interactable" parent="." instance=ExtResource( 11 )]
+editor/display_folded = true
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
@@ -221,4 +232,3 @@ margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
 custom_fonts/font = ExtResource( 6 )
 text = "Player"
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

@@ -22,18 +22,20 @@ class_name NPCPathMovement
 var pathFollow: PathFollow2D
 
 func _ready():
-	assert($PathFollow2D != null)
-	pathFollow = $PathFollow2D
+	pass
+	#assert($PathFollow2D != null)
+	#pathFollow = $PathFollow2D
 
 #should we use physics_process ?
 func _process(delta: float):
-	pathFollow.offset += 25 * delta"
+	pass
+	#pathFollow.offset += 25 * delta"
 
 [node name="Level" type="Node"]
 
 [node name="DayNight" parent="." instance=ExtResource( 1 )]
 modulate = Color( 1, 1, 1, 1 )
-position = Vector2( -193, -193 )
+position = Vector2( -192.61, -193 )
 _CYCLE_LENGTH_DAY_IN_SEC = 5.0
 _CYCLE_LENGTH_NIGHT_DIV = 2.0
 
@@ -59,7 +61,6 @@ __meta__ = {
 }
 
 [node name="Path2D" type="Path2D" parent="DayNight/Walls"]
-editor/display_folded = true
 position = Vector2( 88.0572, 28.1088 )
 curve = SubResource( 3 )
 script = SubResource( 2 )
@@ -69,10 +70,8 @@ position = Vector2( 55.5646, -13.447 )
 rotate = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="DayNight/Walls/Path2D/PathFollow2D"]
-remote_path = NodePath("../../../Characters/GuardNPC")
 
 [node name="Torches" type="YSort" parent="DayNight/Walls"]
-editor/display_folded = true
 position = Vector2( 88.0572, 28.1088 )
 
 [node name="torch" parent="DayNight/Walls/Torches" instance=ExtResource( 4 )]
@@ -129,12 +128,12 @@ position = Vector2( 293.582, 12.3455 )
 [node name="LawNPC" parent="DayNight/Walls/Characters" instance=ExtResource( 5 )]
 
 [node name="GuardNPC" parent="DayNight/Walls/Characters" instance=ExtResource( 6 )]
-position = Vector2( -149.96, 2.31627 )
+position = Vector2( -149.459, -4.8994 )
 
-[node name="Player" parent="DayNight/Walls/Characters" instance=ExtResource( 7 )]
-position = Vector2( -87.226, 15.6391 )
+[node name="Player" parent="DayNight/Walls" instance=ExtResource( 7 )]
+position = Vector2( 206.356, 27.9846 )
 
-[node name="Music" type="AudioStreamPlayer2D" parent="DayNight/Walls/Characters/Player"]
+[node name="Music" type="AudioStreamPlayer2D" parent="DayNight/Walls/Player"]
 pause_mode = 2
 position = Vector2( -24, -7 )
 stream = ExtResource( 8 )

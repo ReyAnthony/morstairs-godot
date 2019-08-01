@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 export (Material) var material_on_mouse_entered: Material
 
@@ -8,6 +9,9 @@ var _velocity := Vector2()
 var _is_attacking := false
 var _last_dir := "NW"
 
+func attack(amount: int):
+	$Stats.attack(amount)
+
 func _ready():
 	set_process(true)
 	$AnimatedSprite.play("NW")
@@ -16,6 +20,7 @@ func _ready():
 	$Interactable.connect("mouse_entered", self,  "_on_player_mouse_entered")
 	$Interactable.connect("mouse_exited", self, "_on_player_mouse_exited")
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
+	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	
 # warning-ignore:unused_argument
 func _process(delta: float):
@@ -73,8 +78,9 @@ func _process(delta: float):
 	if _velocity.length() < 0.1:
 		$AnimatedSprite.stop()
 		$AnimatedSprite.frame = 0
-		
-	move_and_slide(_velocity.normalized() * _WALK_SPEED)
+	
+	if !_is_attacking:	
+		move_and_slide(_velocity.normalized() * _WALK_SPEED)
 
 func _on_AnimatedSprite_animation_finished():
 	var target: PlayerTarget = _PDS.get_target()
@@ -87,7 +93,7 @@ func _on_AnimatedSprite_animation_finished():
 		and (target.node as NPC).can_be_hit \
 		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
 		and $Interactable/ActionArea.overlaps_body(target.node):
-			target.node.attack(1)
+			target.node.attack(1, self)
 			
 # warning-ignore:unused_argument
 func _unhandled_input(event: InputEvent):
