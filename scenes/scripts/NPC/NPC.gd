@@ -45,8 +45,12 @@ func _on_Interactable_mouse_exited():
 	$Sprite.material = null
 
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
-	if !PlayerDataSingleton.get_target().is_valid() or !_dialog:
+	if !PlayerDataSingleton.get_target().is_valid():
 		return
+	
 	if !PlayerDataSingleton.fight_mode && PlayerDataSingleton.get_target().node == self:
-		($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, messages)
+		if !_dialog:
+			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, [chara_name + " n'a plus rien a vous dire."])
+		else:
+			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, messages)
 		PlayerDataSingleton.clear_target()
