@@ -8,14 +8,17 @@ enum Behaviors {
 }
 
 export (Behaviors) var behavior
+export (Font) var f
 
 #for the moment we won't use a locomotion component
 var _flee_node: Node2D
 var _target: Node2D
+var _root: Node2D
 var _is_in_fighting_mode := false
 var _last_dir := "NW"
 var _attack_anim_is_playing := false
 var _animated_sprite :AnimatedSprite
+var _pathfinder: Navigation2D
 
 func _ready():
 	assert($"../" is KinematicBody2D)
@@ -24,13 +27,16 @@ func _ready():
 	assert($"../TalkingNPC/Sprite" is AnimatedSprite)
 	assert($"../Collision")
 	assert($"../Collision" is CollisionPolygon2D)
+	_root = $"../"
 	_animated_sprite = $"../TalkingNPC/Sprite"
 	_flee_node = $"../FleeNode"
 	$"../TalkingNPC/".connect("is_attacked", self, "_on_NPC_is_attacked")
 	$"../TalkingNPC/Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 	$"../TalkingNPC/Sprite".connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-	$"../".add_collision_exception_with($"../TalkingNPC")
-	
+	_root.add_collision_exception_with($"../TalkingNPC")
+	_pathfinder = get_tree().get_nodes_in_group("nav")[0]
+
+var pathfind := []
 var _velocity: Vector2 = Vector2(0, 0)
 func _process(delta):
 	if _target != null and is_instance_valid(_animated_sprite):
@@ -38,7 +44,10 @@ func _process(delta):
 			return
 		var anim_direction := ""
 		var atk := ""
-		_velocity = (_target.global_position - self.global_position)
+		pathfind = _pathfinder.get_simple_path(_root.global_position, _target.global_position, false)
+		if(pathfind.size() > 0):
+			pathfind.remove(0)
+			_velocity = (pathfind[0] - _root.global_position).normalized() 
 		
 		if _velocity.y > 0:
 			anim_direction += "S"
@@ -62,7 +71,7 @@ func _process(delta):
 			_animated_sprite.frame = 0
 		
 		if (_is_in_fighting_mode and !_attack_anim_is_playing) or !_is_in_fighting_mode:
-			$"../".move_and_slide(_velocity.normalized() * 20)
+			_root.move_and_slide(_velocity.normalized() * 20)
 
 func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 	if behavior == Behaviors.FLEE:

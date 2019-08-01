@@ -31,11 +31,9 @@ func _process(delta: float):
 	if Input.is_action_just_pressed("switch_combat_mode"):
 		_PDS.clear_target()
 		if _PDS.fight_mode: 
-			$AnimationPlayer.play("FightOff")
 			$AnimatedSprite.play(_last_dir)
 			_unclear_player_selection()
 		else:
-			$AnimationPlayer.play("FightOn")
 			$AnimatedSprite.play(_last_dir + "_FIGHT")
 			_clear_player_selection(true)
 		_PDS.fight_mode = !_PDS.fight_mode
@@ -90,7 +88,7 @@ func _on_AnimatedSprite_animation_finished():
 	if _is_attacking \
 		and target.is_valid() \
 		and target.targetType == target.TargetType.ACTION_TARGET \
-		and (target.node as NPC).can_be_hit \
+		and target.node.can_be_hit \
 		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
 		and $Interactable/ActionArea.overlaps_body(target.node):
 			target.node.attack(1, self)
@@ -109,7 +107,7 @@ func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 	var target: PlayerTarget = _PDS.get_target()	
 	if !target.is_valid() or !_PDS.fight_mode or target.targetType != target.TargetType.ACTION_TARGET:
 		return
-	if target.node == body and !(target.node as NPC).can_be_hit:
+	if target.node == body and !target.node.can_be_hit:
 		_is_attacking = false
 		_PDS.clear_target()
 	elif target.node == body:
