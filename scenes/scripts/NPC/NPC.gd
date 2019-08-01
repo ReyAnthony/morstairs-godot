@@ -33,7 +33,8 @@ func _ready():
 	
 func _on_DialogPanel_on_dialog_end():
 	PlayerDataSingleton.clear_target()
-	emit_signal("on_dialog_end")
+	if _dialog:
+		emit_signal("on_dialog_end")
 
 func _on_Interactable_mouse_clicked():
 	PlayerDataSingleton.set_target(global_position, self)
