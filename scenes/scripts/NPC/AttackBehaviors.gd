@@ -8,7 +8,6 @@ enum Behaviors {
 }
 
 export (Behaviors) var behavior
-export (Font) var f
 
 #for the moment we won't use a locomotion component
 var _flee_node: Node2D
@@ -44,7 +43,7 @@ func _process(delta):
 			return
 		var anim_direction := ""
 		var atk := ""
-		pathfind = _pathfinder.get_simple_path(_root.global_position, _target.global_position, false)
+		pathfind = _pathfinder.get_simple_path(_root.global_position, _pathfinder.get_closest_point(_target.global_position), false)
 		if(pathfind.size() > 0):
 			pathfind.remove(0)
 			_velocity = (pathfind[0] - _root.global_position).normalized() 
@@ -75,19 +74,17 @@ func _process(delta):
 
 func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 	if behavior == Behaviors.FLEE:
-		_flee_node.global_position = global_position - (attacker.global_position - self.global_position)
+		var rnd_dir := Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
+		var rnd_dist :=  rand_range(-10, 10)
+		_flee_node.global_position = _root.global_position - rnd_dir * rnd_dist 
 		_target = _flee_node
-		pass
 	elif behavior == Behaviors.FIGHT:
 		_target = attacker
 		_is_in_fighting_mode = true
-		pass
-	pass
 
 func _on_Interactable_something_is_inside_interactable(body):
 	if body == _target and _is_in_fighting_mode and !_attack_anim_is_playing:
-		_attack_anim_is_playing = true		
-	pass 
+		_attack_anim_is_playing = true
 
 func _on_AnimatedSprite_animation_finished():
 	if _animated_sprite.animation.ends_with("MELEE_ATTACK"):

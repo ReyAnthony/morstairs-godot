@@ -23,20 +23,20 @@ shader_param/coeff = 2.0
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 7.71511, 0.360394, 0.19268, 8.13358, -8.2447, 0.120659, -0.0456657, -7.51679 )
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( -5.03749, 2.32028, 2.60764, -5.74377, 2.50291, 10.5938 )
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
+[sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 8.35019, -0.0826797, -0.0280457, 8.50501, 0.390869, -7.72782 )
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
+[sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( -0.260788, -8.76634, 8.85054, -0.388102, -7.90593, -0.49283 )
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 9 )
 shader_param/coeff = 2.0
 
-[sub_resource type="ConvexPolygonShape2D" id=9]
+[sub_resource type="ConvexPolygonShape2D" id=7]
 points = PoolVector2Array( -7.86516, 0.435173, 8.15822, 0.539902, 0.198883, 7.97559 )
 
 [resource]
@@ -90,7 +90,7 @@ points = PoolVector2Array( -7.86516, 0.435173, 8.15822, 0.539902, 0.198883, 7.97
 4/name = "grass_flower"
 4/texture = ExtResource( 10 )
 4/tex_offset = Vector2( 0, 0 )
-4/material = SubResource( 7 )
+4/material = SubResource( 6 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 0, 17, 17 )
 4/tile_mode = 0
@@ -150,7 +150,7 @@ points = PoolVector2Array( -7.86516, 0.435173, 8.15822, 0.539902, 0.198883, 7.97
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 9 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8.5, 8.5 )
 } ]
 9/z_index = 0
@@ -166,7 +166,7 @@ points = PoolVector2Array( -7.86516, 0.435173, 8.15822, 0.539902, 0.198883, 7.97
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 5.4687, 6.32104 )
 } ]
 10/z_index = 0
@@ -182,7 +182,7 @@ points = PoolVector2Array( -7.86516, 0.435173, 8.15822, 0.539902, 0.198883, 7.97
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8.5, 8.5 )
 } ]
 11/z_index = 0
@@ -198,7 +198,7 @@ points = PoolVector2Array( -7.86516, 0.435173, 8.15822, 0.539902, 0.198883, 7.97
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8.5, 8.5 )
 } ]
 12/z_index = 0

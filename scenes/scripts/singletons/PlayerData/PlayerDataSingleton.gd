@@ -10,6 +10,7 @@ var fight_mode := false
 func _ready():
 	_target = PlayerTarget.new(Vector2(0,0))
 	_target.invalidate()
+	randomize()
 
 func set_target(global_position: Vector2, node: Node2D = null):
 	_target = PlayerTarget.new(global_position, node)
