@@ -17,6 +17,8 @@ func _ready():
 func attack(damages: int):
 	var dmg = damage.instance()
 	dmg.get_node("Label").text = str(damages)
+	if player:
+		(dmg.get_node("Label") as Label).add_color_override("font_color", Color.violet)
 	_current_life -= damages
 	
 	if _current_life < 1:

@@ -93,7 +93,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Morstairs"
-run/main_scene="res://scenes/Levels/TestPathfinding.tscn"
+run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 
 [autoload]
 
