@@ -10,10 +10,10 @@
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=8]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=9]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=1]
 radius = 5.10834
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 5.58728
 height = 0.19799
 
@@ -81,7 +81,7 @@ position = Vector2( 0, 6.36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
 position = Vector2( -0.345409, -0.347971 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
@@ -89,7 +89,7 @@ editor/display_folded = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 position = Vector2( -0.287483, 1.91654 )
 scale = Vector2( 0.79, 0.78 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="Name" type="Label" parent="Interactable"]
 visible = false

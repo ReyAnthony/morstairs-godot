@@ -4,20 +4,32 @@ class_name AttackBehavior
 enum Behaviors {
 	FLEE,
 	FIGHT
-	##,FIGHT_THEN_FLEE_ON_LOW_HEALTH
 }
 
 export (Behaviors) var behavior
 
 #for the moment we won't use a locomotion component
-var _flee_node: Node2D
+var _initial_position: Vector2
+var _go_back_to_initial_position := false
+var _initial_dir := ""
 var _target: Node2D
 var _root: Node2D
-var _is_in_fighting_mode := false
-var _last_dir := "NW"
+var _last_dir := "SE"
 var _attack_anim_is_playing := false
 var _animated_sprite :AnimatedSprite
 var _pathfinder: Navigation2D
+var _free_target: Node2D
+
+#debug
+var _debug := true
+var _line : Line2D
+
+#TODO when bounty, GUARD attack on sight
+"""
+if (player is colliding guard zone) and bounty[morstairs] > 0:
+	_target = player
+	_go_back_to_initial_position = false #just in case
+"""
 
 func _ready():
 	assert($"../" is KinematicBody2D)
@@ -28,12 +40,16 @@ func _ready():
 	assert($"../Collision" is CollisionPolygon2D)
 	_root = $"../"
 	_animated_sprite = $"../TalkingNPC/Sprite"
-	_flee_node = $"../FleeNode"
+	_free_target = Node2D.new()
+	get_tree().root.add_child(_free_target)
 	$"../TalkingNPC/".connect("is_attacked", self, "_on_NPC_is_attacked")
 	$"../TalkingNPC/Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 	$"../TalkingNPC/Sprite".connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	_root.add_collision_exception_with($"../TalkingNPC")
 	_pathfinder = get_tree().get_nodes_in_group("nav")[0]
+	_initial_position = _root.global_position
+	_initial_dir = _last_dir
+	_line = $"/root/Level/Line2D" as Line2D
 
 var pathfind := []
 var _velocity: Vector2 = Vector2(0, 0)
@@ -41,13 +57,38 @@ func _process(delta):
 	if _target != null and is_instance_valid(_animated_sprite):
 		if !is_instance_valid(_target):
 			return
+			
 		var anim_direction := ""
 		var atk := ""
-		pathfind = _pathfinder.get_simple_path(_root.global_position, _pathfinder.get_closest_point(_target.global_position), false)
-		if(pathfind.size() > 0):
-			pathfind.remove(0)
-			_velocity = (pathfind[0] - _root.global_position).normalized() 
 		
+		pathfind = _pathfinder.get_simple_path(_root.global_position, _target.global_position, false)
+		if(pathfind.size() > 0):
+			if _debug:
+				_line.clear_points()
+				for n in pathfind:
+					_line.add_point(n)
+			pathfind.remove(0)
+			_velocity = (pathfind[0] - _root.global_position).normalized()
+		else:
+			assert(false)
+				
+		if _go_back_to_initial_position:
+			if _root.global_position.distance_to(_initial_position) <= 5:
+				_go_back_to_initial_position = false
+				_target = null
+				_animated_sprite.play(_initial_dir)
+				_animated_sprite.stop()
+				_animated_sprite.frame = 0
+				return
+		elif behavior == Behaviors.FIGHT:
+			if(_root.global_position.distance_to(_target.global_position) > 150):
+				_go_back_to_initial_position = true
+				_free_target.global_position = _initial_position
+				_target = _free_target
+		elif behavior == Behaviors.FLEE:
+			if _root.global_position.distance_to(_target.global_position) <= 5:
+				_target = null
+				
 		if _velocity.y > 0:
 			anim_direction += "S"
 		elif _velocity.y < 0:
@@ -59,7 +100,7 @@ func _process(delta):
 			
 		if anim_direction != "":
 			var animation := anim_direction
-			if _is_in_fighting_mode: 
+			if behavior == Behaviors.FIGHT: 
 				animation += "_FIGHT"
 			if _attack_anim_is_playing:
 				atk = "_MELEE_ATTACK"
@@ -69,21 +110,23 @@ func _process(delta):
 			_animated_sprite.stop()
 			_animated_sprite.frame = 0
 		
-		if (_is_in_fighting_mode and !_attack_anim_is_playing) or !_is_in_fighting_mode:
+		if (behavior == Behaviors.FIGHT and !_attack_anim_is_playing) or behavior != Behaviors.FIGHT:
 			_root.move_and_slide(_velocity.normalized() * 20)
+	else:
+		_animated_sprite.stop()
+		_animated_sprite.frame = 0
 
 func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 	if behavior == Behaviors.FLEE:
 		var rnd_dir := Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
-		var rnd_dist :=  rand_range(-10, 10)
-		_flee_node.global_position = _root.global_position - rnd_dir * rnd_dist 
-		_target = _flee_node
+		var rnd_dist :=  rand_range(75, 150)
+		_free_target.global_position = _pathfinder.get_closest_point(_root.global_position - rnd_dir * rnd_dist)
+		_target = _free_target
 	elif behavior == Behaviors.FIGHT:
 		_target = attacker
-		_is_in_fighting_mode = true
 
 func _on_Interactable_something_is_inside_interactable(body):
-	if body == _target and _is_in_fighting_mode and !_attack_anim_is_playing:
+	if body == _target and behavior == Behaviors.FIGHT and !_attack_anim_is_playing:
 		_attack_anim_is_playing = true
 
 func _on_AnimatedSprite_animation_finished():

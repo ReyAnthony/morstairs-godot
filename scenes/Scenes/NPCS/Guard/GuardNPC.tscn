@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/scripts/NPC/AttackBehaviors.gd" type="Script" id=1]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://scenes/Scenes/NPC.tscn" type="PackedScene" id=3]
-[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Scenes/NPC.tscn" type="PackedScene" id=2]
+[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=7]
 
@@ -25,21 +25,20 @@ polygon = PoolVector2Array( -3.01977, 9.10132, -2.44125, 9.28473, 2.01792, 9.274
 [node name="FightingBehavior" type="Node2D" parent="."]
 script = ExtResource( 1 )
 behavior = 1
-f = ExtResource( 2 )
 
-[node name="TalkingNPC" parent="." instance=ExtResource( 3 )]
+[node name="TalkingNPC" parent="." instance=ExtResource( 2 )]
 scale = Vector2( 1, 1 )
 chara_name = "Guard"
 messages = [ "Message" ]
 
 [node name="Sprite" type="AnimatedSprite" parent="TalkingNPC"]
-frames = ExtResource( 4 )
+frames = ExtResource( 3 )
 animation = "SE"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TalkingNPC"]
 polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
 
-[node name="Interactable" parent="TalkingNPC" instance=ExtResource( 5 )]
+[node name="Interactable" parent="TalkingNPC" instance=ExtResource( 4 )]
 editor/display_folded = true
 
 [node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
@@ -62,7 +61,7 @@ margin_top = -17.2094
 margin_right = 168.367
 margin_bottom = 18.7906
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 5 )
 text = "TEST"
 align = 1
 valign = 1
