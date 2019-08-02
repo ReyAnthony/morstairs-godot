@@ -21,7 +21,10 @@ func _ready():
 	$Interactable.connect("mouse_exited", self, "_on_player_mouse_exited")
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-	$CanvasLayer/TextureButton.connect("pressed", self, "_on_combat_mode_switch")
+	$CanvasLayer/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
+	$CanvasLayer/Inventory.connect("pressed", self, "_on_show_inventory")
+	
+	_clear_player_selection(true)
 	
 # warning-ignore:unused_argument
 func _process(delta: float):
@@ -111,25 +114,29 @@ func _on_combat_mode_switch():
 	_PDS.clear_target()
 	if _PDS.fight_mode: 
 		$AnimatedSprite.play(_last_dir)
-		_unclear_player_selection()
+		##_unclear_player_selection()
 	else:
 		$AnimatedSprite.play(_last_dir + "_FIGHT")
 		_clear_player_selection(true)
 	_PDS.fight_mode = !_PDS.fight_mode
 
 func _on_player_mouse_clicked():
+	"""
 	if !_PDS.fight_mode:
 		_PDS.clear_target()
 		get_tree().paused = true
 		$CanvasLayer/PlayerInventory.show_inventory()
-		_clear_player_selection()
+		_clear_player_selection() """
+	pass
 
 func _on_player_mouse_entered():
-	if !_PDS.fight_mode:
-		$AnimatedSprite.material = material_on_mouse_entered
+	##if !_PDS.fight_mode:
+		##$AnimatedSprite.material = material_on_mouse_entered
+	pass
 
 func _on_player_mouse_exited():
-	$AnimatedSprite.material = null
+	#$AnimatedSprite.material = null
+	pass
 	
 func _clear_player_selection(forever: bool = false):
 	$AnimatedSprite.material = null
@@ -139,3 +146,8 @@ func _clear_player_selection(forever: bool = false):
 	
 func _unclear_player_selection():
 	$Interactable.show_name = true
+	
+func _on_show_inventory():
+	get_tree().paused = true
+	$CanvasLayer/PlayerInventory.show_inventory()
+	_clear_player_selection()	

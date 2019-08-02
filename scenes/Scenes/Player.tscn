@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://scenes/Scenes/PlayerInventory.tscn" type="PackedScene" id=4]
-[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=5]
-[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=6]
-[ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=10]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=11]
+[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=4]
+[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=5]
+[ext_resource path="res://res/sprites/UI/gold_stash.png" type="Texture" id=6]
+[ext_resource path="res://scenes/Scenes/PlayerInventory.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=11]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.10834
@@ -33,24 +34,46 @@ animation = "SE"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 4 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+visible = false
+modulate = Color( 1, 1, 1, 0.509804 )
+margin_left = 1150.0
+margin_top = -2.0
+margin_right = 1285.0
+margin_bottom = 725.0
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+[node name="CombatMode" type="TextureButton" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -110.199
-margin_top = -120.683
+margin_top = -365.145
 margin_right = -79.1995
-margin_bottom = -86.683
+margin_bottom = -331.145
 rect_scale = Vector2( 3, 3 )
 toggle_mode = true
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 6 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
 stretch_mode = 5
+
+[node name="Inventory" type="TextureButton" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -105.834
+margin_top = -523.545
+margin_right = -74.834
+margin_bottom = -489.545
+rect_scale = Vector2( 3, 3 )
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -1, -0.985252 )
@@ -82,13 +105,13 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="Stats" type="Node2D" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 player = true
 life = 1000
-damage = ExtResource( 8 )
-corpse = ExtResource( 9 )
+damage = ExtResource( 9 )
+corpse = ExtResource( 10 )
 
-[node name="Interactable" parent="." instance=ExtResource( 10 )]
+[node name="Interactable" parent="." instance=ExtResource( 11 )]
 editor/display_folded = true
 group_to_test_on_enter = "npc"
 
@@ -115,5 +138,5 @@ margin_top = -17.0
 margin_right = 135.99
 margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 11 )
+custom_fonts/font = ExtResource( 12 )
 text = "Player"
