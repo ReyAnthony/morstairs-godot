@@ -27,13 +27,6 @@ var _velocity: Vector2 = Vector2(0, 0)
 var _debug := true
 var _line : Line2D
 
-#TODO when bounty, GUARD attack on sight
-"""
-if (player is colliding guard zone) and bounty[morstairs] > 0:
-	_target = player
-	_go_back_to_initial_position = false #just in case
-"""
-
 func _ready():
 	assert($"../" is KinematicBody2D)
 	assert($"../TalkingNPC/Sprite")
@@ -118,6 +111,8 @@ func _process(delta):
 		if (behavior == Behaviors.FIGHT and !_attack_anim_is_playing) or behavior != Behaviors.FIGHT:
 			_root.move_and_slide(_velocity.normalized() * 20)
 	else:
+		if !is_instance_valid(_animated_sprite):
+			return
 		_animated_sprite.stop()
 		_animated_sprite.frame = 0
 		var body = get_tree().get_nodes_in_group("player")[0]

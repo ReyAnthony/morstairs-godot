@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-export (Material) var material_on_mouse_entered: Material
+export (Texture) var player_portrait: Texture
 
 const _WALK_SPEED := 30
 const _PDS: PDS = PlayerDataSingleton
@@ -16,25 +16,22 @@ func _ready():
 	set_process(true)
 	$AnimatedSprite.play("NW")
 	add_to_group("player")
-	$Interactable.connect("mouse_clicked", self, "_on_player_mouse_clicked")
 	$Interactable.connect("mouse_entered", self,  "_on_player_mouse_entered")
 	$Interactable.connect("mouse_exited", self, "_on_player_mouse_exited")
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-	$CanvasLayer/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
-	$CanvasLayer/Inventory.connect("pressed", self, "_on_show_inventory")
-	
-	_clear_player_selection(true)
+	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
+	$CanvasLayer/Panel/Inventory.connect("pressed", self, "_on_show_inventory")
+	_clear_player_selection()
 	
 # warning-ignore:unused_argument
 func _process(delta: float):
 	var anim_direction := ""
 	var anim := ""
 	var target: PlayerTarget = _PDS.get_target()
+	_update_targeting(target)
+	_update_player_life()
 		
-	if Input.is_action_just_pressed("switch_combat_mode"):
-		_on_combat_mode_switch()
-	
 	if  target.is_valid():
 		#make movement only diagonal, so we don't have to make 8 sprites
 		_velocity = (target.get_position() - self.global_position).normalized()
@@ -114,40 +111,32 @@ func _on_combat_mode_switch():
 	_PDS.clear_target()
 	if _PDS.fight_mode: 
 		$AnimatedSprite.play(_last_dir)
-		##_unclear_player_selection()
 	else:
 		$AnimatedSprite.play(_last_dir + "_FIGHT")
-		_clear_player_selection(true)
 	_PDS.fight_mode = !_PDS.fight_mode
-
-func _on_player_mouse_clicked():
-	"""
-	if !_PDS.fight_mode:
-		_PDS.clear_target()
-		get_tree().paused = true
-		$CanvasLayer/PlayerInventory.show_inventory()
-		_clear_player_selection() """
-	pass
-
-func _on_player_mouse_entered():
-	##if !_PDS.fight_mode:
-		##$AnimatedSprite.material = material_on_mouse_entered
-	pass
-
-func _on_player_mouse_exited():
-	#$AnimatedSprite.material = null
-	pass
 	
-func _clear_player_selection(forever: bool = false):
-	$AnimatedSprite.material = null
-	if forever:
-		$Interactable.show_name = false
+func _clear_player_selection():
+	$Interactable.show_name = false
 	$Interactable.hide_name()
-	
-func _unclear_player_selection():
-	$Interactable.show_name = true
 	
 func _on_show_inventory():
 	get_tree().paused = true
 	$CanvasLayer/PlayerInventory.show_inventory()
-	_clear_player_selection()	
+
+func _update_targeting(target: PlayerTarget):
+	if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and _PDS.fight_mode and target.node.can_be_hit:
+		$CanvasLayer/Life/Target.show()
+		$CanvasLayer/Life/Target/Label.text = target.node.chara_name
+		$CanvasLayer/Life/Target/Portrait.texture = target.node.chara_portrait
+		$CanvasLayer/Life/Target/ColorRect.rect_size.x = target.node.get_life() * (77 / target.node.get_max_life())
+	else:
+		$CanvasLayer/Life/Target.hide()
+		
+func _update_player_life():
+	if $Stats._current_life < $Stats.life:
+		$CanvasLayer/Life/Player.show()
+		$CanvasLayer/Life/Player/Label.text = _PDS.get_player_name()
+		$CanvasLayer/Life/Player/Portrait.texture = player_portrait
+		$CanvasLayer/Life/Player/ColorRect.rect_size.x = $Stats._current_life * (77 / $Stats.life)
+	else:
+		$CanvasLayer/Life/Player.hide()	

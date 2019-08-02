@@ -68,5 +68,4 @@ align = 1
 valign = 1
 
 [node name="Stats" parent="TalkingNPC" instance=ExtResource( 7 )]
-life = 3000
 corpse = ExtResource( 8 )

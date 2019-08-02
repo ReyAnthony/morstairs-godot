@@ -14,6 +14,12 @@ var can_be_hit := false
 func attack(amount: int, attacker: PhysicsBody2D):
 	$Stats.attack(amount)
 	emit_signal("is_attacked", attacker)
+	
+func get_life() -> int:
+	return $Stats._current_life
+	
+func get_max_life() -> int:
+	return $Stats.life
 
 func _ready():
 	assert($Sprite != null)

@@ -1,17 +1,18 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/scripts/PlayerController.gd" type="Script" id=1]
-[ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
+[ext_resource path="res://res/sprites/characters/player_portrait.png" type="Texture" id=2]
 [ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=4]
-[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=5]
-[ext_resource path="res://res/sprites/UI/gold_stash.png" type="Texture" id=6]
-[ext_resource path="res://scenes/Scenes/PlayerInventory.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=8]
-[ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=11]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=12]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=5]
+[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=6]
+[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=7]
+[ext_resource path="res://res/sprites/UI/gold_stash.png" type="Texture" id=8]
+[ext_resource path="res://scenes/Scenes/PlayerInventory.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=10]
+[ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.10834
@@ -22,7 +23,7 @@ height = 0.19799
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
-material_on_mouse_entered = ExtResource( 2 )
+player_portrait = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -8.45649, -0.30751 )
@@ -34,44 +35,160 @@ animation = "SE"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
-visible = false
-modulate = Color( 1, 1, 1, 0.509804 )
-margin_left = 1150.0
-margin_top = -2.0
-margin_right = 1285.0
-margin_bottom = 725.0
+[node name="Life" type="Control" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="CombatMode" type="TextureButton" parent="CanvasLayer"]
+[node name="Target" type="Control" parent="CanvasLayer/Life"]
+visible = false
+margin_left = -598.982
+margin_top = -92.5319
+margin_right = -523.982
+margin_bottom = 32.4681
+
+[node name="Label" type="Label" parent="CanvasLayer/Life/Target"]
+visible = false
+anchor_right = 1.0
+margin_bottom = 36.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 4 )
+text = "Target"
+align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Portrait" type="TextureRect" parent="CanvasLayer/Life/Target"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -57.5
+margin_top = -43.0
+margin_right = 57.5
+margin_bottom = 43.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Life/Target"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -38.5
+margin_top = -7.0
+margin_right = 38.5
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" type="Control" parent="CanvasLayer/Life"]
+margin_left = 552.74
+margin_top = -91.1238
+margin_right = 627.74
+margin_bottom = 33.8762
+
+[node name="Label" type="Label" parent="CanvasLayer/Life/Player"]
+visible = false
+anchor_right = 1.0
+margin_bottom = 36.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 4 )
+text = "Target"
+align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Portrait" type="TextureRect" parent="CanvasLayer/Life/Player"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -57.5
+margin_top = -43.0
+margin_right = 57.5
+margin_bottom = 43.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Life/Player"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -38.5
+margin_top = -7.0
+margin_right = 38.5
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0 )
+show_behind_parent = true
+margin_left = 1137.0
+margin_top = -2.0
+margin_right = 1280.0
+margin_bottom = 725.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CombatMode" type="TextureButton" parent="CanvasLayer/Panel"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -110.199
-margin_top = -365.145
-margin_right = -79.1995
-margin_bottom = -331.145
+margin_left = -115.199
+margin_top = -370.145
+margin_right = -84.1995
+margin_bottom = -336.145
 rect_scale = Vector2( 3, 3 )
 toggle_mode = true
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
 stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Inventory" type="TextureButton" parent="CanvasLayer"]
+[node name="Inventory" type="TextureButton" parent="CanvasLayer/Panel"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -105.834
-margin_top = -523.545
-margin_right = -74.834
-margin_bottom = -489.545
+margin_left = -110.834
+margin_top = -528.545
+margin_right = -79.834
+margin_bottom = -494.545
 rect_scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 6 )
+texture_normal = ExtResource( 8 )
 expand = true
 stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 7 )]
+[node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 9 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 
@@ -105,14 +222,13 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="Stats" type="Node2D" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 player = true
-life = 1000
-damage = ExtResource( 9 )
-corpse = ExtResource( 10 )
+life = 77
+damage = ExtResource( 11 )
+corpse = ExtResource( 12 )
 
-[node name="Interactable" parent="." instance=ExtResource( 11 )]
-editor/display_folded = true
+[node name="Interactable" parent="." instance=ExtResource( 13 )]
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
@@ -138,5 +254,5 @@ margin_top = -17.0
 margin_right = 135.99
 margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 12 )
+custom_fonts/font = ExtResource( 4 )
 text = "Player"
