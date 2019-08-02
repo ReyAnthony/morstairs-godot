@@ -4,7 +4,7 @@ class_name PDS
 var _player_name := "UNKNOWN"
 var _gold := 500
 var _target: PlayerTarget
-
+var _bounty := 0
 var fight_mode := false
 
 func _ready():
@@ -32,7 +32,22 @@ func set_player_gold(gold: int):
 	if gold > 0:
 		_gold = gold
 	else:
-		_gold = 0	
+		_gold = 0
+		
+func get_bounty() -> int:
+	return _bounty
+
+func increment_bounty(inc):
+	_bounty += inc
+
+func can_pay_bounty() -> bool:
+	return _bounty <= _gold
+	
+func pay_bounty() -> bool:
+	var can_pay = can_pay_bounty()
+	if can_pay:
+		_gold -= _bounty
+	return can_pay
 
 #TODO rework inventory
 #objects that can't be thrown away can't be sold either

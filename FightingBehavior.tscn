@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/scripts/NPC/AttackBehaviors.gd" type="Script" id=1]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "shout"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Message:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.23, 0.23 ), Vector2( 0.2, 0.2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Message:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Message:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -20.8041, -19.8851 ), Vector2( -23.6762, -20 ), Vector2( -20.8041, -19.8851 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 54.8791
+
+[node name="FightingBehavior" type="Node2D"]
+script = ExtResource( 1 )
+behavior = 1
+
+[node name="Message" type="Label" parent="."]
+visible = false
+margin_left = -20.8041
+margin_top = -19.8851
+margin_right = 207.196
+margin_bottom = 16.1149
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 2 )
+text = "HALT !"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/shout = SubResource( 1 )
+
+[node name="ViewArea" type="Area2D" parent="."]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}

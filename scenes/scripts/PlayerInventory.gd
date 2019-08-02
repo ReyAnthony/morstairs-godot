@@ -21,6 +21,7 @@ func update_selection():
 func update_player_infos(): 
 	$InventoryPopup/Panel/Inventory/PlayerInfoView/Name/Value.text = PlayerDataSingleton.get_player_name()
 	$InventoryPopup/Panel/Inventory/PlayerInfoView/Gold/Value.text = String(PlayerDataSingleton.get_player_gold())
+	$InventoryPopup/Panel/Inventory/PlayerInfoView/Bounty/Value.text = String(PlayerDataSingleton.get_bounty())
 	
 func update_inventory_list():
 	INVENTORY.clear()

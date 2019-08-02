@@ -10,11 +10,9 @@ export (Texture) var chara_portrait: Texture
 export (Array, String) var messages: Array = []
 
 var can_be_hit := false
-var _dialog := true
 
 func attack(amount: int, attacker: PhysicsBody2D):
 	$Stats.attack(amount)
-	_dialog = false
 	emit_signal("is_attacked", attacker)
 
 func _ready():
@@ -33,7 +31,7 @@ func _ready():
 	
 func _on_DialogPanel_on_dialog_end():
 	PlayerDataSingleton.clear_target()
-	if _dialog:
+	if PlayerDataSingleton.get_bounty() > 0:
 		emit_signal("on_dialog_end")
 
 func _on_Interactable_mouse_clicked():
@@ -50,7 +48,7 @@ func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 		return
 	
 	if !PlayerDataSingleton.fight_mode && PlayerDataSingleton.get_target().node == self:
-		if !_dialog:
+		if PlayerDataSingleton.get_bounty() > 0:
 			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, [chara_name + " n'a plus rien a vous dire."])
 		else:
 			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, messages)

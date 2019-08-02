@@ -19,6 +19,9 @@ var _attack_anim_is_playing := false
 var _animated_sprite :AnimatedSprite
 var _pathfinder: Navigation2D
 var _free_target: Node2D
+var _viewArea: Area2D
+var pathfind := []
+var _velocity: Vector2 = Vector2(0, 0)
 
 #debug
 var _debug := true
@@ -33,26 +36,28 @@ if (player is colliding guard zone) and bounty[morstairs] > 0:
 
 func _ready():
 	assert($"../" is KinematicBody2D)
-	assert($"../FleeNode")
 	assert($"../TalkingNPC/Sprite")
 	assert($"../TalkingNPC/Sprite" is AnimatedSprite)
 	assert($"../Collision")
 	assert($"../Collision" is CollisionPolygon2D)
+	assert($ViewArea != null)
 	_root = $"../"
 	_animated_sprite = $"../TalkingNPC/Sprite"
 	_free_target = Node2D.new()
 	get_tree().root.add_child(_free_target)
-	$"../TalkingNPC/".connect("is_attacked", self, "_on_NPC_is_attacked")
-	$"../TalkingNPC/Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
-	$"../TalkingNPC/Sprite".connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-	_root.add_collision_exception_with($"../TalkingNPC")
+
 	_pathfinder = get_tree().get_nodes_in_group("nav")[0]
 	_initial_position = _root.global_position
 	_initial_dir = _last_dir
 	_line = $"/root/Level/Line2D" as Line2D
-
-var pathfind := []
-var _velocity: Vector2 = Vector2(0, 0)
+	_viewArea = $ViewArea
+	
+	$"../TalkingNPC/".connect("is_attacked", self, "_on_NPC_is_attacked")
+	$"../TalkingNPC/Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
+	_animated_sprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
+	_root.add_collision_exception_with($"../TalkingNPC")
+	z_index = 255
+	
 func _process(delta):
 	if _target != null and is_instance_valid(_animated_sprite):
 		if !is_instance_valid(_target):
@@ -115,9 +120,20 @@ func _process(delta):
 	else:
 		_animated_sprite.stop()
 		_animated_sprite.frame = 0
-
+		var body = get_tree().get_nodes_in_group("player")[0]
+		if $ViewArea.overlaps_body(body):
+			if body.is_in_group("player") and PlayerDataSingleton.get_bounty() > 0:
+				if behavior == Behaviors.FLEE:
+					$Message.text = "HELP !"
+				elif behavior == Behaviors.FIGHT:
+					$Message.text = "HALT !"
+				$AnimationPlayer.play("shout")
+				_on_NPC_is_attacked(body)
+				
 func _on_NPC_is_attacked(attacker: PhysicsBody2D):
+	PlayerDataSingleton.increment_bounty(10)
 	if behavior == Behaviors.FLEE:
+		## Would be better if avoided the player
 		var rnd_dir := Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
 		var rnd_dist :=  rand_range(75, 150)
 		_free_target.global_position = _pathfinder.get_closest_point(_root.global_position - rnd_dir * rnd_dist)
@@ -127,8 +143,8 @@ func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 
 func _on_Interactable_something_is_inside_interactable(body):
 	if body == _target and behavior == Behaviors.FIGHT and !_attack_anim_is_playing:
-		_attack_anim_is_playing = true
-
+		_attack_anim_is_playing = true	
+		
 func _on_AnimatedSprite_animation_finished():
 	if _animated_sprite.animation.ends_with("MELEE_ATTACK"):
 		_attack_anim_is_playing = false

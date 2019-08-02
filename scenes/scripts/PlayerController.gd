@@ -21,6 +21,7 @@ func _ready():
 	$Interactable.connect("mouse_exited", self, "_on_player_mouse_exited")
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
+	$CanvasLayer/TextureButton.connect("pressed", self, "_on_combat_mode_switch")
 	
 # warning-ignore:unused_argument
 func _process(delta: float):
@@ -29,14 +30,7 @@ func _process(delta: float):
 	var target: PlayerTarget = _PDS.get_target()
 		
 	if Input.is_action_just_pressed("switch_combat_mode"):
-		_PDS.clear_target()
-		if _PDS.fight_mode: 
-			$AnimatedSprite.play(_last_dir)
-			_unclear_player_selection()
-		else:
-			$AnimatedSprite.play(_last_dir + "_FIGHT")
-			_clear_player_selection(true)
-		_PDS.fight_mode = !_PDS.fight_mode
+		_on_combat_mode_switch()
 	
 	if  target.is_valid():
 		#make movement only diagonal, so we don't have to make 8 sprites
@@ -112,6 +106,16 @@ func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 		_PDS.clear_target()
 	elif target.node == body:
 		_is_attacking = true
+
+func _on_combat_mode_switch():
+	_PDS.clear_target()
+	if _PDS.fight_mode: 
+		$AnimatedSprite.play(_last_dir)
+		_unclear_player_selection()
+	else:
+		$AnimatedSprite.play(_last_dir + "_FIGHT")
+		_clear_player_selection(true)
+	_PDS.fight_mode = !_PDS.fight_mode
 
 func _on_player_mouse_clicked():
 	if !_PDS.fight_mode:
