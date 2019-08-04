@@ -16,8 +16,6 @@ func _ready():
 	set_process(true)
 	$AnimatedSprite.play("NW")
 	add_to_group("player")
-	$Interactable.connect("mouse_entered", self,  "_on_player_mouse_entered")
-	$Interactable.connect("mouse_exited", self, "_on_player_mouse_exited")
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")

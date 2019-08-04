@@ -23,6 +23,8 @@ var _viewArea: Area2D
 var pathfind := []
 var _velocity: Vector2 = Vector2(0, 0)
 
+var _last_pathfind_time: float
+
 #debug
 var _debug := true
 var _line : Line2D
@@ -37,6 +39,7 @@ func _ready():
 	_root = $"../"
 	_animated_sprite = $"../TalkingNPC/Sprite"
 	_free_target = Node2D.new()
+	## this creates a lot of errors
 	get_tree().root.add_child(_free_target)
 
 	_pathfinder = get_tree().get_nodes_in_group("nav")[0]
@@ -55,21 +58,17 @@ func _process(delta):
 	if _target != null and is_instance_valid(_animated_sprite):
 		if !is_instance_valid(_target):
 			return
-			
+
 		var anim_direction := ""
 		var atk := ""
-		
-		pathfind = _pathfinder.get_simple_path(_root.global_position, _target.global_position, false)
-		if(pathfind.size() > 0):
-			if _debug:
-				_line.clear_points()
-				for n in pathfind:
-					_line.add_point(n)
-			pathfind.remove(0)
-			_velocity = (pathfind[0] - _root.global_position).normalized()
+		## that's still bad, we compute the whole path to use only the first segment
+		if (_last_pathfind_time > 0.250 or pathfind.empty() or _root.global_position.distance_to(pathfind[0]) <= 2):
+			_pathfind()
+			_last_pathfind_time = 0
 		else:
-			assert(false)
-				
+			_last_pathfind_time += delta
+		_velocity = (pathfind[0] - _root.global_position).normalized()
+		
 		if _go_back_to_initial_position:
 			if _root.global_position.distance_to(_initial_position) <= 5:
 				_go_back_to_initial_position = false
@@ -125,6 +124,15 @@ func _process(delta):
 				$AnimationPlayer.play("shout")
 				_on_NPC_is_attacked(body)
 				
+func _pathfind(): 
+	pathfind = _pathfinder.get_simple_path(_root.global_position, _target.global_position, false)
+	assert(!pathfind.empty())
+	if _debug:
+		_line.clear_points()
+		for n in pathfind:
+			_line.add_point(n)
+	pathfind.remove(0)
+	
 func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 	PlayerDataSingleton.increment_bounty(10)
 	if behavior == Behaviors.FLEE:
@@ -135,6 +143,7 @@ func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 		_target = _free_target
 	elif behavior == Behaviors.FIGHT:
 		_target = attacker
+	_pathfind()	
 
 func _on_Interactable_something_is_inside_interactable(body):
 	if body == _target and behavior == Behaviors.FIGHT and !_attack_anim_is_playing:
