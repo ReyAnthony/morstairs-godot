@@ -21,7 +21,9 @@ radius = 5.10834
 radius = 5.58728
 height = 0.19799
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 script = ExtResource( 1 )
 player_portrait = ExtResource( 2 )
 

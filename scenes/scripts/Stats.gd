@@ -13,7 +13,6 @@ var _current_life: int
 func _ready():
 	_current_life = life
 	
-#TODO Avoid freeing stuff as it creates LOTS OF issues with invalid references
 func attack(damages: int):
 	var dmg = damage.instance()
 	dmg.get_node("Label").text = str(damages)
@@ -34,6 +33,6 @@ func attack(damages: int):
 		rp.move_child(c, rp.get_position_in_parent() + 2)
 		c.global_position = global_position
 		dmg.global_position = global_position
-		get_node(_to_free).queue_free()
+		get_node(_to_free).call_deferred("free")
 	else:
 		add_child(dmg)	
