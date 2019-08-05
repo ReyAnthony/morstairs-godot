@@ -1,23 +1,40 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Scenes/DayNight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/tilesets/ground_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://res/tilesets/structure_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://scenes/Scenes/torch.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Scenes/NPCS/Law/LawNPC.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scenes/Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://res/107_-_Ultima_7_-_DOS_-_Fellowship_Theme.ogg" type="AudioStream" id=7]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardNPC.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Scenes/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/Scenes/Room.tscn" type="PackedScene" id=8]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 158.329, -46.0382, 394.883, -77.251, 364.258, 42.5888, 328.306, 75.8777, 278.373, 81.2039, 179.838, 84.5327, 149.216, 59.5963, 139.688, 27.6988, 146.73, -15.3835, 156.258, -41.8957 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ) ]
+outlines = [ PoolVector2Array( 158.329, -46.0382, 394.883, -77.251, 364.258, 42.5888, 328.306, 75.8777, 278.373, 81.2039, 179.838, 84.5327, 149.216, 59.5963, 139.688, 27.6988, 146.73, -15.3835, 156.258, -41.8957 ) ]
 
 [node name="Level" type="Node"]
 
 [node name="DayNight" parent="." instance=ExtResource( 1 )]
 modulate = Color( 1, 1, 1, 1 )
-position = Vector2( -193, -193 )
 _CYCLE_LENGTH_DAY_IN_SEC = 5.0
 _CYCLE_LENGTH_NIGHT_DIV = 2.0
 
-[node name="Grounds" type="TileMap" parent="DayNight"]
+[node name="Pathfinder" type="Navigation2D" parent="DayNight" groups=[
+"nav",
+]]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="DayNight/Pathfinder"]
+navpoly = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Grounds" type="TileMap" parent="DayNight/Pathfinder"]
 mode = 1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
@@ -27,7 +44,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Walls" type="TileMap" parent="DayNight"]
+[node name="Walls" type="TileMap" parent="DayNight/Pathfinder"]
+editor/display_folded = true
 mode = 1
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
@@ -38,83 +56,91 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="torch" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 43.5625, 132.314 )
-inside = true
-
-[node name="torch13" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 43.5625, 132.314 )
-inside = true
-
-[node name="torch2" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 29.3608, 153.833 )
-inside = true
-
-[node name="torch3" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( -28.8089, 164.267 )
-inside = true
-
-[node name="torch4" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( -20.9833, 94.3589 )
-inside = true
-
-[node name="torch5" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( -46.8076, 105.706 )
-inside = true
-
-[node name="torch6" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 2.62364, 87.4464 )
-inside = true
-
-[node name="torch7" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 26.2306, 80.0121 )
-inside = true
-
-[node name="torch8" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 56.098, 80.9251 )
-inside = true
-
-[node name="torch9" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 93.7909, 119.009 )
-inside = true
-
-[node name="torch10" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 110.38, 133.639 )
-inside = true
-
-[node name="torch12" parent="DayNight/Walls" instance=ExtResource( 4 )]
-position = Vector2( 127.361, 149.836 )
-inside = true
-
-[node name="LawNPC" parent="DayNight/Walls" instance=ExtResource( 5 )]
-position = Vector2( 293.582, 12.3455 )
-
-[node name="Player" parent="DayNight/Walls" instance=ExtResource( 6 )]
+[node name="Torches" type="YSort" parent="DayNight/Pathfinder/Walls"]
 editor/display_folded = true
-position = Vector2( 226.816, 27.9846 )
-
-[node name="Music" type="AudioStreamPlayer2D" parent="DayNight/Walls/Player"]
-pause_mode = 2
-position = Vector2( -24, -7 )
-stream = ExtResource( 7 )
-autoplay = true
-
-[node name="Rooms" type="Node2D" parent="DayNight"]
+position = Vector2( 88.0572, 28.1088 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Room" parent="DayNight/Rooms" instance=ExtResource( 8 )]
+[node name="torch" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -44.4947, 104.205 )
+inside = true
+
+[node name="torch13" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -44.4947, 104.205 )
+inside = true
+
+[node name="torch2" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -58.6964, 125.724 )
+inside = true
+
+[node name="torch3" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -116.866, 136.158 )
+inside = true
+
+[node name="torch4" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -109.041, 66.2501 )
+inside = true
+
+[node name="torch5" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -134.865, 77.5972 )
+inside = true
+
+[node name="torch6" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -85.4336, 59.3376 )
+inside = true
+
+[node name="torch7" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -61.8266, 51.9033 )
+inside = true
+
+[node name="torch8" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( -31.9592, 52.8163 )
+inside = true
+
+[node name="torch9" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( 5.7337, 90.9002 )
+inside = true
+
+[node name="torch10" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( 22.3228, 105.53 )
+inside = true
+
+[node name="torch12" parent="DayNight/Pathfinder/Walls/Torches" instance=ExtResource( 4 )]
+position = Vector2( 39.3038, 121.727 )
+inside = true
+
+[node name="Characters" type="YSort" parent="DayNight/Pathfinder/Walls"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LawNPC" parent="DayNight/Pathfinder/Walls/Characters" instance=ExtResource( 5 )]
+position = Vector2( 293.582, 12.3455 )
+
+[node name="GuardNPC" parent="DayNight/Pathfinder/Walls/Characters" instance=ExtResource( 6 )]
+position = Vector2( 190.582, -12.5793 )
+
+[node name="Player" parent="DayNight/Pathfinder/Walls/Characters" instance=ExtResource( 7 )]
+
+[node name="Rooms" type="Node2D" parent="DayNight/Pathfinder"]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Room" parent="DayNight/Pathfinder/Rooms" instance=ExtResource( 8 )]
 tile_data = PoolIntArray( 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 65542, 1, 0, 65543, 2, 0, 65544, 2, 0, 65545, 2, 0, 65546, 2, 0, 65547, 2, 0, 65548, 2, 0, 65549, 2, 0, 65550, 2, 0, 65551, 2, 0, 65552, 2, 0, 65553, 2, 0, 65554, 2, 0, 131077, 1, 0, 131078, 0, 0, 131079, 2, 0, 131080, 2, 0, 131081, 2, 0, 131082, 2, 0, 131083, 2, 0, 131084, 2, 0, 131085, 2, 0, 131086, 2, 0, 131087, 2, 0, 131088, 2, 0, 131089, 2, 0, 131090, 0, 0, 131091, 1, 0, 196613, 0, 0, 196614, 2, 0, 196615, 2, 0, 196616, 2, 0, 196617, 2, 0, 196618, 2, 0, 196619, 2, 0, 196620, 2, 0, 196621, 2, 0, 196622, 2, 0, 196623, 2, 0, 196624, 2, 0, 196625, 2, 0, 196626, 2, 0, 196627, 0, 0, 262148, 1, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 262152, 2, 0, 262153, 2, 0, 262154, 2, 0, 262155, 2, 0, 262156, 2, 0, 262157, 2, 0, 262158, 2, 0, 262159, 2, 0, 262160, 2, 0, 262161, 2, 0, 262162, 0, 0, 327684, 0, 0, 327685, 2, 0, 327686, 2, 0, 327687, 2, 0, 327688, 2, 0, 327689, 2, 0, 327690, 2, 0, 327691, 2, 0, 327692, 2, 0, 327693, 2, 0, 327694, 2, 0, 327695, 2, 0, 327696, 2, 0, 327697, 0, 0, 393219, 1, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0, 393228, 2, 0, 393229, 2, 0, 393230, 2, 0, 393231, 2, 0, 393232, 0, 0, 458755, 0, 0, 458756, 2, 0, 458757, 2, 0, 458758, 2, 0, 458759, 2, 0, 458760, 2, 0, 458761, 2, 0, 458762, 2, 0, 458763, 2, 0, 458764, 2, 0, 458765, 2, 0, 458766, 2, 0, 458767, 0, 0, 524290, 1, 0, 524291, 2, 0, 524292, 2, 0, 524293, 2, 0, 524294, 2, 0, 524295, 2, 0, 524296, 2, 0, 524297, 2, 0, 524298, 2, 0, 524299, 2, 0, 524300, 2, 0, 524301, 2, 0, 524302, 0, 0, 589826, 0, 0, 589827, 2, 0, 589828, 2, 0, 589829, 2, 0, 589830, 2, 0, 589831, 2, 0, 589832, 2, 0, 589833, 2, 0, 589834, 2, 0, 589835, 2, 0, 589836, 2, 0, 589837, 0, 0, 655361, 1, 0, 655362, 2, 0, 655363, 2, 0, 655364, 2, 0, 655365, 2, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655370, 2, 0, 655371, 2, 0, 655372, 0, 0, 720897, 0, 0, 720898, 2, 0, 720899, 2, 0, 720900, 2, 0, 720901, 2, 0, 720902, 2, 0, 720903, 2, 0, 720904, 2, 0, 720905, 2, 0, 720906, 2, 0, 720907, 0, 0, 786432, 1, 0, 786433, 2, 0, 786434, 2, 0, 786435, 2, 0, 786436, 2, 0, 786437, 2, 0, 786438, 2, 0, 786439, 2, 0, 786440, 2, 0, 786441, 2, 0, 786442, 0, 0, 851968, 2, 0, 851969, 2, 0, 851970, 2, 0, 851971, 2, 0, 851972, 2, 0, 851973, 2, 0, 851974, 2, 0, 851975, 2, 0, 851976, 2, 0, 851977, 0, 0, 917504, 0, 0, 917505, 0, 0, 917506, 0, 0, 917507, 0, 0, 917508, 0, 0, 917509, 0, 0, 917510, 0, 0, 917511, 0, 0, 917512, 0, 0 )
 
-[node name="Collider" type="Area2D" parent="DayNight/Rooms/Room"]
+[node name="Collider" type="Area2D" parent="DayNight/Pathfinder/Rooms/Room"]
 editor/display_folded = true
 visible = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DayNight/Rooms/Room/Collider"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DayNight/Pathfinder/Rooms/Room/Collider"]
 polygon = PoolVector2Array( -83.8651, 104.106, 47.2421, 59.5867, 135.464, 138.823, 128.929, 167.005, 109.324, 171.498, -40.5712, 172.314, -105.104, 108.599 )
 
-[node name="Higher" type="TileMap" parent="DayNight"]
+[node name="Higher" type="TileMap" parent="DayNight/Pathfinder"]
 mode = 1
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )

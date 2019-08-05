@@ -32,12 +32,22 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "NPC",
 "language": "GDScript",
-"path": "res://scenes/scripts/NPC.gd"
+"path": "res://scenes/scripts/NPC/NPC.gd"
+}, {
+"base": "Node2D",
+"class": "NPCBehavior",
+"language": "GDScript",
+"path": "res://scenes/scripts/NPC/NPCBehaviors.gd"
 }, {
 "base": "Node",
 "class": "PDS",
 "language": "GDScript",
 "path": "res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/scripts/PlayerController.gd"
 }, {
 "base": "Node",
 "class": "PlayerTarget",
@@ -52,7 +62,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "ShopKeeper",
 "language": "GDScript",
-"path": "res://scenes/scripts/ShopKeeper.gd"
+"path": "res://scenes/scripts/NPC/ShopKeeper.gd"
 }, {
 "base": "Node2D",
 "class": "Stats",
@@ -70,7 +80,9 @@ _global_script_class_icons={
 "Dice": "",
 "Interactable": "",
 "NPC": "",
+"NPCBehavior": "",
 "PDS": "",
+"Player": "",
 "PlayerTarget": "",
 "Room": "",
 "ShopKeeper": "",
@@ -81,7 +93,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Morstairs"
-run/main_scene="res://scenes/Levels/MorstairsCity2.tscn"
+run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 
 [autoload]
 
@@ -192,14 +204,9 @@ ui_pause={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-switch_combat_mode={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
 mouse_left_click={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

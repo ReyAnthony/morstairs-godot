@@ -20,7 +20,7 @@
 shader = ExtResource( 1 )
 shader_param/coeff = 2.0
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 6 )
 shader_param/coeff = 2.0
 
@@ -28,6 +28,7 @@ shader_param/coeff = 2.0
 position = Vector2( 74.6615, 41.6117 )
 
 [node name="water" type="Sprite" parent="."]
+editor/display_folded = true
 material = SubResource( 1 )
 position = Vector2( -28.1931, 5.35343 )
 texture = ExtResource( 2 )
@@ -52,7 +53,7 @@ position = Vector2( -9.79266, 15.8628 )
 texture = ExtResource( 5 )
 
 [node name="grass_flower" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 7 )
 position = Vector2( 10.9739, 10.1115 )
 texture = ExtResource( 7 )
 
