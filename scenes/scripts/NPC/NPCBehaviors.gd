@@ -81,7 +81,7 @@ func _process(delta):
 			else:
 				_last_pathfind_time += delta
 			_velocity = (pathfind[0] - _root.global_position).normalized()
-			if(_root.global_position.distance_to(_target.global_position) > 150):
+			if(_root.global_position.distance_to(_target.global_position) > 75):
 				_go_back_to_initial_position()
 		elif fighting_behavior == FightingBehaviors.FLEE:
 			if _unroll_pathfind_done():

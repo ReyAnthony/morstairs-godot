@@ -6,8 +6,8 @@ export (Texture) var player_portrait: Texture
 const _WALK_SPEED := 30
 const _PDS: PDS = PlayerDataSingleton
 var _velocity := Vector2()
-var _is_attacking := false
 var _last_dir := "NW"
+var _is_attacking := false
 
 func attack(amount: int):
 	$Stats.attack(amount)
@@ -38,10 +38,6 @@ func _process(delta: float):
 		if target.get_position().distance_to(self.global_position) < 2:
 			_PDS.clear_target()
 			_velocity = Vector2.ZERO
-		
-		if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.is_in_group("npc"):
-			if !$Interactable/ActionArea.overlaps_body(target.node):
-				_is_attacking = false
 	else:
 		_is_attacking = false
 		_velocity = Vector2.ZERO
@@ -92,9 +88,10 @@ func _on_AnimatedSprite_animation_finished():
 		and $Interactable/ActionArea.overlaps_body(target.node):
 			target.node.attack(1, self)
 			
+	_is_attacking = false
+			
 # warning-ignore:unused_argument
 func _unhandled_input(event: InputEvent):
-	##TODO small bug after dialogs, player will move where clicked, but not everytime
 	if Input.is_action_pressed("mouse_left_click"):
 		_is_attacking = false
 		_PDS.set_target(get_global_mouse_position())

@@ -15,7 +15,7 @@
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 5.10834
+radius = 6.87984
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 5.58728
@@ -234,7 +234,6 @@ corpse = ExtResource( 12 )
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
-editor/display_folded = true
 position = Vector2( 0, 6.36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
