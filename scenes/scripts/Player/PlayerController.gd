@@ -2,39 +2,40 @@ extends KinematicBody2D
 class_name Player
 
 export (Texture) var player_portrait: Texture
+export (NodePath) var map_cam: NodePath
 
 const _WALK_SPEED := 30
 const _PDS: PDS = PlayerDataSingleton
 var _velocity := Vector2()
 var _last_dir := "NW"
 var _is_attacking := false
+var _map_cam :Camera
 
 func attack(amount: int):
 	$Stats.attack(amount)
 
 func _ready():
-	set_process(true)
 	$AnimatedSprite.play("NW")
 	add_to_group("player")
+	_map_cam = get_node(map_cam)
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
+	_PDS.connect("target_has_changed", self, "_update_targeting")
 	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
 	$CanvasLayer/Panel/Inventory.connect("pressed", self, "_on_show_inventory")
+	$CanvasLayer/Panel/Player/Portrait.connect("pressed", self, "_on_show_player_stats")
 	_clear_player_selection()
 	
 # warning-ignore:unused_argument
-func _process(delta: float):
+func _process(delta: float):	
 	var anim_direction := ""
 	var anim := ""
 	var target: PlayerTarget = _PDS.get_target()
-	_update_targeting(target)
 	_update_player_life()
 		
 	if  target.is_valid():
-
 		_velocity = (target.get_position() - self.global_position).normalized()
 		anim_direction += _determine_sprite_direction()
-		
 		if target.get_position().distance_to(self.global_position) < 2:
 			_PDS.clear_target()
 			_velocity = Vector2.ZERO
@@ -86,8 +87,7 @@ func _on_AnimatedSprite_animation_finished():
 		and target.node.can_be_hit \
 		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
 		and $Interactable/ActionArea.overlaps_body(target.node):
-			target.node.attack(1, self)
-			
+			target.node.attack(1, self)		
 	_is_attacking = false
 			
 # warning-ignore:unused_argument
@@ -116,13 +116,13 @@ func _on_combat_mode_switch():
 		$AnimatedSprite.play(_last_dir + "_FIGHT")
 	_PDS.fight_mode = !_PDS.fight_mode
 	
-func _clear_player_selection():
-	$Interactable.show_name = false
-	$Interactable.hide_name()
-	
 func _on_show_inventory():
 	get_tree().paused = true
 	$CanvasLayer/PlayerInventory.show_inventory()
+	
+func _clear_player_selection():
+	$Interactable.show_name = false
+	$Interactable.hide_name()
 
 func _update_targeting(target: PlayerTarget):
 	if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.can_be_hit:
@@ -134,10 +134,6 @@ func _update_targeting(target: PlayerTarget):
 		$CanvasLayer/Life/Target.hide()
 		
 func _update_player_life():
-	if $Stats._current_life < $Stats.life:
-		$CanvasLayer/Life/Player.show()
-		$CanvasLayer/Life/Player/Label.text = _PDS.get_player_name()
-		$CanvasLayer/Life/Player/Portrait.texture = player_portrait
-		$CanvasLayer/Life/Player/ColorRect.rect_size.x = $Stats._current_life * (77 / $Stats.life)
-	else:
-		$CanvasLayer/Life/Player.hide()	
+	$CanvasLayer/Panel/Player/Label.text = _PDS.get_player_name()
+##	$CanvasLayer/Panel/Player/Portrait. = player_portrait
+	$CanvasLayer/Panel/Player/ColorRect.rect_size.x = $Stats._current_life * (77 / $Stats.life)

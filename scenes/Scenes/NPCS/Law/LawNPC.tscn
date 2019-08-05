@@ -16,7 +16,7 @@ radius = 11.9791
 
 [node name="TalkingNPC" parent="." instance=ExtResource( 1 )]
 chara_name = "Laws"
-chara_portrait = null
+chara_portrait = ExtResource( 2 )
 messages = [ "IT IS I, THE LAW", "YOU NEED TO RESPECT ME." ]
 
 [node name="Sprite" type="Sprite" parent="TalkingNPC"]

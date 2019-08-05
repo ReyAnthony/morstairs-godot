@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/Scenes/NPCS/Merchant/MerchantCorpse.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Scenes/ShopUI.tscn" type="PackedScene" id=9]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
 height = 13.2929

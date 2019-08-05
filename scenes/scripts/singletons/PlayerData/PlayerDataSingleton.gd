@@ -15,6 +15,13 @@ func _ready():
 	randomize()
 
 func set_target(global_position: Vector2, node: Node2D = null):
+
+	if _target.is_valid():
+		var current_pos := _target.get_position()
+		if node == null: #we clicked on the ground
+			#let's ignore the click if we clicked previously on a target and then we are clicking near it
+			if current_pos.distance_to(global_position) < 5 and _target.targetType == PlayerTarget.TargetType.ACTION_TARGET:
+				return
 	_target = PlayerTarget.new(global_position, node)
 	emit_signal("target_has_changed", _target)
 	

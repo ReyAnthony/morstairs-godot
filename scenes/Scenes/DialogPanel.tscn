@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/scripts/DialogPanel.gd" type="Script" id=1]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://res/sprites/UI/textbox.png" type="Texture" id=2]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=3]
 
 [node name="DialogPanel" type="Popup"]
 pause_mode = 2
@@ -11,34 +12,45 @@ popup_exclusive = true
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
-self_modulate = Color( 1, 1, 1, 0.574588 )
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -235.0
 
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+self_modulate = Color( 1, 1, 1, 0.92549 )
+margin_left = 12.3839
+margin_top = -13.6541
+margin_right = 1256.38
+margin_bottom = 222.346
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
 [node name="CharaName" type="Label" parent="Panel"]
-margin_left = 20.0
-margin_top = 18.0
-margin_right = 254.0
-margin_bottom = 50.0
-custom_fonts/font = ExtResource( 2 )
+margin_left = 63.4756
+margin_top = 23.9091
+margin_right = 297.476
+margin_bottom = 59.9091
+custom_fonts/font = ExtResource( 3 )
 text = "GUARD"
 uppercase = true
 
 [node name="CharaMessage" type="Label" parent="Panel"]
-margin_left = 19.0
-margin_top = 63.0
-margin_right = 1027.0
-margin_bottom = 217.0
-custom_fonts/font = ExtResource( 2 )
+margin_left = 83.0
+margin_top = 70.0
+margin_right = 981.0
+margin_bottom = 183.0
+custom_fonts/font = ExtResource( 3 )
 text = "Stop right there criminal scum !
 You'll pay for what you did !"
 autowrap = true
 
 [node name="CharaPortrait" type="TextureRect" parent="Panel"]
-margin_left = 1071.0
-margin_top = 29.0
-margin_right = 1232.0
-margin_bottom = 207.0
+margin_left = 1063.89
+margin_top = 16.1943
+margin_right = 1201.89
+margin_bottom = 190.194
+expand = true
 stretch_mode = 6

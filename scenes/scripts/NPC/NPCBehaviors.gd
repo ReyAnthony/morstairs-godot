@@ -28,7 +28,7 @@ var _free_target: Node2D
 var _viewArea: Area2D
 var pathfind := []
 var _velocity: Vector2 = Vector2(0, 0)
-var _player: Player
+var _player : Player
 
 var _last_pathfind_time: float
 var _attacked = false
@@ -120,8 +120,10 @@ func _process(delta):
 	anim_direction += _determine_sprite_direction()
 	if anim_direction != "":
 		_last_dir = anim_direction
-		if fighting_behavior == FightingBehaviors.FIGHT: anim_direction += "_FIGHT"
-		if _attack_anim_is_playing: 	atk = "_MELEE_ATTACK"
+		if fighting_behavior == FightingBehaviors.FIGHT:
+			anim_direction += "_FIGHT"
+		if _attack_anim_is_playing:
+			atk = "_MELEE_ATTACK"
 		_animated_sprite.play(anim_direction + atk)
 		
 	if _velocity.length() < 0.1:
@@ -132,10 +134,10 @@ func _process(delta):
 		_root.move_and_slide(_velocity.normalized() * 20, Vector2.ZERO, false, 100)
 		for i in _root.get_slide_count():
 			var collision: KinematicCollision2D = _root.get_slide_collision(i)
-			if !PlayerDataSingleton.get_target().is_you(collision.collider) and collision.collider.name == "TalkingNPC" and fighting_behavior != FightingBehaviors.FIGHT:
+			if fighting_behavior == FightingBehaviors.FLEE:
 				_on_NPC_is_attacked(_player)
+				break;
 				
-
 func _determine_sprite_direction():
 	var dir = ""
 	if _velocity.y > 0:

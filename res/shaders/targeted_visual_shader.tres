@@ -6,11 +6,11 @@ source = 2
 [sub_resource type="VisualShaderNodeInput" id=2]
 input_name = "uv"
 
-[sub_resource type="VisualShaderNodeColorOp" id=7]
+[sub_resource type="VisualShaderNodeColorOp" id=3]
 default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 1, 0, 0 ) ]
 operator = 7
 
-[sub_resource type="VisualShaderNodeInput" id=6]
+[sub_resource type="VisualShaderNodeInput" id=4]
 
 [resource]
 code = "shader_type canvas_item;
@@ -82,13 +82,13 @@ graph_offset = Vector2( 96, -2.52752 )
 mode = 1
 flags/light_only = false
 nodes/vertex/0/position = Vector2( 420, 140 )
-nodes/vertex/2/node = SubResource( 6 )
+nodes/vertex/2/node = SubResource( 4 )
 nodes/vertex/2/position = Vector2( 200, 100 )
 nodes/fragment/0/position = Vector2( 900, 160 )
 nodes/fragment/2/node = SubResource( 1 )
 nodes/fragment/2/position = Vector2( 380, 140 )
 nodes/fragment/3/node = SubResource( 2 )
 nodes/fragment/3/position = Vector2( 160, 80 )
-nodes/fragment/7/node = SubResource( 7 )
+nodes/fragment/7/node = SubResource( 3 )
 nodes/fragment/7/position = Vector2( 740, 40 )
 nodes/fragment/connections = PoolIntArray( 3, 0, 2, 0, 2, 1, 0, 1, 2, 0, 7, 0, 7, 0, 0, 0 )

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Scenes/NPC.tscn" type="PackedScene" id=2]
-[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://res/Guard_spriteframe.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=4]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=6]
@@ -37,6 +37,7 @@ animation = "SE"
 polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
 
 [node name="Interactable" parent="TalkingNPC" instance=ExtResource( 4 )]
+editor/display_folded = true
 
 [node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
 editor/display_folded = true

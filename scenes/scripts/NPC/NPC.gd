@@ -39,7 +39,7 @@ func _ready():
 	
 func _on_DialogPanel_on_dialog_end():
 	PlayerDataSingleton.clear_target()
-	if PlayerDataSingleton.get_bounty() > 0:
+	if PlayerDataSingleton.get_bounty() <= 0:
 		emit_signal("on_dialog_end")
 
 func _on_Interactable_mouse_clicked():
@@ -50,11 +50,11 @@ func _on_Interactable_mouse_entered():
 		$Sprite.material = material_on_mouse_enter
 
 func _on_Interactable_mouse_exited():
-	if !PlayerDataSingleton.get_target().is_you(self):
+	if $Sprite.material == material_on_mouse_enter:
 		$Sprite.material = null
 	
 func _on_player_target_changed(target: PlayerTarget):
-	if target.is_you(self):
+	if target.is_you(self) and can_be_hit:
 		$Sprite.material = material_on_target
 	else:
 		$Sprite.material = null
