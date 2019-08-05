@@ -5,6 +5,7 @@ signal on_dialog_end
 signal is_attacked(attacker)
 
 export (Material) var material_on_mouse_enter: Material
+export (Material) var material_on_target: Material
 export (String)  var chara_name: String
 export (Texture) var chara_portrait: Texture
 export (Array, String) var messages: Array = []
@@ -32,6 +33,7 @@ func _ready():
 	$Interactable.connect("mouse_entered", self,  "_on_Interactable_mouse_entered")
 	$Interactable.connect("mouse_exited", self, "_on_Interactable_mouse_exited")
 	$Interactable.connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
+	PlayerDataSingleton.connect("target_has_changed", self, "_on_player_target_changed")
 	
 	$Interactable/Name.text = chara_name
 	
@@ -44,10 +46,19 @@ func _on_Interactable_mouse_clicked():
 	PlayerDataSingleton.set_target(global_position, self)
 
 func _on_Interactable_mouse_entered():
-	$Sprite.material = material_on_mouse_enter
+	if !PlayerDataSingleton.get_target().is_you(self):
+		$Sprite.material = material_on_mouse_enter
 
 func _on_Interactable_mouse_exited():
-	$Sprite.material = null
+	if !PlayerDataSingleton.get_target().is_you(self):
+		$Sprite.material = null
+	
+func _on_player_target_changed(target: PlayerTarget):
+	if target.is_you(self):
+		$Sprite.material = material_on_target
+	else:
+		$Sprite.material = null
+		
 
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if !PlayerDataSingleton.get_target().is_valid():

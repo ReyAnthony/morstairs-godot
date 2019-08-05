@@ -31,28 +31,25 @@ func _process(delta: float):
 	_update_player_life()
 		
 	if  target.is_valid():
-		#make movement only diagonal, so we don't have to make 8 sprites
+
 		_velocity = (target.get_position() - self.global_position).normalized()
-		
 		anim_direction += _determine_sprite_direction()
 		
 		if target.get_position().distance_to(self.global_position) < 2:
 			_PDS.clear_target()
-			_velocity.x = 0
-			_velocity.y = 0
+			_velocity = Vector2.ZERO
 		
 		if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.is_in_group("npc"):
 			if !$Interactable/ActionArea.overlaps_body(target.node):
 				_is_attacking = false
 	else:
 		_is_attacking = false
-		_velocity.x = 0
-		_velocity.y = 0
+		_velocity = Vector2.ZERO
 
 	if _PDS.fight_mode:
-		anim = "_FIGHT"	
+		anim = "_FIGHT"
 		if _is_attacking and _PDS.get_target().is_valid():
-			anim += "_MELEE_ATTACK"	
+			anim += "_MELEE_ATTACK"
 
 	if anim_direction != "":
 		$AnimatedSprite.play(anim_direction + anim)
@@ -61,8 +58,14 @@ func _process(delta: float):
 		$AnimatedSprite.stop()
 		$AnimatedSprite.frame = 0
 	
-	if !_is_attacking:	
+	if !_is_attacking:
 		move_and_slide(_velocity.normalized() * _WALK_SPEED)
+		var has_collided_with_target = false
+		for i in get_slide_count():
+			var collision: KinematicCollision2D = get_slide_collision(i)
+			if !(collision.collider.name == "TalkingNPC" and _PDS.fight_mode):
+				_PDS.clear_target()
+				_velocity = Vector2.ZERO
 
 func _determine_sprite_direction():
 	var dir = ""
@@ -93,11 +96,10 @@ func _on_AnimatedSprite_animation_finished():
 func _unhandled_input(event: InputEvent):
 	##TODO small bug after dialogs, player will move where clicked, but not everytime
 	if Input.is_action_pressed("mouse_left_click"):
-		_is_attacking = false	
+		_is_attacking = false
 		_PDS.set_target(get_global_mouse_position())
 	else:
-		_velocity.x = 0
-		_velocity.y = 0
+		_velocity = Vector2.ZERO
 		
 func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 	var target: PlayerTarget = _PDS.get_target()	
@@ -126,7 +128,7 @@ func _on_show_inventory():
 	$CanvasLayer/PlayerInventory.show_inventory()
 
 func _update_targeting(target: PlayerTarget):
-	if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and _PDS.fight_mode and target.node.can_be_hit:
+	if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.can_be_hit:
 		$CanvasLayer/Life/Target.show()
 		$CanvasLayer/Life/Target/Label.text = target.node.chara_name
 		$CanvasLayer/Life/Target/Portrait.texture = target.node.chara_portrait

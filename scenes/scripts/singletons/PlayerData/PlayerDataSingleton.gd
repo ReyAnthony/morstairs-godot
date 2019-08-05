@@ -7,6 +7,8 @@ var _target: PlayerTarget
 var _bounty := 0
 var fight_mode := false
 
+signal target_has_changed
+
 func _ready():
 	_target = PlayerTarget.new(Vector2(0,0))
 	_target.invalidate()
@@ -14,6 +16,7 @@ func _ready():
 
 func set_target(global_position: Vector2, node: Node2D = null):
 	_target = PlayerTarget.new(global_position, node)
+	emit_signal("target_has_changed", _target)
 	
 func clear_target():
 	_target.invalidate()

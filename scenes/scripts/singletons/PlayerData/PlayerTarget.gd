@@ -21,6 +21,9 @@ func _init(position: Vector2, node: Node2D = null):
 
 func invalidate():
 	_valid = false
+	
+func is_you(node: Node2D) -> bool:
+	return is_valid() and targetType == TargetType.ACTION_TARGET and self.node == node
 
 func is_valid() -> bool: 
 	if targetType == TargetType.MOVEMENT_TARGET:

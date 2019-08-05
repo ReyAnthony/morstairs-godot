@@ -1,9 +1,6 @@
 extends Node2D
-## RENAME NPC BEHAVIORS
-class_name AttackBehavior
+class_name NPCBehavior
 
-##ADD AN ATTACKED BEAVHIOR AND AN IDLE BEHAVIOR 
-##MAYBE USE A STATE MACHINE ?
 enum IdleBehaviors {
 	WANDERING,
 	IDLE
@@ -11,7 +8,8 @@ enum IdleBehaviors {
 
 enum FightingBehaviors {
 	FLEE,
-	FIGHT
+	FIGHT,
+	GO_BACK_IDLE
 }
 
 export (IdleBehaviors) var idle_behavior
@@ -21,7 +19,7 @@ var _initial_position: Vector2
 var _go_back_to_initial_position := false
 var _initial_dir := ""
 var _target: Node2D
-var _root: Node2D
+var _root: KinematicBody2D
 var _last_dir := "SE"
 var _attack_anim_is_playing := false
 var _animated_sprite :AnimatedSprite
@@ -116,6 +114,7 @@ func _process(delta):
 					pass
 				elif idle_behavior == IdleBehaviors.WANDERING:
 					#_pathfind()
+					##TODO WANDERING AUSSI (comme flee)	
 					pass #go back to initial position
 	
 	anim_direction += _determine_sprite_direction()
@@ -130,7 +129,12 @@ func _process(delta):
 		_animated_sprite.frame = 0
 		
 	if !(fighting_behavior == FightingBehaviors.FIGHT and _attacked and _attack_anim_is_playing):
-		_root.move_and_slide(_velocity.normalized() * 20)	
+		_root.move_and_slide(_velocity.normalized() * 20, Vector2.ZERO, false, 100)
+		for i in _root.get_slide_count():
+			var collision: KinematicCollision2D = _root.get_slide_collision(i)
+			if !PlayerDataSingleton.get_target().is_you(collision.collider) and collision.collider.name == "TalkingNPC" and fighting_behavior != FightingBehaviors.FIGHT:
+				_on_NPC_is_attacked(_player)
+				
 
 func _determine_sprite_direction():
 	var dir = ""
@@ -174,7 +178,10 @@ func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 	PlayerDataSingleton.increment_bounty(10)
 	_attacked = true
 	_go_back_to_initial_position = false
-	if fighting_behavior == FightingBehaviors.FLEE:
+	if fighting_behavior == FightingBehaviors.GO_BACK_IDLE:
+		_attacked = false
+		return 
+	elif fighting_behavior == FightingBehaviors.FLEE:
 		## Would be better if avoided the player
 		var rnd_dir := Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
 		var rnd_dist :=  rand_range(75, 150)
