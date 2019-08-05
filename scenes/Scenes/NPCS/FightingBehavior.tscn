@@ -65,6 +65,7 @@ align = 1
 valign = 1
 
 [node name="ViewArea" type="Area2D" parent="."]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }

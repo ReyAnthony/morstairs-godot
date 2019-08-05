@@ -20,7 +20,7 @@ var _root: Node2D
 var _last_dir := "SE"
 var _attack_anim_is_playing := false
 var _animated_sprite :AnimatedSprite
-var _pathfinder: Navigation2D
+var _pathfinder: NavigationTilemap
 var _free_target: Node2D
 var _viewArea: Area2D
 var pathfind := []
@@ -91,7 +91,9 @@ func _process(delta):
 			_last_pathfind_time = 0
 		else:
 			_last_pathfind_time += delta
-		_velocity = (pathfind[0] - _root.global_position).normalized()
+		
+		if !pathfind.empty():
+			_velocity = (pathfind[0] - _root.global_position).normalized()
 		
 		if _go_back_to_initial_position:
 			if _root.global_position.distance_to(_initial_position) <= 5:
@@ -110,7 +112,7 @@ func _process(delta):
 			if _root.global_position.distance_to(_target.global_position) <= 5:
 				_target = null
 				
-		anim_direction += determine_sprite_direction()
+		anim_direction += _determine_sprite_direction()
 			
 		if anim_direction != "":
 			_last_dir = anim_direction
@@ -125,7 +127,7 @@ func _process(delta):
 		if (behavior == Behaviors.FIGHT and !_attack_anim_is_playing) or behavior != Behaviors.FIGHT:
 			_root.move_and_slide(_velocity.normalized() * 20)
 
-func determine_sprite_direction():
+func _determine_sprite_direction():
 	var dir = ""
 	if _velocity.y > 0:
 		dir += "S"
@@ -138,8 +140,7 @@ func determine_sprite_direction():
 	return dir
 
 func _pathfind(): 
-	pathfind = _pathfinder.get_simple_path(_root.global_position, _target.global_position, false)
-	assert(!pathfind.empty())
+	pathfind = _pathfinder.get_the_path(_root.global_position, _target.global_position)
 	if _debug:
 		_line.clear_points()
 		for n in pathfind:

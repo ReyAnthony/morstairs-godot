@@ -37,7 +37,7 @@ func _ready():
 	
 func _on_DialogPanel_on_dialog_end():
 	PlayerDataSingleton.clear_target()
-	if PlayerDataSingleton.get_bounty() > 0:
+	if PlayerDataSingleton.get_bounty() <= 0:
 		emit_signal("on_dialog_end")
 
 func _on_Interactable_mouse_clicked():

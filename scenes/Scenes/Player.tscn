@@ -28,14 +28,19 @@ script = ExtResource( 1 )
 player_portrait = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -8.45649, -0.30751 )
+position = Vector2( -8.45649, -7 )
 polygon = PoolVector2Array( 6.71868, 6.1156, 9.07625, 5.50058, 10.9726, 6.62811, 11.0238, 8.0119, 8.61499, 8.62692, 6.92369, 7.9094 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -7 )
 frames = ExtResource( 3 )
 animation = "SE"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="Life" type="Control" parent="CanvasLayer"]
 anchor_left = 0.5
@@ -195,7 +200,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -1, -0.985252 )
+position = Vector2( -1, -7 )
 current = true
 zoom = Vector2( 0.15, 0.15 )
 limit_left = -1000
@@ -208,9 +213,12 @@ drag_margin_right = 0.3
 drag_margin_bottom = 0.3
 editor_draw_limits = true
 editor_draw_drag_margin = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DebugCam" type="Camera2D" parent="."]
-position = Vector2( -1, -0.985252 )
+position = Vector2( -1, -7 )
 zoom = Vector2( 0.4, 0.4 )
 limit_left = -1000
 limit_top = -1000
@@ -222,15 +230,24 @@ drag_margin_right = 0.3
 drag_margin_bottom = 0.3
 editor_draw_limits = true
 editor_draw_drag_margin = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Stats" type="Node2D" parent="."]
+position = Vector2( 0, -7 )
 script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
 player = true
 life = 77
 damage = ExtResource( 11 )
 corpse = ExtResource( 12 )
 
 [node name="Interactable" parent="." instance=ExtResource( 13 )]
+editor/display_folded = true
+position = Vector2( 0, -7 )
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
@@ -242,7 +259,6 @@ position = Vector2( -0.345409, -0.347971 )
 shape = SubResource( 1 )
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
-editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 position = Vector2( -0.287483, 1.91654 )

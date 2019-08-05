@@ -8,6 +8,11 @@ const _PDS: PDS = PlayerDataSingleton
 var _velocity := Vector2()
 var _is_attacking := false
 var _last_dir := "NW"
+var _pathfind := []
+var _pathfinder: NavigationTilemap
+var _path_index := 0
+
+var _line : Line2D
 
 func attack(amount: int):
 	$Stats.attack(amount)
@@ -20,47 +25,41 @@ func _ready():
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
 	$CanvasLayer/Panel/Inventory.connect("pressed", self, "_on_show_inventory")
+	PlayerDataSingleton.connect("target_has_changed", self, "_target_changed")
 	_clear_player_selection()
+	_pathfinder = get_tree().get_nodes_in_group("nav")[0]
+	_line = $"/root/Level/Line2D" as Line2D
 	
-# warning-ignore:unused_argument
+##TODO pathfind each 250ms for moving targets	
 func _process(delta: float):
 	var anim_direction := ""
 	var anim := ""
 	var target: PlayerTarget = _PDS.get_target()
-	_update_targeting(target)
 	_update_player_life()
 		
-	if  target.is_valid():
-		#make movement only diagonal, so we don't have to make 8 sprites
-		_velocity = (target.get_position() - self.global_position).normalized()
-		
-		if _velocity.y > 0:
-			anim_direction += "S"
-		elif _velocity.y < 0:
-			anim_direction += "N"
-		if _velocity.x < 0:
-			anim_direction += "W"
-		elif _velocity.x > 0:
-			anim_direction += "E"
-		
-		if (target.get_position() - self.global_position).length() < 2:
-			_PDS.clear_target()
-			_velocity.x = 0
-			_velocity.y = 0
-		pass
-		
-		if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.is_in_group("npc"):
-			if !$Interactable/ActionArea.overlaps_body(target.node):
-				_is_attacking = false
+	if target.is_valid():
+		if _pathfind.empty():
+			_clear_target_reset_velocity()
+		else:	
+			if global_position.distance_to(_pathfind[_path_index]) < 1 and _path_index <= _pathfind.size() - 1:
+				_path_index += 1	
+				
+			if _path_index >= _pathfind.size():
+				_clear_target_reset_velocity()
+			else:		
+				_velocity = (_pathfind[_path_index] - self.global_position).normalized()
+				anim_direction += _determine_sprite_direction()
+				if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.is_in_group("npc"):
+					if !$Interactable/ActionArea.overlaps_body(target.node):
+						_is_attacking = false
 	else:
 		_is_attacking = false
-		_velocity.x = 0
-		_velocity.y = 0
+		_clear_target_reset_velocity()
 
 	if _PDS.fight_mode:
-		anim = "_FIGHT"	
+		anim = "_FIGHT"
 		if _is_attacking and _PDS.get_target().is_valid():
-			anim += "_MELEE_ATTACK"	
+			anim += "_MELEE_ATTACK"
 
 	if anim_direction != "":
 		$AnimatedSprite.play(anim_direction + anim)
@@ -69,8 +68,25 @@ func _process(delta: float):
 		$AnimatedSprite.stop()
 		$AnimatedSprite.frame = 0
 	
-	if !_is_attacking:	
+	if !_is_attacking:
 		move_and_slide(_velocity.normalized() * _WALK_SPEED)
+
+func _clear_target_reset_velocity():
+	_PDS.clear_target()
+	_velocity.x = 0
+	_velocity.y = 0
+
+func _determine_sprite_direction():
+	var dir = ""
+	if _velocity.y > 0:
+		dir += "S"
+	elif _velocity.y < 0:
+		dir += "N"
+	if _velocity.x < 0:
+		dir += "W"
+	elif _velocity.x > 0:
+		dir += "E"
+	return dir
 
 func _on_AnimatedSprite_animation_finished():
 	var target: PlayerTarget = _PDS.get_target()
@@ -84,10 +100,8 @@ func _on_AnimatedSprite_animation_finished():
 		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
 		and $Interactable/ActionArea.overlaps_body(target.node):
 			target.node.attack(1, self)
-			
-# warning-ignore:unused_argument
+
 func _unhandled_input(event: InputEvent):
-	##TODO small bug after dialogs, player will move where clicked, but not everytime
 	if Input.is_action_pressed("mouse_left_click"):
 		_is_attacking = false	
 		_PDS.set_target(get_global_mouse_position())
@@ -120,6 +134,17 @@ func _clear_player_selection():
 func _on_show_inventory():
 	get_tree().paused = true
 	$CanvasLayer/PlayerInventory.show_inventory()
+
+func _target_changed():
+	var target: PlayerTarget = _PDS.get_target()
+	_pathfind = _pathfinder.get_the_path(self.global_position, target.get_position())
+	if !_pathfind.empty():
+		_path_index = 0
+		_pathfind.remove(0)
+		_line.clear_points()
+		for n in _pathfind:
+			_line.add_point(n)
+	_update_targeting(target)
 
 func _update_targeting(target: PlayerTarget):
 	if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and _PDS.fight_mode and target.node.can_be_hit:
