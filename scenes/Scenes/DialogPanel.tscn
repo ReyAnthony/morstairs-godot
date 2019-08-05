@@ -6,8 +6,10 @@
 
 [node name="DialogPanel" type="Popup"]
 pause_mode = 2
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_scale = Vector2( 1.00398, 1 )
 popup_exclusive = true
 script = ExtResource( 1 )
 
@@ -29,19 +31,19 @@ expand = true
 stretch_mode = 6
 
 [node name="CharaName" type="Label" parent="Panel"]
-margin_left = 63.4756
-margin_top = 23.9091
-margin_right = 297.476
-margin_bottom = 59.9091
+margin_left = 60.4309
+margin_top = 13.7196
+margin_right = 294.431
+margin_bottom = 59.7196
 custom_fonts/font = ExtResource( 3 )
 text = "GUARD"
 uppercase = true
 
 [node name="CharaMessage" type="Label" parent="Panel"]
-margin_left = 83.0
-margin_top = 70.0
-margin_right = 981.0
-margin_bottom = 183.0
+margin_left = 78.9403
+margin_top = 67.962
+margin_right = 976.94
+margin_bottom = 180.962
 custom_fonts/font = ExtResource( 3 )
 text = "Stop right there criminal scum !
 You'll pay for what you did !"
