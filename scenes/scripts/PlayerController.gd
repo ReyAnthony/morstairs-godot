@@ -34,20 +34,12 @@ func _process(delta: float):
 		#make movement only diagonal, so we don't have to make 8 sprites
 		_velocity = (target.get_position() - self.global_position).normalized()
 		
-		if _velocity.y > 0:
-			anim_direction += "S"
-		elif _velocity.y < 0:
-			anim_direction += "N"
-		if _velocity.x < 0:
-			anim_direction += "W"
-		elif _velocity.x > 0:
-			anim_direction += "E"
+		anim_direction += _determine_sprite_direction()
 		
-		if (target.get_position() - self.global_position).length() < 2:
+		if target.get_position().distance_to(self.global_position) < 2:
 			_PDS.clear_target()
 			_velocity.x = 0
 			_velocity.y = 0
-		pass
 		
 		if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.is_in_group("npc"):
 			if !$Interactable/ActionArea.overlaps_body(target.node):
@@ -71,6 +63,18 @@ func _process(delta: float):
 	
 	if !_is_attacking:	
 		move_and_slide(_velocity.normalized() * _WALK_SPEED)
+
+func _determine_sprite_direction():
+	var dir = ""
+	if _velocity.y > 0:
+		dir += "S"
+	elif _velocity.y < 0:
+		dir += "N"
+	if _velocity.x < 0:
+		dir += "W"
+	elif _velocity.x > 0:
+		dir += "E"
+	return dir
 
 func _on_AnimatedSprite_animation_finished():
 	var target: PlayerTarget = _PDS.get_target()

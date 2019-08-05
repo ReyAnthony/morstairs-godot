@@ -4,13 +4,18 @@ class_name AttackBehavior
 
 ##ADD AN ATTACKED BEAVHIOR AND AN IDLE BEHAVIOR 
 ##MAYBE USE A STATE MACHINE ?
-enum Behaviors {
-	FLEE,
-	FIGHT,
-	WANDERING
+enum IdleBehaviors {
+	WANDERING,
+	IDLE
 }
 
-export (Behaviors) var behavior
+enum FightingBehaviors {
+	FLEE,
+	FIGHT
+}
+
+export (IdleBehaviors) var idle_behavior
+export (FightingBehaviors) var fighting_behavior
 
 var _initial_position: Vector2
 var _go_back_to_initial_position := false
@@ -28,6 +33,8 @@ var _velocity: Vector2 = Vector2(0, 0)
 var _player: Player
 
 var _last_pathfind_time: float
+var _attacked = false
+var _current_pathfind_index :int = 0
 
 #debug
 var _debug := true
@@ -40,6 +47,7 @@ func _ready():
 	assert($"../Collision")
 	assert($"../Collision" is CollisionPolygon2D)
 	assert($ViewArea != null)
+	
 	_root = $"../"
 	_animated_sprite = $"../TalkingNPC/Sprite"
 	_free_target = Node2D.new()
@@ -63,17 +71,31 @@ func _ready():
 func _process(delta):
 	if !is_instance_valid(_animated_sprite):
 			return
-	
-	if _target == null:
-		_animated_sprite.stop()
-		_animated_sprite.frame = 0
+			
+	var anim_direction := ""
+	var atk := ""
+			
+	if _attacked:
+		if fighting_behavior == FightingBehaviors.FIGHT:
+			if (_last_pathfind_time > 0.250 or pathfind.empty() or _root.global_position.distance_to(pathfind[0]) <= 2):
+				_pathfind()
+				_last_pathfind_time = 0
+			else:
+				_last_pathfind_time += delta
+			_velocity = (pathfind[0] - _root.global_position).normalized()
+			if(_root.global_position.distance_to(_target.global_position) > 150):
+				_go_back_to_initial_position()
+		elif fighting_behavior == FightingBehaviors.FLEE:
+			if _unroll_pathfind_done():
+				_go_back_to_initial_position()
+	else:
 		if $ViewArea.overlaps_body(_player):
 			if PlayerDataSingleton.get_bounty() > 0:
-				if behavior == Behaviors.FLEE:
+				if fighting_behavior == FightingBehaviors.FLEE:
 					match randi() % 2 :
 						0: $Message.text = "HELP !"
 						1: $Message.text = "GUARDS !"
-				elif behavior == Behaviors.FIGHT:
+				elif fighting_behavior == FightingBehaviors.FIGHT:
 					match randi() % 5 :
 						0: $Message.text = "HALT !"
 						1: $Message.text = "FOR THE KING !"
@@ -82,50 +104,35 @@ func _process(delta):
 						4: $Message.text = "SCUM !"
 				$AnimationPlayer.play("shout")
 				_on_NPC_is_attacked(_player)
-	else:
-		var anim_direction := ""
-		var atk := ""
-		## that's still bad, we compute the whole path to use only the first segment
-		if (_last_pathfind_time > 0.250 or pathfind.empty() or _root.global_position.distance_to(pathfind[0]) <= 2):
-			_pathfind()
-			_last_pathfind_time = 0
-		else:
-			_last_pathfind_time += delta
-		_velocity = (pathfind[0] - _root.global_position).normalized()
 		
 		if _go_back_to_initial_position:
-			if _root.global_position.distance_to(_initial_position) <= 5:
+			if _unroll_pathfind_done():
 				_go_back_to_initial_position = false
 				_target = null
 				_animated_sprite.play(_initial_dir)
-				_animated_sprite.stop()
-				_animated_sprite.frame = 0
-				return
-		elif behavior == Behaviors.FIGHT:
-			if(_root.global_position.distance_to(_target.global_position) > 150):
-				_go_back_to_initial_position = true
-				_free_target.global_position = _initial_position
-				_target = _free_target
-		elif behavior == Behaviors.FLEE:
-			if _root.global_position.distance_to(_target.global_position) <= 5:
-				_target = null
-				
-		anim_direction += determine_sprite_direction()
-			
-		if anim_direction != "":
-			_last_dir = anim_direction
-			if behavior == Behaviors.FIGHT: anim_direction += "_FIGHT"
-			if _attack_anim_is_playing: 	atk = "_MELEE_ATTACK"
-			_animated_sprite.play(anim_direction + atk)
+		else:
+				if idle_behavior == IdleBehaviors.IDLE:
+					_velocity = Vector2(0,0)
+					pass
+				elif idle_behavior == IdleBehaviors.WANDERING:
+					#_pathfind()
+					pass #go back to initial position
+	
+	anim_direction += _determine_sprite_direction()
+	if anim_direction != "":
+		_last_dir = anim_direction
+		if fighting_behavior == FightingBehaviors.FIGHT: anim_direction += "_FIGHT"
+		if _attack_anim_is_playing: 	atk = "_MELEE_ATTACK"
+		_animated_sprite.play(anim_direction + atk)
 		
-		if _velocity.length() < 0.1:
-			_animated_sprite.stop()
-			_animated_sprite.frame = 0
-			
-		if (behavior == Behaviors.FIGHT and !_attack_anim_is_playing) or behavior != Behaviors.FIGHT:
-			_root.move_and_slide(_velocity.normalized() * 20)
+	if _velocity.length() < 0.1:
+		_animated_sprite.stop()
+		_animated_sprite.frame = 0
+		
+	if !(fighting_behavior == FightingBehaviors.FIGHT and _attacked and _attack_anim_is_playing):
+		_root.move_and_slide(_velocity.normalized() * 20)	
 
-func determine_sprite_direction():
+func _determine_sprite_direction():
 	var dir = ""
 	if _velocity.y > 0:
 		dir += "S"
@@ -136,6 +143,23 @@ func determine_sprite_direction():
 	elif _velocity.x > 0:
 		dir += "E"
 	return dir
+
+func _go_back_to_initial_position():
+	_attacked = false
+	_go_back_to_initial_position = true
+	_free_target.global_position = _initial_position
+	_target = _free_target
+	_pathfind()
+
+func _unroll_pathfind_done():
+	if _current_pathfind_index >= pathfind.size() -1:
+			_current_pathfind_index = 0
+			return true
+	else:
+		if _root.global_position.distance_to(pathfind[_current_pathfind_index]) <= 2:
+			_current_pathfind_index += 1
+		_velocity = (pathfind[_current_pathfind_index] - _root.global_position).normalized()
+		return false
 
 func _pathfind(): 
 	pathfind = _pathfinder.get_simple_path(_root.global_position, _target.global_position, false)
@@ -148,18 +172,20 @@ func _pathfind():
 	
 func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 	PlayerDataSingleton.increment_bounty(10)
-	if behavior == Behaviors.FLEE:
+	_attacked = true
+	_go_back_to_initial_position = false
+	if fighting_behavior == FightingBehaviors.FLEE:
 		## Would be better if avoided the player
 		var rnd_dir := Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
 		var rnd_dist :=  rand_range(75, 150)
 		_free_target.global_position = _pathfinder.get_closest_point(_root.global_position - rnd_dir * rnd_dist)
 		_target = _free_target
-	elif behavior == Behaviors.FIGHT:
+	elif fighting_behavior == FightingBehaviors.FIGHT:
 		_target = attacker
 	_pathfind()
 
 func _on_Interactable_something_is_inside_interactable(body):
-	if body == _target and behavior == Behaviors.FIGHT and !_attack_anim_is_playing:
+	if body == _target and fighting_behavior == FightingBehaviors.FIGHT and !_attack_anim_is_playing:
 		_attack_anim_is_playing = true	
 		
 func _on_AnimatedSprite_animation_finished():

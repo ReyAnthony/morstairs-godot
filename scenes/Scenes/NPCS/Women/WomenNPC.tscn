@@ -24,7 +24,7 @@ scale = Vector2( 1.00418, 1.0142 )
 polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
 
 [node name="FightingBehavior" parent="." instance=ExtResource( 1 )]
-behavior = 0
+idle_behavior = 1
 
 [node name="TalkingNPC" parent="." instance=ExtResource( 2 )]
 chara_name = "Woman"

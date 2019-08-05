@@ -21,6 +21,8 @@ radius = 7.12598
 polygon = PoolVector2Array( -3.01977, 9.10132, -2.44125, 9.28473, 2.01792, 9.27482, 3.2916, 8.64104, 3.20068, 4.85075, 2.70057, 5.07145, -3.2388, 4.46039 )
 
 [node name="FightingBehavior" parent="." instance=ExtResource( 1 )]
+idle_behavior = 1
+fighting_behavior = 1
 
 [node name="TalkingNPC" parent="." instance=ExtResource( 2 )]
 scale = Vector2( 1, 1 )
