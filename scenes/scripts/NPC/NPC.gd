@@ -54,7 +54,7 @@ func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 		return
 	
 	if !PlayerDataSingleton.fight_mode && PlayerDataSingleton.get_target().node == self:
-		if PlayerDataSingleton.get_bounty() > 0:
+		if PlayerDataSingleton.get_bounty() > 0 and can_be_hit:
 			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, [chara_name + " n'a plus rien a vous dire."])
 		else:
 			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, messages)

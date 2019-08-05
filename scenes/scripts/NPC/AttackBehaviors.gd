@@ -70,12 +70,16 @@ func _process(delta):
 		if $ViewArea.overlaps_body(_player):
 			if PlayerDataSingleton.get_bounty() > 0:
 				if behavior == Behaviors.FLEE:
-					if randi() % 2 == 1:
-						$Message.text = "HELP !"
-					else:
-						$Message.text = "GUARDS !"	
+					match randi() % 2 :
+						0: $Message.text = "HELP !"
+						1: $Message.text = "GUARDS !"
 				elif behavior == Behaviors.FIGHT:
-					$Message.text = "HALT !"
+					match randi() % 5 :
+						0: $Message.text = "HALT !"
+						1: $Message.text = "FOR THE KING !"
+						2: $Message.text = "THOU WILL PAY !"
+						3: $Message.text = "MISCREANT !"
+						4: $Message.text = "SCUM !"
 				$AnimationPlayer.play("shout")
 				_on_NPC_is_attacked(_player)
 	else:
