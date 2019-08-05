@@ -207,6 +207,7 @@ __meta__ = {
 ]]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="DayNight/Navigation2D"]
+visible = false
 position = Vector2( 0.218826, 0 )
 navpoly = SubResource( 1 )
 __meta__ = {

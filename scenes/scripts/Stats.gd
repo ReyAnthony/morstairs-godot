@@ -24,6 +24,9 @@ func attack(damages: int):
 		if !player:
 			if PlayerDataSingleton.get_target().node == $"../":
 				PlayerDataSingleton.clear_target()
+		else:
+			get_tree().change_scene("res://scenes/Scenes/Gameover.tscn")
+			return		
 				
 		var r := get_node(_root)
 		var rp := r.get_parent()
