@@ -36,7 +36,6 @@ script = ExtResource( 5 )
 script = ExtResource( 6 )
 
 [node name="DialogMessage" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 7 )
 message = "I'm here to uphold the law of the King !"
 
@@ -44,48 +43,36 @@ message = "I'm here to uphold the law of the King !"
 script = ExtResource( 7 )
 message = "Dare not causing ado !"
 
-[node name="Response" type="Node" parent="DialogMessage/DialogMessage"]
-script = ExtResource( 7 )
-message = "What is thy response ?"
-
-[node name="Aye" type="Node" parent="DialogMessage/DialogMessage/Response"]
+[node name="Aye" type="Node" parent="DialogMessage/DialogMessage"]
 script = ExtResource( 7 )
 message = "Aye"
 is_choice = true
 
-[node name="DialogMessage2" type="Node" parent="DialogMessage/DialogMessage/Response/Aye"]
+[node name="DialogMessage2" type="Node" parent="DialogMessage/DialogMessage/Aye"]
 script = ExtResource( 7 )
 message = "Be lawful, citizen, and thee won't have any ado.. "
 
-[node name="Nay" type="Node" parent="DialogMessage/DialogMessage/Response"]
+[node name="Nay" type="Node" parent="DialogMessage/DialogMessage"]
 script = ExtResource( 7 )
 message = "Nay"
 is_choice = true
 
-[node name="DialogMessage" type="Node" parent="DialogMessage/DialogMessage/Response/Nay"]
+[node name="DialogMessage" type="Node" parent="DialogMessage/DialogMessage/Nay"]
 script = ExtResource( 7 )
 message = "Be lawful, citizen, and thee won't have any ado.. "
 
-[node name="To hell" type="Node" parent="DialogMessage/DialogMessage/Response"]
-script = ExtResource( 7 )
-message = "To hell with thee !"
-is_choice = true
-
-[node name="DialogMessage" type="Node" parent="DialogMessage/DialogMessage/Response/To hell"]
-script = ExtResource( 7 )
-message = "Farewell then."
-
-[node name="En garde" type="Node" parent="DialogMessage/DialogMessage/Response"]
+[node name="En garde" type="Node" parent="DialogMessage/DialogMessage"]
 script = ExtResource( 7 )
 message = "En garde !"
 is_choice = true
 
-[node name="DialogMessage" type="Node" parent="DialogMessage/DialogMessage/Response/En garde"]
+[node name="DialogMessage" type="Node" parent="DialogMessage/DialogMessage/En garde"]
 script = ExtResource( 7 )
 message = "Thee messed with the wrong guard !"
-dialog_event_path = NodePath("../../../../../DialogEventIncreaseBounty")
+dialog_event_path = NodePath("../../../../DialogEventIncreaseBounty")
 
 [node name="BountyMessages" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 7 )
 message = "Scoundrel ! Stand right there and pay thy fine !"
 
@@ -152,9 +139,8 @@ align = 1
 valign = 1
 
 [node name="Stats" parent="." instance=ExtResource( 10 )]
-life = 30
+life = 5
 corpse = ExtResource( 11 )
-_to_free = "../../"
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 12 )

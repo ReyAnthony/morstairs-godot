@@ -12,6 +12,9 @@ var _map_cam :Camera
 
 func attack(amount: int):
 	$Stats.attack(amount)
+	
+func full_heal():
+	$Stats.full_heal()		
 
 func _ready():
 	$AnimatedSprite.play("NW")
@@ -24,12 +27,14 @@ func _ready():
 	$CanvasLayer/Panel/Inventory.connect("pressed", self, "_on_show_inventory")
 	$CanvasLayer/Panel/Player/Portrait.connect("pressed", self, "_on_show_player_stats")
 	$Interactable/Name.text = _PDS.get_player_name()
+	
 # warning-ignore:unused_argument
 func _process(delta: float):	
 	var anim_direction := ""
 	var anim := ""
 	var target: PlayerTarget = _PDS.get_target()
 	_update_player_life()
+	_update_targeting()
 		
 	if  target.is_valid():
 		_velocity = (target.get_position() - self.global_position).normalized()
@@ -118,7 +123,8 @@ func _on_show_inventory():
 	get_tree().paused = true
 	$CanvasLayer/PlayerInventory.show_inventory()
 
-func _update_targeting(target: PlayerTarget):
+func _update_targeting(t = null):
+	var target: PlayerTarget = _PDS.get_target()
 	if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.can_be_hit:
 		$CanvasLayer/Life/Target.show()
 		$CanvasLayer/Life/Target/Label.text = target.node.chara_name

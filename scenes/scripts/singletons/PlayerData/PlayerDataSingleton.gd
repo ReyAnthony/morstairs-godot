@@ -67,7 +67,19 @@ func go_to_jail_reset_bounty():
 	_bounty = 0
 	
 func get_jail_time() -> int:
-	return _jail_time	
+	return _jail_time
+
+func decrement_jail_time():
+	if _jail_time > 0:
+		_jail_time -= 1
+		
+func heal_player():
+	get_player().full_heal()
+
+#TODO refactor with this and cache it
+#can't type it because of cyclic dependency
+func get_player():
+	return get_tree().get_nodes_in_group("player")[0]
 
 #TODO rework inventory
 #objects that can't be thrown away can't be sold either

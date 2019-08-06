@@ -44,12 +44,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/dice.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "GameObjectBase",
+"language": "GDScript",
+"path": "res://GameObjectBase.gd"
+}, {
 "base": "Node2D",
 "class": "Interactable",
 "language": "GDScript",
 "path": "res://scenes/scripts/Interactable.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "GameObjectBase",
 "class": "NPC",
 "language": "GDScript",
 "path": "res://scenes/scripts/NPC/NPC.gd"
@@ -102,6 +107,7 @@ _global_script_class_icons={
 "DialogMessage": "",
 "DialogPanel": "",
 "Dice": "",
+"GameObjectBase": "",
 "Interactable": "",
 "NPC": "",
 "NPCBehavior": "",

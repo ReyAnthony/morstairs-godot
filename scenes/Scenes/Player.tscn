@@ -62,6 +62,7 @@ frames = ExtResource( 2 )
 animation = "SE"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="Life" type="Control" parent="CanvasLayer"]
 anchor_left = 0.5
@@ -260,7 +261,7 @@ editor_draw_drag_margin = true
 [node name="Stats" type="Node2D" parent="."]
 script = ExtResource( 11 )
 player = true
-life = 77
+life = 10
 damage = ExtResource( 12 )
 corpse = ExtResource( 13 )
 

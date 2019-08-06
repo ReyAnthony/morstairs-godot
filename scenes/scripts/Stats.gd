@@ -33,9 +33,12 @@ func attack(damages: int):
 		var c := corpse.instance()
 		r.add_child(dmg)
 		rp.add_child(c)
-		rp.move_child(c, rp.get_position_in_parent())
+		rp.move_child(c, rp.get_position_in_parent() +1)
 		c.global_position = global_position
 		dmg.global_position = global_position
 		get_node(_to_free).call_deferred("free")
 	else:
 		add_child(dmg)
+
+func full_heal():
+	_current_life = life
