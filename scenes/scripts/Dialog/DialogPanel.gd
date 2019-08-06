@@ -33,6 +33,8 @@ func my_popup(chara_name: String, chara_portrait: Texture, messages: DialogMessa
 	.popup()
 
 func _advance_dialog():
+	if _messages.has_event():
+		_messages.execute_event()
 	if _messages.has_next():
 			_messages = _messages.get_next()
 			_update_text()

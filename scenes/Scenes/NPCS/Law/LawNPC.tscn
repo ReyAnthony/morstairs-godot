@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/scripts/NPC/NPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
 [ext_resource path="res://res/sprites/env/law.png" type="Texture" id=4]
-[ext_resource path="res://DialogMessage.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
-[ext_resource path="res://scenes/Scenes/DialogPanel.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/scripts/Dialog/DialogEventIncreasebounty.gd" type="Script" id=5]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=7]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=9]
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.33256
@@ -23,12 +25,54 @@ material_on_target = ExtResource( 3 )
 chara_name = "Law"
 chara_portrait = ExtResource( 4 )
 
-[node name="DialogMessage" parent="." instance=ExtResource( 5 )]
-editor/display_folded = true
-message = "It is I, the LAW !"
+[node name="DialogEventIncreaseBounty" type="Node" parent="."]
+script = ExtResource( 5 )
 
-[node name="DialogMessage" parent="DialogMessage" instance=ExtResource( 5 )]
-message = "You MUST respect me !"
+[node name="DialogMessage" type="Node" parent="."]
+script = ExtResource( 6 )
+message = "Article 1 : 
+Thou shalt not insult the King."
+
+[node name="Article2" type="Node" parent="DialogMessage"]
+script = ExtResource( 6 )
+message = "Article 2 : 
+Thou shalt not insult the Queen."
+
+[node name="Article3" type="Node" parent="DialogMessage/Article2"]
+script = ExtResource( 6 )
+message = "Article 3 : 
+Thou shalt not insult the Baillif."
+
+[node name="DialogMessage" type="Node" parent="DialogMessage/Article2/Article3"]
+script = ExtResource( 6 )
+message = "The list goes on for ages .. Continue ?"
+is_player = true
+
+[node name="Aye" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage"]
+script = ExtResource( 6 )
+message = "Aye"
+is_choice = true
+
+[node name="Article 4" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage/Aye"]
+script = ExtResource( 6 )
+message = "Article 4 :
+Thou shalt not insult guards."
+
+[node name="Article 5" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage/Aye/Article 4"]
+script = ExtResource( 6 )
+message = "Article 5: 
+Thou shalt not read Article 5"
+
+[node name="??" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage/Aye/Article 4/Article 5"]
+script = ExtResource( 6 )
+message = "????"
+is_player = true
+dialog_event_path = NodePath("../../../../../../../../DialogEventIncreaseBounty")
+
+[node name="Nay" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage"]
+script = ExtResource( 6 )
+message = "Nay"
+is_choice = true
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
 position = Vector2( -0.0522929, 0.156878 )
@@ -39,7 +83,7 @@ polygon = PoolVector2Array( -8.22234, 12.9512, -5.33417, 16.6151, -0.189621, 21.
 scale = Vector2( 1.00418, 1.0142 )
 texture = ExtResource( 4 )
 
-[node name="Interactable" parent="." instance=ExtResource( 6 )]
+[node name="Interactable" parent="." instance=ExtResource( 7 )]
 editor/display_folded = true
 scale = Vector2( 1.00418, 1.0142 )
 
@@ -64,7 +108,7 @@ margin_top = -27.8846
 margin_right = 168.471
 margin_bottom = 8.11537
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 8 )
 text = "TEST"
 align = 1
 valign = 1
@@ -72,4 +116,4 @@ valign = 1
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 8 )]
+[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 9 )]

@@ -6,6 +6,7 @@ var _player_name := "NAME"
 var _gold := 500
 var _target: PlayerTarget
 var _bounty := 0
+var _jail_time := 0 
 var fight_mode := false
 
 signal target_has_changed
@@ -60,6 +61,13 @@ func pay_bounty() -> bool:
 	if can_pay:
 		_gold -= _bounty
 	return can_pay
+	
+func go_to_jail_reset_bounty():
+	_jail_time = _bounty / 10
+	_bounty = 0
+	
+func get_jail_time() -> int:
+	return _jail_time	
 
 #TODO rework inventory
 #objects that can't be thrown away can't be sold either

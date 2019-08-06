@@ -4,14 +4,14 @@
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
 [ext_resource path="res://res/sprites/characters/woman_portrait.png" type="Texture" id=4]
-[ext_resource path="res://DialogMessage.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=5]
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Scenes/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=9]
 [ext_resource path="res://res/Woman_spriteframe.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/Scenes/DialogPanel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
@@ -27,8 +27,9 @@ material_on_target = ExtResource( 3 )
 chara_name = "Woman"
 chara_portrait = ExtResource( 4 )
 
-[node name="DialogMessage" parent="." instance=ExtResource( 5 )]
-message = "This is the inly message i have"
+[node name="DialogMessage" type="Node" parent="."]
+script = ExtResource( 5 )
+message = "I have nothing to say to thee."
 
 [node name="Interactable" parent="." instance=ExtResource( 6 )]
 editor/display_folded = true

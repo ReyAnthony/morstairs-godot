@@ -72,8 +72,10 @@ func _process(delta):
 			
 	var anim_direction := ""
 	var atk := ""
-			
+	
 	if _attacked:
+		if PlayerDataSingleton.get_bounty() <= 0:
+			_go_back_to_initial_position()
 		if fighting_behavior == FightingBehaviors.FIGHT:
 			if (_last_pathfind_time > 0.250 or pathfind.empty() or global_position.distance_to(pathfind[0]) <= 2):
 				_pathfind()
