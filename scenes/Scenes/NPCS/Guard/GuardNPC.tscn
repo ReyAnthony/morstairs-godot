@@ -98,6 +98,7 @@ is_choice = true
 [node name="DialogMessage" type="Node" parent="BountyMessages/Aye"]
 script = ExtResource( 7 )
 message = "Thee shalt come with me !"
+dialog_event_path = NodePath("../../../DialogEventGoToJail")
 
 [node name="Nay" type="Node" parent="BountyMessages"]
 script = ExtResource( 7 )
