@@ -59,7 +59,7 @@ func _process(delta: float):
 		var has_collided_with_target = false
 		for i in get_slide_count():
 			var collision: KinematicCollision2D = get_slide_collision(i)
-			if !(collision.collider.name == "TalkingNPC" and _PDS.fight_mode):
+			if !(collision.collider.is_in_group("npc") and _PDS.fight_mode):
 				_PDS.clear_target()
 				_velocity = Vector2.ZERO
 

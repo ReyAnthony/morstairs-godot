@@ -40,14 +40,14 @@ var _line : Line2D
 
 func _ready():
 	assert($"../" is KinematicBody2D)
-	assert($"../TalkingNPC/Sprite")
-	assert($"../TalkingNPC/Sprite" is AnimatedSprite)
-	assert($"../Collision")
+	assert($"../Sprite" != null)
+	assert($"../Sprite" is AnimatedSprite)
+	assert($"../Collision" != null)
 	assert($"../Collision" is CollisionPolygon2D)
 	assert($ViewArea != null)
 	
 	_root = $"../"
-	_animated_sprite = $"../TalkingNPC/Sprite"
+	_animated_sprite = $"../Sprite"
 	_free_target = Node2D.new()
 	_free_target.name = "free_target"
 	$"../../".call_deferred("add_child", _free_target)
@@ -60,10 +60,10 @@ func _ready():
 	_viewArea = $ViewArea
 	_player = get_tree().get_nodes_in_group("player")[0]
 	
-	$"../TalkingNPC/".connect("is_attacked", self, "_on_NPC_is_attacked")
-	$"../TalkingNPC/Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
+	_root.connect("is_attacked", self, "_on_NPC_is_attacked")
+	$"../Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 	_animated_sprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-	_root.add_collision_exception_with($"../TalkingNPC")
+	#_root.add_collision_exception_with($"../TalkingNPC")
 	z_index = 255
 	
 func _process(delta):
@@ -75,7 +75,7 @@ func _process(delta):
 			
 	if _attacked:
 		if fighting_behavior == FightingBehaviors.FIGHT:
-			if (_last_pathfind_time > 0.250 or pathfind.empty() or _root.global_position.distance_to(pathfind[0]) <= 2):
+			if (_last_pathfind_time > 0.250 or pathfind.empty() or global_position.distance_to(pathfind[0]) <= 2):
 				_pathfind()
 				_last_pathfind_time = 0
 			else:
@@ -203,5 +203,5 @@ func _on_Interactable_something_is_inside_interactable(body):
 func _on_AnimatedSprite_animation_finished():
 	if _animated_sprite.animation.ends_with("MELEE_ATTACK"):
 		_attack_anim_is_playing = false
-		if $"../TalkingNPC/Interactable/ActionArea".overlaps_body(_target):
+		if $"../Interactable/ActionArea".overlaps_body(_target):
 			_target.attack(1)

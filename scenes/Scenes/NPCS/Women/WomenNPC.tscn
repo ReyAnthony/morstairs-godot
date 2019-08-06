@@ -1,13 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Scenes/NPC.tscn" type="PackedScene" id=2]
-[ext_resource path="res://res/sprites/characters/woman_portrait.png" type="Texture" id=3]
-[ext_resource path="res://res/Woman_spriteframe.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=5]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=6]
-[ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Scenes/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/scripts/NPC/NPC.gd" type="Script" id=1]
+[ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
+[ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
+[ext_resource path="res://res/sprites/characters/woman_portrait.png" type="Texture" id=4]
+[ext_resource path="res://DialogMessage.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Scenes/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=9]
+[ext_resource path="res://res/Woman_spriteframe.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Scenes/DialogPanel.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
@@ -17,54 +21,61 @@ height = 13.2929
 radius = 7.12598
 
 [node name="WomanNPC" type="KinematicBody2D"]
-
-[node name="Collision" type="CollisionPolygon2D" parent="."]
-position = Vector2( -0.0522929, 0.156878 )
-scale = Vector2( 1.00418, 1.0142 )
-polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
-
-[node name="NPCBehavior" parent="." instance=ExtResource( 1 )]
-idle_behavior = 1
-
-[node name="TalkingNPC" parent="." instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+material_on_mouse_enter = ExtResource( 2 )
+material_on_target = ExtResource( 3 )
 chara_name = "Woman"
-chara_portrait = ExtResource( 3 )
-messages = [ "Message" ]
+chara_portrait = ExtResource( 4 )
 
-[node name="Sprite" type="AnimatedSprite" parent="TalkingNPC"]
-frames = ExtResource( 4 )
-animation = "SE"
+[node name="DialogMessage" parent="." instance=ExtResource( 5 )]
+message = "This is the inly message i have"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TalkingNPC"]
-position = Vector2( -0.0520752, 0.154682 )
-polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
-
-[node name="Interactable" parent="TalkingNPC" instance=ExtResource( 5 )]
+[node name="Interactable" parent="." instance=ExtResource( 6 )]
 editor/display_folded = true
+scale = Vector2( 1.00418, 1.0142 )
 
-[node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
+[node name="MouseArea" type="Area2D" parent="Interactable"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingNPC/Interactable/MouseArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 shape = SubResource( 1 )
 
-[node name="ActionArea" type="Area2D" parent="TalkingNPC/Interactable"]
+[node name="ActionArea" type="Area2D" parent="Interactable"]
 position = Vector2( 0.995837, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingNPC/Interactable/ActionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
 position = Vector2( -1.21263, 8.40183 )
 shape = SubResource( 2 )
 
-[node name="Name" type="Label" parent="TalkingNPC/Interactable"]
+[node name="Name" type="Label" parent="Interactable"]
 visible = false
 margin_left = -13.6325
 margin_top = -17.2094
 margin_right = 168.367
 margin_bottom = 18.7906
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 7 )
 text = "TEST"
 align = 1
 valign = 1
 
-[node name="Stats" parent="TalkingNPC" instance=ExtResource( 7 )]
-corpse = ExtResource( 8 )
+[node name="Stats" parent="." instance=ExtResource( 8 )]
+scale = Vector2( 1.00418, 1.0142 )
+corpse = ExtResource( 9 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 1.00418, 1.0142 )
+frames = ExtResource( 10 )
+animation = "SE"
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+position = Vector2( -0.0522929, 0.156878 )
+scale = Vector2( 1.00418, 1.0142 )
+polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
+
+[node name="NPCBehavior" parent="." instance=ExtResource( 11 )]
+idle_behavior = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 12 )]

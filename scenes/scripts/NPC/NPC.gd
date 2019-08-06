@@ -8,23 +8,13 @@ export (Material) var material_on_mouse_enter: Material
 export (Material) var material_on_target: Material
 export (String)  var chara_name: String
 export (Texture) var chara_portrait: Texture
-export (Array, String) var messages: Array = []
 
 var can_be_hit := false
-
-func attack(amount: int, attacker: PhysicsBody2D):
-	$Stats.attack(amount)
-	emit_signal("is_attacked", attacker)
-	
-func get_life() -> int:
-	return $Stats._current_life
-	
-func get_max_life() -> int:
-	return $Stats.life
 
 func _ready():
 	assert($Sprite != null)
 	assert($Interactable != null)
+	assert($DialogMessage)
 	self.add_to_group("npc")
 	if $Stats != null:
 		can_be_hit = true
@@ -34,8 +24,17 @@ func _ready():
 	$Interactable.connect("mouse_exited", self, "_on_Interactable_mouse_exited")
 	$Interactable.connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 	PlayerDataSingleton.connect("target_has_changed", self, "_on_player_target_changed")
-	
 	$Interactable/Name.text = chara_name
+	
+func attack(amount: int, attacker: PhysicsBody2D):
+	$Stats.attack(amount)
+	emit_signal("is_attacked", attacker)
+	
+func get_life() -> int:
+	return $Stats._current_life
+	
+func get_max_life() -> int:
+	return $Stats.life	
 	
 func _on_DialogPanel_on_dialog_end():
 	PlayerDataSingleton.clear_target()
@@ -59,14 +58,15 @@ func _on_player_target_changed(target: PlayerTarget):
 	else:
 		$Sprite.material = null
 		
-
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if !PlayerDataSingleton.get_target().is_valid():
 		return
 	
 	if !PlayerDataSingleton.fight_mode && PlayerDataSingleton.get_target().node == self:
 		if PlayerDataSingleton.get_bounty() > 0 and can_be_hit:
-			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, [chara_name + " n'a plus rien a vous dire."])
+			pass
+			##($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, [chara_name + " n'a plus rien a vous dire."])
 		else:
-			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, messages)
+			pass
+			($CanvasLayer/DialogPanel as DialogPanel).my_popup(chara_name, chara_portrait, $DialogMessage)
 		PlayerDataSingleton.clear_target()
