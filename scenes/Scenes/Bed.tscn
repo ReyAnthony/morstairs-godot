@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Bed.gd" type="Script" id=1]
+[ext_resource path="res://scenes/scripts/Bed.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
 [ext_resource path="res://res/sprites/env/bed_std.png" type="Texture" id=4]
@@ -8,15 +8,15 @@
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 10.3616
 height = 16.7988
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 8.55643
 height = 15.6277
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 12.4336
 
 [sub_resource type="Animation" id=4]
@@ -74,7 +74,7 @@ material_on_target = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.237003, -1.18502 )
 rotation = -0.802851
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
@@ -111,7 +111,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 position = Vector2( 0.7258, -0.725803 )
 rotation = -0.767945
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
@@ -122,7 +122,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
 position = Vector2( 0.290329, 0.290318 )
 rotation = -0.71733
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2

@@ -17,9 +17,6 @@ func _ready():
 		if !c.is_choice() and get_child_count() > 1:
 			assert(false)
 	
-	if(is_choice()):
-		is_player = true
-	
 	if !dialog_event_path.is_empty():
 		_dialog_event = get_node(dialog_event_path)
 
@@ -31,10 +28,6 @@ func get_next() -> DialogMessage:
 	
 func has_next() -> bool:
 	return get_child_count() != 0
-	
-func override_next(message: DialogMessage):
-	assert(has_choices())
-	_next = message
 	
 func execute_event():
 	assert(has_event())

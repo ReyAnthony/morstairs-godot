@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "GameObjectBase",
 "language": "GDScript",
-"path": "res://GameObjectBase.gd"
+"path": "res://scenes/scripts/GameObjectBase.gd"
 }, {
 "base": "Node2D",
 "class": "Interactable",

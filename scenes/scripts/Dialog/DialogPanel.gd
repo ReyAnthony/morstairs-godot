@@ -68,17 +68,17 @@ func _update_text():
 			i += 1
 			
 func _on_choice_clicked_0():
-	_messages.override_next(_messages.choices()[0])
+	_messages = _messages.choices()[0]
 	_advance_dialog()
 	
 func _on_choice_clicked_1():
-	_messages.override_next(_messages.choices()[1])
+	_messages = _messages.choices()[1]
 	_advance_dialog()
 	
 func _on_choice_clicked_2():
-	_messages.override_next(_messages.choices()[2])
+	_messages = _messages.choices()[2]
 	_advance_dialog()
 
 func _on_choice_clicked_3():
-	_messages.override_next(_messages.choices()[3])
+	_messages = _messages.choices()[3]
 	_advance_dialog()
