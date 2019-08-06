@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/scripts/Player/PlayerController.gd" type="Script" id=1]
-[ext_resource path="res://res/sprites/characters/player_portrait.png" type="Texture" id=2]
-[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=5]
-[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=6]
-[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=7]
-[ext_resource path="res://res/sprites/UI/bag.png" type="Texture" id=8]
-[ext_resource path="res://res/sprites/UI/map.png" type="Texture" id=9]
+[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=4]
+[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=5]
+[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=6]
+[ext_resource path="res://res/sprites/UI/bag.png" type="Texture" id=7]
+[ext_resource path="res://res/sprites/UI/map.png" type="Texture" id=8]
+[ext_resource path="res://res/sprites/characters/player_portrait.png" type="Texture" id=9]
 [ext_resource path="res://scenes/Scenes/PlayerInventory.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=11]
 [ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=12]
@@ -52,14 +52,13 @@ height = 0.19799
 "player",
 ]]
 script = ExtResource( 1 )
-player_portrait = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -8.45649, -0.30751 )
 polygon = PoolVector2Array( 6.71868, 6.1156, 9.07625, 5.50058, 10.9726, 6.62811, 11.0238, 8.0119, 8.61499, 8.62692, 6.92369, 7.9094 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 3 )
+frames = ExtResource( 2 )
 animation = "SE"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -89,7 +88,7 @@ visible = false
 anchor_right = 1.0
 margin_bottom = 36.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 3 )
 text = "Target"
 align = 1
 __meta__ = {
@@ -105,7 +104,7 @@ margin_left = -57.5
 margin_top = -43.0
 margin_right = 57.5
 margin_bottom = 43.0
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -148,8 +147,8 @@ margin_bottom = -224.437
 rect_scale = Vector2( 3, 3 )
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 7 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
 stretch_mode = 5
 
 [node name="Inventory" type="TextureButton" parent="CanvasLayer/Panel"]
@@ -163,7 +162,7 @@ margin_right = -86.4171
 margin_bottom = -354.806
 rect_scale = Vector2( 3, 3 )
 action_mode = 0
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 7 )
 expand = true
 stretch_mode = 5
 
@@ -174,7 +173,7 @@ margin_right = 118.715
 margin_bottom = 187.314
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
@@ -189,7 +188,7 @@ visible = false
 anchor_right = 1.0
 margin_bottom = 36.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 3 )
 text = "Target"
 align = 1
 __meta__ = {
@@ -205,7 +204,7 @@ margin_left = -58.3203
 margin_top = -44.6405
 margin_right = 56.6797
 margin_bottom = 41.3595
-texture_normal = ExtResource( 2 )
+texture_normal = ExtResource( 9 )
 expand = true
 stretch_mode = 5
 __meta__ = {
@@ -290,5 +289,5 @@ margin_top = -17.0
 margin_right = 135.99
 margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 3 )
 text = "Player"

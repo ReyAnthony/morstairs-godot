@@ -1,7 +1,8 @@
 extends Node
 class_name PDS
 
-var _player_name := "UNKNOWN"
+var player_portrait: Texture
+var _player_name := "NAME"
 var _gold := 500
 var _target: PlayerTarget
 var _bounty := 0
@@ -13,6 +14,7 @@ func _ready():
 	_target = PlayerTarget.new(Vector2(0,0))
 	_target.invalidate()
 	randomize()
+	player_portrait = preload("res://res/sprites/characters/player_portrait.png")
 
 func set_target(global_position: Vector2, node: Node2D = null):
 

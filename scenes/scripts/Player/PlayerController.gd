@@ -1,7 +1,6 @@
 extends KinematicBody2D
 class_name Player
 
-export (Texture) var player_portrait: Texture
 export (NodePath) var map_cam: NodePath
 
 const _WALK_SPEED := 30
@@ -24,7 +23,7 @@ func _ready():
 	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
 	$CanvasLayer/Panel/Inventory.connect("pressed", self, "_on_show_inventory")
 	$CanvasLayer/Panel/Player/Portrait.connect("pressed", self, "_on_show_player_stats")
-	
+	$Interactable/Name.text = _PDS.get_player_name()
 # warning-ignore:unused_argument
 func _process(delta: float):	
 	var anim_direction := ""
@@ -130,5 +129,4 @@ func _update_targeting(target: PlayerTarget):
 		
 func _update_player_life():
 	$CanvasLayer/Panel/Player/Label.text = _PDS.get_player_name()
-##	$CanvasLayer/Panel/Player/Portrait. = player_portrait
 	$CanvasLayer/Panel/Player/ColorRect.rect_size.x = $Stats._current_life * (77 / $Stats.life)

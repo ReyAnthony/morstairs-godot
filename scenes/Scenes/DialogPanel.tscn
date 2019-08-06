@@ -47,6 +47,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Stop right there criminal scum !
 You'll pay for what you did !"
 autowrap = true
+percent_visible = -0.00934579
 
 [node name="CharaPortrait" type="TextureRect" parent="Panel"]
 margin_left = 1063.89
@@ -55,3 +56,51 @@ margin_right = 1201.89
 margin_bottom = 190.194
 expand = true
 stretch_mode = 6
+
+[node name="Choices" type="GridContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 253.51
+margin_top = 139.85
+margin_right = -411.49
+margin_bottom = -24.1504
+columns = 4
+
+[node name="Button4" type="Button" parent="Panel/Choices"]
+margin_right = 150.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 150, 52 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 0.592157, 0, 0, 1 )
+text = "AAAAAA"
+flat = true
+
+[node name="Button5" type="Button" parent="Panel/Choices"]
+margin_left = 154.0
+margin_right = 304.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 150, 52 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 0.592157, 0, 0, 1 )
+text = "AAAAAA"
+flat = true
+
+[node name="Button6" type="Button" parent="Panel/Choices"]
+margin_left = 308.0
+margin_right = 458.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 150, 52 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 0.592157, 0, 0, 1 )
+text = "AAAAAA"
+flat = true
+
+[node name="Button7" type="Button" parent="Panel/Choices"]
+margin_left = 462.0
+margin_right = 612.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 150, 52 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 0.592157, 0, 0, 1 )
+text = "AAAAAA"
+flat = true
