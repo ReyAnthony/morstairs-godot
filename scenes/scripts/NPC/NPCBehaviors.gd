@@ -101,7 +101,7 @@ func _process(delta):
 						3: $Message.text = "MISCREANT !"
 						4: $Message.text = "SCUM !"
 				$AnimationPlayer.play("shout")
-				_on_NPC_is_attacked(_player)
+				_npc_attack(_player)
 		
 		if _go_back_to_initial_position:
 			if _unroll_pathfind_done():
@@ -132,11 +132,11 @@ func _process(delta):
 		
 	if !(fighting_behavior == FightingBehaviors.FIGHT and _attacked and _attack_anim_is_playing):
 		_root.move_and_slide(_velocity.normalized() * 20, Vector2.ZERO, false, 100)
-		for i in _root.get_slide_count():
-			var collision: KinematicCollision2D = _root.get_slide_collision(i)
-			if fighting_behavior == FightingBehaviors.FLEE:
-				_on_NPC_is_attacked(_player)
-				break;
+	for i in _root.get_slide_count():
+		var collision: KinematicCollision2D = _root.get_slide_collision(i)
+		if fighting_behavior == FightingBehaviors.FLEE and _attacked:
+			_npc_attack(_player)
+			break;
 				
 func _determine_sprite_direction():
 	var dir = ""
@@ -178,6 +178,9 @@ func _pathfind():
 	
 func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 	PlayerDataSingleton.increment_bounty(10)
+	_npc_attack(attacker)
+
+func _npc_attack(attacker: PhysicsBody2D):
 	_attacked = true
 	_go_back_to_initial_position = false
 	if fighting_behavior == FightingBehaviors.GO_BACK_IDLE:
@@ -191,7 +194,7 @@ func _on_NPC_is_attacked(attacker: PhysicsBody2D):
 		_target = _free_target
 	elif fighting_behavior == FightingBehaviors.FIGHT:
 		_target = attacker
-	_pathfind()
+	_pathfind()	
 
 func _on_Interactable_something_is_inside_interactable(body):
 	if body == _target and fighting_behavior == FightingBehaviors.FIGHT and !_attack_anim_is_playing:

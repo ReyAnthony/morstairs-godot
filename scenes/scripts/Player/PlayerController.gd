@@ -24,7 +24,6 @@ func _ready():
 	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
 	$CanvasLayer/Panel/Inventory.connect("pressed", self, "_on_show_inventory")
 	$CanvasLayer/Panel/Player/Portrait.connect("pressed", self, "_on_show_player_stats")
-	_clear_player_selection()
 	
 # warning-ignore:unused_argument
 func _process(delta: float):	
@@ -119,10 +118,6 @@ func _on_combat_mode_switch():
 func _on_show_inventory():
 	get_tree().paused = true
 	$CanvasLayer/PlayerInventory.show_inventory()
-	
-func _clear_player_selection():
-	$Interactable.show_name = false
-	$Interactable.hide_name()
 
 func _update_targeting(target: PlayerTarget):
 	if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.can_be_hit:
