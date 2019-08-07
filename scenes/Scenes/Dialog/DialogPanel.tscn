@@ -84,22 +84,20 @@ expand = true
 stretch_mode = 6
 
 [node name="CharaMessage" type="Label" parent="Panel/Center/Grid/Panel"]
-margin_left = 36.9786
-margin_top = 27.84
-margin_right = 941.979
-margin_bottom = 145.84
+margin_left = 37.0
+margin_top = 28.0
+margin_right = 940.0
+margin_bottom = 199.0
 custom_fonts/font = ExtResource( 3 )
 text = "Stop right there criminal scum !
 You'll pay for what you did !"
 autowrap = true
 
 [node name="Choices" type="GridContainer" parent="Panel/Center/Grid/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 39.107
 margin_top = 151.41
-margin_right = -321.893
-margin_bottom = -12.5906
+margin_right = 189.107
+margin_bottom = 151.41
 columns = 4
 
 [node name="Button5" type="Button" parent="Panel/Center/Grid/Panel/Choices"]
