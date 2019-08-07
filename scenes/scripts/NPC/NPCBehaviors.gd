@@ -109,7 +109,9 @@ func _process(delta):
 			if _unroll_pathfind_done():
 				_go_back_to_initial_position = false
 				_target = null
+				_root.global_position = _initial_position
 				_animated_sprite.play(_initial_dir)
+				_velocity = Vector2.ZERO
 		else:
 				if idle_behavior == IdleBehaviors.IDLE:
 					_velocity = Vector2(0,0)
@@ -168,13 +170,13 @@ func _go_back_to_initial_position():
 	_pathfind()
 
 func _unroll_pathfind_done():
-	if _current_pathfind_index >= pathfind.size() -1:
+	if _current_pathfind_index >= pathfind.size(): ##you got after the last
 			_current_pathfind_index = 0
 			return true
 	else:
+		_velocity = (pathfind[_current_pathfind_index] - _root.global_position).normalized()
 		if _root.global_position.distance_to(pathfind[_current_pathfind_index]) <= 2:
 			_current_pathfind_index += 1
-		_velocity = (pathfind[_current_pathfind_index] - _root.global_position).normalized()
 		return false
 
 func _pathfind(): 

@@ -32,7 +32,7 @@ func _on_DialogPanel_on_dialog_end():
 		emit_signal("on_dialog_end")
 
 func _on_player_target_changed(target: PlayerTarget):
-	if target.is_you(self) and can_be_hit:
+	if target.is_you(self) and can_be_hit and target.is_valid():
 		$Sprite.material = material_on_target
 	else:
 		$Sprite.material = null

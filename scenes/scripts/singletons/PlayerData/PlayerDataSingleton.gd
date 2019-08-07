@@ -31,6 +31,7 @@ func set_target(global_position: Vector2, node: Node2D = null):
 	
 func clear_target():
 	_target.invalidate()
+	emit_signal("target_has_changed", _target)
 	
 func get_target() -> PlayerTarget:
 	assert(_target != null)
