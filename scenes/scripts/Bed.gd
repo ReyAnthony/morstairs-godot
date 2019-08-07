@@ -14,16 +14,18 @@ func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 		PlayerDataSingleton.clear_target()
 		if PlayerDataSingleton.get_bounty() > 0:
 			$CanvasLayer/DialogPanel.my_popup("", null, $CantUse)
-		else:	
-			_sleep()
+		else:
+			if !_is_sleeping:
+				_sleep()
 		
 func _sleep():
+	$CanvasLayer.layer = 255
+	$CanvasLayer/AnimationPlayer.play("fade")
+	
 	._on_Interactable_mouse_exited()
 	_is_sleeping = true
 	$SleepingPC.show()
 	PlayerDataSingleton.get_player().hide()
-	$CanvasLayer.layer = 255
-	$CanvasLayer/AnimationPlayer.play("fade")
 	PlayerDataSingleton.heal_player()
 	
 	if PlayerDataSingleton.get_jail_time() > 0 and jail_bed:
