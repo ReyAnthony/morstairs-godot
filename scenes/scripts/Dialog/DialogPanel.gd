@@ -11,7 +11,7 @@ var lock = false
 func _ready():
 	set_process(false)
 	var i = 0
-	for c in $Panel/Choices.get_children():
+	for c in $Panel/Center/Grid/Panel/Choices.get_children():
 		c.connect("pressed", self, "_on_choice_clicked_" + String(i))
 		i += 1
 
@@ -46,22 +46,26 @@ func _advance_dialog():
 		hide()
 	
 func _update_text():
-	$Panel/CharaMessage.text = _messages.message
-	for c in $Panel/Choices.get_children():
+	$Panel/Center/Grid/Panel/CharaMessage.text = _messages.message
+	for c in $Panel/Center/Grid/Panel/Choices.get_children():
 		c.hide()
 		
 	if _messages.is_player:
-		$Panel/CharaName.text = PlayerDataSingleton.get_player_name()
-		$Panel/CharaPortrait.texture = PlayerDataSingleton.player_portrait
+		$Panel/Center/Grid/Portrait/CharaName.text = PlayerDataSingleton.get_player_name()
+		$Panel/Center/Grid/Portrait/CharaPortrait.texture = PlayerDataSingleton.player_portrait
 	else:
-		$Panel/CharaName.text = _chara_name
-		$Panel/CharaPortrait.texture = _chara_portrait
+		$Panel/Center/Grid/Portrait/CharaName.text = _chara_name
+		$Panel/Center/Grid/Portrait/CharaPortrait.texture = _chara_portrait
+		if _chara_portrait == null:
+			$Panel/Center/Grid/Portrait.hide()
+		else:
+			$Panel/Center/Grid/Portrait.show()	
 	
 	if _messages.has_choices():
 		var i = 0
 		for c in _messages.choices():
 			c = c as DialogMessage
-			var b: Button = $Panel/Choices.get_children()[i]
+			var b: Button = $Panel/Center/Grid/Panel/Choices.get_children()[i]
 			b = (b as Button)
 			b.text = c.message
 			b.show()

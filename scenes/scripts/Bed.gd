@@ -40,3 +40,5 @@ func _on_finished_animation(animation):
 	PlayerDataSingleton.get_player().show()
 	get_tree().paused = false
 	$CanvasLayer.layer = -1
+	if jail_bed and PlayerDataSingleton.get_jail_time() <= 0:
+		$CanvasLayer/DialogPanel.my_popup("", null, $AfterJail)

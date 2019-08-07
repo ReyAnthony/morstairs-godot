@@ -57,6 +57,7 @@ __meta__ = {
 }
 
 [node name="Torchs" type="YSort" parent="DayNight/Level/Walls"]
+editor/display_folded = true
 
 [node name="torch5" parent="DayNight/Level/Walls/Torchs" instance=ExtResource( 4 )]
 position = Vector2( 212, 118 )

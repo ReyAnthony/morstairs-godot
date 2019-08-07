@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/scripts/Bed.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://res/sprites/characters/player/sleeping_pc.png" type="Texture" id=5]
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 10.3616
@@ -88,6 +90,7 @@ position = Vector2( -3.68961, -7.42055 )
 texture = ExtResource( 5 )
 
 [node name="Interactable" parent="." instance=ExtResource( 6 )]
+editor/display_folded = true
 
 [node name="Name" type="Label" parent="Interactable"]
 visible = false
@@ -128,10 +131,13 @@ shape = SubResource( 3 )
 pause_mode = 2
 layer = 0
 
+[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 8 )]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 anims/fade = SubResource( 4 )
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
+editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -162,3 +168,11 @@ custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "JAIL"
 align = 1
+
+[node name="AfterJail" type="Node" parent="."]
+script = ExtResource( 9 )
+message = "Thee has been freed."
+
+[node name="Stats--" type="Node" parent="AfterJail"]
+script = ExtResource( 9 )
+message = "Some of thy stats have lowered as a result of thy stay"
