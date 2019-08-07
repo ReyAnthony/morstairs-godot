@@ -19,7 +19,6 @@ func _sleep():
 	_is_sleeping = true
 	$SleepingPC.show()
 	PlayerDataSingleton.get_player().hide()
-	get_tree().paused = true
 	$CanvasLayer.layer = 255
 	$CanvasLayer/AnimationPlayer.play("fade")
 	PlayerDataSingleton.heal_player()
@@ -33,12 +32,13 @@ func _sleep():
 		PlayerDataSingleton.decrement_jail_time()
 	if PlayerDataSingleton.get_jail_time() <= 0 and jail_bed:
 		PlayerDataSingleton.get_player().global_position = get_tree().get_nodes_in_group("out_jail")[0].global_position
+	PlayerDataSingleton.has_slept()
+	##get_tree().paused = true #no need to pause as the canvas will block movements
 
 func _on_finished_animation(animation):
 	_is_sleeping = false
 	$SleepingPC.hide()
 	PlayerDataSingleton.get_player().show()
-	get_tree().paused = false
 	$CanvasLayer.layer = -1
 	if jail_bed and PlayerDataSingleton.get_jail_time() <= 0:
 		$CanvasLayer/DialogPanel.my_popup("", null, $AfterJail)

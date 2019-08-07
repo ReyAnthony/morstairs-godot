@@ -141,11 +141,14 @@ position = Vector2( 16.0565, -127.829 )
 [node name="GuardNPC4" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 7 )]
 position = Vector2( 308.312, -27.3893 )
 
+[node name="GuardNPC8" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 7 )]
+position = Vector2( 521.529, 135.815 )
+
 [node name="LawNPC" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
 position = Vector2( 144.221, 42.6661 )
 
 [node name="Player" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
-position = Vector2( 482.737, 112.24 )
+position = Vector2( 556.97, 121.561 )
 map_cam = NodePath("../../../MapCam")
 
 [node name="Rooms" type="Node2D" parent="DayNight/Level"]

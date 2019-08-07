@@ -63,7 +63,7 @@ func _ready():
 	_root.connect("is_attacked", self, "_on_NPC_is_attacked")
 	$"../Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 	_animated_sprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-	#_root.add_collision_exception_with($"../TalkingNPC")
+	PlayerDataSingleton.connect("has_slept", self, "_on_player_has_slept")
 	z_index = 255
 	
 func _process(delta):
@@ -151,6 +151,14 @@ func _determine_sprite_direction():
 	elif _velocity.x > 0:
 		dir += "E"
 	return dir
+
+func _on_player_has_slept():
+	_go_back_to_initial_position()
+	_go_back_to_initial_position = false
+	_root.global_position = _initial_position
+	_animated_sprite.play(_initial_dir)
+	_target = null
+	pathfind = []
 
 func _go_back_to_initial_position():
 	_attacked = false

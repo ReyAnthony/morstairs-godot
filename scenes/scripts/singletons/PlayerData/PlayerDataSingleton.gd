@@ -10,6 +10,7 @@ var _jail_time := 0
 var fight_mode := false
 
 signal target_has_changed
+signal has_slept
 
 func _ready():
 	_target = PlayerTarget.new(Vector2(0,0))
@@ -75,6 +76,10 @@ func decrement_jail_time():
 		
 func heal_player():
 	get_player().full_heal()
+	
+func has_slept():
+	#update calendar
+	emit_signal("has_slept")	
 
 #TODO refactor with this and cache it
 #can't type it because of cyclic dependency

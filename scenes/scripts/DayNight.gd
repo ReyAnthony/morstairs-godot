@@ -16,6 +16,7 @@ func _ready():
 	_anim_node = $AnimationPlayer
 	_CYCLE_LENGTH_NIGHT = _CYCLE_LENGTH_DAY_IN_SEC / _CYCLE_LENGTH_NIGHT_DIV
 	self.set_process(true)
+	PlayerDataSingleton.connect("has_slept", self, "_on_has_slept")
    
 func _process(delta):
 	if _time < _get_cycle_length() && !_anim_node.is_playing():
@@ -45,3 +46,8 @@ func _night_end():
 	for t in get_tree().get_nodes_in_group("torchs"):
 		var tt: Torch = t as Torch
 		tt.unlight_it()
+		
+func _on_has_slept():
+	_day = false
+	_anim_node.stop()
+	_time = _get_cycle_length() + 1
