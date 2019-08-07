@@ -129,6 +129,7 @@ shape = SubResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
+editor/display_folded = true
 layer = 0
 
 [node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 8 )]
@@ -170,6 +171,7 @@ text = "JAIL"
 align = 1
 
 [node name="AfterJail" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 9 )
 message = "Thou hast been freed."
 

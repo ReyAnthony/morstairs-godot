@@ -55,6 +55,7 @@ func get_bounty() -> int:
 
 func increment_bounty(inc):
 	_bounty += inc
+	_jail_time = _bounty / 10
 
 func can_pay_bounty() -> bool:
 	return _bounty <= _gold
@@ -68,7 +69,6 @@ func pay_bounty() -> bool:
 	return can_pay
 	
 func go_to_jail_reset_bounty():
-	_jail_time = _bounty / 10
 	_bounty = 0
 	emit_signal("bounty_paid")
 	

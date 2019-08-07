@@ -28,9 +28,9 @@ func _sleep():
 	
 	if PlayerDataSingleton.get_jail_time() > 0 and jail_bed:
 		if PlayerDataSingleton.get_jail_time() == 1:
-			$CanvasLayer/Panel/JailTime.text = "This is your last night before freedom."
+			$CanvasLayer/Panel/JailTime.text = "This is thy last night before freedom."
 		else:
-			$CanvasLayer/Panel/JailTime.text = "Thee shall still stay " + String(PlayerDataSingleton._jail_time) +" night here."
+			$CanvasLayer/Panel/JailTime.text = "Thou shall still stay " + String(PlayerDataSingleton.get_jail_time()) +" night here."
 	else:
 		$CanvasLayer/Panel/JailTime.text = ""
 		
