@@ -3,7 +3,7 @@ class_name PDS
 
 var player_portrait: Texture
 var _player_name := "NAME"
-var _gold := 500
+var _gold := 10
 var _target: PlayerTarget
 var _bounty := 0
 var _jail_time := 0 

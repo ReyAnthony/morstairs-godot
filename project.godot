@@ -25,6 +25,16 @@ _global_script_classes=[ {
 "path": "res://scenes/scripts/Dialog/DialogEventGoToJail.gd"
 }, {
 "base": "DialogEvent",
+"class": "DialogEventGotoDialog",
+"language": "GDScript",
+"path": "res://scenes/scripts/Dialog/DialogEventGotoDialog.gd"
+}, {
+"base": "DialogEvent",
+"class": "DialogEventHowMuch",
+"language": "GDScript",
+"path": "res://scenes/scripts/Dialog/DialogEventHowMuch.gd"
+}, {
+"base": "DialogEvent",
 "class": "DialogEventIncreaseBounty",
 "language": "GDScript",
 "path": "res://scenes/scripts/Dialog/DialogEventIncreasebounty.gd"
@@ -32,7 +42,7 @@ _global_script_classes=[ {
 "base": "DialogEvent",
 "class": "DialogEventPayFine",
 "language": "GDScript",
-"path": "res://DialogEventPayFine.gd"
+"path": "res://scenes/scripts/Dialog/DialogEventPayFine.gd"
 }, {
 "base": "Node",
 "class": "DialogMessage",
@@ -108,6 +118,8 @@ _global_script_class_icons={
 "DayNight": "",
 "DialogEvent": "",
 "DialogEventGoToJail": "",
+"DialogEventGotoDialog": "",
+"DialogEventHowMuch": "",
 "DialogEventIncreaseBounty": "",
 "DialogEventPayFine": "",
 "DialogMessage": "",
