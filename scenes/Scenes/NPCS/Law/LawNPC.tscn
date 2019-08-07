@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://scenes/Scenes/NPC.tscn" type="PackedScene" id=1]
-[ext_resource path="res://res/sprites/env/law.png" type="Texture" id=2]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=3]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scenes/scripts/NPC/NPC.gd" type="Script" id=1]
+[ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
+[ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
+[ext_resource path="res://res/sprites/env/law.png" type="Texture" id=4]
+[ext_resource path="res://scenes/scripts/Dialog/DialogEventIncreasebounty.gd" type="Script" id=5]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=7]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.33256
@@ -12,44 +17,102 @@ height = 33.9592
 [sub_resource type="CircleShape2D" id=2]
 radius = 11.9791
 
-[node name="LawNPC" type="Node2D"]
+[node name="LawNPC" type="KinematicBody2D"]
+script = ExtResource( 1 )
+material_on_mouse_enter = ExtResource( 2 )
+material_on_target = ExtResource( 3 )
+chara_name = "Law"
+chara_portrait = ExtResource( 4 )
 
-[node name="TalkingNPC" parent="." instance=ExtResource( 1 )]
-chara_name = "Laws"
-chara_portrait = ExtResource( 2 )
-messages = [ "IT IS I, THE LAW", "YOU NEED TO RESPECT ME." ]
+[node name="DialogEventIncreaseBounty" type="Node" parent="."]
+script = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="TalkingNPC"]
-texture = ExtResource( 2 )
+[node name="DialogMessage" type="Node" parent="."]
+script = ExtResource( 6 )
+message = "Article 1 : 
+Thou shalt not insult the King."
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TalkingNPC"]
-position = Vector2( -0.0520752, 0.154682 )
+[node name="Article2" type="Node" parent="DialogMessage"]
+script = ExtResource( 6 )
+message = "Article 2 : 
+Thou shalt not insult the Queen."
+
+[node name="Article3" type="Node" parent="DialogMessage/Article2"]
+script = ExtResource( 6 )
+message = "Article 3 : 
+Thou shalt not insult the Baillif."
+
+[node name="DialogMessage" type="Node" parent="DialogMessage/Article2/Article3"]
+script = ExtResource( 6 )
+message = "The list goes on for ages .. Continue ?"
+is_narrator = true
+
+[node name="Aye" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage"]
+script = ExtResource( 6 )
+message = "Aye"
+is_choice = true
+
+[node name="Article 4" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage/Aye"]
+script = ExtResource( 6 )
+message = "Article 4 :
+Thou shalt not insult guards."
+
+[node name="Article 5" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage/Aye/Article 4"]
+script = ExtResource( 6 )
+message = "Article 5: 
+Thou shalt not read Article 5"
+
+[node name="??" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage/Aye/Article 4/Article 5"]
+script = ExtResource( 6 )
+message = "????"
+is_player = true
+dialog_event_path = NodePath("../../../../../../../../DialogEventIncreaseBounty")
+
+[node name="Nay" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage"]
+script = ExtResource( 6 )
+message = "Nay"
+is_choice = true
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+position = Vector2( -0.0522929, 0.156878 )
+scale = Vector2( 1.00418, 1.0142 )
 polygon = PoolVector2Array( -8.22234, 12.9512, -5.33417, 16.6151, -0.189621, 21.1726, 9.10668, 11.5214, 7.21132, 5.17655, -0.00911237, 8.39364, -8.22234, 4.19355 )
 
-[node name="Interactable" parent="TalkingNPC" instance=ExtResource( 3 )]
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.00418, 1.0142 )
+texture = ExtResource( 4 )
 
-[node name="MouseArea" type="Area2D" parent="TalkingNPC/Interactable"]
+[node name="Interactable" parent="." instance=ExtResource( 7 )]
+editor/display_folded = true
+scale = Vector2( 1.00418, 1.0142 )
+
+[node name="MouseArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingNPC/Interactable/MouseArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 shape = SubResource( 1 )
 
-[node name="ActionArea" type="Area2D" parent="TalkingNPC/Interactable"]
+[node name="ActionArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
 position = Vector2( 0.995837, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkingNPC/Interactable/ActionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
 position = Vector2( -2.02492, 13.2275 )
 shape = SubResource( 2 )
 
-[node name="Name" type="Label" parent="TalkingNPC/Interactable"]
+[node name="Name" type="Label" parent="Interactable"]
 visible = false
 margin_left = -13.5288
 margin_top = -27.8846
 margin_right = 168.471
 margin_bottom = 8.11537
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 8 )
 text = "TEST"
 align = 1
 valign = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 9 )]
