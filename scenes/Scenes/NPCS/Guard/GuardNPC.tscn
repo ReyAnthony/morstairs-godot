@@ -34,6 +34,7 @@ chara_name = "Guard"
 chara_portrait = ExtResource( 4 )
 
 [node name="Events" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="JailSentence" type="Node" parent="Events"]
 editor/display_folded = true
@@ -69,6 +70,7 @@ dialog_panel = NodePath("../../CanvasLayer/DialogPanel")
 script = ExtResource( 10 )
 
 [node name="PayFine" type="Node" parent="Events"]
+editor/display_folded = true
 script = ExtResource( 11 )
 dialog_panel = NodePath("../../CanvasLayer/DialogPanel")
 NPC = NodePath("../..")
@@ -84,11 +86,11 @@ message = "Thou cans't pay !"
 dialog_event_path = NodePath("../../RestartBountyDialog")
 
 [node name="DialogMessage" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 6 )
 message = "I'm here to uphold the law of the King !"
 
 [node name="DialogMessage" type="Node" parent="DialogMessage"]
-editor/display_folded = true
 script = ExtResource( 6 )
 message = "Dare not causing ado !"
 
@@ -112,6 +114,7 @@ message = "Thee messed with the wrong guard !"
 dialog_event_path = NodePath("../../../../Events/IncreaseBounty")
 
 [node name="BountyMessages" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 6 )
 message = "Scoundrel ! Stand right there and pay thy fine !"
 
