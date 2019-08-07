@@ -28,7 +28,6 @@ chara_portrait = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="DialogMessage" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 6 )
 message = "Article 1 : 
 Thou shalt not insult the King."
@@ -46,7 +45,7 @@ Thou shalt not insult the Baillif."
 [node name="DialogMessage" type="Node" parent="DialogMessage/Article2/Article3"]
 script = ExtResource( 6 )
 message = "The list goes on for ages .. Continue ?"
-is_player = true
+is_narrator = true
 
 [node name="Aye" type="Node" parent="DialogMessage/Article2/Article3/DialogMessage"]
 script = ExtResource( 6 )

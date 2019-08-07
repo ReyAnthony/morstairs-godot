@@ -171,8 +171,13 @@ align = 1
 
 [node name="AfterJail" type="Node" parent="."]
 script = ExtResource( 9 )
-message = "Thee have been freed."
+message = "Thou hast been freed."
 
 [node name="Stats--" type="Node" parent="AfterJail"]
 script = ExtResource( 9 )
 message = "Some of thy stats have lowered as a result of thy stay"
+
+[node name="CantUse" type="Node" parent="."]
+script = ExtResource( 9 )
+message = "Dost thee wish to get killed in thine sleep ? 
+Thou canst use it ! "

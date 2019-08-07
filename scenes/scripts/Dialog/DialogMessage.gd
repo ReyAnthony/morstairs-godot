@@ -4,6 +4,7 @@ class_name DialogMessage
 export (String, MULTILINE) var message: String
 export (bool) var is_choice: bool = false
 export (bool) var is_player: bool = false
+export (bool) var is_narrator: bool = false
 export (NodePath) var dialog_event_path: NodePath
 
 var _dialog_event: DialogEvent

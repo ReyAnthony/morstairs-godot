@@ -12,7 +12,10 @@ func _ready():
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if body.is_in_group("player") and PlayerDataSingleton.get_target().is_you(self):
 		PlayerDataSingleton.clear_target()
-		_sleep()
+		if PlayerDataSingleton.get_bounty() > 0:
+			$CanvasLayer/DialogPanel.my_popup("", null, $CantUse)
+		else:	
+			_sleep()
 		
 func _sleep():
 	._on_Interactable_mouse_exited()

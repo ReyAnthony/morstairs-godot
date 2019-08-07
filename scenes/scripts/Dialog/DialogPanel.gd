@@ -50,16 +50,18 @@ func _update_text():
 	for c in $Panel/Center/Grid/Panel/Choices.get_children():
 		c.hide()
 		
+	$Panel/Center/Grid/Portrait.show()
+	
 	if _messages.is_player:
 		$Panel/Center/Grid/Portrait/CharaName.text = PlayerDataSingleton.get_player_name()
 		$Panel/Center/Grid/Portrait/CharaPortrait.texture = PlayerDataSingleton.player_portrait
+	elif _messages.is_narrator:
+		$Panel/Center/Grid/Portrait.hide()
 	else:
 		$Panel/Center/Grid/Portrait/CharaName.text = _chara_name
 		$Panel/Center/Grid/Portrait/CharaPortrait.texture = _chara_portrait
 		if _chara_portrait == null:
 			$Panel/Center/Grid/Portrait.hide()
-		else:
-			$Panel/Center/Grid/Portrait.show()	
 	
 	if _messages.has_choices():
 		var i = 0

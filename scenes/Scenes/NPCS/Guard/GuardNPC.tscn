@@ -44,6 +44,7 @@ script = ExtResource( 7 )
 message = "Dare not causing ado !"
 
 [node name="Aye" type="Node" parent="DialogMessage/DialogMessage"]
+editor/display_folded = true
 script = ExtResource( 7 )
 message = "Aye"
 is_choice = true
@@ -52,16 +53,8 @@ is_choice = true
 script = ExtResource( 7 )
 message = "Be lawful, citizen, and thee won't have any ado.. "
 
-[node name="Nay" type="Node" parent="DialogMessage/DialogMessage"]
-script = ExtResource( 7 )
-message = "Nay"
-is_choice = true
-
-[node name="DialogMessage" type="Node" parent="DialogMessage/DialogMessage/Nay"]
-script = ExtResource( 7 )
-message = "Be lawful, citizen, and thee won't have any ado.. "
-
 [node name="En garde" type="Node" parent="DialogMessage/DialogMessage"]
+editor/display_folded = true
 script = ExtResource( 7 )
 message = "En garde !"
 is_choice = true
