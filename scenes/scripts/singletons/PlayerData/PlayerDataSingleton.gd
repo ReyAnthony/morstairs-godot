@@ -11,6 +11,7 @@ var fight_mode := false
 
 signal target_has_changed
 signal has_slept
+signal bounty_paid
 
 func _ready():
 	_target = PlayerTarget.new(Vector2(0,0))
@@ -62,11 +63,14 @@ func pay_bounty() -> bool:
 	var can_pay = can_pay_bounty()
 	if can_pay:
 		_gold -= _bounty
+		_bounty = 0
+		emit_signal("bounty_paid")
 	return can_pay
 	
 func go_to_jail_reset_bounty():
 	_jail_time = _bounty / 10
 	_bounty = 0
+	emit_signal("bounty_paid")
 	
 func get_jail_time() -> int:
 	return _jail_time

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/scripts/NPC/NPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
@@ -6,14 +6,15 @@
 [ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=4]
 [ext_resource path="res://scenes/scripts/Dialog/DialogEventGoToJail.gd" type="Script" id=5]
 [ext_resource path="res://scenes/scripts/Dialog/DialogEventIncreasebounty.gd" type="Script" id=6]
-[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=8]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=9]
-[ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=11]
-[ext_resource path="res://res/Guard_spriteframe.tres" type="SpriteFrames" id=12]
-[ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=14]
+[ext_resource path="res://DialogEventPayFine.gd" type="Script" id=7]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=9]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=10]
+[ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=12]
+[ext_resource path="res://res/Guard_spriteframe.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
@@ -35,75 +36,89 @@ script = ExtResource( 5 )
 [node name="DialogEventIncreaseBounty" type="Node" parent="."]
 script = ExtResource( 6 )
 
-[node name="DialogMessage" type="Node" parent="."]
+[node name="DialogEventPayFine" type="Node" parent="."]
 script = ExtResource( 7 )
+
+[node name="CanPay" type="Node" parent="DialogEventPayFine"]
+script = ExtResource( 8 )
+message = "Thee are free to go ! 
+But we won't forget you, scoundrel !"
+
+[node name="CantPay" type="Node" parent="DialogEventPayFine"]
+script = ExtResource( 8 )
+message = "Thou cans't pay !"
+
+[node name="DialogMessage" type="Node" parent="."]
+editor/display_folded = true
+script = ExtResource( 8 )
 message = "I'm here to uphold the law of the King !"
 
 [node name="DialogMessage" type="Node" parent="DialogMessage"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Dare not causing ado !"
 
 [node name="Aye" type="Node" parent="DialogMessage/DialogMessage"]
 editor/display_folded = true
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Aye"
 is_choice = true
 
 [node name="DialogMessage2" type="Node" parent="DialogMessage/DialogMessage/Aye"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Be lawful, citizen, and thee won't have any ado.. "
 
 [node name="En garde" type="Node" parent="DialogMessage/DialogMessage"]
 editor/display_folded = true
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "En garde !"
 is_choice = true
 
 [node name="DialogMessage" type="Node" parent="DialogMessage/DialogMessage/En garde"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Thee messed with the wrong guard !"
 dialog_event_path = NodePath("../../../../DialogEventIncreaseBounty")
 
 [node name="BountyMessages" type="Node" parent="."]
-editor/display_folded = true
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Scoundrel ! Stand right there and pay thy fine !"
 
 [node name="Aye" type="Node" parent="BountyMessages"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Aye
 "
 is_choice = true
 
 [node name="DialogMessage" type="Node" parent="BountyMessages/Aye"]
-script = ExtResource( 7 )
-message = "Thee shalt come with me !"
-dialog_event_path = NodePath("../../../DialogEventGoToJail")
+script = ExtResource( 8 )
+message = "Let's see..."
+dialog_event_path = NodePath("../../../DialogEventPayFine")
 
 [node name="Nay" type="Node" parent="BountyMessages"]
-script = ExtResource( 7 )
+editor/display_folded = true
+script = ExtResource( 8 )
 message = "Nay"
 is_choice = true
 
 [node name="DialogMessage" type="Node" parent="BountyMessages/Nay"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Thee shalt gust mine own blade then !"
 
 [node name="Jail" type="Node" parent="BountyMessages"]
-script = ExtResource( 7 )
+editor/display_folded = true
+script = ExtResource( 8 )
 message = "Jail
 "
 is_choice = true
 
 [node name="DialogMessage" type="Node" parent="BountyMessages/Jail"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Thee shalt rot in cage !"
 dialog_event_path = NodePath("../../../DialogEventGoToJail")
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -3.01977, 9.10132, -2.44125, 9.28473, 2.01792, 9.27482, 3.2916, 8.64104, 3.20068, 4.85075, 2.70057, 5.07145, -3.2388, 4.46039 )
 
-[node name="Interactable" parent="." instance=ExtResource( 8 )]
+[node name="Interactable" parent="." instance=ExtResource( 9 )]
 editor/display_folded = true
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
@@ -126,24 +141,25 @@ margin_top = -17.2094
 margin_right = 168.367
 margin_bottom = 18.7906
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 9 )
+custom_fonts/font = ExtResource( 10 )
 text = "TEST"
 align = 1
 valign = 1
 
-[node name="Stats" parent="." instance=ExtResource( 10 )]
+[node name="Stats" parent="." instance=ExtResource( 11 )]
 life = 5
-corpse = ExtResource( 11 )
+corpse = ExtResource( 12 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 12 )
+frames = ExtResource( 13 )
 animation = "SE"
 
-[node name="NPCBehavior" parent="." instance=ExtResource( 13 )]
+[node name="NPCBehavior" parent="." instance=ExtResource( 14 )]
 idle_behavior = 1
 fighting_behavior = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 0
 
-[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 14 )]
+[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 15 )]

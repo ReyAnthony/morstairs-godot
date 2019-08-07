@@ -21,6 +21,7 @@ func _process(delta):
 
 func my_popup(chara_name: String, chara_portrait: Texture, messages: DialogMessage):
 	
+	get_tree().paused = true
 	$"../".layer = 255
 
 	_chara_name = chara_name
@@ -28,23 +29,26 @@ func my_popup(chara_name: String, chara_portrait: Texture, messages: DialogMessa
 	_messages = messages
 	_update_text()
 	
-	get_tree().paused = true
 	set_process(true)
 	.popup()
 
 func _advance_dialog():
-	if _messages.has_event():
-		_messages.execute_event()
+	
 	if _messages.has_next():
-			_messages = _messages.get_next()
-			_update_text()
+		if _messages.has_event():
+			_messages.execute_event()
+		_messages = _messages.get_next()
+		_update_text()
+		return
 	else: 
 		get_tree().paused = false
 		$"../".layer = 0
 		set_process(false)
 		emit_signal("on_dialog_end")
 		hide()
-	
+		if _messages.has_event():
+			_messages.execute_event()
+
 func _update_text():
 	$Panel/Center/Grid/Panel/CharaMessage.text = _messages.message
 	for c in $Panel/Center/Grid/Panel/Choices.get_children():

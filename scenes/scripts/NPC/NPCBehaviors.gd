@@ -64,6 +64,7 @@ func _ready():
 	$"../Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 	_animated_sprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	PlayerDataSingleton.connect("has_slept", self, "_on_player_has_slept")
+	PlayerDataSingleton.connect("bounty_paid", self, "_on_bounty_paid")
 	z_index = 255
 	
 func _process(delta):
@@ -153,6 +154,9 @@ func _determine_sprite_direction():
 	elif _velocity.x > 0:
 		dir += "E"
 	return dir
+	
+func _on_bounty_paid():
+	_go_back_to_initial_position()
 
 func _on_player_has_slept():
 	_go_back_to_initial_position()

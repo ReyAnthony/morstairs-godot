@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/Dialog/DialogEventIncreasebounty.gd"
 }, {
+"base": "DialogEvent",
+"class": "DialogEventPayFine",
+"language": "GDScript",
+"path": "res://DialogEventPayFine.gd"
+}, {
 "base": "Node",
 "class": "DialogMessage",
 "language": "GDScript",
@@ -104,6 +109,7 @@ _global_script_class_icons={
 "DialogEvent": "",
 "DialogEventGoToJail": "",
 "DialogEventIncreaseBounty": "",
+"DialogEventPayFine": "",
 "DialogMessage": "",
 "DialogPanel": "",
 "Dice": "",
