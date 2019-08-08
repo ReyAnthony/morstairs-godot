@@ -5,17 +5,22 @@ func _ready():
 	for c in $Bag.get_children():
 		if c.get_child_count() == 1:
 			c.get_child(0).scale = Vector2(4,4)
+	$"../Panel/Inventory".connect("pressed", self, "_on_inventory_pressed")
 
 func _process(delta):
-	$Weight.text = "Weight : " + String($Bag.get_weight()) + "/" + String($Bag.get_max_weight())
+	$InfoPanel/Weight.text = "Weight : " + String($Bag.get_weight()) + "/" + String($Bag.get_max_weight())
 
 func show_inventory():
 	PDS.clear_target()
+	$"../Panel/CombatMode".hide()
+	$"../Panel/Map".hide()
 	get_tree().paused = true
 	show()
-	.popup()
+	##.popup()
 	
 func close_inventory():
+	$"../Panel/CombatMode".show()
+	$"../Panel/Map".show()
 	get_tree().paused = false
 	hide()
 	
@@ -77,3 +82,9 @@ func add_to_inventory(object: PickableObject) -> int:
 	object.position = Vector2.ZERO
 	object.scale = Vector2(4,4)
 	return 0
+
+func _on_inventory_pressed():
+	if visible:
+		close_inventory()
+	else:
+		show_inventory()	

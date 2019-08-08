@@ -26,7 +26,6 @@ func _ready():
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	PDS.connect("target_has_changed", self, "_update_targeting")
 	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
-	$CanvasLayer/Panel/Inventory.connect("pressed", self, "_on_show_inventory")
 	$CanvasLayer/Panel/Player/Portrait.connect("pressed", self, "_on_show_player_stats")
 	$Interactable/Name.text = PDS.get_player_name()
 	
@@ -120,9 +119,6 @@ func _on_combat_mode_switch():
 	else:
 		$AnimatedSprite.play(_last_dir + "_FIGHT")
 	PDS.fight_mode = !PDS.fight_mode
-	
-func _on_show_inventory():
-	$CanvasLayer/PlayerInventory.show_inventory()
 
 func _update_targeting(t = null):
 	var target: PlayerTarget = PDS.get_target()

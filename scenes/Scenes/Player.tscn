@@ -4,12 +4,12 @@
 [ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=4]
-[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=5]
-[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=6]
-[ext_resource path="res://res/sprites/UI/bag.png" type="Texture" id=7]
-[ext_resource path="res://res/sprites/UI/map.png" type="Texture" id=8]
-[ext_resource path="res://res/sprites/characters/player_portrait.png" type="Texture" id=9]
-[ext_resource path="res://scenes/Scenes/PlayerInventory.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Scenes/PlayerInventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=6]
+[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=7]
+[ext_resource path="res://res/sprites/UI/bag.png" type="Texture" id=8]
+[ext_resource path="res://res/sprites/UI/map.png" type="Texture" id=9]
+[ext_resource path="res://res/sprites/characters/player_portrait.png" type="Texture" id=10]
 [ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=11]
 [ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=13]
@@ -62,6 +62,7 @@ frames = ExtResource( 2 )
 animation = "SE"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
 
 [node name="Life" type="Control" parent="CanvasLayer"]
 editor/display_folded = true
@@ -125,65 +126,70 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Map" type="Control" parent="CanvasLayer"]
 editor/display_folded = true
-self_modulate = Color( 1, 1, 1, 0 )
-show_behind_parent = true
-margin_left = 1137.0
-margin_top = -2.0
-margin_right = 1280.0
-margin_bottom = 725.0
-__meta__ = {
-"_edit_lock_": true
-}
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = SubResource( 1 )
+
+[node name="Close" type="Button" parent="CanvasLayer/Map"]
+margin_left = 15.6957
+margin_top = 15.6957
+margin_right = 195.696
+margin_bottom = 97.6957
+text = "CLOSE"
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0.219608 )
+margin_left = 1138.0
+margin_top = 2.0
+margin_right = 1283.0
+margin_bottom = 720.0
 
 [node name="CombatMode" type="TextureButton" parent="CanvasLayer/Panel"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -114.603
-margin_top = -258.437
-margin_right = -83.6031
-margin_bottom = -224.437
+margin_left = 25.2334
+margin_top = 512.01
+margin_right = 56.2334
+margin_bottom = 546.01
 rect_scale = Vector2( 3, 3 )
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 6 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
 stretch_mode = 5
 
 [node name="Inventory" type="TextureButton" parent="CanvasLayer/Panel"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -117.417
-margin_top = -388.806
-margin_right = -86.4171
-margin_bottom = -354.806
+margin_left = 17.6666
+margin_top = 377.072
+margin_right = 48.6665
+margin_bottom = 411.072
 rect_scale = Vector2( 3, 3 )
-action_mode = 0
-texture_normal = ExtResource( 7 )
-expand = true
-stretch_mode = 5
-
-[node name="Map" type="TextureButton" parent="CanvasLayer/Panel"]
-margin_left = 19.7156
-margin_top = 96.3138
-margin_right = 118.715
-margin_bottom = 187.314
-toggle_mode = true
 action_mode = 0
 texture_normal = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
+[node name="Map" type="TextureButton" parent="CanvasLayer/Panel"]
+margin_left = 22.6998
+margin_top = 102.15
+margin_right = 121.699
+margin_bottom = 193.15
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
 [node name="Player" type="Control" parent="CanvasLayer/Panel"]
-margin_left = 12.1752
-margin_top = 200.442
-margin_right = 141.175
-margin_bottom = 311.442
+editor/display_folded = true
+margin_left = 8.82788
+margin_top = 221.955
+margin_right = 137.828
+margin_bottom = 332.955
 
 [node name="Label" type="Label" parent="CanvasLayer/Panel/Player"]
 visible = false
@@ -206,7 +212,7 @@ margin_left = -58.3203
 margin_top = -44.6405
 margin_right = 56.6797
 margin_bottom = 41.3595
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 10 )
 expand = true
 stretch_mode = 5
 __meta__ = {
@@ -225,22 +231,6 @@ color = Color( 1, 0, 0, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 10 )]
-
-[node name="Map" type="Control" parent="CanvasLayer"]
-editor/display_folded = true
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-script = SubResource( 1 )
-
-[node name="Close" type="Button" parent="CanvasLayer/Map"]
-margin_left = 15.6957
-margin_top = 15.6957
-margin_right = 195.696
-margin_bottom = 97.6957
-text = "CLOSE"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -1, -0.985252 )

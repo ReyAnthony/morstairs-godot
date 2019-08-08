@@ -16,6 +16,7 @@ script = ExtResource( 1 )
 material_on_mouse_enter = ExtResource( 2 )
 material_on_target = ExtResource( 3 )
 weight = 5
+_name = "Long Sword"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )

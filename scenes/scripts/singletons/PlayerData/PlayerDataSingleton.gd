@@ -98,5 +98,5 @@ func add_to_inventory(object: PickableObject):
 		dm.message = "Your inventory is full !"
 		DS.spawn_dialog("", null, dm)
 	if r == 2:
-		dm.message = "This is too heavy ! It weighs " + String(object.get_weight()) + " kgs"
+		dm.message = "This is too heavy ! It weighs " + String(object.get_weight()) + " Stones"
 		DS.spawn_dialog("", null, dm)	
