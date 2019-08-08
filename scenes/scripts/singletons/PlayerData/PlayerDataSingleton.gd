@@ -1,8 +1,9 @@
 extends Node
-class_name PDS
+class_name PlayerDataSingleton
 
 var player_portrait: Texture
 var _player_name := "NAME"
+var _player
 var _gold := 10
 var _target: PlayerTarget
 var _bounty := 0
@@ -16,11 +17,11 @@ signal bounty_paid
 func _ready():
 	_target = PlayerTarget.new(Vector2(0,0))
 	_target.invalidate()
-	randomize()
 	player_portrait = preload("res://res/sprites/characters/player_portrait.png")
-
+	_player = get_tree().get_nodes_in_group("player")[0]
+	randomize()
+	
 func set_target(global_position: Vector2, node: Node2D = null):
-
 	if _target.is_valid():
 		var current_pos := _target.get_position()
 		if node == null: #we clicked on the ground
@@ -89,7 +90,7 @@ func has_slept():
 #TODO refactor with this and cache it
 #can't type it because of cyclic dependency
 func get_player():
-	return get_tree().get_nodes_in_group("player")[0]
+	return _player
 
 #TODO rework inventory
 #objects that can't be thrown away can't be sold either

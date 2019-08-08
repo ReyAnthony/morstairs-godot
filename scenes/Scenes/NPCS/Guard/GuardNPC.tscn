@@ -1,23 +1,22 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/scripts/NPC/NPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
 [ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=4]
-[ext_resource path="res://scenes/scripts/Dialog/DialogEventJailSentence.gd" type="Script" id=5]
+[ext_resource path="res://scenes/scripts/Dialog/events/DialogEventJailSentence.gd" type="Script" id=5]
 [ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=6]
-[ext_resource path="res://scenes/scripts/Dialog/DialogEventGotoDialog.gd" type="Script" id=7]
-[ext_resource path="res://scenes/scripts/Dialog/DialogEventHowMuch.gd" type="Script" id=8]
-[ext_resource path="res://scenes/scripts/Dialog/DialogEventGoToJail.gd" type="Script" id=9]
-[ext_resource path="res://scenes/scripts/Dialog/DialogEventIncreasebounty.gd" type="Script" id=10]
-[ext_resource path="res://scenes/scripts/Dialog/DialogEventPayFine.gd" type="Script" id=11]
+[ext_resource path="res://scenes/scripts/Dialog/events/DialogEventGotoDialog.gd" type="Script" id=7]
+[ext_resource path="res://scenes/scripts/Dialog/events/DialogEventHowMuch.gd" type="Script" id=8]
+[ext_resource path="res://scenes/scripts/Dialog/events/DialogEventGoToJail.gd" type="Script" id=9]
+[ext_resource path="res://scenes/scripts/Dialog/events/DialogEventIncreasebounty.gd" type="Script" id=10]
+[ext_resource path="res://scenes/scripts/Dialog/events/DialogEventPayFine.gd" type="Script" id=11]
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=12]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=13]
 [ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=15]
 [ext_resource path="res://res/Guard_spriteframe.tres" type="SpriteFrames" id=16]
 [ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=17]
-[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=18]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
@@ -27,6 +26,7 @@ height = 13.2929
 radius = 7.12598
 
 [node name="GuardNPC" type="KinematicBody2D"]
+editor/display_folded = true
 script = ExtResource( 1 )
 material_on_mouse_enter = ExtResource( 2 )
 material_on_target = ExtResource( 3 )
@@ -34,12 +34,10 @@ chara_name = "Guard"
 chara_portrait = ExtResource( 4 )
 
 [node name="Events" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="JailSentence" type="Node" parent="Events"]
 editor/display_folded = true
 script = ExtResource( 5 )
-dialog_panel = NodePath("../../CanvasLayer/DialogPanel")
 NPC = NodePath("../..")
 
 [node name="Sentence" type="Node" parent="Events/JailSentence"]
@@ -48,14 +46,12 @@ dialog_event_path = NodePath("../../GoToJail")
 
 [node name="RestartBountyDialog" type="Node" parent="Events"]
 script = ExtResource( 7 )
-dialog_panel = NodePath("../../CanvasLayer/DialogPanel")
 NPC = NodePath("../..")
 start_node = NodePath("../../BountyMessages")
 
 [node name="HowMuch" type="Node" parent="Events"]
 editor/display_folded = true
 script = ExtResource( 8 )
-dialog_panel = NodePath("../../CanvasLayer/DialogPanel")
 NPC = NodePath("../..")
 
 [node name="HowMuch" type="Node" parent="Events/HowMuch"]
@@ -64,15 +60,12 @@ dialog_event_path = NodePath("../../RestartBountyDialog")
 
 [node name="GoToJail" type="Node" parent="Events"]
 script = ExtResource( 9 )
-dialog_panel = NodePath("../../CanvasLayer/DialogPanel")
 
 [node name="IncreaseBounty" type="Node" parent="Events"]
 script = ExtResource( 10 )
 
 [node name="PayFine" type="Node" parent="Events"]
-editor/display_folded = true
 script = ExtResource( 11 )
-dialog_panel = NodePath("../../CanvasLayer/DialogPanel")
 NPC = NodePath("../..")
 
 [node name="CanPay" type="Node" parent="Events/PayFine"]
@@ -97,7 +90,6 @@ message = "Dare not causing ado !"
 [node name="Aye" type="Node" parent="DialogMessage/DialogMessage"]
 script = ExtResource( 6 )
 message = "Aye"
-is_choice = true
 
 [node name="DialogMessage2" type="Node" parent="DialogMessage/DialogMessage/Aye"]
 script = ExtResource( 6 )
@@ -106,7 +98,6 @@ message = "Be lawful, citizen, and thee won't have any ado.. "
 [node name="En garde" type="Node" parent="DialogMessage/DialogMessage"]
 script = ExtResource( 6 )
 message = "En garde !"
-is_choice = true
 
 [node name="DialogMessage" type="Node" parent="DialogMessage/DialogMessage/En garde"]
 script = ExtResource( 6 )
@@ -123,7 +114,6 @@ editor/display_folded = true
 script = ExtResource( 6 )
 message = "Aye
 "
-is_choice = true
 
 [node name="lets see" type="Node" parent="BountyMessages/Aye"]
 script = ExtResource( 6 )
@@ -134,7 +124,6 @@ dialog_event_path = NodePath("../../../Events/PayFine")
 editor/display_folded = true
 script = ExtResource( 6 )
 message = "Nay"
-is_choice = true
 
 [node name="DialogMessage" type="Node" parent="BountyMessages/Nay"]
 script = ExtResource( 6 )
@@ -144,7 +133,6 @@ message = "Thee shalt gust mine own blade then !"
 editor/display_folded = true
 script = ExtResource( 6 )
 message = "Fine"
-is_choice = true
 
 [node name="lets see" type="Node" parent="BountyMessages/Fine"]
 script = ExtResource( 6 )
@@ -155,7 +143,6 @@ dialog_event_path = NodePath("../../../Events/HowMuch")
 script = ExtResource( 6 )
 message = "Jail
 "
-is_choice = true
 
 [node name="DialogMessage" type="Node" parent="BountyMessages/Jail"]
 script = ExtResource( 6 )
@@ -204,9 +191,3 @@ animation = "SE"
 [node name="NPCBehavior" parent="." instance=ExtResource( 17 )]
 idle_behavior = 1
 fighting_behavior = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
-layer = 0
-
-[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 18 )]

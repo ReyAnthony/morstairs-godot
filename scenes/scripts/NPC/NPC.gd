@@ -6,6 +6,7 @@ signal is_attacked(attacker)
 
 export (String)  var chara_name: String
 export (Texture) var chara_portrait: Texture
+export (NodePath) var override_dialog: NodePath
 
 func _ready():
 	assert($Sprite != null)
@@ -13,8 +14,10 @@ func _ready():
 	self.add_to_group("npc")
 	if $Stats != null:
 		can_be_hit = true
-	PlayerDataSingleton.connect("target_has_changed", self, "_on_player_target_changed")
+	PDS.connect("target_has_changed", self, "_on_player_target_changed")
 	$Interactable/Name.text = chara_name
+	if !override_dialog.is_empty():
+		assert(get_children().has(get_node(override_dialog)))
 	
 func attack(amount: int, attacker: PhysicsBody2D):
 	$Stats.attack(amount)
@@ -27,8 +30,8 @@ func get_max_life() -> int:
 	return $Stats.life
 	
 func _on_DialogPanel_on_dialog_end():
-	PlayerDataSingleton.clear_target()
-	if PlayerDataSingleton.get_bounty() <= 0:
+	PDS.clear_target()
+	if PDS.get_bounty() <= 0:
 		emit_signal("on_dialog_end")
 
 func _on_player_target_changed(target: PlayerTarget):
@@ -38,15 +41,14 @@ func _on_player_target_changed(target: PlayerTarget):
 		$Sprite.material = null
 		
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
-	if !PlayerDataSingleton.get_target().is_valid():
+	if !PDS.get_target().is_valid():
 		return
-	
-	if !PlayerDataSingleton.fight_mode && PlayerDataSingleton.get_target().is_you(self):
-		if PlayerDataSingleton.get_bounty() > 0 and can_be_hit and $BountyMessages != null:
-			$CanvasLayer/DialogPanel.my_popup(chara_name, chara_portrait, $BountyMessages)
+	if !PDS.fight_mode && PDS.get_target().is_you(self):
+		if PDS.get_bounty() > 0 and can_be_hit and $BountyMessages != null:
+			DS.spawn_dialog(chara_name, chara_portrait, $BountyMessages)
 		else:
-			if $OverrideDialog != null:
-				$CanvasLayer/DialogPanel.my_popup(chara_name, chara_portrait, $OverrideDialog)
+			if !override_dialog.is_empty():
+				DS.spawn_dialog(chara_name, chara_portrait, get_node(override_dialog))
 			else:
-				$CanvasLayer/DialogPanel.my_popup(chara_name, chara_portrait, $DialogMessage)
-		PlayerDataSingleton.clear_target()
+				DS.spawn_dialog(chara_name, chara_portrait, $DialogMessage)
+		PDS.clear_target()

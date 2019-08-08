@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/scripts/NPC/NPC.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://scenes/Scenes/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=9]
 [ext_resource path="res://res/Woman_spriteframe.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
@@ -75,8 +74,3 @@ polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.8113
 
 [node name="NPCBehavior" parent="." instance=ExtResource( 11 )]
 idle_behavior = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 12 )]

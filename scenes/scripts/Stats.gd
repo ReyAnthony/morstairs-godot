@@ -22,8 +22,8 @@ func attack(damages: int):
 	
 	if _current_life < 1:
 		if !player:
-			if PlayerDataSingleton.get_target().node == $"../":
-				PlayerDataSingleton.clear_target()
+			if PDS.get_target().node == $"../":
+				PDS.clear_target()
 		else:
 			get_tree().change_scene("res://scenes/Scenes/Gameover.tscn")
 			return		

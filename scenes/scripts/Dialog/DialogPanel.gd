@@ -57,8 +57,8 @@ func _update_text():
 	$Panel/Center/Grid/Portrait.show()
 	
 	if _messages.is_player:
-		$Panel/Center/Grid/Portrait/CharaName.text = PlayerDataSingleton.get_player_name()
-		$Panel/Center/Grid/Portrait/CharaPortrait.texture = PlayerDataSingleton.player_portrait
+		$Panel/Center/Grid/Portrait/CharaName.text = PDS.get_player_name()
+		$Panel/Center/Grid/Portrait/CharaPortrait.texture = PDS.player_portrait
 	elif _messages.is_narrator:
 		$Panel/Center/Grid/Portrait.hide()
 	else:

@@ -118,7 +118,9 @@ jail_bed = true
 position = Vector2( 212.446, 60.0851 )
 
 [node name="WomanNPC2" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 6 )]
+editor/display_folded = true
 position = Vector2( 249.78, 54.4938 )
+override_dialog = NodePath("OverrideDialog")
 
 [node name="OverrideDialog" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2"]
 editor/display_folded = true
@@ -137,7 +139,6 @@ message = "Thee wilst spend a crazy night !"
 [node name="Buy" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2/OverrideDialog/DialogMessage/DialogMessage"]
 script = ExtResource( 7 )
 message = "Buy"
-is_choice = true
 
 [node name="DialogMessage" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2/OverrideDialog/DialogMessage/DialogMessage/Buy"]
 script = ExtResource( 7 )
@@ -147,7 +148,6 @@ Come back later hun."
 [node name="Bye" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2/OverrideDialog/DialogMessage/DialogMessage"]
 script = ExtResource( 7 )
 message = "Bye"
-is_choice = true
 
 [node name="GuardNPC3" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
 position = Vector2( 400.842, 95.1117 )
@@ -159,7 +159,9 @@ position = Vector2( 378.598, 117.356 )
 position = Vector2( -8.26218, -109.395 )
 
 [node name="GuardNPC6" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
+editor/display_folded = false
 position = Vector2( 108.482, 65.575 )
+override_dialog = NodePath("OverrideDialog")
 
 [node name="OverrideDialog" type="Node" parent="DayNight/Level/Walls/Characters/GuardNPC6"]
 editor/display_folded = true

@@ -10,7 +10,7 @@ func show_inventory():
 	$InventoryPopup.popup_centered()
 	
 func update_selection():
-	if PlayerDataSingleton.objects.size() <= 0:
+	if PDS.objects.size() <= 0:
 		$InventoryPopup/Panel/Inventory/ObjectInfoView.hide()
 		$InventoryPopup/Panel/Inventory/ObjectActionsView.hide()
 		$InventoryPopup/Panel/Inventory/Exit.grab_focus()
@@ -19,14 +19,14 @@ func update_selection():
 		_on_Inventory_item_selected(0)	
 		
 func update_player_infos(): 
-	$InventoryPopup/Panel/Inventory/PlayerInfoView/Name/Value.text = PlayerDataSingleton.get_player_name()
-	$InventoryPopup/Panel/Inventory/PlayerInfoView/Gold/Value.text = String(PlayerDataSingleton.get_player_gold())
-	$InventoryPopup/Panel/Inventory/PlayerInfoView/Bounty/Value.text = String(PlayerDataSingleton.get_bounty())
+	$InventoryPopup/Panel/Inventory/PlayerInfoView/Name/Value.text = PDS.get_player_name()
+	$InventoryPopup/Panel/Inventory/PlayerInfoView/Gold/Value.text = String(PDS.get_player_gold())
+	$InventoryPopup/Panel/Inventory/PlayerInfoView/Bounty/Value.text = String(PDS.get_bounty())
 	
 func update_inventory_list():
 	INVENTORY.clear()
 	var idx = 0
-	for o in PlayerDataSingleton.objects:
+	for o in PDS.objects:
 		INVENTORY.add_item(o.name)
 		INVENTORY.set_item_metadata(idx, o)
 		idx += 1
@@ -63,7 +63,7 @@ func _on_Throw_pressed():
 	#this only works because the inventory have a 1:1 mapping with the view list
 	var index = INVENTORY.get_selected_items()[0]
 	
-	PlayerDataSingleton.objects.remove(index)
+	PDS.objects.remove(index)
 	update_inventory_list()
 	update_selection()
 

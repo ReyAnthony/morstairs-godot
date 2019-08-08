@@ -63,8 +63,8 @@ func _ready():
 	_root.connect("is_attacked", self, "_on_NPC_is_attacked")
 	$"../Interactable".connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 	_animated_sprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-	PlayerDataSingleton.connect("has_slept", self, "_on_player_has_slept")
-	PlayerDataSingleton.connect("bounty_paid", self, "_on_bounty_paid")
+	PDS.connect("has_slept", self, "_on_player_has_slept")
+	PDS.connect("bounty_paid", self, "_on_bounty_paid")
 	z_index = 255
 	
 func _process(delta):
@@ -75,7 +75,7 @@ func _process(delta):
 	var atk := ""
 	
 	if _attacked:
-		if PlayerDataSingleton.get_bounty() <= 0:
+		if PDS.get_bounty() <= 0:
 			_go_back_to_initial_position()
 		if fighting_behavior == FightingBehaviors.FIGHT:
 			if (_last_pathfind_time > 0.250 or pathfind.empty() or global_position.distance_to(pathfind[0]) <= 2):
@@ -91,7 +91,7 @@ func _process(delta):
 				_go_back_to_initial_position()
 	else:
 		if $ViewArea.overlaps_body(_player):
-			if PlayerDataSingleton.get_bounty() > 0:
+			if PDS.get_bounty() > 0:
 				if fighting_behavior == FightingBehaviors.FLEE:
 					match randi() % 2 :
 						0: $Message.text = "HELP !"
@@ -193,7 +193,7 @@ func _pathfind():
 	pathfind.remove(0)
 	
 func _on_NPC_is_attacked(attacker: PhysicsBody2D):
-	PlayerDataSingleton.increment_bounty(10)
+	PDS.increment_bounty(10)
 	_npc_attack(attacker)
 
 func _npc_attack(attacker: PhysicsBody2D):

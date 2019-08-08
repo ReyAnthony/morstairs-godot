@@ -14,10 +14,10 @@ func _ready():
 	$Interactable.connect("something_is_inside_interactable", self, "_on_Interactable_something_is_inside_interactable")
 
 func _on_Interactable_mouse_clicked():
-	PlayerDataSingleton.set_target(global_position, self)
+	PDS.set_target(global_position, self)
 
 func _on_Interactable_mouse_entered():
-	if !PlayerDataSingleton.get_target().is_you(self):
+	if !PDS.get_target().is_you(self):
 		$Sprite.material = material_on_mouse_enter
 
 func _on_Interactable_mouse_exited():

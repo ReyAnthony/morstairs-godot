@@ -17,37 +17,37 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "DialogEvent",
 "language": "GDScript",
-"path": "res://scenes/scripts/Dialog/DialogEvent.gd"
+"path": "res://scenes/scripts/Dialog/events/DialogEvent.gd"
 }, {
 "base": "DialogEvent",
 "class": "DialogEventGoToJail",
 "language": "GDScript",
-"path": "res://scenes/scripts/Dialog/DialogEventGoToJail.gd"
+"path": "res://scenes/scripts/Dialog/events/DialogEventGoToJail.gd"
 }, {
 "base": "DialogEvent",
 "class": "DialogEventGotoDialog",
 "language": "GDScript",
-"path": "res://scenes/scripts/Dialog/DialogEventGotoDialog.gd"
+"path": "res://scenes/scripts/Dialog/events/DialogEventGotoDialog.gd"
 }, {
 "base": "DialogEvent",
 "class": "DialogEventHowMuch",
 "language": "GDScript",
-"path": "res://scenes/scripts/Dialog/DialogEventHowMuch.gd"
+"path": "res://scenes/scripts/Dialog/events/DialogEventHowMuch.gd"
 }, {
 "base": "DialogEvent",
 "class": "DialogEventIncreaseBounty",
 "language": "GDScript",
-"path": "res://scenes/scripts/Dialog/DialogEventIncreasebounty.gd"
+"path": "res://scenes/scripts/Dialog/events/DialogEventIncreasebounty.gd"
 }, {
 "base": "DialogEvent",
 "class": "DialogEventJailSentence",
 "language": "GDScript",
-"path": "res://scenes/scripts/Dialog/DialogEventJailSentence.gd"
+"path": "res://scenes/scripts/Dialog/events/DialogEventJailSentence.gd"
 }, {
 "base": "DialogEvent",
 "class": "DialogEventPayFine",
 "language": "GDScript",
-"path": "res://scenes/scripts/Dialog/DialogEventPayFine.gd"
+"path": "res://scenes/scripts/Dialog/events/DialogEventPayFine.gd"
 }, {
 "base": "Node",
 "class": "DialogMessage",
@@ -58,6 +58,11 @@ _global_script_classes=[ {
 "class": "DialogPanel",
 "language": "GDScript",
 "path": "res://scenes/scripts/Dialog/DialogPanel.gd"
+}, {
+"base": "Node",
+"class": "DialogSingleton",
+"language": "GDScript",
+"path": "res://scenes/scripts/singletons/DialogSingleton.gd"
 }, {
 "base": "Control",
 "class": "Dice",
@@ -84,15 +89,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/NPC/NPCBehaviors.gd"
 }, {
-"base": "Node",
-"class": "PDS",
-"language": "GDScript",
-"path": "res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scenes/scripts/Player/PlayerController.gd"
+}, {
+"base": "Node",
+"class": "PlayerDataSingleton",
+"language": "GDScript",
+"path": "res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
 }, {
 "base": "Node",
 "class": "PlayerTarget",
@@ -130,13 +135,14 @@ _global_script_class_icons={
 "DialogEventPayFine": "",
 "DialogMessage": "",
 "DialogPanel": "",
+"DialogSingleton": "",
 "Dice": "",
 "GameObjectBase": "",
 "Interactable": "",
 "NPC": "",
 "NPCBehavior": "",
-"PDS": "",
 "Player": "",
+"PlayerDataSingleton": "",
 "PlayerTarget": "",
 "Room": "",
 "ShopKeeper": "",
@@ -152,8 +158,9 @@ run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 [autoload]
 
 ObjectHelper="*res://scenes/scripts/singletons/ObjectHelper.gd"
-PlayerDataSingleton="*res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
+PDS="*res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
 ShopDataSingleton="*res://scenes/scripts/singletons/ShopDataSingleton.gd"
+DS="*res://scenes/scripts/singletons/DialogSingleton.gd"
 
 [display]
 

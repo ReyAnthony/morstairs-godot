@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/scripts/Bed.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
@@ -7,8 +7,7 @@
 [ext_resource path="res://res/sprites/characters/player/sleeping_pc.png" type="Texture" id=5]
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
-[ext_resource path="res://scenes/Scenes/Dialog/DialogPanel.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=9]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 10.3616
@@ -132,8 +131,6 @@ pause_mode = 2
 editor/display_folded = true
 layer = 0
 
-[node name="DialogPanel" parent="CanvasLayer" instance=ExtResource( 8 )]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 anims/fade = SubResource( 4 )
 
@@ -172,14 +169,14 @@ align = 1
 
 [node name="AfterJail" type="Node" parent="."]
 editor/display_folded = true
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 message = "Thou hast been freed."
 
 [node name="Stats--" type="Node" parent="AfterJail"]
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 message = "Some of thy stats have lowered as a result of thy stay"
 
 [node name="CantUse" type="Node" parent="."]
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 message = "Dost thee wish to get killed in thine sleep ? 
 Thou canst use it ! "

@@ -16,7 +16,7 @@ func _ready():
 	_anim_node = $AnimationPlayer
 	_CYCLE_LENGTH_NIGHT = _CYCLE_LENGTH_DAY_IN_SEC / _CYCLE_LENGTH_NIGHT_DIV
 	self.set_process(true)
-	PlayerDataSingleton.connect("has_slept", self, "_on_has_slept")
+	PDS.connect("has_slept", self, "_on_has_slept")
    
 func _process(delta):
 	if _time < _get_cycle_length() && !_anim_node.is_playing():
