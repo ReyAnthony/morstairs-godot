@@ -227,7 +227,6 @@ __meta__ = {
 }
 
 [node name="PlayerInventory" parent="CanvasLayer" instance=ExtResource( 10 )]
-visible = false
 
 [node name="Map" type="Control" parent="CanvasLayer"]
 editor/display_folded = true

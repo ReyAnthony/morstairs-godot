@@ -1,20 +1,79 @@
 extends Popup
 
 func _ready():
-	##$InventoryPopup/Bag.connect("mouse_entered", self, "_on_mouse_entered")
-	##$InventoryPopup/Bag.connect("mouse_exited", self, "_on_mouse_exited")
 	pause_mode = PAUSE_MODE_PROCESS
+	for c in $Bag.get_children():
+		if c.get_child_count() == 1:
+			c.get_child(0).scale = Vector2(4,4)
+
+func _process(delta):
+	$Weight.text = "Weight : " + String($Bag.get_weight()) + "/" + String($Bag.get_max_weight())
 
 func show_inventory():
+	PDS.clear_target()
 	get_tree().paused = true
 	show()
 	.popup()
+	
+func close_inventory():
+	get_tree().paused = false
+	hide()
 	
 func can_drop_data(position, data):
 	return true
 	
 func drop_data(position, data):
-	if !$Bag.get_rect().has_point(position):
-		data.get_parent().remove_child(data)
-		print("dropped sword")
-		data.free()
+	var position_on_the_ground = get_a_position_on_the_ground_without_object()
+	if position_on_the_ground == Vector2(-10000, -100000):
+		var dm = DialogMessage.new()
+		dm.message = "You can't place anything here anymore !"
+		DS.spawn_dialog("", null, dm)
+		return
+			
+	data.get_parent().remove_child(data)
+	PDS.get_player().get_parent().add_child(data)
+	PDS.get_player().get_parent().move_child(data, 0)
+	data.global_position = position_on_the_ground
+	data.scale = Vector2(1,1)
+		
+func get_a_position_on_the_ground_without_object() -> Vector2:
+	var objects_on_ground := []
+	var parent = PDS.get_player().get_parent()
+	var tilemap := PDS.get_player().get_parent().get_parent() as TileMap
+	var cell_size = tilemap.cell_size.x
+	for c in parent.get_children():
+		if c is PickableObject:
+			if PDS.get_player().global_position.distance_to(c.global_position) <= cell_size * 3:
+				objects_on_ground.append(tilemap.map_to_world(tilemap.world_to_map(c.global_position)))
+			else:
+				break #they are supposed to be in first position of the childrens		
+	
+	var position = tilemap.map_to_world(tilemap.world_to_map(PDS.get_player().global_position))
+	if objects_on_ground.empty():
+		#we lower the precision to get the center of the cell at the point
+		return position
+	else:
+		var initial_position = position
+		for x in range(-cell_size, cell_size+ 1, cell_size): #range is < x not <= so +1
+			print (x)
+			for y in  range(-cell_size, cell_size +1, cell_size):
+				print("y" + String(y))
+				var where = tilemap.map_to_world(tilemap.world_to_map(initial_position + Vector2(x, y)))
+				print(where)
+				var cell = tilemap.get_cellv(tilemap.world_to_map(where))
+				##TODO AVOID WATER CELLS
+				##we want an invalid cell BECAUSE THERE IS NO WALL THEN
+				if !objects_on_ground.has(where) and cell == tilemap.INVALID_CELL:
+					return where
+	return Vector2(-10000, -100000)				
+	
+func add_to_inventory(object: PickableObject) -> int:
+	if $Bag.is_full():
+		return 1
+	if $Bag.is_it_too_heavy_with_new(object):
+		return 2
+	object.get_parent().remove_child(object)
+	$Bag.get_empty_slot().add_child(object)
+	object.position = Vector2.ZERO
+	object.scale = Vector2(4,4)
+	return 0

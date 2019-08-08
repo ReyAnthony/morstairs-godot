@@ -1,16 +1,17 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Scenes/DayNight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/tilesets/ground_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://res/tilesets/structure_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://scenes/Scenes/torch.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Scenes/Bed.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scenes/NPCS/Women/WomenNPC.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardNPC.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Scenes/NPCS/Law/LawNPC.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Scenes/Player.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/Scenes/Room.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Scenes/Objects/Sword.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Scenes/Bed.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Scenes/NPCS/Women/WomenNPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardNPC.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Scenes/NPCS/Law/LawNPC.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Scenes/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Scenes/Room.tscn" type="PackedScene" id=12]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 215.082, -27.1756, 211.524, -41.8521, 211.619, -41.7115, 361.295, -12.3535, 365.629, -7.43597, 358.433, 0.135132, 346.725, -3.50739, 344.383, -11.0526, 394.1, -0.464157, 390.023, 41.0781, 381.416, 26.8605, 379.79, 12.6635, 379.79, -1.16772, 536.287, 129.625, 516.013, 104.716, 530.784, 108.046, 550.19, 143.962, 281.42, -24.8421, 319.146, -42.274, 329.813, -41.2333, 330.073, -21.9801, 315.243, -11.5729, 303.795, -6.88972, 272.872, -16.3436, 586.095, 165.998, 605.741, 146.352, 600.781, 222.313, 129.432, 142.711, 128.554, 176.95, 120.213, 185.729, 105.947, 183.754, 92.2386, 178.502, 90.934, 174.805, 105.288, 136.565, 120.751, 118.37, 334.757, 7.15994, 334.496, 20.9494, 312.422, 7.9138, 551.638, 87.6268, 551.638, 71.9863, 586.25, 104.716, 218.07, -39.6148, 233.532, -20.0017, 225.292, -14.4104, 238.959, 33.1497, 239.76, 30.4792, 255.554, 47.7633, 88.1073, 180.893, 93.8751, 193.411, 82.6815, 193.631, 537.099, 238.037, 567.271, 182.406, 587.763, 265.614, 756.534, 239.655, 766.81, 223.919, 776.766, 240.618, 734.624, 285.815, 533.97, 97.6194, 533.825, 89.3647, 543.239, 93.2748, 379.781, -40, 378.613, -7.05334, 378.318, -14.9989, 356.836, -39.7185, 329.781, -90, 330.351, -65.321, 309.781, -90, 370.964, 55.3239, 368.296, 44.6501, 389.238, 75.0939, 71.9267, 184.193, 81.5842, 177.849, 71.9267, 169.049, 85.2806, 174.37, 391.855, 103.353, 422.837, 62.086, 426.226, 66.8342, 417.735, 108.346, 161.022, -3.23741, 163.912, -6.39018, 220.584, 5.01218, 230.001, 10.015, 182.077, 57.1842, 158.268, 52.2282, 143.704, 37.8644, 355.571, 4.81835, 347.505, 10.5423, 218.427, 80.744, 176.366, 139.701, 157.706, 118.615, 156.4, 107.42, 191.958, 76.1448, 408.772, 154.103, 371.268, 153.816, 376.94, 120.884, 604.642, 119.777, 568.003, 154.678, 536.722, 135.562, 541.216, 155.821, 875.997, 239.334, 871.502, 287.504, 853.197, 288.468, 810.806, 285.899, 724.42, 240.939, 636.284, 276.726, 705.152, 230.663, 687.168, 228.094, 677.534, 223.277, 665.652, 228.415, 526.814, 144.119, 297.031, -57.8848, 272.053, -36.2899, 279.338, -62.568, 630.647, 210.431, 515.382, 212.125, 497.928, 115.893, 406.77, 52.8528, 365.689, 93.6717, 368.296, 65.3306, 384.005, 96.0266, 307.958, 21.9902, 303.721, 15.5602, 296.77, 25.8928, 290.006, 19.6485, 296.866, 7.38647, 279.599, 11.583, 98.4386, -10.2707, 69.1006, 3.79436, -33.0741, -100.848, 23.6896, -153.828, 128.661, -55.1082, 111.093, -17.4709, 235.659, 155.009, 209.303, 127.157, 223.805, 113.806, 239.917, 127.847, 278.295, 115.389, 265.612, 128.892, 248.089, 119.1, 278.236, 90.6808, 300.695, 90.9032, 490.852, 99.3831, 231.457, -46.8727, 213.877, -71.2268, 224.521, -78.9686, 233.715, -74.6138, 317.402, -63.8495, 296.214, -82.095, 279.781, -120, 144.103, 69.784, 179.674, 70.8038, 143.338, 110.032, 286.209, -77.0922, 272.672, -86.8035, 244.745, -104.702, 239.781, -130, 232.54, -108.99, 120.476, -7.65244, 217.696, -95.4662, 192.922, -72.9723, 178.836, -51.1916, 187.286, -38.9613, 185.952, -25.619, 161.547, -12.433, 247.597, -89.1062, 262.326, -24.7809, 149.634, 125.495, 115.138, 93.854, 268.846, 15.312, 199.739, -16.0571, 217.641, -3.81624, 153.928, -6.12746, 355.843, 81.5636, 311.787, 142.602, 304.253, 81.1189, 200.504, 65.9969, 252.218, 65.5529, 105.421, 8.05712, 104.802, 54.7303, 71.1782, 94.6797, 67.1329, 76.6314, 97.2471, 48.4142, 109.26, 50.3957, 129.141, 51.6297, 50.6405, 58.2719, 50.9516, 52.6707, 104.306, 44.2034 )
@@ -108,99 +109,100 @@ inside = true
 
 [node name="Characters" type="YSort" parent="DayNight/Level/Walls"]
 
-[node name="Bed2" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 5 )]
+[node name="Sword" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 5 )]
+position = Vector2( 425.938, 119.596 )
+
+[node name="Bed2" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 6 )]
 position = Vector2( 214.426, -53.654 )
 
-[node name="Bed" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 5 )]
+[node name="Bed" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 6 )]
 position = Vector2( 590.172, 117.327 )
 jail_bed = true
 
-[node name="WomanNPC" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 6 )]
+[node name="WomanNPC" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 7 )]
 position = Vector2( 212.446, 60.0851 )
 
-[node name="WomanNPC2" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 6 )]
+[node name="WomanNPC2" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 7 )]
 editor/display_folded = true
 position = Vector2( 249.78, 54.4938 )
 override_dialog = NodePath("OverrideDialog")
 
 [node name="OverrideDialog" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2"]
 editor/display_folded = true
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Hello Handsome, how are thee today ?"
 
 [node name="DialogMessage" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2/OverrideDialog"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Do thee want to buy my special weed ? 
 It gets thee high very quickly !"
 
 [node name="DialogMessage" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2/OverrideDialog/DialogMessage"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Thee wilst spend a crazy night !"
 
 [node name="Buy" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2/OverrideDialog/DialogMessage/DialogMessage"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Buy"
 
 [node name="DialogMessage" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2/OverrideDialog/DialogMessage/DialogMessage/Buy"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "The guard is way too close.. 
 Come back later hun."
 
 [node name="Bye" type="Node" parent="DayNight/Level/Walls/Characters/WomanNPC2/OverrideDialog/DialogMessage/DialogMessage"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Bye"
 
-[node name="GuardNPC3" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
+[node name="GuardNPC3" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
 position = Vector2( 400.842, 95.1117 )
 
-[node name="GuardNPC7" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
+[node name="GuardNPC7" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
 position = Vector2( 378.598, 117.356 )
 
-[node name="GuardNPC" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
+[node name="GuardNPC" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
 position = Vector2( -8.26218, -109.395 )
 
-[node name="GuardNPC6" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
-editor/display_folded = false
+[node name="GuardNPC6" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
 position = Vector2( 108.482, 65.575 )
 override_dialog = NodePath("OverrideDialog")
 
 [node name="OverrideDialog" type="Node" parent="DayNight/Level/Walls/Characters/GuardNPC6"]
 editor/display_folded = true
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Hello friend, i'm a friendly guard. 
 I'm not as blood thirsty as the other are. 
 But still, RESPECT THE FUCKING LAW."
 
 [node name="DialogMessage" type="Node" parent="DayNight/Level/Walls/Characters/GuardNPC6/OverrideDialog"]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 message = "Bye."
 
-[node name="GuardNPC5" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
+[node name="GuardNPC5" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
 position = Vector2( 245.992, 69.2648 )
 
-[node name="GuardNPC2" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
+[node name="GuardNPC2" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
 position = Vector2( 16.0565, -127.829 )
 
-[node name="GuardNPC4" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
+[node name="GuardNPC4" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
 position = Vector2( 308.312, -27.3893 )
 
-[node name="GuardNPC8" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 8 )]
+[node name="GuardNPC8" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
 position = Vector2( 521.529, 135.815 )
 
-[node name="LawNPC" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 9 )]
+[node name="LawNPC" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 10 )]
 position = Vector2( 144.221, 42.6661 )
 
-[node name="Player" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 10 )]
+[node name="Player" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 11 )]
 position = Vector2( 404.883, 123.149 )
 map_cam = NodePath("../../../MapCam")
 
 [node name="Rooms" type="Node2D" parent="DayNight/Level"]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Room" parent="DayNight/Level/Rooms" instance=ExtResource( 11 )]
+[node name="Room" parent="DayNight/Level/Rooms" instance=ExtResource( 12 )]
 editor/display_folded = true
 cell_y_sort = true
 tile_data = PoolIntArray( -589805, 1, 0, -589804, 1, 0, -589803, 1, 0, -589802, 1, 0, -589801, 1, 0, -589800, 1, 0, -524269, 2, 0, -524268, 2, 0, -524267, 2, 0, -524266, 2, 0, -524265, 2, 0, -524264, 2, 0, -458733, 2, 0, -458732, 2, 0, -458731, 2, 0, -458730, 2, 0, -458729, 2, 0, -458728, 2, 0, -393197, 2, 0, -393196, 2, 0, -393195, 2, 0, -393194, 2, 0, -393193, 2, 0, -393192, 2, 0, -327661, 2, 0, -327660, 2, 0, -327659, 2, 0, -327658, 2, 0, -327657, 2, 0, -327656, 2, 0, -262125, 0, 0, -262124, 0, 0, -262123, 0, 0, -262122, 0, 0, -262121, 0, 0, -262120, 0, 0 )
@@ -218,7 +220,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Room2" parent="DayNight/Level/Rooms" instance=ExtResource( 11 )]
+[node name="Room2" parent="DayNight/Level/Rooms" instance=ExtResource( 12 )]
 editor/display_folded = true
 tile_data = PoolIntArray( -1638384, 1, 0, -1638383, 1, 0, -1638382, 1, 0, -1638381, 1, 0, -1638380, 1, 0, -1638379, 1, 0, -1638378, 1, 0, -1572850, 1, 0, -1572849, 1, 0, -1572848, 2, 0, -1572847, 2, 0, -1572846, 2, 0, -1572845, 2, 0, -1572844, 2, 0, -1572843, 2, 0, -1572842, 2, 0, -1572841, 1, 0, -1572838, 1, 0, -1507320, 1, 0, -1507319, 1, 0, -1507318, 1, 0, -1507317, 1, 0, -1507316, 1, 0, -1507315, 1, 0, -1507314, 2, 0, -1507313, 2, 0, -1507312, 2, 0, -1507311, 2, 0, -1507310, 2, 0, -1507309, 2, 0, -1507308, 2, 0, -1507307, 2, 0, -1507306, 2, 0, -1507305, 2, 0, -1507304, 1, 0, -1441784, 2, 0, -1441783, 2, 0, -1441782, 2, 0, -1441781, 2, 0, -1441780, 2, 0, -1441779, 2, 0, -1441778, 2, 0, -1441777, 2, 0, -1441776, 2, 0, -1441775, 2, 0, -1441774, 2, 0, -1441773, 2, 0, -1441772, 2, 0, -1441771, 2, 0, -1441770, 2, 0, -1441769, 2, 0, -1441768, 2, 0, -1376248, 2, 0, -1376247, 2, 0, -1376246, 2, 0, -1376245, 2, 0, -1376244, 2, 0, -1376243, 2, 0, -1376242, 2, 0, -1376241, 2, 0, -1376240, 2, 0, -1376239, 2, 0, -1376238, 2, 0, -1376237, 2, 0, -1376236, 2, 0, -1376235, 2, 0, -1376234, 2, 0, -1376233, 2, 0, -1376232, 0, 0, -1310713, 1, 0, -1310712, 2, 0, -1310711, 2, 0, -1310710, 2, 0, -1310709, 2, 0, -1310708, 2, 0, -1310707, 2, 0, -1310706, 2, 0, -1310705, 2, 0, -1310704, 2, 0, -1310703, 2, 0, -1310702, 2, 0, -1310701, 2, 0, -1310700, 2, 0, -1310699, 2, 0, -1310698, 2, 0, -1310697, 2, 0, -1245177, 2, 0, -1245176, 2, 0, -1245175, 2, 0, -1245174, 2, 0, -1245173, 2, 0, -1245172, 2, 0, -1245171, 2, 0, -1245170, 2, 0, -1245169, 2, 0, -1245168, 2, 0, -1245167, 2, 0, -1245166, 2, 0, -1245165, 2, 0, -1245164, 2, 0, -1245163, 2, 0, -1245162, 2, 0, -1245161, 0, 0, -1179641, 2, 0, -1179640, 2, 0, -1179639, 2, 0, -1179638, 2, 0, -1179637, 2, 0, -1179636, 2, 0, -1179635, 2, 0, -1179634, 2, 0, -1179633, 2, 0, -1179632, 2, 0, -1179631, 2, 0, -1179630, 2, 0, -1179629, 2, 0, -1179628, 2, 0, -1179627, 0, 0, -1179626, 0, 0, -1114105, 2, 0, -1114104, 2, 0, -1114103, 2, 0, -1114102, 2, 0, -1114101, 2, 0, -1114100, 2, 0, -1114099, 2, 0, -1114098, 2, 0, -1114097, 2, 0, -1114096, 2, 0, -1114095, 2, 0, -1114094, 2, 0, -1114093, 2, 0, -1114092, 0, 0, -1048569, 0, 0, -1048568, 0, 0, -1048567, 2, 0, -1048566, 2, 0, -1048565, 2, 0, -1048564, 2, 0, -1048563, 2, 0, -1048562, 2, 0, -1048561, 2, 0, -1048560, 2, 0, -1048559, 2, 0, -1048558, 2, 0, -1048557, 2, 0, -983031, 0, 0, -983030, 0, 0, -983029, 0, 0, -983028, 0, 0, -983027, 0, 0, -983026, 0, 0, -983025, 0, 0, -983024, 0, 0, -983023, 0, 0, -983022, 0, 0, -983021, 0, 0 )
 
@@ -234,7 +236,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Jail" parent="DayNight/Level/Rooms" instance=ExtResource( 11 )]
+[node name="Jail" parent="DayNight/Level/Rooms" instance=ExtResource( 12 )]
 editor/display_folded = true
 tile_data = PoolIntArray( -2097115, 1, 0, -2097114, 1, 0, -2097113, 1, 0, -2097112, 1, 0, -2097111, 1, 0, -2097110, 1, 0, -2097109, 1, 0, -2097108, 1, 0, -2097107, 1, 0, -2031579, 2, 0, -2031578, 2, 0, -2031577, 2, 0, -2031576, 2, 0, -2031575, 2, 0, -2031574, 2, 0, -2031573, 2, 0, -2031572, 2, 0, -2031571, 2, 0, -1966043, 2, 0, -1966042, 2, 0, -1966041, 2, 0, -1966040, 2, 0, -1966039, 2, 0, -1966038, 2, 0, -1966037, 2, 0, -1966036, 2, 0, -1966035, 2, 0, -1900507, 2, 0, -1900506, 2, 0, -1900505, 2, 0, -1900504, 2, 0, -1900503, 2, 0, -1900502, 2, 0, -1900501, 2, 0, -1900500, 2, 0, -1900499, 2, 0, -1834971, 2, 0, -1834970, 2, 0, -1834969, 2, 0, -1834968, 2, 0, -1834967, 2, 0, -1834966, 2, 0, -1834965, 2, 0, -1834964, 2, 0, -1834963, 2, 0, -1769435, 2, 0, -1769434, 2, 0, -1769433, 2, 0, -1769432, 2, 0, -1769431, 2, 0, -1769430, 2, 0, -1769429, 2, 0, -1769428, 2, 0, -1769427, 2, 0, -1703899, 0, 0, -1703898, 0, 0, -1703897, 0, 0, -1703896, 0, 0, -1703895, 0, 0, -1703894, 0, 0, -1703893, 0, 0, -1703892, 0, 0, -1703891, 0, 0 )
 
@@ -264,6 +266,9 @@ __meta__ = {
 [node name="Navigation2D" type="Navigation2D" parent="DayNight/Level" groups=[
 "nav",
 ]]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="DayNight/Level/Navigation2D"]
 visible = false
@@ -278,6 +283,9 @@ __meta__ = {
 ]]
 offset = Vector2( 343, 16.12 )
 zoom = Vector2( 1.02, 1.11 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
@@ -285,3 +293,6 @@ points = PoolVector2Array( 213.28, -25.7144 )
 width = 1.0
 default_color = Color( 1, 1, 1, 1 )
 texture_mode = 1104824240
+__meta__ = {
+"_edit_lock_": true
+}

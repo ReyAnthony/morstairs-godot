@@ -13,7 +13,10 @@ func attack(amount: int):
 	$Stats.attack(amount)
 	
 func full_heal():
-	$Stats.full_heal()		
+	$Stats.full_heal()
+	
+func add_to_inventory(object: PickableObject) -> bool:
+	return $CanvasLayer/PlayerInventory.add_to_inventory(object)
 
 func _ready():
 	$AnimatedSprite.play("NW")

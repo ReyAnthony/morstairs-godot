@@ -1,0 +1,35 @@
+extends TextureRect
+class_name Bag
+
+var _max_weight = 25
+
+func _input(event):
+	if Input.is_action_just_pressed("mouse_right_click") and get_rect().has_point(get_viewport().get_mouse_position()):
+		$"../".close_inventory()
+
+func is_full() -> bool:
+	for slot in get_children():
+		if slot.get_child_count() == 0:
+			return false
+	return true
+	
+func is_it_too_heavy_with_new(new: PickableObject) -> bool:
+	return get_weight() + new.get_weight() > _max_weight	
+	
+func get_empty_slot() -> InventorySlot:
+	for slot in get_children():
+		if slot.get_child_count() == 0:
+			return slot
+	assert(false)
+	return null
+	
+func get_weight() -> int:
+	var weight = 0
+	for slot in get_children():
+		if slot.get_child_count() == 1:
+			var object = slot.get_children()[0] as PickableObject
+			weight += object.get_weight()	
+	return weight	
+	
+func get_max_weight() -> int:
+	return _max_weight	

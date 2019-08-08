@@ -90,3 +90,13 @@ func has_slept():
 #can't type it because of cyclic dependency
 func get_player():
 	return _player
+	
+func add_to_inventory(object: PickableObject):
+	var dm = DialogMessage.new()
+	var r = _player.add_to_inventory(object)
+	if r == 1:
+		dm.message = "Your inventory is full !"
+		DS.spawn_dialog("", null, dm)
+	if r == 2:
+		dm.message = "This is too heavy ! It weighs " + String(object.get_weight()) + " kgs"
+		DS.spawn_dialog("", null, dm)	
