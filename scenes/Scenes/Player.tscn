@@ -62,9 +62,9 @@ frames = ExtResource( 2 )
 animation = "SE"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
 
 [node name="Life" type="Control" parent="CanvasLayer"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -126,6 +126,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
+editor/display_folded = true
 self_modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
 margin_left = 1137.0
@@ -266,6 +267,7 @@ damage = ExtResource( 12 )
 corpse = ExtResource( 13 )
 
 [node name="Interactable" parent="." instance=ExtResource( 14 )]
+editor/display_folded = true
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]

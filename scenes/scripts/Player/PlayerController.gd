@@ -119,7 +119,6 @@ func _on_combat_mode_switch():
 	PDS.fight_mode = !PDS.fight_mode
 	
 func _on_show_inventory():
-	get_tree().paused = true
 	$CanvasLayer/PlayerInventory.show_inventory()
 
 func _update_targeting(t = null):

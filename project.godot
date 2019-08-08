@@ -157,9 +157,7 @@ run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 
 [autoload]
 
-ObjectHelper="*res://scenes/scripts/singletons/ObjectHelper.gd"
 PDS="*res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
-ShopDataSingleton="*res://scenes/scripts/singletons/ShopDataSingleton.gd"
 DS="*res://scenes/scripts/singletons/DialogSingleton.gd"
 
 [display]

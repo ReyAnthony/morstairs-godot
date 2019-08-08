@@ -58,6 +58,7 @@ __meta__ = {
 }
 
 [node name="Torchs" type="YSort" parent="DayNight/Level/Walls"]
+editor/display_folded = true
 
 [node name="torch5" parent="DayNight/Level/Walls/Torchs" instance=ExtResource( 4 )]
 position = Vector2( 212, 118 )
@@ -194,6 +195,7 @@ position = Vector2( 404.883, 123.149 )
 map_cam = NodePath("../../../MapCam")
 
 [node name="Rooms" type="Node2D" parent="DayNight/Level"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -264,6 +266,7 @@ __meta__ = {
 ]]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="DayNight/Level/Navigation2D"]
+visible = false
 position = Vector2( 0.218826, 0 )
 navpoly = SubResource( 1 )
 __meta__ = {

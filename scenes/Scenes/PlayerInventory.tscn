@@ -3,7 +3,6 @@
 [ext_resource path="res://scenes/scripts/Player/PlayerInventory.gd" type="Script" id=1]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
 
-
 [node name="PlayerInventory" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
@@ -11,6 +10,8 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="InventoryPopup" type="Popup" parent="."]
+editor/display_folded = true
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
