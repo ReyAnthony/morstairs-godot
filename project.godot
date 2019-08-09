@@ -50,6 +50,11 @@ _global_script_classes=[ {
 "path": "res://scenes/scripts/Dialog/events/DialogEventJailSentence.gd"
 }, {
 "base": "DialogEvent",
+"class": "DialogEventPauseGame",
+"language": "GDScript",
+"path": "res://scenes/scripts/Dialog/events/DialogEventPauseGame.gd"
+}, {
+"base": "DialogEvent",
 "class": "DialogEventPayFine",
 "language": "GDScript",
 "path": "res://scenes/scripts/Dialog/events/DialogEventPayFine.gd"
@@ -74,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/dice.gd"
 }, {
+"base": "Slot",
+"class": "DollSlot",
+"language": "GDScript",
+"path": "res://scenes/scripts/Objects/DollSlot.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "GameObjectBase",
 "language": "GDScript",
@@ -84,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/Interactable.gd"
 }, {
-"base": "Control",
+"base": "Slot",
 "class": "InventorySlot",
 "language": "GDScript",
 "path": "res://scenes/scripts/Objects/InventorySlot.gd"
@@ -129,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/NPC/ShopKeeper.gd"
 }, {
+"base": "Control",
+"class": "Slot",
+"language": "GDScript",
+"path": "res://Slot.gd"
+}, {
 "base": "Node2D",
 "class": "Stats",
 "language": "GDScript",
@@ -148,11 +163,13 @@ _global_script_class_icons={
 "DialogEventHowMuch": "",
 "DialogEventIncreaseBounty": "",
 "DialogEventJailSentence": "",
+"DialogEventPauseGame": "",
 "DialogEventPayFine": "",
 "DialogMessage": "",
 "DialogPanel": "",
 "DialogSingleton": "",
 "Dice": "",
+"DollSlot": "",
 "GameObjectBase": "",
 "Interactable": "",
 "InventorySlot": "",
@@ -164,6 +181,7 @@ _global_script_class_icons={
 "PlayerTarget": "",
 "Room": "",
 "ShopKeeper": "",
+"Slot": "",
 "Stats": "",
 "Torch": ""
 }

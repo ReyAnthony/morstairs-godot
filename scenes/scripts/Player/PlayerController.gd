@@ -26,7 +26,6 @@ func _ready():
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	PDS.connect("target_has_changed", self, "_update_targeting")
 	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
-	$CanvasLayer/Panel/Player/Portrait.connect("pressed", self, "_on_show_player_stats")
 	$Interactable/Name.text = PDS.get_player_name()
 	
 # warning-ignore:unused_argument

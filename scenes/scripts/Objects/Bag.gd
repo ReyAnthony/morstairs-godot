@@ -3,10 +3,6 @@ class_name Bag
 
 var _max_weight = 25
 
-func _input(event):
-	if Input.is_action_just_pressed("mouse_right_click") and get_rect().has_point(get_viewport().get_mouse_position()):
-		$"../".close_inventory()
-
 func is_full() -> bool:
 	for slot in get_children():
 		if slot.get_child_count() == 0:

@@ -191,7 +191,6 @@ position = Vector2( 144.221, 42.6661 )
 
 [node name="Player" parent="DayNight/Level/Walls/Characters" instance=ExtResource( 10 )]
 position = Vector2( 404.883, 123.149 )
-map_cam = NodePath("../../../MapCam")
 
 [node name="Rooms" type="Node2D" parent="DayNight/Level"]
 __meta__ = {
@@ -270,15 +269,6 @@ __meta__ = {
 visible = false
 position = Vector2( 0.218826, 0 )
 navpoly = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="MapCam" type="Camera2D" parent="DayNight/Level" groups=[
-"map_cam",
-]]
-offset = Vector2( 343, 16.12 )
-zoom = Vector2( 1.02, 1.11 )
 __meta__ = {
 "_edit_lock_": true
 }

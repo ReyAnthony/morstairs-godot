@@ -1,28 +1,20 @@
 extends Popup
 
+var dm: DialogMessage
+
 func _ready():
-	pause_mode = PAUSE_MODE_PROCESS
 	for c in $Bag.get_children():
 		if c.get_child_count() == 1:
 			c.get_child(0).scale = Vector2(4,4)
-	$"../Panel/Inventory".connect("pressed", self, "_on_inventory_pressed")
+	dm = DialogMessage.new()
+	dm.message = "You can't place anything here anymore !"
+	var de =  DialogEventPauseGame.new()
+	self.add_child(de)
+	dm._dialog_event = de
+	self.add_child(dm)
 
 func _process(delta):
 	$InfoPanel/Weight.text = "Weight : " + String($Bag.get_weight()) + "/" + String($Bag.get_max_weight())
-
-func show_inventory():
-	PDS.clear_target()
-	$"../Panel/CombatMode".hide()
-	$"../Panel/Map".hide()
-	get_tree().paused = true
-	show()
-	##.popup()
-	
-func close_inventory():
-	$"../Panel/CombatMode".show()
-	$"../Panel/Map".show()
-	get_tree().paused = false
-	hide()
 	
 func can_drop_data(position, data):
 	return true
@@ -30,8 +22,6 @@ func can_drop_data(position, data):
 func drop_data(position, data):
 	var position_on_the_ground = get_a_position_on_the_ground_without_object()
 	if position_on_the_ground == Vector2(-10000, -100000):
-		var dm = DialogMessage.new()
-		dm.message = "You can't place anything here anymore !"
 		DS.spawn_dialog("", null, dm)
 		return
 			
@@ -82,9 +72,3 @@ func add_to_inventory(object: PickableObject) -> int:
 	object.position = Vector2.ZERO
 	object.scale = Vector2(4,4)
 	return 0
-
-func _on_inventory_pressed():
-	if visible:
-		close_inventory()
-	else:
-		show_inventory()	

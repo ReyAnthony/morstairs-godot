@@ -4,20 +4,20 @@
 [ext_resource path="res://res/sprites/characters/player/melee_atk/SW/Sw3.png" type="Texture" id=2]
 [ext_resource path="res://res/sprites/characters/player/melee_atk/SW/Sw5.png" type="Texture" id=3]
 [ext_resource path="res://res/sprites/characters/player/melee_atk/SW/Sw6.png" type="Texture" id=4]
-[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE1.png" type="Texture" id=5]
-[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE2.png" type="Texture" id=6]
-[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE3.png" type="Texture" id=7]
-[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE4.png" type="Texture" id=8]
-[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE5.png" type="Texture" id=9]
-[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE6.png" type="Texture" id=10]
-[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE7.png" type="Texture" id=11]
-[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw1.png" type="Texture" id=12]
-[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw2.png" type="Texture" id=13]
-[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw3.png" type="Texture" id=14]
-[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw4.png" type="Texture" id=15]
-[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw5.png" type="Texture" id=16]
-[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw6.png" type="Texture" id=17]
-[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw7.png" type="Texture" id=18]
+[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw1.png" type="Texture" id=5]
+[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw2.png" type="Texture" id=6]
+[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw3.png" type="Texture" id=7]
+[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw4.png" type="Texture" id=8]
+[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw5.png" type="Texture" id=9]
+[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw6.png" type="Texture" id=10]
+[ext_resource path="res://res/sprites/characters/player/normal/Sw/Sw7.png" type="Texture" id=11]
+[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE1.png" type="Texture" id=12]
+[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE2.png" type="Texture" id=13]
+[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE3.png" type="Texture" id=14]
+[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE4.png" type="Texture" id=15]
+[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE5.png" type="Texture" id=16]
+[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE6.png" type="Texture" id=17]
+[ext_resource path="res://res/sprites/characters/player/melee/NW/NW_MELEE7.png" type="Texture" id=18]
 [ext_resource path="res://res/sprites/characters/player/normal/NE/NE1.png" type="Texture" id=19]
 [ext_resource path="res://res/sprites/characters/player/normal/NE/NE2.png" type="Texture" id=20]
 [ext_resource path="res://res/sprites/characters/player/normal/NE/NE3.png" type="Texture" id=21]
@@ -83,12 +83,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "NW_FIGHT",
+"name": "SW",
 "speed": 8.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
-"name": "SW",
+"name": "NW_FIGHT",
 "speed": 8.0
 }, {
 "frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ) ],
