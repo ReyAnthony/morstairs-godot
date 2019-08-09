@@ -17,7 +17,7 @@ func get_drag_data(position):
 
 func can_drop_data(position, data):
 	assert(get_child_count() <= 1)
-	return get_child_count() == 0
+	return get_child_count() == 0 ##show weight popup ? (could be used when using containers)
 
 func drop_data(position, data):
 	data.show()

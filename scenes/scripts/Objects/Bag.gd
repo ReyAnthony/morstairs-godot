@@ -19,6 +19,7 @@ func get_empty_slot() -> InventorySlot:
 	assert(false)
 	return null
 	
+##must take equipement into account 	
 func get_weight() -> int:
 	var weight = 0
 	for slot in get_children():

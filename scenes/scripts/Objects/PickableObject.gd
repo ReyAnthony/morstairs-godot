@@ -1,8 +1,11 @@
 extends GameObjectBase
 class_name PickableObject
 
-export (int) var weight
-export (String) var _name
+const ObjectType = preload("res://scenes/scripts/Objects/ObjectType.gd").ObjectType
+
+export (ObjectType) var type: int
+export (int) var weight: int
+export (String) var _name: String
 
 func _ready():
 	$Interactable/Name.text = _name
@@ -17,3 +20,6 @@ func get_weight() -> int:
 	
 func get_object_name() -> String:
 	return _name	
+	
+func get_type() -> int:
+	return type	
