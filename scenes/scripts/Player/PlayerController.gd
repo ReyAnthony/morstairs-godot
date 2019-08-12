@@ -16,7 +16,7 @@ func full_heal():
 	$Stats.full_heal()
 	
 func get_stats():
-	return $Stats	
+	return $Stats
 
 func _ready():
 	$AnimatedSprite.play("NW")

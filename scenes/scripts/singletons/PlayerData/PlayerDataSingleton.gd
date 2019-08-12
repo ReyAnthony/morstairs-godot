@@ -9,6 +9,7 @@ var _target: PlayerTarget
 var _bounty := 0
 var _jail_time := 0 
 var fight_mode := false
+var uiScene: PackedScene = preload("res://scenes/Scenes/PlayerUI.tscn")
 
 signal target_has_changed
 signal has_slept
@@ -21,6 +22,8 @@ func _ready():
 	player_portrait = preload("res://res/sprites/characters/player_portrait.png")
 	_player = get_tree().get_nodes_in_group("player")[0]
 	randomize()
+	var scene = uiScene.instance()
+	self.add_child(scene)
 	
 func set_target(global_position: Vector2, node: Node2D = null):
 	if _target.is_valid():
@@ -89,9 +92,18 @@ func has_slept():
 	emit_signal("has_slept")
 	
 func switch_fight_mode():
-	PDS.fight_mode = !PDS.fight_mode
+	fight_mode = !fight_mode
 	emit_signal("combat_mode_change", fight_mode)
-
-#can't type it because of cyclic dependency
-func get_player():
+	
+func add_to_inventory(object: PickableObject):
+	$PlayerUI.add_to_inventory(object)
+	
+func get_player() -> Player:
 	return _player
+	
+func get_doll() -> CharaDoll:
+	return $PlayerUI.get_doll()
+	
+func get_inventory() -> Inventory:
+	return $PlayerUI/PlayerInventory as Inventory
+		

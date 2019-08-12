@@ -1,11 +1,13 @@
 extends Popup
+class_name Inventory
 
 var dm: DialogMessage
 
 func _ready():
 	for c in $Bag.get_children():
-		if c.get_child_count() == 1:
-			c.get_child(0).scale = Vector2(4,4)
+		c = c as InventorySlot
+		if !c.is_empty():
+			c.get_object_in_slot().scale = Vector2(4,4)
 	dm = DialogMessage.new()
 	dm.message = "You can't place anything here anymore !"
 	var de =  DialogEventPauseGame.new()

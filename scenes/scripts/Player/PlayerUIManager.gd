@@ -21,11 +21,6 @@ func _ready():
 	PDS.connect("target_has_changed", self, "_update_targeting")
 	PDS.get_player().get_stats().connect("life_changed", self, "_update_player_life")
 	
-func _process(delta):
-	#maybe not needed?
-	##_update_targeting()
-	pass
-	
 func _on_combat_mode_switch():
 	PDS.clear_target()
 	PDS.switch_fight_mode()
@@ -95,5 +90,7 @@ func add_to_inventory(object: PickableObject):
 		DS.spawn_dialog("", null, dm)
 	if r == 2:
 		dm.message = "This is too heavy ! It weighs " + String(object.get_weight()) + " Stones"
-		DS.spawn_dialog("", null, dm)			
-	
+		DS.spawn_dialog("", null, dm)
+		
+func get_doll() -> CharaDoll:
+	return $PlayerInventory/CharaDoll as CharaDoll

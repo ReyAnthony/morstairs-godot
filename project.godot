@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/Objects/Bag.gd"
 }, {
+"base": "Popup",
+"class": "CharaDoll",
+"language": "GDScript",
+"path": "res://scenes/scripts/Player/CharaDoll.gd"
+}, {
 "base": "Node2D",
 "class": "DayNight",
 "language": "GDScript",
@@ -94,10 +99,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/Interactable.gd"
 }, {
+"base": "Popup",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://scenes/scripts/Player/PlayerInventory.gd"
+}, {
 "base": "TextureRect",
 "class": "InventoryInfoPanel",
 "language": "GDScript",
-"path": "res://scenes/scripts/Objects/InfoPanel.gd"
+"path": "res://scenes/scripts/Objects/InventoryInfoPanel.gd"
 }, {
 "base": "Slot",
 "class": "InventorySlot",
@@ -161,6 +171,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bag": "",
+"CharaDoll": "",
 "DayNight": "",
 "DialogEvent": "",
 "DialogEventGoToJail": "",
@@ -177,6 +188,7 @@ _global_script_class_icons={
 "DollSlot": "",
 "GameObjectBase": "",
 "Interactable": "",
+"Inventory": "",
 "InventoryInfoPanel": "",
 "InventorySlot": "",
 "NPC": "",
@@ -201,7 +213,6 @@ run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 
 PDS="*res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
 DS="*res://scenes/scripts/singletons/DialogSingleton.gd"
-PUI="*res://scenes/scripts/singletons/PlayerUISingleton.gd"
 
 [display]
 

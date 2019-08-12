@@ -8,7 +8,7 @@ func _ready():
 
 func is_full() -> bool:
 	for slot in get_children():
-		if slot.get_child_count() == 0:
+		if slot.is_empty():
 			return false
 	return true
 	
@@ -17,17 +17,17 @@ func is_it_too_heavy_with_new(new: PickableObject) -> bool:
 	
 func get_empty_slot() -> InventorySlot:
 	for slot in get_children():
-		if slot.get_child_count() == 0:
+		if slot.is_empty():
 			return slot
-	assert(false)
+	assert(false) ##you should check with is full before
 	return null
 	
 func get_weight() -> int:
 	var weight = 0
 	for slot in get_children():
-		if slot.get_child_count() == 1:
-			var object = slot.get_children()[0] as PickableObject
-			weight += object.get_weight()	
+		var object = slot.get_object_in_slot()
+		if object != null:
+			weight += object.get_weight()
 	return weight + $"../CharaDoll".get_weight()
 	
 func get_max_weight() -> int:

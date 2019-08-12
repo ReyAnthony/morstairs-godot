@@ -11,9 +11,10 @@ func _ready():
 	._ready()
 
 func _on_mouse_entered():
-	if get_child_count() == 0:
+	if is_empty():
 		return
-	_info_panel.update_panel(get_children()[0].get_object_name(), get_children()[0].get_weight())
+	var o = get_object_in_slot()	
+	_info_panel.update_panel(o.get_object_name(), o.get_weight())
 
 func _on_mouse_exited():
 	_info_panel.reset()

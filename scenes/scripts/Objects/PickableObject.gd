@@ -12,7 +12,7 @@ func _ready():
 
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if PDS.get_target().is_you(self):
-		PUI.add_to_inventory(self)
+		PDS.add_to_inventory(self)
 		PDS.clear_target()
 		
 func get_weight() -> int:

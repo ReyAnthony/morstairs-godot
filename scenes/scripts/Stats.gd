@@ -5,14 +5,20 @@ export (bool) var player := false
 export (int) var life: int
 export (PackedScene) var damage: PackedScene
 export (PackedScene) var corpse: PackedScene
-var _root: String = "/root/Level/DayNight/Level/Walls/"
 export (String) var _to_free: String = "../"
 
+var _root: String = "/root/Level/DayNight/Level/Walls/"
 var _current_life: int
 signal life_changed
 
 func _ready():
 	_current_life = life
+	
+func get_life() -> int:
+	return _current_life
+	
+func get_max_life() -> int:
+	return life
 	
 func attack(damages: int):
 	var dmg = damage.instance()
