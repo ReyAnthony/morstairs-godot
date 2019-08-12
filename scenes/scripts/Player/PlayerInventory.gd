@@ -27,6 +27,7 @@ func drop_data(position, data):
 	PDS.get_player().get_parent().move_child(data, 0)
 	data.global_position = position_on_the_ground
 	data.scale = Vector2(1,1)
+	data.show()
 		
 func get_a_position_on_the_ground_without_object() -> Vector2:
 	var objects_on_ground := []
