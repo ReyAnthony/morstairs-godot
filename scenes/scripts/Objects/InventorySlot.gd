@@ -1,19 +1,19 @@
 extends Slot
 class_name InventorySlot
 
+var _info_panel: InventoryInfoPanel
+
 func _ready():
-	self.connect("mouse_entered", self, "_on_mouse_entered")
-	self.connect("mouse_exited", self, "_on_mouse_exited")
-	$"../../InfoPanel/ObjectName".text = "Hover on an object"
-	$"../../InfoPanel/ObjectWeight".text = "to get more infos"
+	connect("mouse_entered", self, "_on_mouse_entered")
+	connect("mouse_exited", self, "_on_mouse_exited")
+	_info_panel = $"../../InfoPanel"
+	_info_panel.reset()
 	._ready()
 
 func _on_mouse_entered():
 	if get_child_count() == 0:
 		return
-	$"../../InfoPanel/ObjectName".text = get_children()[0].get_object_name()
-	$"../../InfoPanel/ObjectWeight".text = "It weighs " + String(get_children()[0].get_weight()) + " Stones"
+	_info_panel.update_panel(get_children()[0].get_object_name(), get_children()[0].get_weight())
 
 func _on_mouse_exited():
-	$"../../InfoPanel/ObjectName".text = "Hover on an object"
-	$"../../InfoPanel/ObjectWeight".text = "to get more infos"
+	_info_panel.reset()

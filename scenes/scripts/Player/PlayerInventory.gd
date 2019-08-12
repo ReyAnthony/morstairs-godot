@@ -12,11 +12,8 @@ func _ready():
 	self.add_child(de)
 	dm._dialog_event = de
 	self.add_child(dm)
-
-func _process(delta):
-	$InfoPanel/Weight.text = "Weight : " + String($Bag.get_weight()) + "/" + String($Bag.get_max_weight())
 	
-func can_drop_data(position, data):
+func can_drop_data(position, data) -> bool:
 	return true
 	
 func drop_data(position, data):
@@ -60,7 +57,8 @@ func get_a_position_on_the_ground_without_object() -> Vector2:
 				##we want an invalid cell BECAUSE THERE IS NO WALL THEN
 				if !objects_on_ground.has(where) and cell == tilemap.INVALID_CELL:
 					return where
-	return Vector2(-10000, -100000)				
+	assert(PDS.get_player().global_position != Vector2(-10000, -100000)) 				
+	return Vector2(-10000, -100000) #HACKISH
 	
 func add_to_inventory(object: PickableObject) -> int:
 	if $Bag.is_full():
