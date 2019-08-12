@@ -15,8 +15,8 @@ func attack(amount: int):
 func full_heal():
 	$Stats.full_heal()
 	
-func add_to_inventory(object: PickableObject) -> bool:
-	return $CanvasLayer/PlayerInventory.add_to_inventory(object)
+func get_stats():
+	return $Stats	
 
 func _ready():
 	$AnimatedSprite.play("NW")
@@ -24,8 +24,7 @@ func _ready():
 	_map_cam = get_node(map_cam)
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
-	PDS.connect("target_has_changed", self, "_update_targeting")
-	$CanvasLayer/Panel/CombatMode.connect("pressed", self, "_on_combat_mode_switch")
+	PDS.connect("combat_mode_change", self, "_on_combat_mode_change")
 	$Interactable/Name.text = PDS.get_player_name()
 	
 # warning-ignore:unused_argument
@@ -33,8 +32,6 @@ func _process(delta: float):
 	var anim_direction := ""
 	var anim := ""
 	var target: PlayerTarget = PDS.get_target()
-	_update_player_life()
-	_update_targeting()
 		
 	if  target.is_valid():
 		_velocity = (target.get_position() - self.global_position).normalized()
@@ -100,7 +97,13 @@ func _unhandled_input(event: InputEvent):
 		PDS.set_target(get_global_mouse_position())
 	else:
 		_velocity = Vector2.ZERO
-		
+
+func _on_combat_mode_change(mode: bool):
+	if !mode: 
+		$AnimatedSprite.play(_last_dir)
+	else:
+		$AnimatedSprite.play(_last_dir + "_FIGHT")
+
 func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 	var target: PlayerTarget = PDS.get_target()	
 	if !target.is_valid() or !PDS.fight_mode or target.targetType != target.TargetType.ACTION_TARGET:
@@ -110,25 +113,3 @@ func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 		PDS.clear_target()
 	elif target.node == body:
 		_is_attacking = true
-
-func _on_combat_mode_switch():
-	PDS.clear_target()
-	if PDS.fight_mode: 
-		$AnimatedSprite.play(_last_dir)
-	else:
-		$AnimatedSprite.play(_last_dir + "_FIGHT")
-	PDS.fight_mode = !PDS.fight_mode
-
-func _update_targeting(t = null):
-	var target: PlayerTarget = PDS.get_target()
-	if target.is_valid() and target.targetType == target.TargetType.ACTION_TARGET and target.node.can_be_hit:
-		$CanvasLayer/Life/Target.show()
-		$CanvasLayer/Life/Target/Label.text = target.node.chara_name
-		$CanvasLayer/Life/Target/Portrait.texture = target.node.chara_portrait
-		$CanvasLayer/Life/Target/ColorRect.rect_size.x = target.node.get_life() * (77 / target.node.get_max_life())
-	else:
-		$CanvasLayer/Life/Target.hide()
-		
-func _update_player_life():
-	$CanvasLayer/Panel/Player/Label.text = PDS.get_player_name()
-	$CanvasLayer/Panel/Player/ColorRect.rect_size.x = $Stats._current_life * (77 / $Stats.life)

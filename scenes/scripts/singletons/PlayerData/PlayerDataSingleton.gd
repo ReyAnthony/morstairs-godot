@@ -13,6 +13,7 @@ var fight_mode := false
 signal target_has_changed
 signal has_slept
 signal bounty_paid
+signal combat_mode_change
 
 func _ready():
 	_target = PlayerTarget.new(Vector2(0,0))
@@ -85,18 +86,12 @@ func heal_player():
 	
 func has_slept():
 	#update calendar
-	emit_signal("has_slept")	
+	emit_signal("has_slept")
+	
+func switch_fight_mode():
+	PDS.fight_mode = !PDS.fight_mode
+	emit_signal("combat_mode_change", fight_mode)
 
 #can't type it because of cyclic dependency
 func get_player():
 	return _player
-	
-func add_to_inventory(object: PickableObject):
-	var dm = DialogMessage.new()
-	var r = _player.add_to_inventory(object)
-	if r == 1:
-		dm.message = "Your inventory is full !"
-		DS.spawn_dialog("", null, dm)
-	if r == 2:
-		dm.message = "This is too heavy ! It weighs " + String(object.get_weight()) + " Stones"
-		DS.spawn_dialog("", null, dm)	

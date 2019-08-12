@@ -142,7 +142,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "Slot",
 "language": "GDScript",
-"path": "res://Slot.gd"
+"path": "res://scenes/scripts/Objects/Slot.gd"
 }, {
 "base": "Node2D",
 "class": "Stats",
@@ -195,6 +195,7 @@ run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 
 PDS="*res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
 DS="*res://scenes/scripts/singletons/DialogSingleton.gd"
+PUI="*res://scenes/scripts/singletons/PlayerUISingleton.gd"
 
 [display]
 

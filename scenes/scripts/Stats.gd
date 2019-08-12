@@ -9,6 +9,7 @@ var _root: String = "/root/Level/DayNight/Level/Walls/"
 export (String) var _to_free: String = "../"
 
 var _current_life: int
+signal life_changed
 
 func _ready():
 	_current_life = life
@@ -39,6 +40,9 @@ func attack(damages: int):
 		get_node(_to_free).call_deferred("free")
 	else:
 		add_child(dmg)
+		
+	emit_signal("life_changed")	
 
 func full_heal():
 	_current_life = life
+	emit_signal("life_changed")	

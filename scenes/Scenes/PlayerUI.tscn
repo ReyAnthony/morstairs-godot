@@ -1,0 +1,575 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scenes/scripts/Player/PlayerUIManager.gd" type="Script" id=1]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=3]
+[ext_resource path="res://scenes/scripts/Player/PlayerInventory.gd" type="Script" id=4]
+[ext_resource path="res://res/sprites/UI/bag_inside.png" type="Texture" id=5]
+[ext_resource path="res://scenes/scripts/Objects/Bag.gd" type="Script" id=6]
+[ext_resource path="res://scenes/scripts/Objects/InventorySlot.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Scenes/Objects/Sword.tscn" type="PackedScene" id=8]
+[ext_resource path="res://res/sprites/UI/bag-info-panel.png" type="Texture" id=9]
+[ext_resource path="res://scenes/scripts/Player/CharaDoll.gd" type="Script" id=10]
+[ext_resource path="res://res/sprites/UI/Stats.png" type="Texture" id=11]
+[ext_resource path="res://scenes/scripts/Objects/DollSlot.gd" type="Script" id=12]
+[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=13]
+[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=14]
+[ext_resource path="res://res/sprites/UI/bag.png" type="Texture" id=15]
+[ext_resource path="res://res/sprites/characters/player_portrait.png" type="Texture" id=16]
+
+[node name="PlayerUI" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="Life" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Target" type="Control" parent="Life"]
+editor/display_folded = true
+visible = false
+margin_left = -598.982
+margin_top = -92.5319
+margin_right = -523.982
+margin_bottom = 32.4681
+
+[node name="Label" type="Label" parent="Life/Target"]
+visible = false
+anchor_right = 1.0
+margin_bottom = 36.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Target"
+align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Portrait" type="TextureRect" parent="Life/Target"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -57.5
+margin_top = -43.0
+margin_right = 57.5
+margin_bottom = 43.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Life/Target"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -38.5
+margin_top = -7.0
+margin_right = 38.5
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerInventory" type="Popup" parent="."]
+self_modulate = Color( 1, 1, 1, 0.129412 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -192.0
+script = ExtResource( 4 )
+
+[node name="Name" type="Label" parent="PlayerInventory"]
+margin_left = 206.629
+margin_top = 50.9148
+margin_right = 325.629
+margin_bottom = 96.9148
+custom_fonts/font = ExtResource( 2 )
+text = "Bag"
+align = 1
+valign = 1
+
+[node name="Bag" type="TextureRect" parent="PlayerInventory"]
+editor/display_folded = true
+margin_left = 109.0
+margin_top = 107.039
+margin_right = 433.0
+margin_bottom = 415.039
+texture = ExtResource( 5 )
+stretch_mode = 6
+script = ExtResource( 6 )
+
+[node name="Slot" type="Control" parent="PlayerInventory/Bag"]
+editor/display_folded = true
+margin_left = 39.0
+margin_top = 40.0
+margin_right = 93.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword2" parent="PlayerInventory/Bag/Slot" instance=ExtResource( 8 )]
+
+[node name="Slot2" type="Control" parent="PlayerInventory/Bag"]
+editor/display_folded = true
+margin_left = 98.0513
+margin_top = 39.4267
+margin_right = 152.051
+margin_bottom = 91.4267
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword" parent="PlayerInventory/Bag/Slot2" instance=ExtResource( 8 )]
+
+[node name="Slot3" type="Control" parent="PlayerInventory/Bag"]
+editor/display_folded = true
+margin_left = 166.276
+margin_top = 38.2801
+margin_right = 220.276
+margin_bottom = 90.2801
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword2" parent="PlayerInventory/Bag/Slot3" instance=ExtResource( 8 )]
+
+[node name="Slot4" type="Control" parent="PlayerInventory/Bag"]
+editor/display_folded = true
+margin_left = 231.06
+margin_top = 38.2801
+margin_right = 285.06
+margin_bottom = 90.2801
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword3" parent="PlayerInventory/Bag/Slot4" instance=ExtResource( 8 )]
+
+[node name="Slot5" type="Control" parent="PlayerInventory/Bag"]
+editor/display_folded = true
+margin_left = 39.5734
+margin_top = 93.3181
+margin_right = 93.5734
+margin_bottom = 145.318
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword3" parent="PlayerInventory/Bag/Slot5" instance=ExtResource( 8 )]
+
+[node name="Slot6" type="Control" parent="PlayerInventory/Bag"]
+editor/display_folded = true
+margin_left = 99.7712
+margin_top = 93.8914
+margin_right = 153.771
+margin_bottom = 145.891
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword4" parent="PlayerInventory/Bag/Slot6" instance=ExtResource( 8 )]
+
+[node name="Slot7" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 165.702
+margin_top = 95.0381
+margin_right = 219.702
+margin_bottom = 147.038
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword5" parent="PlayerInventory/Bag/Slot7" instance=ExtResource( 8 )]
+
+[node name="Slot8" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 231.06
+margin_top = 94.4648
+margin_right = 285.06
+margin_bottom = 146.465
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword6" parent="PlayerInventory/Bag/Slot8" instance=ExtResource( 8 )]
+
+[node name="Slot9" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 39.5733
+margin_top = 153.516
+margin_right = 93.5733
+margin_bottom = 205.516
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword7" parent="PlayerInventory/Bag/Slot9" instance=ExtResource( 8 )]
+
+[node name="Slot10" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 101.491
+margin_top = 152.369
+margin_right = 155.491
+margin_bottom = 204.369
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sword8" parent="PlayerInventory/Bag/Slot10" instance=ExtResource( 8 )]
+
+[node name="Slot11" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 166.849
+margin_top = 152.369
+margin_right = 220.849
+margin_bottom = 204.369
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Slot12" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 231.06
+margin_top = 150.65
+margin_right = 285.06
+margin_bottom = 202.65
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Slot13" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 40.72
+margin_top = 216.007
+margin_right = 94.72
+margin_bottom = 268.007
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Slot14" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 101.491
+margin_top = 212.567
+margin_right = 155.491
+margin_bottom = 264.567
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Slot15" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 165.702
+margin_top = 213.714
+margin_right = 219.702
+margin_bottom = 265.714
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Slot16" type="Control" parent="PlayerInventory/Bag"]
+margin_left = 234.5
+margin_top = 213.714
+margin_right = 288.5
+margin_bottom = 265.714
+rect_min_size = Vector2( 50, 50 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="InfoPanel" type="TextureRect" parent="PlayerInventory"]
+editor/display_folded = true
+margin_left = 114.959
+margin_top = 432.371
+margin_right = 431.959
+margin_bottom = 671.371
+texture = ExtResource( 9 )
+stretch_mode = 6
+
+[node name="Weight" type="Label" parent="PlayerInventory/InfoPanel"]
+margin_left = 66.0
+margin_top = 59.0
+margin_right = 388.0
+margin_bottom = 105.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 2 )
+text = "Weight : 12/12"
+align = 1
+valign = 1
+
+[node name="ObjectName" type="Label" parent="PlayerInventory/InfoPanel"]
+margin_left = 55.0
+margin_top = 107.0
+margin_right = 400.0
+margin_bottom = 153.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 2 )
+text = "Sword"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="ObjectWeight" type="Label" parent="PlayerInventory/InfoPanel"]
+margin_left = 55.0
+margin_top = 151.0
+margin_right = 396.0
+margin_bottom = 197.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 2 )
+text = "Poids"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="CharaDoll" type="Popup" parent="PlayerInventory"]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 10 )
+
+[node name="Doll" type="TextureRect" parent="PlayerInventory/CharaDoll"]
+editor/display_folded = true
+margin_left = 700.0
+margin_top = 120.0
+margin_right = 990.0
+margin_bottom = 420.0
+texture = ExtResource( 11 )
+stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RightHandSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+margin_left = 57.9573
+margin_top = 150.403
+margin_right = 97.9573
+margin_bottom = 190.403
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LeftHandSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+margin_left = 180.482
+margin_top = 151.338
+margin_right = 220.482
+margin_bottom = 191.338
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HeadSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+margin_left = 122.493
+margin_top = 50.3251
+margin_right = 162.493
+margin_bottom = 90.3251
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+slot_type = 3
+
+[node name="RingSlot1" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+margin_left = 55.1514
+margin_top = 75.5784
+margin_right = 95.1514
+margin_bottom = 115.578
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+slot_type = 4
+
+[node name="RingSlot2" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+margin_left = 185.159
+margin_top = 75.5784
+margin_right = 225.159
+margin_bottom = 115.578
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+slot_type = 4
+
+[node name="LeftFeetSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+margin_left = 165.517
+margin_top = 220.55
+margin_right = 205.517
+margin_bottom = 260.55
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+slot_type = 2
+
+[node name="RightFeetSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+margin_left = 72.9221
+margin_top = 220.551
+margin_right = 112.922
+margin_bottom = 260.551
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+slot_type = 2
+
+[node name="InfoPanel" type="TextureRect" parent="PlayerInventory/CharaDoll"]
+editor/display_folded = true
+margin_left = 690.0
+margin_top = 441.371
+margin_right = 1008.0
+margin_bottom = 680.371
+texture = ExtResource( 9 )
+stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerName" type="Label" parent="PlayerInventory/CharaDoll/InfoPanel"]
+margin_left = 50.0
+margin_top = 49.0
+margin_right = 400.0
+margin_bottom = 95.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 2 )
+text = "PlayerName"
+align = 1
+
+[node name="HP" type="Label" parent="PlayerInventory/CharaDoll/InfoPanel"]
+margin_left = 50.0
+margin_top = 99.0
+margin_right = 400.0
+margin_bottom = 145.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 2 )
+text = "150/150 HP"
+align = 1
+
+[node name="Title" type="Label" parent="PlayerInventory/CharaDoll"]
+margin_left = 790.0
+margin_top = 70.0
+margin_right = 881.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 2 )
+text = "Stats"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 1138.0
+margin_top = 2.0
+margin_right = 1283.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CombatMode" type="TextureButton" parent="Panel"]
+margin_left = 26.8544
+margin_top = 437.446
+margin_right = 57.8544
+margin_bottom = 471.446
+rect_scale = Vector2( 3, 3 )
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 14 )
+stretch_mode = 5
+
+[node name="Inventory" type="TextureButton" parent="Panel"]
+margin_left = 19.2876
+margin_top = 302.508
+margin_right = 50.2875
+margin_bottom = 336.508
+rect_scale = Vector2( 3, 3 )
+action_mode = 0
+texture_normal = ExtResource( 15 )
+expand = true
+stretch_mode = 5
+
+[node name="Player" type="Control" parent="Panel"]
+margin_left = 10.4489
+margin_top = 147.391
+margin_right = 139.449
+margin_bottom = 258.391
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="Panel/Player"]
+visible = false
+anchor_right = 1.0
+margin_bottom = 36.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Target"
+align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Portrait" type="TextureButton" parent="Panel/Player"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.3203
+margin_top = -44.6405
+margin_right = 56.6797
+margin_bottom = 41.3595
+texture_normal = ExtResource( 16 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Panel/Player"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -38.5
+margin_top = -7.0
+margin_right = 38.5
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
