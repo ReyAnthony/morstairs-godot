@@ -26,13 +26,13 @@ func get_drag_data(position):
 
 func can_drop_data(position, data):
 	assert(.get_child_count() <= 1)
-	return is_empty()  ##show weight popup ? (could be used when using containers)
+	return is_empty() 
 
 func drop_data(position, data):
 	data.show()
 	data.get_parent().remove_child(data)
 	add_child(data)
-	
+
 func get_object_in_slot() -> PickableObject:
 	if !is_empty():
 		return .get_children()[0]
@@ -53,7 +53,7 @@ func get_children() -> Array:
 func _on_mouse_entered():
 	if is_empty():
 		return
-	pass	
+	pass
 
 func _on_mouse_exited():
 	pass

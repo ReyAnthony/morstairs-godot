@@ -15,5 +15,8 @@ func get_weight():
 			w += object.get_weight()
 	return w
 
+func get_damage_string() -> String:
+	return String(_get_default_damages())## + " + TODO malus etc"
 	
-##TODO can't throw stuff if inventory not openned	
+func get_defense_string() -> String:
+	return String(get_defense()) ##+ " + TODO malus etc"

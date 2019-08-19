@@ -107,6 +107,8 @@ func get_chara_doll() -> CharaDoll:
 func get_inventory() -> Inventory:
 	return $PlayerUI/PlayerInventory as Inventory
 	
+func get_player_ui_manager() -> PlayerUIManager:
+	return $PlayerUI as PlayerUIManager
+	
 func game_over():
 	assert(false) ##HIDE UI
-		

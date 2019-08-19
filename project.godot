@@ -119,6 +119,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/Objects/InventorySlot.gd"
 }, {
+"base": "Slot",
+"class": "LootSlot",
+"language": "GDScript",
+"path": "res://scenes/Scenes/LootSlot.gd"
+}, {
+"base": "GameObjectBase",
+"class": "Lootable",
+"language": "GDScript",
+"path": "res://Lootable.gd"
+}, {
 "base": "GameObjectBase",
 "class": "NPC",
 "language": "GDScript",
@@ -153,6 +163,11 @@ _global_script_classes=[ {
 "class": "PlayerTarget",
 "language": "GDScript",
 "path": "res://scenes/scripts/singletons/PlayerData/PlayerTarget.gd"
+}, {
+"base": "CanvasLayer",
+"class": "PlayerUIManager",
+"language": "GDScript",
+"path": "res://scenes/scripts/Player/PlayerUIManager.gd"
 }, {
 "base": "Node2D",
 "class": "Room",
@@ -202,6 +217,8 @@ _global_script_class_icons={
 "Inventory": "",
 "InventoryInfoPanel": "",
 "InventorySlot": "",
+"LootSlot": "",
+"Lootable": "",
 "NPC": "",
 "NPCBehavior": "",
 "NPCDoll": "",
@@ -209,6 +226,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerDataSingleton": "",
 "PlayerTarget": "",
+"PlayerUIManager": "",
 "Room": "",
 "ShopKeeper": "",
 "Slot": "",

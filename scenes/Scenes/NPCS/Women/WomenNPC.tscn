@@ -1,18 +1,16 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/scripts/NPC/NPC.gd" type="Script" id=1]
-[ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
-[ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
-[ext_resource path="res://res/sprites/characters/woman_portrait.png" type="Texture" id=4]
-[ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scenes/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/scripts/NPC/NPCDoll.gd" type="Script" id=7]
-[ext_resource path="res://scenes/scripts/Objects/Slot.gd" type="Script" id=8]
-[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=9]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=10]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=11]
-[ext_resource path="res://res/Woman_spriteframe.tres" type="SpriteFrames" id=12]
-[ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=13]
+[ext_resource path="res://res/sprites/characters/woman_portrait.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Scenes/NPCS/Women/WomenCorpse.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/scripts/NPC/NPCDoll.gd" type="Script" id=5]
+[ext_resource path="res://scenes/scripts/Objects/Slot.gd" type="Script" id=6]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=8]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=9]
+[ext_resource path="res://res/Woman_spriteframe.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5876
@@ -23,36 +21,33 @@ radius = 7.12598
 
 [node name="WomanNPC" type="KinematicBody2D"]
 script = ExtResource( 1 )
-material_on_mouse_enter = ExtResource( 2 )
-material_on_target = ExtResource( 3 )
 chara_name = "Woman"
-chara_portrait = ExtResource( 4 )
+chara_portrait = ExtResource( 2 )
 
-[node name="Stats" parent="." instance=ExtResource( 5 )]
+[node name="Stats" parent="." instance=ExtResource( 3 )]
 scale = Vector2( 1.00418, 1.0142 )
-corpse = ExtResource( 6 )
+corpse = ExtResource( 4 )
 
 [node name="Equipment" type="Node" parent="."]
-editor/display_folded = true
-script = ExtResource( 7 )
+script = ExtResource( 5 )
 
-[node name="Doll" type="Node" parent="Equipment"]
+[node name="Doll" type="Node2D" parent="Equipment"]
 
 [node name="WeaponSlot" type="Control" parent="Equipment/Doll"]
 margin_right = 40.0
 margin_bottom = 40.0
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 
 [node name="ArmorSlot" type="Control" parent="Equipment/Doll"]
 margin_right = 40.0
 margin_bottom = 40.0
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 
 [node name="DialogMessage" type="Node" parent="."]
-script = ExtResource( 9 )
+script = ExtResource( 7 )
 message = "I have nothing to say to thee."
 
-[node name="Interactable" parent="." instance=ExtResource( 10 )]
+[node name="Interactable" parent="." instance=ExtResource( 8 )]
 editor/display_folded = true
 scale = Vector2( 1.00418, 1.0142 )
 
@@ -75,14 +70,14 @@ margin_top = -17.2094
 margin_right = 168.367
 margin_bottom = 18.7906
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 11 )
+custom_fonts/font = ExtResource( 9 )
 text = "TEST"
 align = 1
 valign = 1
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 1.00418, 1.0142 )
-frames = ExtResource( 12 )
+frames = ExtResource( 10 )
 animation = "SE"
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
@@ -90,5 +85,5 @@ position = Vector2( -0.0522929, 0.156878 )
 scale = Vector2( 1.00418, 1.0142 )
 polygon = PoolVector2Array( -4.3325, 9.10918, -2.44125, 9.28473, 2.05046, 9.81139, 3.2916, 8.64104, 4.47363, 5.42256, 2.70057, 5.07145, -4.62801, 4.31073 )
 
-[node name="NPCBehavior" parent="." instance=ExtResource( 13 )]
+[node name="NPCBehavior" parent="." instance=ExtResource( 11 )]
 idle_behavior = 1

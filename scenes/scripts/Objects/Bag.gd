@@ -1,8 +1,6 @@
 extends TextureRect
 class_name Bag
 
-var _max_weight = 25
-
 func _ready():
 	mouse_filter = MOUSE_FILTER_STOP ##SO THAT WE can't drop stuff
 

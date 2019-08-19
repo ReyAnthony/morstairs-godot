@@ -27,9 +27,3 @@ func get_defense() -> int:
 	if $Doll/ArmorSlot.is_empty():
 		return 0
 	return _get_equipped_armor().get_defense()
-	
-func get_damage_string() -> String:
-	return String(_get_default_damages()) + " + TODO malus etc"
-	
-func get_defense_string() -> String:
-	return String(get_defense()) + " + TODO malus etc"

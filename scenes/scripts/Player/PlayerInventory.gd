@@ -2,7 +2,7 @@ extends Popup
 class_name Inventory
 
 var dm: DialogMessage
-var _max_weight = 25
+var _max_weight = 100
 
 func _ready():
 	for c in $Bag.get_children():
@@ -10,11 +10,11 @@ func _ready():
 		if !c.is_empty():
 			c.get_object_in_slot().scale = Vector2(4,4)
 	dm = DialogMessage.new()
-	dm.message = "You can't place anything here anymore !"
 	var de =  DialogEventPauseGame.new()
 	self.add_child(de)
 	dm._dialog_event = de
 	self.add_child(dm)
+	assert(get_total_weight() <= _max_weight)
 	
 func can_drop_data(position, data) -> bool:
 	return true
@@ -22,6 +22,7 @@ func can_drop_data(position, data) -> bool:
 func drop_data(position, data):
 	var position_on_the_ground = get_a_position_on_the_ground_without_object()
 	if position_on_the_ground == Vector2(-10000, -100000):
+		dm.message = "You can't place anything here anymore !"
 		DS.spawn_dialog("", null, dm)
 		return
 			
@@ -73,7 +74,12 @@ func add_to_inventory(object: PickableObject):
 		return
 	object.get_parent().remove_child(object)
 	$Bag.add_object_in_empty_slot(object)
-	
+
+func show_is_full():
+	dm.message = "Your inventory is full !"
+	DS.spawn_dialog("", null, dm)
+	var dialog = DialogMessage.new()
+
 func get_total_weight() -> int:
 	return $Bag.get_weight() + $CharaDoll.get_weight() 
 	
@@ -85,3 +91,24 @@ func get_chara_doll() -> CharaDoll:
 	
 func _is_it_too_heavy_with_new(new: PickableObject) -> bool:
 	return get_total_weight() + new.get_weight() > get_max_weight()
+	
+func update_loot(loot: Array):
+	assert(loot.size() < $Loot/LootBag.get_child_count())
+	for l in loot:
+		l.get_parent().remove_child(l)
+		$Loot/LootBag.add_object_in_empty_slot(l)
+
+func show_loot():
+	$Loot.show()
+
+func hide_loot():
+	$Loot.hide()
+	
+func clear_loot(original_node: Node):
+	for n in $Loot/LootBag.get_children():
+		n = n as Slot
+		if !n.is_empty():
+			var obj = n.get_object_in_slot()
+			obj.hide()
+			n.remove_child(obj)
+			original_node.add_child(obj)

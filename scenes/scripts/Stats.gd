@@ -7,7 +7,7 @@ export (PackedScene) var damage: PackedScene
 export (PackedScene) var corpse: PackedScene
 export (String) var _to_free: String = "../"
 
-var _root: String = "/root/Level/DayNight/Level/Walls/"
+var _root: String = "/root/Level/DayNight/Level/Walls/Characters"
 var _current_life: int
 signal life_changed
 

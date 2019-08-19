@@ -23,3 +23,13 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	_inventory_info_panel.reset()
+	
+func drop_data(position, data):
+	##allow moving from inventory slot to doll slot even if full
+	var player_inventory = $"../../../"
+	var bag = $"../../../Bag"
+	var chara_doll = $"../../"
+	if bag.is_full() or player_inventory._is_it_too_heavy_with_new(data) and data.get_parent() is LootSlot:
+		player_inventory.show_is_full()
+		return
+	.drop_data(position, data)

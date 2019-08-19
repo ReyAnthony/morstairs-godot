@@ -18,3 +18,9 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	_info_panel.reset()
+	
+func drop_data(position, data):
+	if $"../".is_full() or $"../../"._is_it_too_heavy_with_new(data) and data.get_parent() is LootSlot:
+		$"../../".show_is_full()
+		return
+	.drop_data(position, data)

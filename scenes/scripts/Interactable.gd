@@ -16,7 +16,7 @@ var _is_body_inside := false
 func _ready():
 	assert($MouseArea != null)
 	assert($ActionArea != null)
-	assert($Name != null)
+	assert($Name != null) ##Create it by default ??
 	assert(group_to_test_on_enter != "")
 	_mouseArea = $MouseArea
 	_actionArea = $ActionArea

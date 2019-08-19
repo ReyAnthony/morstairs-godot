@@ -49,6 +49,7 @@ func _ready():
 	assert($ViewArea != null)
 	
 	_equipement = $"../Equipment" as NPCDoll
+	$"../Equipment/Doll".hide()
 	_root = $"../"
 	_animated_sprite = $"../Sprite"
 	_free_target = Node2D.new()

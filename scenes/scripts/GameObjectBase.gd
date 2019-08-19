@@ -1,8 +1,8 @@
 extends KinematicBody2D
 class_name GameObjectBase
 
-export (Material) var material_on_mouse_enter: Material
-export (Material) var material_on_target: Material
+export (Material) var material_on_mouse_enter: Material = preload("res://res/shaders/select_npc.material")
+export (Material) var material_on_target: Material = preload("res://res/shaders/targeted_npc.material")
 
 var can_be_hit := false
 

@@ -1,9 +1,12 @@
 extends CanvasLayer
+class_name PlayerUIManager
 
 var charadoll_button
 var inventory_button
 var inventory_ui
 var combat_button
+
+var _parent_for_loot: Node
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
@@ -18,6 +21,24 @@ func _ready():
 	combat_button.connect("pressed", self, "_on_combat_mode_switch")
 	PDS.connect("target_has_changed", self, "_update_targeting")
 	PDS.get_player().get_stats().connect("life_changed", self, "_update_player_life")
+	
+func add_to_inventory(object: PickableObject):
+	$PlayerInventory.add_to_inventory(object)
+		
+func get_chara_doll() -> CharaDoll:
+	return $PlayerInventory.get_chara_doll() as CharaDoll
+	
+func show_inventory_and_loot(loot: Array, parent: Node):
+	_parent_for_loot = parent
+	_on_inventory_pressed()
+	show_loot(loot)
+	
+func show_loot(loot: Array):
+	$PlayerInventory.update_loot(loot)
+	$PlayerInventory.show_loot()
+
+func hide_loot():
+	$PlayerInventory.hide_loot()
 	
 func _on_combat_mode_switch():
 	PDS.clear_target()
@@ -35,11 +56,13 @@ func _on_inventory_pressed():
 		
 func show_inventory():
 	PDS.clear_target()
+	hide_loot()
 	inventory_button.pressed = true
 	inventory_ui.show()
 	
 func close_inventory():
 	inventory_ui.hide()
+	$PlayerInventory.clear_loot(_parent_for_loot)
 	
 func _hide_combat_mode():
 	$Panel/CombatMode.hide()
@@ -61,9 +84,3 @@ func _update_targeting(t = null):
 		$Life/Target/ColorRect.rect_size.x = target.node.get_life() * (77 / target.node.get_max_life())
 	else:
 		$Life/Target.hide()
-		
-func add_to_inventory(object: PickableObject):
-	var r = $PlayerInventory.add_to_inventory(object)
-		
-func get_chara_doll() -> CharaDoll:
-	return $PlayerInventory.get_chara_doll() as CharaDoll
