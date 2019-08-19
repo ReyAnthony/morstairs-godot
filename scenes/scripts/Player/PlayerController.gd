@@ -9,14 +9,17 @@ var _last_dir := "NW"
 var _is_attacking := false
 var _map_cam :Camera
 
-func attack(amount: int):
-	$Stats.attack(amount)
+func attack(damages: int):
+	$Stats.attack(damages)
 	
 func full_heal():
 	$Stats.full_heal()
 	
 func get_stats():
 	return $Stats
+	
+func get_doll():
+	return PDS.get_chara_doll()
 
 func _ready():
 	$AnimatedSprite.play("NW")
@@ -87,7 +90,7 @@ func _on_AnimatedSprite_animation_finished():
 		and target.node.can_be_hit \
 		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
 		and $Interactable/ActionArea.overlaps_body(target.node):
-			target.node.attack(1, self)		
+			target.node.attack(PDS.get_chara_doll().get_damages(target.node.get_doll()), self)
 	_is_attacking = false
 			
 # warning-ignore:unused_argument

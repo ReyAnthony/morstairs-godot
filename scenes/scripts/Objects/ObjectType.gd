@@ -7,5 +7,6 @@ enum ObjectType {
 	HELMET = 3,
 	AMULET_OR_RING = 4,
 	POTION = 5,
-	SCROLL = 6
+	SCROLL = 6,
+	ARMOR = 7
 }

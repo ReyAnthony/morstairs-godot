@@ -3,22 +3,23 @@
 [ext_resource path="res://scenes/scripts/Objects/PickableObject.gd" type="Script" id=1]
 [ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
 [ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
-[ext_resource path="res://res/sprites/objects/sword.png" type="Texture" id=4]
+[ext_resource path="res://res/sprites/objects/armor.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=5]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 23.6407
-height = 50.921
+height = 6.83747
 
-[node name="Sword" type="KinematicBody2D"]
+[node name="Armor" type="KinematicBody2D"]
 script = ExtResource( 1 )
 material_on_mouse_enter = ExtResource( 2 )
 material_on_target = ExtResource( 3 )
-weight = 5
+type = 7
+weight = 15
 contextual_value = 3
-_name = "Long Sword"
-_description = "A standard long sword"
+_name = "Armor"
+_description = "A standard armor"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
@@ -30,23 +31,21 @@ __meta__ = {
 [node name="Interactable" parent="." instance=ExtResource( 5 )]
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
-editor/display_folded = true
 scale = Vector2( 0.25, 0.25 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
-position = Vector2( 21.8058, 15.5227 )
+position = Vector2( 18.6094, 18.0342 )
 rotation = 3.94444
 shape = SubResource( 1 )
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
-editor/display_folded = true
 scale = Vector2( 0.25, 0.25 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
-position = Vector2( 21.8057, 15.5227 )
+position = Vector2( 18.6093, 17.8059 )
 rotation = 3.94444
 shape = SubResource( 1 )
 

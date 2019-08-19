@@ -1,0 +1,2 @@
+extends Doll
+class_name NPCDoll

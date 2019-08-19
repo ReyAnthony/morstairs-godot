@@ -2,6 +2,7 @@ extends Popup
 class_name Inventory
 
 var dm: DialogMessage
+var _max_weight = 25
 
 func _ready():
 	for c in $Bag.get_children():
@@ -50,26 +51,37 @@ func get_a_position_on_the_ground_without_object() -> Vector2:
 	else:
 		var initial_position = position
 		for x in range(-cell_size, cell_size+ 1, cell_size): #range is < x not <= so +1
-			print (x)
 			for y in  range(-cell_size, cell_size +1, cell_size):
-				print("y" + String(y))
 				var where = tilemap.map_to_world(tilemap.world_to_map(initial_position + Vector2(x, y)))
-				print(where)
 				var cell = tilemap.get_cellv(tilemap.world_to_map(where))
 				##TODO AVOID WATER CELLS
 				##we want an invalid cell BECAUSE THERE IS NO WALL THEN
 				if !objects_on_ground.has(where) and cell == tilemap.INVALID_CELL:
 					return where
-	assert(PDS.get_player().global_position != Vector2(-10000, -100000)) 				
+	assert(PDS.get_player().global_position != Vector2(-10000, -100000))
 	return Vector2(-10000, -100000) #HACKISH
 	
-func add_to_inventory(object: PickableObject) -> int:
+func add_to_inventory(object: PickableObject):
+	var dialog = DialogMessage.new()
 	if $Bag.is_full():
-		return 1
-	if $Bag.is_it_too_heavy_with_new(object):
-		return 2
+		dialog.message = "Your inventory is full !"
+		DS.spawn_dialog("", null, dialog)
+		return
+	if _is_it_too_heavy_with_new(object):
+		dialog.message = "This is too heavy ! It weighs " + String(object.get_weight()) + " Stones"
+		DS.spawn_dialog("", null, dialog)
+		return
 	object.get_parent().remove_child(object)
-	$Bag.get_empty_slot().add_child(object)
-	object.position = Vector2.ZERO
-	object.scale = Vector2(4,4)
-	return 0
+	$Bag.add_object_in_empty_slot(object)
+	
+func get_total_weight() -> int:
+	return $Bag.get_weight() + $CharaDoll.get_weight() 
+	
+func get_max_weight() -> int:
+	return _max_weight
+	
+func get_chara_doll() -> CharaDoll:
+	return $CharaDoll as CharaDoll
+	
+func _is_it_too_heavy_with_new(new: PickableObject) -> bool:
+	return get_total_weight() + new.get_weight() > get_max_weight()

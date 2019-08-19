@@ -8,10 +8,10 @@ func _ready():
 	self.connect("mouse_exited", self, "_on_mouse_exited")
 	
 func _process(delta):
-		if preview == null or !is_instance_valid(preview):
+	if preview == null or !is_instance_valid(preview):
+		if !is_empty():
 			var obj = get_object_in_slot()
-			if obj != null:
-				obj.show()
+			obj.show()
 
 func get_drag_data(position):
 	if is_empty():
@@ -36,6 +36,7 @@ func drop_data(position, data):
 func get_object_in_slot() -> PickableObject:
 	if !is_empty():
 		return .get_children()[0]
+	assert(false) ## USE is_empty before calling
 	return null	
 
 func is_empty() -> bool:

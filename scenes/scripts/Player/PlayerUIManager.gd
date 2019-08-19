@@ -83,14 +83,7 @@ func _update_targeting(t = null):
 		$Life/Target.hide()
 		
 func add_to_inventory(object: PickableObject):
-	var dm = DialogMessage.new()
 	var r = $PlayerInventory.add_to_inventory(object)
-	if r == 1:
-		dm.message = "Your inventory is full !"
-		DS.spawn_dialog("", null, dm)
-	if r == 2:
-		dm.message = "This is too heavy ! It weighs " + String(object.get_weight()) + " Stones"
-		DS.spawn_dialog("", null, dm)
 		
-func get_doll() -> CharaDoll:
-	return $PlayerInventory/CharaDoll as CharaDoll
+func get_chara_doll() -> CharaDoll:
+	return $PlayerInventory.get_chara_doll() as CharaDoll

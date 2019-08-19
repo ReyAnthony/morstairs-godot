@@ -101,9 +101,12 @@ func add_to_inventory(object: PickableObject):
 func get_player() -> Player:
 	return _player
 	
-func get_doll() -> CharaDoll:
-	return $PlayerUI.get_doll()
+func get_chara_doll() -> CharaDoll:
+	return $PlayerUI.get_chara_doll()
 	
 func get_inventory() -> Inventory:
 	return $PlayerUI/PlayerInventory as Inventory
+	
+func game_over():
+	assert(false) ##HIDE UI
 		

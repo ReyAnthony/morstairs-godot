@@ -19,9 +19,13 @@ func _ready():
 	if !override_dialog.is_empty():
 		assert(get_children().has(get_node(override_dialog)))
 	
-func attack(amount: int, attacker: PhysicsBody2D):
-	$Stats.attack(amount)
+##MERGE STATS AND DOLL ??
+func attack(damages: int, attacker: PhysicsBody2D):
+	$Stats.attack(damages)
 	emit_signal("is_attacked", attacker)
+	
+func get_doll() -> Doll:
+	return $Equipment as Doll
 	
 func get_life() -> int:
 	return $Stats._current_life

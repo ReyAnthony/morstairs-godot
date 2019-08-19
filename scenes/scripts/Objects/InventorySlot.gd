@@ -14,7 +14,7 @@ func _on_mouse_entered():
 	if is_empty():
 		return
 	var o = get_object_in_slot()	
-	_info_panel.update_panel(o.get_object_name(), o.get_weight())
+	_info_panel.update_panel(o)
 
 func _on_mouse_exited():
 	_info_panel.reset()

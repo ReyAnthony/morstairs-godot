@@ -17,9 +17,9 @@ func can_drop_data(position, data):
 
 func _on_mouse_entered():
 	if is_empty():
-		return
-	var o = get_object_in_slot()	
-	_inventory_info_panel.update_panel(o.get_object_name(), o.get_weight())
+		return #update with slot name ?
+	var o = get_object_in_slot()
+	_inventory_info_panel.update_panel(o)
 
 func _on_mouse_exited():
 	_inventory_info_panel.reset()

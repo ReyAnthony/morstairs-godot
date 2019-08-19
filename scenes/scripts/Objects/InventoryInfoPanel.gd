@@ -7,10 +7,14 @@ func _ready():
 func reset():
 	$ObjectName.text = "Hover on an object"
 	$ObjectWeight.text = "to get more infos"
+	$ObjectDesc.text = ""
+	$ObjectSpecificationDesc.text = ""
 	
-func update_panel(name: String, weight: int):
-	$ObjectName.text = name
-	$ObjectWeight.text = "It weighs " + String(weight) + " Stones"
+func update_panel(object: PickableObject):
+	$ObjectName.text = object.get_object_name()
+	$ObjectWeight.text = "It weighs " + String(object.get_weight()) + " Stones"
+	$ObjectDesc.text = object.get_desc()
+	$ObjectSpecificationDesc.text = object.get_specification_desc()
 	
 func _process(delta):
-	$Weight.text = "Weight : " + String($"../Bag".get_weight()) + "/" + String($"../Bag".get_max_weight())	
+	$Weight.text = "Weight : " + String($"../../PlayerInventory".get_total_weight()) + "/" + String($"../../PlayerInventory".get_max_weight())	
