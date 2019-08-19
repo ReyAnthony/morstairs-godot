@@ -19,7 +19,7 @@ func get_drag_data(position):
 	var obj = get_object_in_slot()
 	preview = TextureRect.new()
 	preview.texture = obj.get_node("Sprite").texture
-	preview.rect_scale = Vector2(4,4)
+	preview.rect_scale = Vector2(5,5)
 	set_drag_preview(preview)
 	obj.hide()
 	return obj
