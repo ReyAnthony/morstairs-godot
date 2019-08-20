@@ -16,17 +16,19 @@ polygon = PoolVector2Array( -13.4471, -49.7455, -11.1416, -51.4363, -0.843472, -
 [node name="StructureTileset" type="Node2D"]
 
 [node name="wall" type="Sprite" parent="."]
-editor/display_folded = true
+position = Vector2( -0.118385, 0 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -16 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall"]
+editor/display_folded = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall/StaticBody2D"]
 position = Vector2( 0.173862, -16.7615 )
 polygon = PoolVector2Array( 0.252897, 4.88708, -8.52972, 3.87759, -8.51458, 7.61824, -0.477329, 15.9495, 8.14801, 7.61824, 8.16992, 4.044 )
 
 [node name="jail_door" type="Sprite" parent="."]
+editor/display_folded = true
 position = Vector2( 81.736, 21.4993 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -16 )
@@ -72,7 +74,7 @@ polygon = PoolVector2Array( -11.3075, 3.86107, -8.04812, -1.27874, -6.04235, -3.
 occluder = SubResource( 1 )
 
 [node name="fortified_wall" type="Sprite" parent="."]
-position = Vector2( -22.2271, -1.46992 )
+position = Vector2( -22.2271, -1.35153 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -15 )
 

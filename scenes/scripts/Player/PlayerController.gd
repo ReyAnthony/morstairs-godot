@@ -8,6 +8,7 @@ var _velocity := Vector2()
 var _last_dir := "NW"
 var _is_attacking := false
 var _map_cam :Camera
+var _sprite: AnimatedSprite
 
 func attack(damages: int):
 	assert($Stats)
@@ -26,11 +27,12 @@ func get_doll():
 
 func _ready():
 	assert($Stats)
-	$AnimatedSprite.play("NW")
+	_sprite = $AnimatedSprite
+	_sprite.play("NW")
 	add_to_group("player")
 	_map_cam = get_node(map_cam)
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
-	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
+	_sprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	PDS.connect("combat_mode_change", self, "_on_combat_mode_change")
 	$Interactable/Name.text = PDS.get_player_name()
 
@@ -56,11 +58,11 @@ func _process(delta: float):
 			anim += "_MELEE_ATTACK"
 
 	if anim_direction != "":
-		$AnimatedSprite.play(anim_direction + anim)
+		_sprite.play(anim_direction + anim)
 		_last_dir = anim_direction
 	if _velocity.length() < 0.1:
-		$AnimatedSprite.stop()
-		$AnimatedSprite.frame = 0
+		_sprite.stop()
+		_sprite.frame = 0
 	
 	if !_is_attacking:
 		move_and_slide(_velocity.normalized() * _WALK_SPEED)
@@ -92,7 +94,7 @@ func _on_AnimatedSprite_animation_finished():
 		and target.is_valid() \
 		and target.targetType == target.TargetType.ACTION_TARGET \
 		and target.node.can_be_hit \
-		and $AnimatedSprite.animation.ends_with("MELEE_ATTACK")\
+		and _sprite.animation.ends_with("MELEE_ATTACK")\
 		and $Interactable/ActionArea.overlaps_body(target.node):
 			target.node.attack(PDS.get_chara_doll().get_damages(target.node.get_doll()), self)
 	_is_attacking = false
@@ -107,9 +109,9 @@ func _unhandled_input(event: InputEvent):
 
 func _on_combat_mode_change(mode: bool):
 	if !mode: 
-		$AnimatedSprite.play(_last_dir)
+		_sprite.play(_last_dir)
 	else:
-		$AnimatedSprite.play(_last_dir + "_FIGHT")
+		_sprite.play(_last_dir + "_FIGHT")
 
 func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 	var target: PlayerTarget = PDS.get_target()	

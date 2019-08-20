@@ -17,7 +17,7 @@ func _ready():
 	assert(get_total_weight() <= _max_weight)
 	
 func can_drop_data(position, data) -> bool:
-	return true
+	return true and !data.get_type() == 8 ##no coins
 	
 func drop_data(position, data):
 	var position_on_the_ground = get_a_position_on_the_ground_without_object()

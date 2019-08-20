@@ -127,7 +127,7 @@ _global_script_classes=[ {
 "base": "GameObjectBase",
 "class": "Lootable",
 "language": "GDScript",
-"path": "res://Lootable.gd"
+"path": "res://scenes/scripts/Lootable.gd"
 }, {
 "base": "GameObjectBase",
 "class": "NPC",

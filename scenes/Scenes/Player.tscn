@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/scripts/Player/PlayerController.gd" type="Script" id=1]
-[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://res/sprites/env/light_mask.png" type="Texture" id=2]
+[ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=7]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.87984
@@ -20,13 +21,24 @@ height = 0.19799
 ]]
 script = ExtResource( 1 )
 
+[node name="Mask TO FIX" type="Light2D" parent="."]
+position = Vector2( -0.145781, 0.109345 )
+scale = Vector2( 1.00858, 1.48453 )
+texture = ExtResource( 2 )
+mode = 3
+range_z_min = 0
+range_z_max = 0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 2
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 3 )
+animation = "SE"
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -8.45649, -0.30751 )
 polygon = PoolVector2Array( 6.71868, 6.1156, 9.07625, 5.50058, 10.9726, 6.62811, 11.0238, 8.0119, 8.61499, 8.62692, 6.92369, 7.9094 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 2 )
-animation = "SE"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -1, -0.985252 )
@@ -44,14 +56,13 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="Stats" type="Node2D" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 player = true
 life = 10
-damage = ExtResource( 4 )
-corpse = ExtResource( 5 )
+damage = ExtResource( 5 )
+corpse = ExtResource( 6 )
 
-[node name="Interactable" parent="." instance=ExtResource( 6 )]
-editor/display_folded = true
+[node name="Interactable" parent="." instance=ExtResource( 7 )]
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
@@ -62,7 +73,6 @@ position = Vector2( -0.345409, -0.347971 )
 shape = SubResource( 1 )
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
-editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/MouseArea"]
 position = Vector2( -0.287483, 1.91654 )
@@ -76,5 +86,5 @@ margin_top = -17.0
 margin_right = 135.99
 margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 8 )
 text = "Player"
