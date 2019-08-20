@@ -53,6 +53,11 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
 
+[node name="ShieldSlot" type="Control" parent="Equipment/Doll"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 8 )
+
 [node name="WeaponSlot" type="Control" parent="Equipment/Doll"]
 margin_right = 40.0
 margin_bottom = 40.0

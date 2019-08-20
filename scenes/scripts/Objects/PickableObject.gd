@@ -44,13 +44,13 @@ func get_damages() -> int:
 
 func get_defense() -> int:
 	##TODO range like 1 to 5
-	assert(type == ObjectType.ARMOR)
+	assert(type == ObjectType.ARMOR || type == ObjectType.SHIELD)
 	return contextual_value	
 
 func get_specification_desc() -> String:
 	if type == ObjectType.WEAPON:
 		return "It gives " + String(get_damages()) + " damages to an unarmored target."
-	elif type == ObjectType.ARMOR:
+	elif type == ObjectType.ARMOR || type == ObjectType.SHIELD:
 		return "It gives " + String(get_defense()) + " defense points."
 	elif type == ObjectType.COIN:
 		return "It can be borrowed against goods and services."

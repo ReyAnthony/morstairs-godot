@@ -1,13 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/scripts/Lootable.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Scenes/Objects/Coin.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Scenes/Objects/Armor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://res/sprites/env/box.png" type="Texture" id=4]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=5]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=6]
-
-
+[ext_resource path="res://scenes/Scenes/Objects/Shield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Scenes/Objects/Coin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Scenes/Objects/Armor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://res/sprites/env/box.png" type="Texture" id=5]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.37947
@@ -23,23 +22,25 @@ script = ExtResource( 1 )
 
 [node name="Content" type="Node2D" parent="."]
 
-[node name="Coin" parent="Content" instance=ExtResource( 2 )]
+[node name="Shield" parent="Content" instance=ExtResource( 2 )]
+
+[node name="Coin" parent="Content" instance=ExtResource( 3 )]
 _stack_count = 500
 
-[node name="Armor" parent="Content" instance=ExtResource( 3 )]
+[node name="Armor" parent="Content" instance=ExtResource( 4 )]
 
-[node name="Armor2" parent="Content" instance=ExtResource( 3 )]
+[node name="Armor2" parent="Content" instance=ExtResource( 4 )]
 
-[node name="Armor3" parent="Content" instance=ExtResource( 3 )]
+[node name="Armor3" parent="Content" instance=ExtResource( 4 )]
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.637711, 2.91525 )
 shape = SubResource( 1 )
 
-[node name="Interactable" parent="." instance=ExtResource( 5 )]
+[node name="Interactable" parent="." instance=ExtResource( 6 )]
 
 [node name="Name" type="Label" parent="Interactable"]
 visible = false
@@ -48,7 +49,7 @@ margin_top = -21.0445
 margin_right = 56.2585
 margin_bottom = 24.9555
 rect_scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 7 )
 text = "Box"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
