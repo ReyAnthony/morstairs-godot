@@ -122,7 +122,7 @@ _global_script_classes=[ {
 "base": "Slot",
 "class": "LootSlot",
 "language": "GDScript",
-"path": "res://scenes/Scenes/LootSlot.gd"
+"path": "res://scenes/scripts/Objects/LootSlot.gd"
 }, {
 "base": "GameObjectBase",
 "class": "Lootable",

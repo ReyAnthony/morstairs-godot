@@ -56,7 +56,9 @@ func get_children() -> Array:
 func _on_mouse_entered():
 	if is_empty():
 		return
-	pass
+	get_object_in_slot().modulate = Color.gray
 
 func _on_mouse_exited():
-	pass
+	if is_empty():
+		return
+	get_object_in_slot().modulate = Color.white

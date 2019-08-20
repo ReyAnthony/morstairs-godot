@@ -12,7 +12,7 @@ func _ready():
 	_inventory_info_panel.reset()
 	
 func get_drag_data(position):
-	if !is_empty() and get_object_in_slot().get_type() == 8: ##cash
+	if !is_empty() and get_object_in_slot().get_type() == ObjectType.COIN:
 		return null #can't drag cash once it's in your inventory
 	return .get_drag_data(position)
 
@@ -21,13 +21,16 @@ func can_drop_data(position, data):
 	return ret and data.get_type() == slot_type
 
 func _on_mouse_entered():
+	._on_mouse_entered()
 	if is_empty():
 		return
 	var o = get_object_in_slot()
 	_inventory_info_panel.update_panel(o)
 
 func _on_mouse_exited():
-	_inventory_info_panel.reset()
+	._on_mouse_exited()
+	##_inventory_info_panel.reset()
+	pass
 	
 func drop_data(position, data):
 	##allow moving from inventory slot to doll slot even if full

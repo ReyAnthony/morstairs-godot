@@ -55,6 +55,7 @@ func _on_inventory_pressed():
 		get_tree().paused = true
 		
 func show_inventory():
+	$PlayerInventory/InfoPanel.reset()
 	PDS.clear_target()
 	hide_loot()
 	inventory_button.pressed = true
@@ -62,6 +63,7 @@ func show_inventory():
 	
 func close_inventory():
 	inventory_ui.hide()
+	inventory_button.pressed = false
 	$PlayerInventory.clear_loot(_parent_for_loot)
 	
 func _hide_combat_mode():

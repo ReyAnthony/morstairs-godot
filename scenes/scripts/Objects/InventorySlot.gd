@@ -11,13 +11,16 @@ func _ready():
 	._ready()
 
 func _on_mouse_entered():
+	._on_mouse_entered()
 	if is_empty():
 		return
 	var o = get_object_in_slot()	
 	_info_panel.update_panel(o)
 
 func _on_mouse_exited():
-	_info_panel.reset()
+	._on_mouse_exited()
+	##_info_panel.reset()
+	pass
 	
 func drop_data(position, data):
 	if $"../".is_full() or $"../../"._is_it_too_heavy_with_new(data) and data.get_parent() is LootSlot:

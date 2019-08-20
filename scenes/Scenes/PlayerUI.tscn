@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/scripts/Player/PlayerInventory.gd" type="Script" id=4]
 [ext_resource path="res://res/sprites/UI/bag_inside.png" type="Texture" id=5]
 [ext_resource path="res://scenes/scripts/Objects/Bag.gd" type="Script" id=6]
-[ext_resource path="res://scenes/Scenes/LootSlot.gd" type="Script" id=7]
+[ext_resource path="res://scenes/scripts/Objects/LootSlot.gd" type="Script" id=7]
 [ext_resource path="res://scenes/scripts/Player/CharaDoll.gd" type="Script" id=8]
 [ext_resource path="res://res/sprites/UI/Stats.png" type="Texture" id=9]
 [ext_resource path="res://scenes/scripts/Objects/DollSlot.gd" type="Script" id=10]
@@ -99,6 +99,7 @@ margin_bottom = 4.0
 script = ExtResource( 4 )
 
 [node name="Loot" type="Control" parent="PlayerInventory"]
+editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -300,6 +301,7 @@ __meta__ = {
 }
 
 [node name="CharaDoll" type="Control" parent="PlayerInventory"]
+editor/display_folded = true
 script = ExtResource( 8 )
 
 [node name="Doll" type="TextureRect" parent="PlayerInventory/CharaDoll"]
