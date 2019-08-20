@@ -4,7 +4,6 @@ class_name PlayerDataSingleton
 var player_portrait: Texture
 var _player_name := "NAME"
 var _player
-var _gold := 10
 var _target: PlayerTarget
 var _bounty := 0
 var _jail_time := 0 
@@ -47,13 +46,10 @@ func get_player_name() -> String:
 	return _player_name
 	
 func get_player_gold() -> int: 
-	return _gold
+	return get_chara_doll().get_gold()
 	
 func set_player_gold(gold: int):
-	if gold > 0:
-		_gold = gold
-	else:
-		_gold = 0
+	get_chara_doll().update_gold(gold)
 		
 func get_bounty() -> int:
 	return _bounty
@@ -63,12 +59,12 @@ func increment_bounty(inc):
 	_jail_time = _bounty / 10
 
 func can_pay_bounty() -> bool:
-	return _bounty <= _gold
+	return _bounty <=  get_player_gold()
 	
 func pay_bounty() -> bool:
 	var can_pay = can_pay_bounty()
 	if can_pay:
-		_gold -= _bounty
+		get_chara_doll().update_gold(get_player_gold() - _bounty)
 		_bounty = 0
 		emit_signal("bounty_paid")
 	return can_pay

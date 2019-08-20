@@ -20,3 +20,14 @@ func get_damage_string() -> String:
 	
 func get_defense_string() -> String:
 	return String(get_defense()) ##+ " + TODO malus etc"
+	
+func get_gold() -> int:
+	if $Doll/CashSlot.is_empty():
+		return 0
+	return $Doll/CashSlot.get_object_in_slot().get_stack_count()
+	
+func update_gold(amount: int):
+	assert(amount >= 0)
+	assert(!$Doll/CashSlot.is_empty()) ##cashslot is a special case
+	var gold = $Doll/CashSlot.get_object_in_slot()
+	gold.set_stack_count(amount)

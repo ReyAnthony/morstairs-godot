@@ -10,6 +10,11 @@ func _ready():
 	connect("mouse_exited", self, "_on_mouse_exited")
 	_inventory_info_panel = $"../../../InfoPanel"
 	_inventory_info_panel.reset()
+	
+func get_drag_data(position):
+	if !is_empty() and get_object_in_slot().get_type() == 8: ##cash
+		return null #can't drag cash once it's in your inventory
+	return .get_drag_data(position)
 
 func can_drop_data(position, data):
 	var ret = .can_drop_data(position, data)

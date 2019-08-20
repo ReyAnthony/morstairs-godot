@@ -11,7 +11,10 @@ func reset():
 	$ObjectSpecificationDesc.text = ""
 	
 func update_panel(object: PickableObject):
-	$ObjectName.text = object.get_object_name()
+	if object.is_stackable():
+		$ObjectName.text = object.get_object_name() + " (" + String(object.get_stack_count()) + ")"
+	else:
+		$ObjectName.text = object.get_object_name() 
 	$ObjectWeight.text = "It weighs " + String(object.get_weight()) + " Stones"
 	$ObjectDesc.text = object.get_desc()
 	$ObjectSpecificationDesc.text = object.get_specification_desc()

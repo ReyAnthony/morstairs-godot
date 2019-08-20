@@ -28,6 +28,7 @@ func _sleep():
 	PDS.get_player().hide()
 	PDS.heal_player()
 	
+	##TODO you will not get out of jail if you actually wait
 	if PDS.get_jail_time() > 0 and jail_bed:
 		if PDS.get_jail_time() == 1:
 			$CanvasLayer/Panel/JailTime.text = "This is thy last night before freedom."

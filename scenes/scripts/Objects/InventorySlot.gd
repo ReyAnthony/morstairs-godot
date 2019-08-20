@@ -24,3 +24,6 @@ func drop_data(position, data):
 		$"../../".show_is_full()
 		return
 	.drop_data(position, data)
+	
+func can_drop_data(position, data):
+	return .can_drop_data(position, data) and data.get_type() != 8 ##coin

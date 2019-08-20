@@ -36,6 +36,9 @@ func attack(damages: int):
 		var r := get_node(_root)
 		var rp := r.get_parent()
 		var c := corpse.instance()
+		if !player and c is Lootable:
+			c.setup_loot($"../Equipment".get_equipement())
+			c.add_money(0, 10)
 		r.add_child(dmg_scene)
 		rp.add_child(c)
 		rp.move_child(c, rp.get_position_in_parent() +1)
