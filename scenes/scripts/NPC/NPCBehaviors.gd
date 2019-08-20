@@ -29,6 +29,7 @@ var _viewArea: Area2D
 var pathfind := []
 var _velocity: Vector2 = Vector2(0, 0)
 var _player : Player
+var _equipement : NPCDoll
 
 var _last_pathfind_time: float
 var _attacked = false
@@ -44,8 +45,11 @@ func _ready():
 	assert($"../Sprite" is AnimatedSprite)
 	assert($"../Collision" != null)
 	assert($"../Collision" is CollisionPolygon2D)
+	assert($"../Equipment" is NPCDoll)
 	assert($ViewArea != null)
 	
+	_equipement = $"../Equipment" as NPCDoll
+	$"../Equipment/Doll".hide()
 	_root = $"../"
 	_animated_sprite = $"../Sprite"
 	_free_target = Node2D.new()
@@ -220,4 +224,4 @@ func _on_AnimatedSprite_animation_finished():
 	if _animated_sprite.animation.ends_with("MELEE_ATTACK"):
 		_attack_anim_is_playing = false
 		if $"../Interactable/ActionArea".overlaps_body(_target):
-			_target.attack(1)
+			_target.attack(_equipement.get_damages(_target.get_doll()))

@@ -1,13 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/scripts/Bed.gd" type="Script" id=1]
-[ext_resource path="res://res/shaders/select_npc.material" type="Material" id=2]
-[ext_resource path="res://res/shaders/targeted_npc.material" type="Material" id=3]
-[ext_resource path="res://res/sprites/env/bed_std.png" type="Texture" id=4]
-[ext_resource path="res://res/sprites/characters/player/sleeping_pc.png" type="Texture" id=5]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=6]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=7]
-[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=8]
+[ext_resource path="res://res/sprites/env/bed_std.png" type="Texture" id=2]
+[ext_resource path="res://res/sprites/characters/player/sleeping_pc.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://scenes/scripts/Dialog/DialogMessage.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 10.3616
@@ -69,8 +67,6 @@ tracks/2/keys = {
 
 [node name="Bed" type="KinematicBody2D"]
 script = ExtResource( 1 )
-material_on_mouse_enter = ExtResource( 2 )
-material_on_target = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.237003, -1.18502 )
@@ -78,7 +74,7 @@ rotation = -0.802851
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -86,10 +82,9 @@ __meta__ = {
 [node name="SleepingPC" type="Sprite" parent="."]
 visible = false
 position = Vector2( -3.68961, -7.42055 )
-texture = ExtResource( 5 )
+texture = ExtResource( 3 )
 
-[node name="Interactable" parent="." instance=ExtResource( 6 )]
-editor/display_folded = true
+[node name="Interactable" parent="." instance=ExtResource( 4 )]
 
 [node name="Name" type="Label" parent="Interactable"]
 visible = false
@@ -98,7 +93,7 @@ margin_top = -28.9177
 margin_right = 53.0853
 margin_bottom = 17.0823
 rect_scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 text = "Bed"
 __meta__ = {
 "_edit_lock_": true
@@ -149,7 +144,7 @@ margin_left = -249.572
 margin_top = -24.537
 margin_right = 279.428
 margin_bottom = 21.463
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Thou art sleeping profoundly..."
 
@@ -162,21 +157,21 @@ margin_left = -458.046
 margin_top = 29.7234
 margin_right = 466.774
 margin_bottom = 75.7234
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "JAIL"
 align = 1
 
 [node name="AfterJail" type="Node" parent="."]
 editor/display_folded = true
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 message = "Thou hast been freed."
 
 [node name="Stats--" type="Node" parent="AfterJail"]
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 message = "Some of thy stats have lowered as a result of thy stay"
 
 [node name="CantUse" type="Node" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 message = "Dost thee wish to get killed in thine sleep ? 
 Thou canst use it ! "

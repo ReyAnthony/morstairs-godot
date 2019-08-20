@@ -4,15 +4,16 @@ class_name PlayerDataSingleton
 var player_portrait: Texture
 var _player_name := "NAME"
 var _player
-var _gold := 10
 var _target: PlayerTarget
 var _bounty := 0
 var _jail_time := 0 
 var fight_mode := false
+var uiScene: PackedScene = preload("res://scenes/Scenes/PlayerUI.tscn")
 
 signal target_has_changed
 signal has_slept
 signal bounty_paid
+signal combat_mode_change
 
 func _ready():
 	_target = PlayerTarget.new(Vector2(0,0))
@@ -20,6 +21,11 @@ func _ready():
 	player_portrait = preload("res://res/sprites/characters/player_portrait.png")
 	_player = get_tree().get_nodes_in_group("player")[0]
 	randomize()
+	var scene = uiScene.instance()
+	self.add_child(scene)
+	
+func _process(delta):
+	OS.set_window_title("morstairs" + " | fps: " + str(Engine.get_frames_per_second()))
 	
 func set_target(global_position: Vector2, node: Node2D = null):
 	if _target.is_valid():
@@ -43,13 +49,10 @@ func get_player_name() -> String:
 	return _player_name
 	
 func get_player_gold() -> int: 
-	return _gold
+	return get_chara_doll().get_gold()
 	
 func set_player_gold(gold: int):
-	if gold > 0:
-		_gold = gold
-	else:
-		_gold = 0
+	get_chara_doll().update_gold(gold)
 		
 func get_bounty() -> int:
 	return _bounty
@@ -59,12 +62,12 @@ func increment_bounty(inc):
 	_jail_time = _bounty / 10
 
 func can_pay_bounty() -> bool:
-	return _bounty <= _gold
+	return _bounty <=  get_player_gold()
 	
 func pay_bounty() -> bool:
 	var can_pay = can_pay_bounty()
 	if can_pay:
-		_gold -= _bounty
+		get_chara_doll().update_gold(get_player_gold() - _bounty)
 		_bounty = 0
 		emit_signal("bounty_paid")
 	return can_pay
@@ -85,24 +88,26 @@ func heal_player():
 	
 func has_slept():
 	#update calendar
-	emit_signal("has_slept")	
-
-#TODO refactor with this and cache it
-#can't type it because of cyclic dependency
-func get_player():
-	return _player
-
-#TODO rework inventory
-#objects that can't be thrown away can't be sold either
-var objects = [
-	ObjectHelper.make_player_inventory_object("Shield", 100, true, true),
-	ObjectHelper.make_player_inventory_object("Useless annoying object", 0, false, false),
-	ObjectHelper.make_player_inventory_object("Useless annoying object", 0, false, false),
-	ObjectHelper.make_player_inventory_object("Useless object", 150, true, false)
-]
-
-func add_object_in_inventory(obj): 
-	objects.push_back(obj)
+	emit_signal("has_slept")
 	
-func remove_object_from_inventory(obj):
-	objects.remove(obj)
+func switch_fight_mode():
+	fight_mode = !fight_mode
+	emit_signal("combat_mode_change", fight_mode)
+	
+func add_to_inventory(object: PickableObject):
+	$PlayerUI.add_to_inventory(object)
+	
+func get_player() -> Player:
+	return _player
+	
+func get_chara_doll() -> CharaDoll:
+	return $PlayerUI.get_chara_doll()
+	
+func get_inventory() -> Inventory:
+	return $PlayerUI/PlayerInventory as Inventory
+	
+func get_player_ui_manager() -> PlayerUIManager:
+	return $PlayerUI as PlayerUIManager
+	
+func game_over():
+	assert(false) ##HIDE UI

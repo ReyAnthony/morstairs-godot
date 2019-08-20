@@ -1,74 +1,114 @@
-extends Control
+extends Popup
+class_name Inventory
 
-var INVENTORY
+var dm: DialogMessage
+var _max_weight = 100
 
-func show_inventory():
-	INVENTORY = $InventoryPopup/Panel/Inventory/Inventory
-	update_player_infos()
-	update_inventory_list()
-	update_selection()
-	$InventoryPopup.popup_centered()
+func _ready():
+	for c in $Bag.get_children():
+		c = c as InventorySlot
+		if !c.is_empty():
+			c.get_object_in_slot().scale = Vector2(4,4)
+	dm = DialogMessage.new()
+	var de =  DialogEventPauseGame.new()
+	self.add_child(de)
+	dm._dialog_event = de
+	self.add_child(dm)
+	assert(get_total_weight() <= _max_weight)
 	
-func update_selection():
-	if PDS.objects.size() <= 0:
-		$InventoryPopup/Panel/Inventory/ObjectInfoView.hide()
-		$InventoryPopup/Panel/Inventory/ObjectActionsView.hide()
-		$InventoryPopup/Panel/Inventory/Exit.grab_focus()
+func can_drop_data(position, data) -> bool:
+	return true and !data.get_type() == 8 ##no coins
+	
+func drop_data(position, data):
+	var position_on_the_ground = get_a_position_on_the_ground_without_object()
+	if position_on_the_ground == Vector2(-10000, -100000):
+		dm.message = "You can't place anything here anymore !"
+		DS.spawn_dialog("", null, dm)
+		return
+			
+	data.get_parent().remove_child(data)
+	PDS.get_player().get_parent().add_child(data)
+	PDS.get_player().get_parent().move_child(data, 0)
+	data.global_position = position_on_the_ground
+	data.scale = Vector2(1,1)
+	data.show()
+		
+func get_a_position_on_the_ground_without_object() -> Vector2:
+	var objects_on_ground := []
+	var parent = PDS.get_player().get_parent()
+	var tilemap := PDS.get_player().get_parent().get_parent() as TileMap
+	var cell_size = tilemap.cell_size.x
+	for c in parent.get_children():
+		if c is PickableObject:
+			if PDS.get_player().global_position.distance_to(c.global_position) <= cell_size * 3:
+				objects_on_ground.append(tilemap.map_to_world(tilemap.world_to_map(c.global_position)))
+			else:
+				break #they are supposed to be in first position of the childrens		
+	
+	var position = tilemap.map_to_world(tilemap.world_to_map(PDS.get_player().global_position))
+	if objects_on_ground.empty():
+		#we lower the precision to get the center of the cell at the point
+		return position
 	else:
-		$InventoryPopup/Panel/Inventory/Inventory.select(0)
-		_on_Inventory_item_selected(0)	
-		
-func update_player_infos(): 
-	$InventoryPopup/Panel/Inventory/PlayerInfoView/Name/Value.text = PDS.get_player_name()
-	$InventoryPopup/Panel/Inventory/PlayerInfoView/Gold/Value.text = String(PDS.get_player_gold())
-	$InventoryPopup/Panel/Inventory/PlayerInfoView/Bounty/Value.text = String(PDS.get_bounty())
+		var initial_position = position
+		for x in range(-cell_size, cell_size+ 1, cell_size): #range is < x not <= so +1
+			for y in  range(-cell_size, cell_size +1, cell_size):
+				var where = tilemap.map_to_world(tilemap.world_to_map(initial_position + Vector2(x, y)))
+				var cell = tilemap.get_cellv(tilemap.world_to_map(where))
+				##TODO AVOID WATER CELLS
+				##we want an invalid cell BECAUSE THERE IS NO WALL THEN
+				if !objects_on_ground.has(where) and cell == tilemap.INVALID_CELL:
+					return where
+	assert(PDS.get_player().global_position != Vector2(-10000, -100000))
+	return Vector2(-10000, -100000) #HACKISH
 	
-func update_inventory_list():
-	INVENTORY.clear()
-	var idx = 0
-	for o in PDS.objects:
-		INVENTORY.add_item(o.name)
-		INVENTORY.set_item_metadata(idx, o)
-		idx += 1
-		
-func disable_object_actions(equip, unequip, throw_away):
-	$InventoryPopup/Panel/Inventory/ObjectActionsView/Equip.disabled = equip
-	$InventoryPopup/Panel/Inventory/ObjectActionsView/Unequip.disabled = unequip
-	$InventoryPopup/Panel/Inventory/ObjectActionsView/Throw.disabled = throw_away
+func add_to_inventory(object: PickableObject):
+	var dialog = DialogMessage.new()
+	if $Bag.is_full():
+		dialog.message = "Your inventory is full !"
+		DS.spawn_dialog("", null, dialog)
+		return
+	if _is_it_too_heavy_with_new(object):
+		dialog.message = "This is too heavy ! It weighs " + String(object.get_weight()) + " Stones"
+		DS.spawn_dialog("", null, dialog)
+		return
+	object.get_parent().remove_child(object)
+	$Bag.add_object_in_empty_slot(object)
+
+func show_is_full():
+	dm.message = "Your inventory is full !"
+	DS.spawn_dialog("", null, dm)
+	var dialog = DialogMessage.new()
+
+func get_total_weight() -> int:
+	return $Bag.get_weight() + $CharaDoll.get_weight() 
 	
-func update_object_info_view(index):
-	$InventoryPopup/Panel/Inventory/ObjectInfoView.show()
-	var metadata = INVENTORY.get_item_metadata(index)
-	var cost = String(metadata.cost)
-	$InventoryPopup/Panel/Inventory/ObjectInfoView/Cost/Value.text = cost 
-
-func update_object_actions_view(index): 
-	#TODO equipment
-	var is_throwable = false
+func get_max_weight() -> int:
+	return _max_weight
 	
-	var metadata = INVENTORY.get_item_metadata(index)
-	if metadata.throwable:
-		is_throwable = true
-	disable_object_actions(true, true, !is_throwable)
-
-func _on_Inventory_item_selected(index):
-	update_object_info_view(index)
-	update_object_actions_view(index)
+func get_chara_doll() -> CharaDoll:
+	return $CharaDoll as CharaDoll
 	
-func _on_Exit_pressed():
-	$InventoryPopup.hide()
-	get_tree().paused = false
-
-func _on_Throw_pressed():
-	#this only works because the inventory have a 1:1 mapping with the view list
-	var index = INVENTORY.get_selected_items()[0]
+func _is_it_too_heavy_with_new(new: PickableObject) -> bool:
+	return get_total_weight() + new.get_weight() > get_max_weight()
 	
-	PDS.objects.remove(index)
-	update_inventory_list()
-	update_selection()
+func update_loot(loot: Array):
+	assert(loot.size() < $Loot/LootBag.get_child_count())
+	for l in loot:
+		l.get_parent().remove_child(l)
+		$Loot/LootBag.add_object_in_empty_slot(l)
 
-func _on_Equip_pressed():
-	pass # replace with function body
+func show_loot():
+	$Loot.show()
 
-func _on_Unequip_pressed():
-	pass # replace with function body
+func hide_loot():
+	$Loot.hide()
+	
+func clear_loot(original_node: Node):
+	for n in $Loot/LootBag.get_children():
+		n = n as Slot
+		if !n.is_empty():
+			var obj = n.get_object_in_slot()
+			obj.hide()
+			n.remove_child(obj)
+			original_node.add_child(obj)
