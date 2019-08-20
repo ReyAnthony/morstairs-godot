@@ -5,6 +5,8 @@ var charadoll_button
 var inventory_button
 var inventory_ui
 var combat_button
+var pause_ui
+var pause_button
 
 var _parent_for_loot: Node
 
@@ -19,6 +21,11 @@ func _ready():
 	
 	combat_button = $Panel/CombatMode
 	combat_button.connect("pressed", self, "_on_combat_mode_switch")
+	
+	pause_button = $Panel/Pause
+	pause_ui = $PauseUI
+	pause_button.connect("pressed", self, "_on_pause_pressed")
+	
 	PDS.connect("target_has_changed", self, "_update_targeting")
 	PDS.get_player().get_stats().connect("life_changed", self, "_update_player_life")
 	
@@ -47,13 +54,35 @@ func _on_combat_mode_switch():
 func _on_inventory_pressed():
 	if inventory_ui.visible:
 		close_inventory()
-		_show_combat_mode()
+		show_all_buttons()
 		get_tree().paused = false
 	else:
 		_hide_combat_mode()
+		pause_button.hide()
 		show_inventory()
 		get_tree().paused = true
 		
+func _on_pause_pressed():
+	if !pause_ui.visible:
+		get_tree().paused = true
+		pause_ui.show()
+		hide_all_buttons_but_pause()
+	else:
+		get_tree().paused = false
+		pause_ui.hide()
+		show_all_buttons()
+
+func hide_all_buttons_but_pause():
+	inventory_button.hide()
+	combat_button.hide()
+	$Panel/Player.hide()
+	
+func show_all_buttons():
+	inventory_button.show()
+	combat_button.show()
+	$Panel/Player.show()
+	pause_button.show()
+
 func show_inventory():
 	$PlayerInventory/InfoPanel.reset()
 	PDS.clear_target()
@@ -67,10 +96,10 @@ func close_inventory():
 	$PlayerInventory.clear_loot(_parent_for_loot)
 	
 func _hide_combat_mode():
-	$Panel/CombatMode.hide()
+	combat_button.hide()
 	
 func _show_combat_mode():
-	$Panel/CombatMode.show()
+	combat_button.show()
 	
 func _update_player_life():
 	var stats = PDS.get_player().get_stats()

@@ -24,6 +24,9 @@ func _ready():
 	var scene = uiScene.instance()
 	self.add_child(scene)
 	
+func _process(delta):
+	OS.set_window_title("morstairs" + " | fps: " + str(Engine.get_frames_per_second()))
+	
 func set_target(global_position: Vector2, node: Node2D = null):
 	if _target.is_valid():
 		var current_pos := _target.get_position()
