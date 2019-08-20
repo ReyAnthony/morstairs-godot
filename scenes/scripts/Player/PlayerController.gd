@@ -10,18 +10,22 @@ var _is_attacking := false
 var _map_cam :Camera
 
 func attack(damages: int):
+	assert($Stats)
 	$Stats.attack(damages)
 	
 func full_heal():
+	assert($Stats)
 	$Stats.full_heal()
 	
 func get_stats():
+	assert($Stats)
 	return $Stats
 	
 func get_doll():
 	return PDS.get_chara_doll()
 
 func _ready():
+	assert($Stats)
 	$AnimatedSprite.play("NW")
 	add_to_group("player")
 	_map_cam = get_node(map_cam)
@@ -29,7 +33,7 @@ func _ready():
 	$AnimatedSprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	PDS.connect("combat_mode_change", self, "_on_combat_mode_change")
 	$Interactable/Name.text = PDS.get_player_name()
-	
+
 # warning-ignore:unused_argument
 func _process(delta: float):	
 	var anim_direction := ""

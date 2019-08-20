@@ -346,8 +346,9 @@ mouse_right_click={
 
 [rendering]
 
-quality/intended_usage/framebuffer_allocation=0
-quality/intended_usage/framebuffer_allocation.mobile=0
+quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation=1
+quality/intended_usage/framebuffer_allocation.mobile=1
 quality/filters/anisotropic_filter_level=1
 quality/reflections/texture_array_reflections=false
 quality/reflections/high_quality_ggx=false

@@ -12,7 +12,7 @@ func _ready():
 	assert($Sprite != null)
 	assert($DialogMessage)
 	self.add_to_group("npc")
-	if $Stats != null:
+	if has_node("Stats"):
 		can_be_hit = true
 	PDS.connect("target_has_changed", self, "_on_player_target_changed")
 	$Interactable/Name.text = chara_name
@@ -21,6 +21,7 @@ func _ready():
 	
 ##MERGE STATS AND DOLL ??
 func attack(damages: int, attacker: PhysicsBody2D):
+	assert($Stats)
 	$Stats.attack(damages)
 	emit_signal("is_attacked", attacker)
 	
@@ -28,9 +29,11 @@ func get_doll() -> Doll:
 	return $Equipment as Doll
 	
 func get_life() -> int:
+	assert($Stats)
 	return $Stats._current_life
 	
 func get_max_life() -> int:
+	assert($Stats)
 	return $Stats.life
 	
 func _on_DialogPanel_on_dialog_end():
