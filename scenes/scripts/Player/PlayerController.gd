@@ -52,7 +52,7 @@ func _process(delta: float):
 		_is_attacking = false
 		_velocity = Vector2.ZERO
 
-	if PDS.fight_mode:
+	if PDS.is_fighting():
 		anim = "_FIGHT"
 		if _is_attacking and PDS.get_target().is_valid():
 			anim += "_MELEE_ATTACK"
@@ -69,7 +69,7 @@ func _process(delta: float):
 		var has_collided_with_target = false
 		for i in get_slide_count():
 			var collision: KinematicCollision2D = get_slide_collision(i)
-			if !(collision.collider.is_in_group("npc") and PDS.fight_mode):
+			if !(collision.collider.is_in_group("npc") and PDS.is_fighting()):
 				PDS.clear_target()
 				_velocity = Vector2.ZERO
 
@@ -115,7 +115,7 @@ func _on_combat_mode_change(mode: bool):
 
 func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 	var target: PlayerTarget = PDS.get_target()	
-	if !target.is_valid() or !PDS.fight_mode or target.targetType != target.TargetType.ACTION_TARGET:
+	if !target.is_valid() or !PDS.is_fighting() or target.targetType != target.TargetType.ACTION_TARGET:
 		return
 	if target.node == body and !target.node.can_be_hit:
 		_is_attacking = false

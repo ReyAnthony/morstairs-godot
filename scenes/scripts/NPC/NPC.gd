@@ -50,7 +50,7 @@ func _on_player_target_changed(target: PlayerTarget):
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if !PDS.get_target().is_valid():
 		return
-	if !PDS.fight_mode && PDS.get_target().is_you(self):
+	if !PDS.is_fighting() && PDS.get_target().is_you(self):
 		if PDS.get_bounty() > 0 and can_be_hit and $BountyMessages != null:
 			DS.spawn_dialog(chara_name, chara_portrait, $BountyMessages)
 		else:

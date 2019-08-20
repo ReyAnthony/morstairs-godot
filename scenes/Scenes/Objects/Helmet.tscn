@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/scripts/Objects/PickableObject.gd" type="Script" id=1]
-[ext_resource path="res://res/sprites/objects/shield.png" type="Texture" id=2]
+[ext_resource path="res://res/sprites/objects/helmet.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=4]
 
@@ -9,14 +9,13 @@
 radius = 23.6407
 height = 6.83747
 
-[node name="Shield" type="KinematicBody2D"]
-editor/display_folded = true
+[node name="Helmet" type="KinematicBody2D"]
 script = ExtResource( 1 )
-type = 1
+type = 3
 weight = 5
 contextual_value = 1
-_name = "Shield"
-_description = "A standard shield"
+_name = "Helmet"
+_description = "A standard helmet"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -26,6 +25,7 @@ __meta__ = {
 }
 
 [node name="Interactable" parent="." instance=ExtResource( 3 )]
+editor/display_folded = true
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
 scale = Vector2( 0.25, 0.25 )

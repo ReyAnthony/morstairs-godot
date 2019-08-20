@@ -7,7 +7,7 @@ var _player
 var _target: PlayerTarget
 var _bounty := 0
 var _jail_time := 0 
-var fight_mode := false
+var _fight_mode := false
 var uiScene: PackedScene = preload("res://scenes/Scenes/PlayerUI.tscn")
 
 signal target_has_changed
@@ -91,8 +91,8 @@ func has_slept():
 	emit_signal("has_slept")
 	
 func switch_fight_mode():
-	fight_mode = !fight_mode
-	emit_signal("combat_mode_change", fight_mode)
+	_fight_mode = !_fight_mode
+	emit_signal("combat_mode_change", _fight_mode)
 	
 func add_to_inventory(object: PickableObject):
 	$PlayerUI.add_to_inventory(object)
@@ -108,6 +108,9 @@ func get_inventory() -> Inventory:
 	
 func get_player_ui_manager() -> PlayerUIManager:
 	return $PlayerUI as PlayerUIManager
+
+func is_fighting() -> bool:
+	return _fight_mode	
 	
 func game_over():
 	assert(false) ##HIDE UI

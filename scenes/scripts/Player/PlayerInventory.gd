@@ -55,7 +55,7 @@ func get_a_position_on_the_ground_without_object() -> Vector2:
 			for y in  range(-cell_size, cell_size +1, cell_size):
 				var where = tilemap.map_to_world(tilemap.world_to_map(initial_position + Vector2(x, y)))
 				var cell = tilemap.get_cellv(tilemap.world_to_map(where))
-				##TODO AVOID WATER CELLS
+				##TODO AVOID WATER CELLS ##TODO AVOID OBJECTS AND CHARACTERS
 				##we want an invalid cell BECAUSE THERE IS NO WALL THEN
 				if !objects_on_ground.has(where) and cell == tilemap.INVALID_CELL:
 					return where

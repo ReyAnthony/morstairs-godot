@@ -6,6 +6,8 @@ func _ready():
 	assert($Doll/WeaponSlot)
 	assert($Doll/ArmorSlot)
 	assert($Doll/ShieldSlot)
+	assert($Doll/BootsSlot)
+	assert($Doll/HelmetSlot)
 
 func _get_equipped_weapon() -> PickableObject:
 	assert(!$Doll/WeaponSlot.is_empty())
@@ -18,6 +20,14 @@ func _get_equipped_armor() -> PickableObject:
 func _get_equipped_shield() -> PickableObject:
 	assert(!$Doll/ShieldSlot.is_empty())
 	return $Doll/ShieldSlot.get_object_in_slot()
+	
+func _get_equipped_boots() -> PickableObject:
+	assert(!$Doll/BootsSlot.is_empty())
+	return $Doll/BootsSlot.get_object_in_slot()	
+	
+func _get_equipped_helmet() -> PickableObject:
+	assert(!$Doll/HelmetSlot.is_empty())
+	return $Doll/HelmetSlot.get_object_in_slot()
 
 func _get_default_damages() -> int:
 	if $Doll/WeaponSlot.is_empty():
@@ -34,4 +44,8 @@ func get_defense() -> int:
 		def += _get_equipped_armor().get_defense()
 	if !$Doll/ShieldSlot.is_empty():
 	    def += _get_equipped_shield().get_defense()
+	if !$Doll/BootsSlot.is_empty():
+	    def += _get_equipped_boots().get_defense()
+	if !$Doll/HelmetSlot.is_empty():
+	    def += _get_equipped_helmet().get_defense()
 	return def	

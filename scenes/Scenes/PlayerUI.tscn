@@ -93,12 +93,14 @@ __meta__ = {
 }
 
 [node name="PauseUI" type="Popup" parent="."]
+editor/display_folded = true
 visible = true
 margin_right = 1144.0
 margin_bottom = 720.0
 script = ExtResource( 4 )
 
 [node name="TextureRect" type="TextureRect" parent="PauseUI"]
+editor/display_folded = true
 margin_left = 52.4027
 margin_top = 64.2169
 margin_right = 409.403
@@ -148,7 +150,6 @@ __meta__ = {
 }
 
 [node name="PlayerInventory" type="Popup" parent="."]
-editor/display_folded = true
 self_modulate = Color( 1, 1, 1, 0.129412 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -360,7 +361,6 @@ __meta__ = {
 }
 
 [node name="CharaDoll" type="Control" parent="PlayerInventory"]
-editor/display_folded = true
 script = ExtResource( 10 )
 
 [node name="Doll" type="TextureRect" parent="PlayerInventory/CharaDoll"]
@@ -396,7 +396,7 @@ __meta__ = {
 }
 slot_type = 1
 
-[node name="HeadSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+[node name="HelmetSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
 margin_left = 122.493
 margin_top = 50.3251
 margin_right = 162.493
@@ -419,7 +419,6 @@ __meta__ = {
 slot_type = 4
 
 [node name="ArmorSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
-editor/display_folded = true
 margin_left = 185.159
 margin_top = 75.5784
 margin_right = 225.159
@@ -433,7 +432,7 @@ slot_type = 7
 [node name="Armor" parent="PlayerInventory/CharaDoll/Doll/ArmorSlot" instance=ExtResource( 14 )]
 scale = Vector2( 4, 4 )
 
-[node name="FeetSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
+[node name="BootsSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
 margin_left = 119.925
 margin_top = 212.689
 margin_right = 159.925
