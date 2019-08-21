@@ -2,6 +2,7 @@ extends Node
 class_name Doll
 
 const SubType = preload("res://scenes/scripts/Objects/ObjectType.gd").SubType
+const ObjectType = preload("res://scenes/scripts/Objects/ObjectType.gd").ObjectType
 
 func _ready():
 	assert($Doll/WeaponSlot)

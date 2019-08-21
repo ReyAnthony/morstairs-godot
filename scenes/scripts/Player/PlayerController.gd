@@ -9,7 +9,6 @@ const _WALK_SPEED := 30
 var _velocity := Vector2()
 var _last_dir := "NW"
 var _is_attacking := false
-var _map_cam :Camera
 var _sprite: AnimatedSprite
 
 func _ready():
@@ -17,7 +16,6 @@ func _ready():
 	_sprite = $AnimatedSprite
 	_sprite.play("NW")
 	add_to_group("player")
-	_map_cam = get_node(map_cam)
 	$Interactable.connect("something_is_inside_interactable", self, "_on_player_npc_is_inside_action_zone")
 	_sprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	PDS.connect("combat_mode_change", self, "_on_combat_mode_change")
@@ -43,11 +41,22 @@ func _process(delta: float):
 	var target: PlayerTarget = PDS.get_target()
 		
 	if  target.is_valid():
-		_velocity = (target.get_position() - self.global_position).normalized()
-		anim_direction += _determine_sprite_direction()
-		if target.get_position().distance_to(self.global_position) < 2:
-			PDS.clear_target()
+		if PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE or target.targetType != target.TargetType.ACTION_TARGET:
+			_velocity = (target.get_position() - self.global_position).normalized()
+			anim_direction += _determine_sprite_direction()
+			if target.get_position().distance_to(self.global_position) < 2:
+				PDS.clear_target()
+				_velocity = Vector2.ZERO
+		elif PDS.get_chara_doll().get_weapon_subtype() == SubType.RANGED:
+			_velocity = (target.get_position() - self.global_position).normalized()
+			anim_direction += _determine_sprite_direction()
 			_velocity = Vector2.ZERO
+			_is_attacking = true
+			##if too far clear target
+			
+		else:
+			assert(false)	
+				
 	else:
 		_is_attacking = false
 		_velocity = Vector2.ZERO
@@ -60,7 +69,7 @@ func _process(delta: float):
 	if anim_direction != "":
 		_sprite.play(anim_direction + anim)
 		_last_dir = anim_direction
-	if _velocity.length() < 0.1:
+	if PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE and _velocity.length() < 0.1:
 		_sprite.stop()
 		_sprite.frame = 0
 	
@@ -100,10 +109,12 @@ func _on_AnimatedSprite_animation_finished():
 				and PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE\
 				and $Interactable/ActionArea.overlaps_body(target.node):
 					target.node.attack(PDS.get_chara_doll(), self)		
-			elif _sprite.animation.ends_with("RANGED_ATTACK")\
-				and PDS.get_chara_doll().get_weapon_subtype() == SubType.RANGED\
-				and $Interactable/ActionArea.overlaps_body(target.node):
-					assert(false) ##not implemented
+					
+			##change me
+			elif _sprite.animation.ends_with("MELEE_ATTACK")\
+				and PDS.get_chara_doll().get_weapon_subtype() == SubType.RANGED:
+					var foe_dir = (target.get_position() - self.global_position).normalized()
+					PDS.get_chara_doll().use_ranged_weapon(foe_dir, global_position, self)
 					##throw arrow
 	_is_attacking = false
 			

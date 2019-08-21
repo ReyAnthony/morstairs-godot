@@ -27,6 +27,15 @@ func get_gold() -> int:
 		return 0
 	return $Doll/CashSlot.get_object_in_slot().get_stack_count()
 	
+func use_ranged_weapon(shot_direction: Vector2, initial_position: Vector2, parent: Node2D):
+	assert(_get_equipped_weapon().get_type() == ObjectType.WEAPON)
+	assert(_get_equipped_weapon().sub_type == SubType.RANGED)
+	assert(_get_quiver().get_type() == ObjectType.AMMO)
+	assert(_get_quiver().get_stack_count() > 0) 
+	_get_quiver().set_stack_count(_get_quiver().get_stack_count() - 1)
+	##make a generic projectile and shoot it
+	CSS.spawn_projectile(initial_position, shot_direction)
+
 func update_gold(amount: int):
 	assert(amount >= 0)
 	assert(!$Doll/CashSlot.is_empty()) ##cashslot is a special case

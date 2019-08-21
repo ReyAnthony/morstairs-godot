@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/GameObjectBase.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "GenericProjectile",
+"language": "GDScript",
+"path": "res://scenes/scripts/GenericProjectile.gd"
+}, {
 "base": "Node2D",
 "class": "Interactable",
 "language": "GDScript",
@@ -227,6 +232,7 @@ _global_script_class_icons={
 "Doll": "",
 "DollSlot": "",
 "GameObjectBase": "",
+"GenericProjectile": "",
 "Interactable": "",
 "Inventory": "",
 "InventoryInfoPanel": "",
@@ -262,7 +268,7 @@ run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 PDS="*res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
 DS="*res://scenes/scripts/singletons/DialogSingleton.gd"
 GS="*res://scenes/scripts/singletons/SettingsSingleton.gd"
-CSS="*res://scenes/scripts/singletons/CadaverSpawnerSingleton.gd"
+CSS="*res://scenes/scripts/singletons/SpawnerSingleton.gd"
 
 [display]
 

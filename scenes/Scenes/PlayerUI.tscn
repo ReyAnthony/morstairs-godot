@@ -153,6 +153,7 @@ __meta__ = {
 }
 
 [node name="PlayerInventory" type="Popup" parent="."]
+editor/display_folded = true
 self_modulate = Color( 1, 1, 1, 0.129412 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -799,8 +800,7 @@ text = "Spec Desc
 autowrap = true
 
 [node name="Panel" type="Panel" parent="."]
-editor/display_folded = true
-self_modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0.137255 )
 margin_left = 1138.0
 margin_top = 2.0
 margin_right = 1283.0
