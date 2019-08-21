@@ -5,14 +5,13 @@
 [ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=4]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.48649
 height = 13.6305
 
 [node name="Corpse" type="KinematicBody2D"]
 script = ExtResource( 1 )
+_max_money = 10
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -21,6 +20,7 @@ texture = ExtResource( 2 )
 visible = false
 
 [node name="Interactable" parent="." instance=ExtResource( 3 )]
+editor/display_folded = true
 
 [node name="Name" type="Label" parent="Interactable"]
 visible = false

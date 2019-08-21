@@ -4,9 +4,9 @@
 [ext_resource path="res://res/sprites/characters/guard_portrait.png" type="Texture" id=2]
 [ext_resource path="res://res/Guard_spriteframe.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://scenes/Scenes/NPCS/NPCBehaviors.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Scenes/Stats.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/scripts/NPC/NPCDoll.gd" type="Script" id=7]
+[ext_resource path="res://scenes/scripts/NPC/NPCDoll.gd" type="Script" id=5]
+[ext_resource path="res://scenes/scripts/NPCStats.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/scripts/Objects/Slot.gd" type="Script" id=8]
 [ext_resource path="res://scenes/Scenes/Objects/Sword.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/scripts/Dialog/events/DialogEventJailSentence.gd" type="Script" id=10]
@@ -31,6 +31,9 @@ script = ExtResource( 1 )
 chara_name = "Guard"
 chara_portrait = ExtResource( 2 )
 
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -3.01977, 9.10132, -2.44125, 9.28473, 2.01792, 9.27482, 3.2916, 8.64104, 3.20068, 4.85075, 2.70057, 5.07145, -3.2388, 4.46039 )
+
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
 animation = "SE"
@@ -39,41 +42,48 @@ animation = "SE"
 idle_behavior = 1
 fighting_behavior = 1
 
-[node name="Stats" parent="." instance=ExtResource( 5 )]
-life = 5
-corpse = ExtResource( 6 )
+[node name="NPCDoll" type="Node" parent="."]
+script = ExtResource( 5 )
 
-[node name="Equipment" type="Node" parent="."]
-script = ExtResource( 7 )
+[node name="Stats" type="Node2D" parent="NPCDoll"]
+script = ExtResource( 6 )
+life = 10
+corpse = ExtResource( 7 )
 
-[node name="Doll" type="Node2D" parent="Equipment"]
+[node name="Doll" type="Node2D" parent="NPCDoll"]
 
-[node name="ArmorSlot" type="Control" parent="Equipment/Doll"]
+[node name="ArmorSlot" type="Control" parent="NPCDoll/Doll"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
 
-[node name="BootsSlot" type="Control" parent="Equipment/Doll"]
+[node name="BootsSlot" type="Control" parent="NPCDoll/Doll"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
 
-[node name="HelmetSlot" type="Control" parent="Equipment/Doll"]
+[node name="HelmetSlot" type="Control" parent="NPCDoll/Doll"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
 
-[node name="ShieldSlot" type="Control" parent="Equipment/Doll"]
+[node name="ShieldSlot" type="Control" parent="NPCDoll/Doll"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
 
-[node name="WeaponSlot" type="Control" parent="Equipment/Doll"]
+[node name="QuiverSlot" type="Control" parent="NPCDoll/Doll"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
 
-[node name="Sword" parent="Equipment/Doll/WeaponSlot" instance=ExtResource( 9 )]
+[node name="WeaponSlot" type="Control" parent="NPCDoll/Doll"]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 8 )
+
+[node name="Sword" parent="NPCDoll/Doll/WeaponSlot" instance=ExtResource( 9 )]
 visible = false
 
 [node name="Events" type="Node" parent="."]
@@ -194,7 +204,6 @@ message = "Thee shalt rot in cage !"
 dialog_event_path = NodePath("../../../Events/JailSentence")
 
 [node name="Interactable" parent="." instance=ExtResource( 17 )]
-editor/display_folded = true
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]
 editor/display_folded = true
@@ -203,6 +212,7 @@ editor/display_folded = true
 shape = SubResource( 1 )
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
+editor/display_folded = true
 position = Vector2( 0.995837, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/ActionArea"]
@@ -220,6 +230,3 @@ custom_fonts/font = ExtResource( 18 )
 text = "TEST"
 align = 1
 valign = 1
-
-[node name="Collision" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -3.01977, 9.10132, -2.44125, 9.28473, 2.01792, 9.27482, 3.2916, 8.64104, 3.20068, 4.85075, 2.70057, 5.07145, -3.2388, 4.46039 )

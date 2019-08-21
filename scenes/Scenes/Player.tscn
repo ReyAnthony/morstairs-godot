@@ -1,13 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/scripts/Player/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://res/sprites/env/light_mask.png" type="Texture" id=2]
 [ext_resource path="res://res/Player_spriteframe.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://scenes/scripts/Stats.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Scenes/Damage.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Scenes/NPCS/Guard/GuardCorpse.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=7]
-[ext_resource path="res://res/font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://scenes/scripts/PlayerStats.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Scenes/Interactable.tscn" type="PackedScene" id=5]
+[ext_resource path="res://res/font.tres" type="DynamicFont" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.87984
@@ -57,12 +55,10 @@ editor_draw_drag_margin = true
 
 [node name="Stats" type="Node2D" parent="."]
 script = ExtResource( 4 )
-player = true
 life = 10
-damage = ExtResource( 5 )
-corpse = ExtResource( 6 )
 
-[node name="Interactable" parent="." instance=ExtResource( 7 )]
+[node name="Interactable" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]
@@ -86,5 +82,5 @@ margin_top = -17.0
 margin_right = 135.99
 margin_bottom = 19.0
 rect_scale = Vector2( 0.15, 0.15 )
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 6 )
 text = "Player"

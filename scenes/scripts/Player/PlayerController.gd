@@ -2,6 +2,8 @@ extends KinematicBody2D
 class_name Player
 
 export (NodePath) var map_cam: NodePath
+const ObjectType = preload("res://scenes/scripts/Objects/ObjectType.gd").ObjectType
+const SubType = preload("res://scenes/scripts/Objects/ObjectType.gd").SubType
 
 const _WALK_SPEED := 30
 var _velocity := Vector2()
@@ -10,9 +12,10 @@ var _is_attacking := false
 var _map_cam :Camera
 var _sprite: AnimatedSprite
 
-func attack(damages: int):
+func attack(attackerDoll: Doll, attacker: PhysicsBody2D):
 	assert($Stats)
-	$Stats.attack(damages)
+	var dmg = attackerDoll.get_damages(get_doll())
+	$Stats.attack(dmg)
 	
 func full_heal():
 	assert($Stats)
@@ -27,6 +30,7 @@ func get_doll():
 
 func _ready():
 	assert($Stats)
+	assert($Stats is PlayerStats)
 	_sprite = $AnimatedSprite
 	_sprite.play("NW")
 	add_to_group("player")
@@ -90,13 +94,21 @@ func _on_AnimatedSprite_animation_finished():
 	if !target.is_valid() or target.targetType != target.TargetType.ACTION_TARGET:
 		_is_attacking = false
 		return
+			
 	if _is_attacking \
 		and target.is_valid() \
 		and target.targetType == target.TargetType.ACTION_TARGET \
-		and target.node.can_be_hit \
-		and _sprite.animation.ends_with("MELEE_ATTACK")\
-		and $Interactable/ActionArea.overlaps_body(target.node):
-			target.node.attack(PDS.get_chara_doll().get_damages(target.node.get_doll()), self)
+		and target.node.can_be_hit:
+			
+			if _sprite.animation.ends_with("MELEE_ATTACK")\
+				and PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE\
+				and $Interactable/ActionArea.overlaps_body(target.node):
+					target.node.attack(PDS.get_chara_doll(), self)		
+			elif _sprite.animation.ends_with("RANGED_ATTACK")\
+				and PDS.get_chara_doll().get_weapon_subtype() == SubType.RANGED\
+				and $Interactable/ActionArea.overlaps_body(target.node):
+					assert(false) ##not implemented
+					##throw arrow
 	_is_attacking = false
 			
 # warning-ignore:unused_argument

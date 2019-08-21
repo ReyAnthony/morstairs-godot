@@ -9,5 +9,12 @@ enum ObjectType {
 	POTION = 5,
 	SCROLL = 6,
 	ARMOR = 7,
-	COIN = 8
+	COIN = 8,
+	AMMO = 9
+}
+
+enum SubType {
+	NONE = 0,
+	RANGED = 1,
+	MELEE = 2	
 }

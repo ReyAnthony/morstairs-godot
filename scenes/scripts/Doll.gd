@@ -1,13 +1,15 @@
 extends Node
 class_name Doll
 
+const SubType = preload("res://scenes/scripts/Objects/ObjectType.gd").SubType
+
 func _ready():
-	assert($Doll)
 	assert($Doll/WeaponSlot)
 	assert($Doll/ArmorSlot)
 	assert($Doll/ShieldSlot)
 	assert($Doll/BootsSlot)
 	assert($Doll/HelmetSlot)
+	assert($Doll/QuiverSlot)
 
 func _get_equipped_weapon() -> PickableObject:
 	assert(!$Doll/WeaponSlot.is_empty())
@@ -28,12 +30,27 @@ func _get_equipped_boots() -> PickableObject:
 func _get_equipped_helmet() -> PickableObject:
 	assert(!$Doll/HelmetSlot.is_empty())
 	return $Doll/HelmetSlot.get_object_in_slot()
+	
+func _get_quiver() -> PickableObject:
+	assert(!$Doll/QuiverSlot.is_empty())
+	return $Doll/QuiverSlot.get_object_in_slot()
 
 func _get_default_damages() -> int:
 	if $Doll/WeaponSlot.is_empty():
 		return 1
+	if get_weapon_subtype() == SubType.RANGED:
+		if !$Doll/QuiverSlot.is_empty():
+			return _get_equipped_weapon().get_damages() + _get_quiver().get_damages()
+		else:
+			return 0 ##no damages if no ammo.
 	else:
 		return _get_equipped_weapon().get_damages()
+		
+func get_weapon_subtype() -> int:
+	if $Doll/WeaponSlot.is_empty():
+		return SubType.MELEE
+	else:
+		return _get_equipped_weapon().sub_type
 
 func get_damages(defender: Doll) -> int: 
 	return int(max(_get_default_damages() - defender.get_defense(), 0))

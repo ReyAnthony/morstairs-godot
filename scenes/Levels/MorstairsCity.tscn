@@ -121,6 +121,7 @@ position = Vector2( 524.365, 94.0346 )
 inside = true
 
 [node name="Characters" type="YSort" parent="DayNight/Level/Walls"]
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }

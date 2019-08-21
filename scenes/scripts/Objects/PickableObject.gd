@@ -2,8 +2,10 @@ extends GameObjectBase
 class_name PickableObject
 
 const ObjectType = preload("res://scenes/scripts/Objects/ObjectType.gd").ObjectType
+const SubType = preload("res://scenes/scripts/Objects/ObjectType.gd").SubType
 
 export (ObjectType) var type: int
+export (SubType) var sub_type: int
 export (int) var weight: int
 export (int) var contextual_value: int ##attack/def etc..
 export (String) var _name: String ##should be unique
@@ -13,8 +15,13 @@ export (int) var _stack_count: int
 
 func _ready():
 	$Interactable/Name.text = _name
+	if _stackable:
+		assert(weight == 0) #remove a looooot of issues (we can't split stacks ..)
 	if _stack_count <= 0 and _stackable:
-		set_stack_count(1)	
+		set_stack_count(1)
+	if type == ObjectType.WEAPON and sub_type == SubType.NONE:
+		assert(false)
+			
 
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if PDS.get_target().is_you(self):
@@ -39,7 +46,7 @@ func get_desc() -> String:
 
 func get_damages() -> int:
 	##TODO range like 1 to 5
-	assert(type == ObjectType.WEAPON)
+	assert(type == ObjectType.WEAPON || type == ObjectType.AMMO)
 	return contextual_value
 
 func get_defense() -> int:
@@ -54,6 +61,8 @@ func get_specification_desc() -> String:
 		return "It gives " + String(get_defense()) + " defense points."
 	elif type == ObjectType.COIN:
 		return "It can be borrowed against goods and services."
+	elif type == ObjectType.AMMO:
+		return "It gives the equipped weapon damages + " + String(get_damages()) + " damages to an unarmored target."
 	else:
 		assert(false)
 		return ""
@@ -78,5 +87,6 @@ func is_same(other: PickableObject) -> bool:
 func merge_stack(other: PickableObject):
 	assert(_stackable)
 	assert(is_same(other))
+	assert(other != self)
 	set_stack_count(get_stack_count() + other.get_stack_count())
 	other.queue_free()

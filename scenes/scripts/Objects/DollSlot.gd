@@ -17,7 +17,7 @@ func get_drag_data(position):
 func can_drop_data(position, data):
 	var ret = .can_drop_data(position, data)
 	return ret and data.get_type() == slot_type
-
+	
 func _on_mouse_entered():
 	._on_mouse_entered()
 	if is_empty():

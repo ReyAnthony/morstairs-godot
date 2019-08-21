@@ -139,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/NPC/NPCDoll.gd"
 }, {
+"base": "Stats",
+"class": "NPCStats",
+"language": "GDScript",
+"path": "res://scenes/scripts/NPCStats.gd"
+}, {
 "base": "Popup",
 "class": "PauseUI",
 "language": "GDScript",
@@ -159,6 +164,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
 }, {
+"base": "Stats",
+"class": "PlayerStats",
+"language": "GDScript",
+"path": "res://scenes/scripts/PlayerStats.gd"
+}, {
 "base": "Node",
 "class": "PlayerTarget",
 "language": "GDScript",
@@ -177,7 +187,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Settings",
 "language": "GDScript",
-"path": "res://scenes/scripts/singletons/Settings.gd"
+"path": "res://scenes/scripts/singletons/SettingsSingleton.gd"
 }, {
 "base": "Node2D",
 "class": "ShopKeeper",
@@ -226,10 +236,12 @@ _global_script_class_icons={
 "NPC": "",
 "NPCBehavior": "",
 "NPCDoll": "",
+"NPCStats": "",
 "PauseUI": "",
 "PickableObject": "",
 "Player": "",
 "PlayerDataSingleton": "",
+"PlayerStats": "",
 "PlayerTarget": "",
 "PlayerUIManager": "",
 "Room": "",
@@ -249,7 +261,8 @@ run/main_scene="res://scenes/Levels/MorstairsCity.tscn"
 
 PDS="*res://scenes/scripts/singletons/PlayerData/PlayerDataSingleton.gd"
 DS="*res://scenes/scripts/singletons/DialogSingleton.gd"
-GS="*res://scenes/scripts/singletons/Settings.gd"
+GS="*res://scenes/scripts/singletons/SettingsSingleton.gd"
+CSS="*res://scenes/scripts/singletons/CadaverSpawnerSingleton.gd"
 
 [display]
 

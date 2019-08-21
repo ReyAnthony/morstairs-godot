@@ -27,7 +27,6 @@ func _ready():
 	pause_button.connect("pressed", self, "_on_pause_pressed")
 	
 	PDS.connect("target_has_changed", self, "_update_targeting")
-	PDS.get_player().get_stats().connect("life_changed", self, "_update_player_life")
 	
 func add_to_inventory(object: PickableObject):
 	$PlayerInventory.add_to_inventory(object)

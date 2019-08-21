@@ -26,7 +26,7 @@ func get_drag_data(position):
 
 func can_drop_data(position, data):
 	assert(.get_child_count() <= 1)
-	return is_empty() or (get_object_in_slot().is_stackable() and data.is_same(get_object_in_slot()))
+	return is_empty() or (get_object_in_slot().is_stackable() and data.is_same(get_object_in_slot()) and data != get_object_in_slot())
 
 func drop_data(position, data):
 	if !is_empty() and get_object_in_slot().is_stackable():
