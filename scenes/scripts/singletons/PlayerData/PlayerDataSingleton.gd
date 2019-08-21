@@ -103,6 +103,9 @@ func get_player() -> Player:
 func get_chara_doll() -> CharaDoll:
 	return $PlayerUI.get_chara_doll()
 	
+func get_stats() -> CharaDoll:
+	return $PlayerUI.get_chara_doll().get_stats()	
+	
 func get_inventory() -> Inventory:
 	return $PlayerUI/PlayerInventory as Inventory
 	

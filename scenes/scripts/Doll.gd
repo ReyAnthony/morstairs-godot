@@ -10,6 +10,7 @@ func _ready():
 	assert($Doll/BootsSlot)
 	assert($Doll/HelmetSlot)
 	assert($Doll/QuiverSlot)
+	assert($Stats)
 
 func _get_equipped_weapon() -> PickableObject:
 	assert(!$Doll/WeaponSlot.is_empty())
@@ -65,4 +66,7 @@ func get_defense() -> int:
 	    def += _get_equipped_boots().get_defense()
 	if !$Doll/HelmetSlot.is_empty():
 	    def += _get_equipped_helmet().get_defense()
-	return def	
+	return def
+	
+func get_stats() -> Stats:
+	return $Stats as Stats

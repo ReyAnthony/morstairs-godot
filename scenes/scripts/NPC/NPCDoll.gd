@@ -2,7 +2,6 @@ extends Doll
 class_name NPCDoll
 
 func _ready():
-	assert($Stats)
 	assert($Stats is NPCStats)
 
 func get_equipement() -> Array:

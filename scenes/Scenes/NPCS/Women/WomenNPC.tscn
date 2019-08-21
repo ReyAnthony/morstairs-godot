@@ -25,7 +25,6 @@ chara_name = "Woman"
 chara_portrait = ExtResource( 2 )
 
 [node name="NPCDoll" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 3 )
 
 [node name="Stats" type="Node2D" parent="NPCDoll"]

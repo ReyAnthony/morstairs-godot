@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/scripts/Player/PlayerUIManager.gd" type="Script" id=1]
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=2]
@@ -10,23 +10,24 @@
 [ext_resource path="res://scenes/scripts/Objects/Bag.gd" type="Script" id=8]
 [ext_resource path="res://scenes/scripts/Objects/LootSlot.gd" type="Script" id=9]
 [ext_resource path="res://scenes/scripts/Player/CharaDoll.gd" type="Script" id=10]
-[ext_resource path="res://res/sprites/UI/Stats.png" type="Texture" id=11]
-[ext_resource path="res://scenes/scripts/Objects/DollSlot.gd" type="Script" id=12]
-[ext_resource path="res://scenes/Scenes/Objects/Sword.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/Scenes/Objects/Armor.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/Scenes/Objects/Coin.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/scripts/Objects/CharaDollInfoPanel.gd" type="Script" id=16]
-[ext_resource path="res://scenes/scripts/Objects/InventorySlot.gd" type="Script" id=17]
-[ext_resource path="res://scenes/Scenes/Objects/Bow.tscn" type="PackedScene" id=18]
-[ext_resource path="res://scenes/Scenes/Objects/Arrow.tscn" type="PackedScene" id=19]
-[ext_resource path="res://scenes/scripts/Objects/InventoryInfoPanel.gd" type="Script" id=20]
-[ext_resource path="res://res/sprites/UI/pause.png" type="Texture" id=21]
-[ext_resource path="res://res/sprites/UI/play.png" type="Texture" id=22]
-[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=23]
-[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=24]
-[ext_resource path="res://res/sprites/UI/bag.png" type="Texture" id=25]
-[ext_resource path="res://res/sprites/UI/bag_open.png" type="Texture" id=26]
-[ext_resource path="res://res/sprites/characters/player_portrait.png" type="Texture" id=27]
+[ext_resource path="res://scenes/scripts/PlayerStats.gd" type="Script" id=11]
+[ext_resource path="res://res/sprites/UI/Stats.png" type="Texture" id=12]
+[ext_resource path="res://scenes/scripts/Objects/DollSlot.gd" type="Script" id=13]
+[ext_resource path="res://scenes/Scenes/Objects/Sword.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/Scenes/Objects/Armor.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/Scenes/Objects/Coin.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/scripts/Objects/CharaDollInfoPanel.gd" type="Script" id=17]
+[ext_resource path="res://scenes/scripts/Objects/InventorySlot.gd" type="Script" id=18]
+[ext_resource path="res://scenes/Scenes/Objects/Bow.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/Scenes/Objects/Arrow.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/scripts/Objects/InventoryInfoPanel.gd" type="Script" id=21]
+[ext_resource path="res://res/sprites/UI/pause.png" type="Texture" id=22]
+[ext_resource path="res://res/sprites/UI/play.png" type="Texture" id=23]
+[ext_resource path="res://res/sprites/UI/peace.png" type="Texture" id=24]
+[ext_resource path="res://res/sprites/UI/war.png" type="Texture" id=25]
+[ext_resource path="res://res/sprites/UI/bag.png" type="Texture" id=26]
+[ext_resource path="res://res/sprites/UI/bag_open.png" type="Texture" id=27]
+[ext_resource path="res://res/sprites/characters/player_portrait.png" type="Texture" id=28]
 
 [node name="PlayerUI" type="CanvasLayer"]
 pause_mode = 2
@@ -152,7 +153,6 @@ __meta__ = {
 }
 
 [node name="PlayerInventory" type="Popup" parent="."]
-editor/display_folded = true
 self_modulate = Color( 1, 1, 1, 0.129412 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -363,15 +363,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CharaDoll" type="Control" parent="PlayerInventory"]
+[node name="CharaDoll" type="Node2D" parent="PlayerInventory"]
 script = ExtResource( 10 )
 
+[node name="Stats" type="Node2D" parent="PlayerInventory/CharaDoll"]
+script = ExtResource( 11 )
+life = 10
+
 [node name="Doll" type="TextureRect" parent="PlayerInventory/CharaDoll"]
+editor/display_folded = true
 margin_left = 357.174
 margin_top = 58.0226
 margin_right = 647.174
 margin_bottom = 458.023
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 stretch_mode = 5
 
 [node name="WeaponSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
@@ -380,12 +385,12 @@ margin_left = 57.9573
 margin_top = 150.403
 margin_right = 97.9573
 margin_bottom = 190.403
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sword" parent="PlayerInventory/CharaDoll/Doll/WeaponSlot" instance=ExtResource( 13 )]
+[node name="Sword" parent="PlayerInventory/CharaDoll/Doll/WeaponSlot" instance=ExtResource( 14 )]
 scale = Vector2( 4, 4 )
 
 [node name="ShieldSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
@@ -393,7 +398,7 @@ margin_left = 180.482
 margin_top = 151.338
 margin_right = 220.482
 margin_bottom = 191.338
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -404,7 +409,7 @@ margin_left = 122.493
 margin_top = 50.3251
 margin_right = 162.493
 margin_bottom = 90.3251
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -415,7 +420,7 @@ margin_left = 55.1514
 margin_top = 75.5784
 margin_right = 95.1514
 margin_bottom = 115.578
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -426,13 +431,13 @@ margin_left = 185.159
 margin_top = 75.5784
 margin_right = 225.159
 margin_bottom = 115.578
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
 slot_type = 7
 
-[node name="Armor" parent="PlayerInventory/CharaDoll/Doll/ArmorSlot" instance=ExtResource( 14 )]
+[node name="Armor" parent="PlayerInventory/CharaDoll/Doll/ArmorSlot" instance=ExtResource( 15 )]
 scale = Vector2( 4, 4 )
 
 [node name="BootsSlot" type="Control" parent="PlayerInventory/CharaDoll/Doll"]
@@ -440,7 +445,7 @@ margin_left = 119.925
 margin_top = 212.689
 margin_right = 159.925
 margin_bottom = 252.689
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -451,10 +456,10 @@ margin_left = 38.0342
 margin_top = 329.655
 margin_right = 78.0342
 margin_bottom = 369.655
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 slot_type = 8
 
-[node name="Coin" parent="PlayerInventory/CharaDoll/Doll/CashSlot" instance=ExtResource( 15 )]
+[node name="Coin" parent="PlayerInventory/CharaDoll/Doll/CashSlot" instance=ExtResource( 16 )]
 scale = Vector2( 4, 4 )
 contextual_value = 5
 _stack_count = 10
@@ -467,7 +472,7 @@ margin_right = 907.0
 margin_bottom = 366.0
 texture = ExtResource( 5 )
 stretch_mode = 1
-script = ExtResource( 16 )
+script = ExtResource( 17 )
 
 [node name="PlayerName" type="Label" parent="PlayerInventory/CharaDoll/InfoPanel"]
 margin_left = 39.4486
@@ -533,6 +538,7 @@ align = 1
 valign = 1
 
 [node name="Bag" type="TextureRect" parent="PlayerInventory"]
+editor/display_folded = true
 margin_left = 17.4967
 margin_top = 58.4535
 margin_right = 341.497
@@ -548,12 +554,12 @@ margin_top = 40.0
 margin_right = 93.0
 margin_bottom = 92.0
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sword2" parent="PlayerInventory/Bag/Slot" instance=ExtResource( 13 )]
+[node name="Sword2" parent="PlayerInventory/Bag/Slot" instance=ExtResource( 14 )]
 
 [node name="Slot2" type="Control" parent="PlayerInventory/Bag"]
 editor/display_folded = true
@@ -562,12 +568,12 @@ margin_top = 39.4267
 margin_right = 152.051
 margin_bottom = 91.4267
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Bow" parent="PlayerInventory/Bag/Slot2" instance=ExtResource( 18 )]
+[node name="Bow" parent="PlayerInventory/Bag/Slot2" instance=ExtResource( 19 )]
 
 [node name="Slot3" type="Control" parent="PlayerInventory/Bag"]
 margin_left = 166.276
@@ -575,12 +581,12 @@ margin_top = 38.2801
 margin_right = 220.276
 margin_bottom = 90.2801
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Arrow" parent="PlayerInventory/Bag/Slot3" instance=ExtResource( 19 )]
+[node name="Arrow" parent="PlayerInventory/Bag/Slot3" instance=ExtResource( 20 )]
 _stack_count = 12
 
 [node name="Slot4" type="Control" parent="PlayerInventory/Bag"]
@@ -589,12 +595,12 @@ margin_top = 38.2801
 margin_right = 285.06
 margin_bottom = 90.2801
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Arrow" parent="PlayerInventory/Bag/Slot4" instance=ExtResource( 19 )]
+[node name="Arrow" parent="PlayerInventory/Bag/Slot4" instance=ExtResource( 20 )]
 _stack_count = 12
 
 [node name="Slot5" type="Control" parent="PlayerInventory/Bag"]
@@ -603,7 +609,7 @@ margin_top = 93.3181
 margin_right = 93.5734
 margin_bottom = 145.318
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -614,7 +620,7 @@ margin_top = 93.8914
 margin_right = 153.771
 margin_bottom = 145.891
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -625,7 +631,7 @@ margin_top = 95.0381
 margin_right = 219.702
 margin_bottom = 147.038
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -636,7 +642,7 @@ margin_top = 94.4648
 margin_right = 285.06
 margin_bottom = 146.465
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -647,7 +653,7 @@ margin_top = 153.516
 margin_right = 93.5733
 margin_bottom = 205.516
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -658,7 +664,7 @@ margin_top = 152.369
 margin_right = 155.491
 margin_bottom = 204.369
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -669,7 +675,7 @@ margin_top = 152.369
 margin_right = 220.849
 margin_bottom = 204.369
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -680,7 +686,7 @@ margin_top = 150.65
 margin_right = 285.06
 margin_bottom = 202.65
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -691,7 +697,7 @@ margin_top = 216.007
 margin_right = 94.72
 margin_bottom = 268.007
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -702,7 +708,7 @@ margin_top = 212.567
 margin_right = 155.491
 margin_bottom = 264.567
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -713,7 +719,7 @@ margin_top = 213.714
 margin_right = 219.702
 margin_bottom = 265.714
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -724,7 +730,7 @@ margin_top = 213.714
 margin_right = 288.5
 margin_bottom = 265.714
 rect_min_size = Vector2( 50, 50 )
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -738,7 +744,7 @@ margin_bottom = 701.449
 mouse_filter = 0
 texture = ExtResource( 5 )
 stretch_mode = 1
-script = ExtResource( 20 )
+script = ExtResource( 21 )
 
 [node name="Weight" type="Label" parent="PlayerInventory/InfoPanel"]
 margin_left = 56.458
@@ -809,8 +815,8 @@ margin_top = 56.1332
 margin_right = 111.248
 margin_bottom = 134.133
 toggle_mode = true
-texture_normal = ExtResource( 21 )
-texture_pressed = ExtResource( 22 )
+texture_normal = ExtResource( 22 )
+texture_pressed = ExtResource( 23 )
 expand = true
 stretch_mode = 5
 
@@ -822,8 +828,8 @@ margin_bottom = 471.446
 rect_scale = Vector2( 3, 3 )
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 23 )
-texture_pressed = ExtResource( 24 )
+texture_normal = ExtResource( 24 )
+texture_pressed = ExtResource( 25 )
 stretch_mode = 5
 
 [node name="Inventory" type="TextureButton" parent="Panel"]
@@ -834,8 +840,8 @@ margin_bottom = 336.508
 rect_scale = Vector2( 3, 3 )
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 26 )
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 27 )
 expand = true
 stretch_mode = 5
 
@@ -868,7 +874,7 @@ margin_left = -58.3203
 margin_top = -44.6405
 margin_right = 56.6797
 margin_bottom = 41.3595
-texture_normal = ExtResource( 27 )
+texture_normal = ExtResource( 28 )
 expand = true
 stretch_mode = 5
 __meta__ = {

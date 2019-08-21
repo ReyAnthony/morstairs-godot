@@ -21,21 +21,21 @@ func _ready():
 	
 ##MERGE STATS AND DOLL ??
 func attack(attackerDoll: Doll, attacker: PhysicsBody2D):
-	assert($NPCDoll/Stats)
+	assert($NPCDoll.get_stats())
 	var dmg = attackerDoll.get_damages(get_doll())
-	$NPCDoll/Stats.attack(dmg)
+	$NPCDoll.get_stats().attack(dmg)
 	emit_signal("is_attacked", attacker)
 	
 func get_doll() -> Doll:
 	return $NPCDoll as Doll
 	
 func get_life() -> int:
-	assert($NPCDoll/Stats)
-	return $NPCDoll/Stats._current_life
+	assert($NPCDoll.get_stats())
+	return $NPCDoll.get_stats()._current_life
 	
 func get_max_life() -> int:
-	assert($NPCDoll/Stats)
-	return $NPCDoll/Stats.life
+	assert($NPCDoll.get_stats())
+	return $NPCDoll.get_stats().life
 	
 func _on_DialogPanel_on_dialog_end():
 	PDS.clear_target()

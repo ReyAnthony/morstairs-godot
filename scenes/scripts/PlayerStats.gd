@@ -3,7 +3,7 @@ class_name PlayerStats
 
 func _ready():
 	_is_player = true
-	_character_root = get_node("../")
+	_character_root = PDS.get_player()
 
 func _on_death():
 	PDS.game_over()

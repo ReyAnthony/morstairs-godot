@@ -3,6 +3,7 @@ class_name CharaDoll
 
 func _ready():
 	$InfoPanel/PlayerName.text = PDS.get_player_name()
+	assert($Stats is PlayerStats)
 	
 func _process(delta):
 	pass

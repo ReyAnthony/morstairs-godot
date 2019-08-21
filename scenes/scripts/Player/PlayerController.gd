@@ -12,25 +12,8 @@ var _is_attacking := false
 var _map_cam :Camera
 var _sprite: AnimatedSprite
 
-func attack(attackerDoll: Doll, attacker: PhysicsBody2D):
-	assert($Stats)
-	var dmg = attackerDoll.get_damages(get_doll())
-	$Stats.attack(dmg)
-	
-func full_heal():
-	assert($Stats)
-	$Stats.full_heal()
-	
-func get_stats():
-	assert($Stats)
-	return $Stats
-	
-func get_doll():
-	return PDS.get_chara_doll()
-
 func _ready():
-	assert($Stats)
-	assert($Stats is PlayerStats)
+	assert(get_stats())
 	_sprite = $AnimatedSprite
 	_sprite.play("NW")
 	add_to_group("player")
@@ -39,6 +22,19 @@ func _ready():
 	_sprite.connect("animation_finished", self, "_on_AnimatedSprite_animation_finished")
 	PDS.connect("combat_mode_change", self, "_on_combat_mode_change")
 	$Interactable/Name.text = PDS.get_player_name()
+
+func attack(attackerDoll: Doll, attacker: PhysicsBody2D):
+	var dmg = attackerDoll.get_damages(get_doll())
+	get_stats().attack(dmg)
+	
+func full_heal():
+	get_stats().full_heal()
+	
+func get_stats():
+	return PDS.get_stats()
+	
+func get_doll():
+	return PDS.get_chara_doll()
 
 # warning-ignore:unused_argument
 func _process(delta: float):	
