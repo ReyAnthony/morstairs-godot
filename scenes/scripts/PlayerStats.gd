@@ -7,4 +7,3 @@ func _ready():
 
 func _on_death():
 	PDS.game_over()
-	get_tree().change_scene("res://scenes/Scenes/Gameover.tscn")

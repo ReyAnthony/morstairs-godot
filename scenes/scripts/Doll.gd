@@ -53,6 +53,7 @@ func get_weapon_subtype() -> int:
 	else:
 		return _get_equipped_weapon().sub_type
 
+##TODO USE STATS TO MITIGATES STUFF
 func get_damages(defender: Doll) -> int: 
 	return int(max(_get_default_damages() - defender.get_defense(), 0))
 

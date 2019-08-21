@@ -116,4 +116,5 @@ func is_fighting() -> bool:
 	return _fight_mode	
 	
 func game_over():
-	assert(false) ##HIDE UI
+	$PlayerUI.queue_free()
+	get_tree().change_scene("res://scenes/Scenes/Gameover.tscn")
