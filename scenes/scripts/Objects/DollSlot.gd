@@ -35,7 +35,7 @@ func drop_data(position, data):
 	var player_inventory = $"../../../"
 	var bag = $"../../../Bag"
 	var chara_doll = $"../../"
-	if bag.is_full() or player_inventory._is_it_too_heavy_with_new(data) and data.get_parent() is LootSlot:
+	if player_inventory._is_it_too_heavy_with_new(data) and data.get_parent() is LootSlot:
 		player_inventory.show_is_full()
 		return
 	.drop_data(position, data)
