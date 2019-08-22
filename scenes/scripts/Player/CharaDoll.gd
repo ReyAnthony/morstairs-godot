@@ -28,6 +28,8 @@ func get_gold() -> int:
 	return $Doll/CashSlot.get_object_in_slot().get_stack_count()
 	
 func use_ranged_weapon(shot_direction: Vector2, initial_position: Vector2, parent: Node2D):
+	if $Doll/QuiverSlot.is_empty():
+		return
 	assert(_get_equipped_weapon().get_type() == ObjectType.WEAPON)
 	assert(_get_equipped_weapon().sub_type == SubType.RANGED)
 	assert(_get_quiver().get_type() == ObjectType.AMMO)

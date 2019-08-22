@@ -70,7 +70,6 @@ script = ExtResource( 7 )
 message = "I have nothing to say to thee."
 
 [node name="Interactable" parent="." instance=ExtResource( 8 )]
-editor/display_folded = true
 scale = Vector2( 1.00418, 1.0142 )
 
 [node name="MouseArea" type="Area2D" parent="Interactable"]

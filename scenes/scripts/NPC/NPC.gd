@@ -22,6 +22,7 @@ func _ready():
 ##MERGE STATS AND DOLL ??
 func attack(attackerDoll: Doll, attacker: PhysicsBody2D):
 	assert($NPCDoll.get_stats())
+	assert(can_be_hit)
 	var dmg = attackerDoll.get_damages(get_doll())
 	$NPCDoll.get_stats().attack(dmg)
 	emit_signal("is_attacked", attacker)
