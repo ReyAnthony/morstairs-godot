@@ -40,7 +40,7 @@ func _process(delta: float):
 	var target: PlayerTarget = PDS.get_target()
 		
 	if  target.is_valid():
-		if PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE or target.targetType != target.TargetType.ACTION_TARGET or !target.node.can_be_hit:
+		if PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE or target.targetType != target.TargetType.ACTION_TARGET or !target.node.can_be_hit or !PDS.is_fighting():
 			_velocity = (target.get_position() - self.global_position).normalized()
 			anim_direction += _determine_sprite_direction()
 			if target.get_position().distance_to(self.global_position) < 2:

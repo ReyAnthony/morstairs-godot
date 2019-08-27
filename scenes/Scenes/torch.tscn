@@ -158,7 +158,9 @@ texture = ExtResource( 4 )
 texture_scale = 1.55781
 color = Color( 0.996933, 0.992518, 0.465123, 1 )
 energy = 1.50929
+range_item_cull_mask = 3
 shadow_enabled = true
+shadow_item_cull_mask = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/light_off = SubResource( 3 )
