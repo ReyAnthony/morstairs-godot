@@ -49,6 +49,7 @@ func _get_default_damages() -> int:
 		return _get_equipped_weapon().get_damages()
 		
 func get_weapon_subtype() -> int:
+	##maybe return something specific for fists
 	if $Doll/WeaponSlot.is_empty():
 		return SubType.MELEE
 	else:

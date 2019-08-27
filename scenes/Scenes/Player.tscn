@@ -32,7 +32,7 @@ shadow_item_cull_mask = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
-animation = "SE"
+animation = "NE_RANGED_ATK"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -8.45649, -0.30751 )

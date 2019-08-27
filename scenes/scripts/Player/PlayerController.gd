@@ -12,7 +12,6 @@ var _is_attacking := false
 var _sprite: AnimatedSprite
 
 func _ready():
-	assert(get_stats())
 	_sprite = $AnimatedSprite
 	_sprite.play("NW")
 	add_to_group("player")
@@ -53,18 +52,19 @@ func _process(delta: float):
 			_velocity = Vector2.ZERO
 			_is_attacking = true
 			##if too far clear target
-			
 		else:
-			assert(false)	
-				
+			assert(false)
 	else:
 		_is_attacking = false
 		_velocity = Vector2.ZERO
 
 	if PDS.is_fighting():
-		anim = "_FIGHT"
+		if PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE:
+			anim = "_MELEE"
+		else:
+			anim = "_RANGED"
 		if _is_attacking and PDS.get_target().is_valid():
-			anim += "_MELEE_ATTACK"
+			anim += "_ATK"
 
 	if anim_direction != "":
 		_sprite.play(anim_direction + anim)
@@ -105,13 +105,12 @@ func _on_AnimatedSprite_animation_finished():
 		and target.targetType == target.TargetType.ACTION_TARGET \
 		and target.node.can_be_hit:
 			
-			if _sprite.animation.ends_with("MELEE_ATTACK")\
+			if _sprite.animation.ends_with("MELEE_ATK")\
 				and PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE\
 				and $Interactable/ActionArea.overlaps_body(target.node):
-					target.node.attack(PDS.get_chara_doll(), self)		
-					
+					target.node.attack(PDS.get_chara_doll(), self)				
 			##change me
-			elif _sprite.animation.ends_with("MELEE_ATTACK")\
+			elif _sprite.animation.ends_with("RANGED_ATK")\
 				and PDS.get_chara_doll().get_weapon_subtype() == SubType.RANGED:
 					var foe_dir = (target.get_position() - self.global_position).normalized()
 					PDS.get_chara_doll().use_ranged_weapon(foe_dir, global_position, self)
@@ -130,7 +129,10 @@ func _on_combat_mode_change(mode: bool):
 	if !mode: 
 		_sprite.play(_last_dir)
 	else:
-		_sprite.play(_last_dir + "_FIGHT")
+		if PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE:
+			_sprite.play(_last_dir + "_MELEE")
+		else:
+			_sprite.play(_last_dir + "_RANGED")
 
 func _on_player_npc_is_inside_action_zone(body: PhysicsBody2D):
 	var target: PlayerTarget = PDS.get_target()	
