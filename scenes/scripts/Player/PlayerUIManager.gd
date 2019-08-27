@@ -52,6 +52,7 @@ func _on_combat_mode_switch():
 
 func _on_inventory_pressed():
 	if inventory_ui.visible:
+		PDS.get_target().invalidate()
 		close_inventory()
 		show_all_buttons()
 		get_tree().paused = false

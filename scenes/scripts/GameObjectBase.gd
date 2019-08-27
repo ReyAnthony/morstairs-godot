@@ -25,4 +25,4 @@ func _on_Interactable_mouse_exited():
 		$Sprite.material = null
 		
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
-	pass		
+	pass

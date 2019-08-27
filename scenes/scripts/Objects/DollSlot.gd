@@ -9,16 +9,11 @@ export (ObjectType) var slot_type: int
 func _ready():
 	_inventory_info_panel = $"../../../InfoPanel"
 	_inventory_info_panel.reset()
-	assert($"../CantDoThisInFightMode")
 	assert($"../CantEquipABowWithAShield")
 	
 func get_drag_data(position):
 	if !is_empty() and get_object_in_slot().get_type() == ObjectType.COIN:
 		return null #can't drag cash once it's in your inventory
-	##can't drag stuff from the charadoll when in combat mode
-	if PDS.is_fighting():
-		DS.spawn_dialog("", null, $"../CantDoThisInFightMode")
-		return null	
 	return .get_drag_data(position)
 
 func can_drop_data(position, data):
@@ -39,9 +34,6 @@ func _on_mouse_exited():
 	pass
 	
 func drop_data(position, data):
-	if(PDS.is_fighting() and data.get_type() == slot_type and slot_type != ObjectType.AMMO):
-		DS.spawn_dialog("", null, $"../CantDoThisInFightMode")
-		return
 	if slot_type == ObjectType.WEAPON and data.get_subtype() == SubType.RANGED:
 		if ($"../../" as CharaDoll).has_shield():
 			DS.spawn_dialog("", null, $"../CantEquipABowWithAShield")
@@ -50,7 +42,6 @@ func drop_data(position, data):
 		if ($"../../" as CharaDoll).has_ranged_weapon():
 			DS.spawn_dialog("", null, $"../CantEquipABowWithAShield")
 			return
-	
 	##allow moving from inventory slot to doll slot even if full
 	var player_inventory = $"../../../"
 	var bag = $"../../../Bag"

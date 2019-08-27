@@ -383,12 +383,6 @@ stretch_mode = 5
 [node name="DialogEventPauseGame" type="Node" parent="PlayerInventory/CharaDoll/Doll"]
 script = ExtResource( 13 )
 
-[node name="CantDoThisInFightMode" type="Node" parent="PlayerInventory/CharaDoll/Doll"]
-script = ExtResource( 14 )
-message = "You can't do this in fight mode !"
-is_narrator = true
-dialog_event_path = NodePath("../DialogEventPauseGame")
-
 [node name="CantEquipABowWithAShield" type="Node" parent="PlayerInventory/CharaDoll/Doll"]
 script = ExtResource( 14 )
 message = "You can't equip a bow with a shield !"
