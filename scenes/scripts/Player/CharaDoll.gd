@@ -40,6 +40,6 @@ func use_ranged_weapon(shot_direction: Vector2, initial_position: Vector2, paren
 
 func update_gold(amount: int):
 	assert(amount >= 0)
-	assert(!$Doll/CashSlot.is_empty()) ##cashslot is a special case
+	assert(!$Doll/CashSlot.is_empty()) ##cashslot is a special case and is never empty
 	var gold = $Doll/CashSlot.get_object_in_slot()
 	gold.set_stack_count(amount)

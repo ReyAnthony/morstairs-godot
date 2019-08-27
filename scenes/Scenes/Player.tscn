@@ -19,7 +19,6 @@ height = 0.19799
 script = ExtResource( 1 )
 
 [node name="Mask TO FIX" type="Light2D" parent="."]
-visible = false
 position = Vector2( -0.145781, 0.109345 )
 scale = Vector2( 1.00858, 1.48453 )
 texture = ExtResource( 2 )
@@ -54,7 +53,6 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="Interactable" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
 group_to_test_on_enter = "npc"
 
 [node name="ActionArea" type="Area2D" parent="Interactable"]

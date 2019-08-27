@@ -51,7 +51,9 @@ func _process(delta: float):
 			anim_direction += _determine_sprite_direction()
 			_velocity = Vector2.ZERO
 			_is_attacking = true
-			##if too far clear target
+			if target.get_position().distance_to(self.global_position) > 2000: ##completely arbitrary
+				PDS.clear_target() 
+				_velocity = Vector2.ZERO
 		else:
 			assert(false)
 	else:
@@ -69,8 +71,9 @@ func _process(delta: float):
 	if anim_direction != "":
 		_sprite.play(anim_direction + anim)
 		_last_dir = anim_direction
-	if PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE and _velocity.length() < 0.1:
+	else:
 		_sprite.stop()
+		_sprite.play(_last_dir + anim)
 		_sprite.frame = 0
 	
 	if !_is_attacking:
@@ -104,17 +107,14 @@ func _on_AnimatedSprite_animation_finished():
 		and target.is_valid() \
 		and target.targetType == target.TargetType.ACTION_TARGET \
 		and target.node.can_be_hit:
-			
 			if _sprite.animation.ends_with("MELEE_ATK")\
 				and PDS.get_chara_doll().get_weapon_subtype() == SubType.MELEE\
 				and $Interactable/ActionArea.overlaps_body(target.node):
-					target.node.attack(PDS.get_chara_doll(), self)				
-			##change me
+					target.node.attack(PDS.get_chara_doll(), self)
 			elif _sprite.animation.ends_with("RANGED_ATK")\
 				and PDS.get_chara_doll().get_weapon_subtype() == SubType.RANGED:
 					var foe_dir = (target.get_position() - self.global_position).normalized()
 					PDS.get_chara_doll().use_ranged_weapon(foe_dir, global_position, self)
-					##throw arrow
 	_is_attacking = false
 			
 # warning-ignore:unused_argument

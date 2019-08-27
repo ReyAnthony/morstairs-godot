@@ -19,7 +19,6 @@ func _ready():
 	if !override_dialog.is_empty():
 		assert(get_children().has(get_node(override_dialog)))
 	
-##MERGE STATS AND DOLL ??
 func attack(attackerDoll: Doll, attacker: PhysicsBody2D):
 	assert($NPCDoll.get_stats())
 	assert(can_be_hit)
