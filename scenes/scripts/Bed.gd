@@ -3,11 +3,22 @@ extends GameObjectBase
 export (bool) var jail_bed := false
 var _is_sleeping := false
 
+var cursor = preload("res://res/sprites/use.png")
+var default_cursor = preload("res://res/sprites/cursor.png")
+
 func _ready():
 	$CanvasLayer.layer = -1
 	$CanvasLayer/Panel.hide()
 	$CanvasLayer/AnimationPlayer.connect("animation_finished", self, "_on_finished_animation")
 	pass
+	
+func _on_Interactable_mouse_entered():
+	._on_Interactable_mouse_entered()
+	Input.set_custom_mouse_cursor(cursor)
+	
+func _on_Interactable_mouse_exited():
+	._on_Interactable_mouse_exited()
+	Input.set_custom_mouse_cursor(default_cursor)
 
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if body.is_in_group("player") and PDS.get_target().is_you(self):
@@ -17,6 +28,7 @@ func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 		else:
 			if !_is_sleeping:
 				_sleep()
+		_on_Interactable_mouse_exited()		
 		
 func _sleep():
 	$CanvasLayer.layer = 255

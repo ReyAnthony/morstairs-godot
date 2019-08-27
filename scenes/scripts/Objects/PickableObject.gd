@@ -3,6 +3,8 @@ class_name PickableObject
 
 const ObjectType = preload("res://scenes/scripts/Objects/ObjectType.gd").ObjectType
 const SubType = preload("res://scenes/scripts/Objects/ObjectType.gd").SubType
+var cursor = preload("res://res/sprites/grab.png")
+var default_cursor = preload("res://res/sprites/cursor.png")
 
 export (ObjectType) var type: int
 export (SubType) var sub_type: int
@@ -21,7 +23,14 @@ func _ready():
 		set_stack_count(1)
 	if type == ObjectType.WEAPON and sub_type == SubType.NONE:
 		assert(false)
-			
+
+func _on_Interactable_mouse_entered():
+	._on_Interactable_mouse_entered()
+	Input.set_custom_mouse_cursor(cursor)
+	
+func _on_Interactable_mouse_exited():
+	._on_Interactable_mouse_exited()
+	Input.set_custom_mouse_cursor(default_cursor)			
 
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if PDS.get_target().is_you(self):

@@ -43,6 +43,7 @@ idle_behavior = 1
 fighting_behavior = 1
 
 [node name="NPCDoll" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="Stats" type="Node2D" parent="NPCDoll"]

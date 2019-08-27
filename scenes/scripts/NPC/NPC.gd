@@ -8,6 +8,10 @@ export (String)  var chara_name: String
 export (Texture) var chara_portrait: Texture
 export (NodePath) var override_dialog: NodePath
 
+var talk_cursor = preload("res://res/sprites/talk.png")
+var attack_cursor = preload("res://res/sprites/attack.png")
+var default_cursor = preload("res://res/sprites/cursor.png")
+
 func _ready():
 	assert($Sprite != null)
 	assert($DialogMessage)
@@ -48,6 +52,19 @@ func _on_player_target_changed(target: PlayerTarget):
 	else:
 		$Sprite.material = null
 		
+func _on_Interactable_mouse_entered():
+	
+	if PDS.is_fighting() and can_be_hit:
+		Input.set_custom_mouse_cursor(attack_cursor)
+		._on_Interactable_mouse_entered()
+	if !PDS.is_fighting():
+		Input.set_custom_mouse_cursor(talk_cursor)
+		._on_Interactable_mouse_entered()
+	
+func _on_Interactable_mouse_exited():
+	._on_Interactable_mouse_exited()
+	Input.set_custom_mouse_cursor(default_cursor)	
+		
 func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 	if !PDS.get_target().is_valid():
 		return
@@ -59,4 +76,5 @@ func _on_Interactable_something_is_inside_interactable(body: PhysicsBody2D):
 				DS.spawn_dialog(chara_name, chara_portrait, get_node(override_dialog))
 			else:
 				DS.spawn_dialog(chara_name, chara_portrait, $DialogMessage)
+		_on_Interactable_mouse_exited()		
 		PDS.clear_target()
