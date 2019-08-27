@@ -40,7 +40,10 @@ func get_object_name() -> String:
 
 func get_type() -> int:
 	return type
-
+	
+func get_subtype() -> int:
+	return sub_type
+	
 func get_desc() -> String:
 	return _description
 

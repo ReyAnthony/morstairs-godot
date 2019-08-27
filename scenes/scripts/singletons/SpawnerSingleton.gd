@@ -20,9 +20,9 @@ func spawn_damages(damages: int, position: Vector2, player: bool):
 	if player:
 		(dmg_scene.get_node("Label") as Label).add_color_override("font_color", Color.violet)
 		
-func spawn_projectile(initial_position: Vector2, direction: Vector2):
+func spawn_projectile(initial_position: Vector2, direction: Vector2, doll_copy: Doll):
 	var projectile := _generic_projectile.instance() as GenericProjectile
 	_cadaver_root.add_child(projectile)
 	projectile.global_position = initial_position
 	projectile.rotation = direction.angle()
-	projectile.fire(direction)
+	projectile.fire(direction, doll_copy)

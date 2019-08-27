@@ -12,6 +12,12 @@ func _ready():
 	assert($Doll/HelmetSlot)
 	assert($Doll/QuiverSlot)
 	assert($Stats)
+	
+func has_shield() -> bool:
+	return !$Doll/ShieldSlot.is_empty()
+	
+func has_ranged_weapon() -> bool:
+	return !$Doll/WeaponSlot.is_empty() and $Doll/WeaponSlot.get_object_in_slot().get_subtype() == SubType.RANGED
 
 func _get_equipped_weapon() -> PickableObject:
 	assert(!$Doll/WeaponSlot.is_empty())
@@ -38,7 +44,7 @@ func _get_quiver() -> PickableObject:
 	return $Doll/QuiverSlot.get_object_in_slot()
 
 func _get_default_damages() -> int:
-	if $Doll/WeaponSlot.is_empty():
+	if $Doll/WeaponSlot.is_empty(): ##fists
 		return 1
 	if get_weapon_subtype() == SubType.RANGED:
 		if !$Doll/QuiverSlot.is_empty():

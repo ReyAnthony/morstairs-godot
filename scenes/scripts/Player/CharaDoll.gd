@@ -11,6 +11,8 @@ func _process(delta):
 func get_weight():
 	var w = 0
 	for slot in $Doll.get_children():
+		if !(slot is Slot):
+			continue
 		if !slot.is_empty():
 			var object = slot.get_object_in_slot()
 			w += object.get_weight()
@@ -34,9 +36,11 @@ func use_ranged_weapon(shot_direction: Vector2, initial_position: Vector2, paren
 	assert(_get_equipped_weapon().sub_type == SubType.RANGED)
 	assert(_get_quiver().get_type() == ObjectType.AMMO)
 	assert(_get_quiver().get_stack_count() > 0) 
+	var doll_cpy: Doll = self.duplicate() as Doll
 	_get_quiver().set_stack_count(_get_quiver().get_stack_count() - 1)
 	##make a generic projectile and shoot it
-	CSS.spawn_projectile(initial_position, shot_direction)
+	##create a fake doll for the projectile to use
+	CSS.spawn_projectile(initial_position, shot_direction, doll_cpy)
 
 func update_gold(amount: int):
 	assert(amount >= 0)

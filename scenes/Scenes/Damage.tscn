@@ -2,15 +2,14 @@
 
 [ext_resource path="res://res/font.tres" type="DynamicFont" id=1]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	queue_free()
 "
 
-[sub_resource type="Animation" id=1]
-resource_name = "damage"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:modulate")
 tracks/0/interp = 1
@@ -39,11 +38,11 @@ tracks/1/keys = {
 [node name="Damage" type="Node2D"]
 position = Vector2( 1, 0 )
 z_index = 255
-script = SubResource( 2 )
+script = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "damage"
-anims/damage = SubResource( 1 )
+anims/damage = SubResource( 2 )
 
 [node name="Label" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
